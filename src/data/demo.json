@@ -2826,15 +2826,15 @@
     "te-spend-ceilings",
     "ssv-residual",
     "atec-phase2",
-    "uspto-receipt-history",
     "lean-kernel-receipt",
     "bits-48",
     "gate-b-host",
     "drive-diu-swap-usv",
-    "drive-n417-filing-fee",
     "drive-pass-job",
     "drive-fail-job",
-    "track-one-skeleton-unpaid"
+    "readme-1004-vs-70",
+    "track-one-skeleton-unpaid",
+    "uspto-receipt-history"
   ],
   "batch4BriefFileId": "1a0Hcs28fpH3s3oGvc8MbgegyBVGN4hOg",
   "note": "Quality over volume: shipShortlist (~14) for demo; full pack kept for forensic depth. Batch4 mythos/COHOCF skipped.",
