@@ -1,5 +1,5 @@
 {
-  "version": "2.9.0",
+  "version": "2.12.0",
   "source": "Eve Drive fuel briefs 1l1wjwE8\u2026 + batch2 sibling 1iNnqPeHizQyiOYvDnhjypbqVXyAXPUBT + priority/Batch2 fileIds (forensic claim\u2194receipt, not chat)",
   "org": "Monsters Ink LLC",
   "lineItems": [
@@ -2913,6 +2913,127 @@
         "1P6jNfCJwURyXPz68b1tqCJYYuumrvZqb"
       ],
       "scrapeFixtureText": "INTERIOR: 1, 0\nFORENSIC Eve: 136(a) EOT fee auth; not a patent grant"
+    },
+    {
+      "id": "nv012-demo-pack-synthetic",
+      "caseId": "CG-EVE-B12-01",
+      "label": "REFUSE \u2014 NV012 demo pack unit_cost interiors vs synthetic/not DSIP",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "unit_cost_present",
+        "grant_refuse_emit",
+        "dsip_army_data"
+      ],
+      "email": {
+        "subject": "[FORENSIC] NV012_demo_pack \u2014 Eve batch12",
+        "from": "eve-fuel@monstersink.example",
+        "body": "CLAIMED: 1, 1, 1\nINTERIOR: 1, 1, 0\nfileId 1uKr005YuoPxI9J2DPSscpe88cxB5lVEz\nSynthetic / not DSIP / not Army data",
+        "receiptUrl": "https://www.diu.mil/"
+      },
+      "claimed": [
+        1,
+        1,
+        1
+      ],
+      "interior": [
+        1,
+        1,
+        0
+      ],
+      "expect": {
+        "status": "refuse",
+        "mask": 4,
+        "failedIndices": [
+          2
+        ]
+      },
+      "driveFileIds": [
+        "1uKr005YuoPxI9J2DPSscpe88cxB5lVEz"
+      ],
+      "scrapeFixtureText": "INTERIOR: 1, 1, 0\nFORENSIC Eve: demo pack emit yes; not DSIP/Army data"
+    },
+    {
+      "id": "nv012-phase1-tech-draft",
+      "caseId": "CG-EVE-B12-02",
+      "label": "REFUSE \u2014 ARM26BX06-NV012 Phase I Tech Volume DRAFT vs DSIP/CAGE/awards",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "tech_volume_draft",
+        "dsip_open",
+        "cage_assigned",
+        "prior_awards"
+      ],
+      "email": {
+        "subject": "[FORENSIC] NV012 Phase I Technical Volume DRAFT \u2014 Eve batch12",
+        "from": "eve-fuel@monstersink.example",
+        "body": "CLAIMED: 1, 1, 1, 1\nINTERIOR: 1, 0, 0, 0\nfileId 1MxyBaG-wBsdEyzT0iiL8g6uSLxC8lEiP\nNot DSIP (opens 23 Sep) / no CAGE / no prior awards",
+        "receiptUrl": "https://www.diu.mil/"
+      },
+      "claimed": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "interior": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "expect": {
+        "status": "refuse",
+        "mask": 14,
+        "failedIndices": [
+          1,
+          2,
+          3
+        ]
+      },
+      "driveFileIds": [
+        "1MxyBaG-wBsdEyzT0iiL8g6uSLxC8lEiP"
+      ],
+      "scrapeFixtureText": "INTERIOR: 1, 0, 0, 0\nFORENSIC Eve: DRAFT only; DSIP/CAGE/awards absent"
+    },
+    {
+      "id": "mma-magpie-uas-30m",
+      "caseId": "CG-EVE-B12-03",
+      "label": "REFUSE \u2014 MMA MAGPIE-UAS >$30M + Active SAM vs no award/obligated",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "exquisite_platform_claim_usd",
+        "active_sam_claim",
+        "award_obligated_usd"
+      ],
+      "email": {
+        "subject": "[FORENSIC] MMA MAGPIE-UAS brief \u2014 Eve batch12",
+        "from": "eve-fuel@monstersink.example",
+        "body": "CLAIMED: 30000001, 1, 1\nINTERIOR: 0, 0, 0\nfileId 12BHCKrV8-npFjOG11c3KXY4gtL_sXDsB\n>$30M language + Active SAM claim \u2194 no award/obligated $",
+        "receiptUrl": "https://sam.gov/"
+      },
+      "claimed": [
+        30000001,
+        1,
+        1
+      ],
+      "interior": [
+        0,
+        0,
+        0
+      ],
+      "expect": {
+        "status": "refuse",
+        "mask": 7,
+        "failedIndices": [
+          0,
+          1,
+          2
+        ]
+      },
+      "driveFileIds": [
+        "12BHCKrV8-npFjOG11c3KXY4gtL_sXDsB"
+      ],
+      "scrapeFixtureText": "INTERIOR: 0, 0, 0\nFORENSIC Eve: no award/obligated $ for MAGPIE-UAS claims"
     }
   ],
   "seedUrls": [
@@ -2982,5 +3103,12 @@
   "eveBatch10FileIds": [
     "1fhcdR-VsQ8u-Lz05jjhTvdqOK04brzhu",
     "1P6jNfCJwURyXPz68b1tqCJYYuumrvZqb"
+  ],
+  "eveBatch12BriefFileId": "1iHBLtLXP6SU8jNTA_kkoUMQaPZIJvvbn",
+  "eveBatch11BackfillFileId": "1BqIrnXHD-GTZwERWLNa4c4abVOj",
+  "eveBatch12FileIds": [
+    "1uKr005YuoPxI9J2DPSscpe88cxB5lVEz",
+    "1MxyBaG-wBsdEyzT0iiL8g6uSLxC8lEiP",
+    "12BHCKrV8-npFjOG11c3KXY4gtL_sXDsB"
   ]
 }
