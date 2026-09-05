@@ -3117,6 +3117,45 @@
         "1MdoQek5IfNGQC6fYotsatCp0iHfhM4TX"
       ],
       "scrapeFixtureText": "INTERIOR: 1, 0, 0\nFORENSIC Eve: fee-calc package; unfiled; no paid line"
+    },
+    {
+      "id": "pc-may9-submission-ui",
+      "caseId": "CG-EVE-B14-01",
+      "label": "REFUSE \u2014 Patent Center May9 submission UI \u2260 EPR / fee-cart PAID / grant (fee memo \u2260 prize)",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "submission_ack",
+        "fee_code_paid",
+        "epr_or_grant"
+      ],
+      "email": {
+        "subject": "[FORENSIC] Patent Center May9 submission receipt \u2014 Eve pc-may9-submission-ui",
+        "from": "eve-fuel@monstersink.example",
+        "body": "CLAIMED: 1, 1, 1\nINTERIOR: 1, 0, 0\nfileId 15RjPss4-7ws-DJd3Dz8bM2KSHllezkmI\nApp 19/658,750 / Conf 3591 / PC# 76049174 \u2014 submission UI only; not EPR / no FEE CODE / not fee-cart PAID / not grant",
+        "receiptUrl": "https://patentcenter.uspto.gov/"
+      },
+      "claimed": [
+        1,
+        1,
+        1
+      ],
+      "interior": [
+        1,
+        0,
+        0
+      ],
+      "expect": {
+        "status": "refuse",
+        "mask": 6,
+        "failedIndices": [
+          1,
+          2
+        ]
+      },
+      "driveFileIds": [
+        "15RjPss4-7ws-DJd3Dz8bM2KSHllezkmI"
+      ],
+      "scrapeFixtureText": "INTERIOR: 1, 0, 0\nFORENSIC Eve Batch14: Patent Center May9 submission-receipt UI; no FEE CODE / not PAID / not grant"
     }
   ],
   "seedUrls": [
