@@ -1,17 +1,16 @@
-# CeilingGate — remaining (PUBLISH live)
+# CeilingGate blockers
 
-**Taylor PUBLISH live** (publish-go overridden). Offline demo is green.
+## Cleared
+- Public GitHub: https://github.com/snowphamtom/ceilinggate
+- Convex backend + site: https://quirky-rhinoceros-204.convex.site/ (health OK)
+- FIRECRAWL_API_KEY: set in `.env.local` + Convex env; Firecrawl component installed
+- AgentMail primary inbox seeded: `ceilinggate-claims@agentmail.to`
 
-| Item | Status |
-|------|--------|
-| Luma registration | **Done** (“You’re In”) |
-| AgentMail inbox | **Done** — `ceilinggate-claims@agentmail.to` (webhook wired in code) |
-| Offline gate demo | **Green** — `npm run demo:gate` / `demo:offline` |
-| Public GitHub | **In flight** — MANAGER browser login/create; push when remote URL exists |
-| Origin namespace | Blocked — using GitHub path instead |
-| Convex / `*.convex.site` | Pending MANAGER Convex login + deploy key |
-| `FIRECRAWL_API_KEY` | Secret card raised to Taylor — wire when in env |
-| `CONVEX_DEPLOY_KEY` | Secret card raised to Taylor — wire when in env |
-| vibeapps video / social | Later (Taylor sends) |
+## Open
+- AgentMail webhook registration needs `AGENTMAIL_API_KEY` + webhook signing secret in Convex env, then register:
+  `POST https://quirky-rhinoceros-204.convex.site/agentmail/webhook`
+- Optional: production Convex deploy key if we outgrow the current dev deployment
 
-Not blocking local demo or prep push.
+## Do not
+- Re-run GitHub device auth (already OK as snowphamtom)
+- Treat Firecrawl as missing / force optional-config revert unless the live key is revoked
