@@ -1,19 +1,18 @@
-# CeilingGate STATUS — PUBLISH LIVE
+# CeilingGate STATUS — PUBLISH GO
 
 **Updated:** 2026-09-05 evening CT  
-**Taylor:** PUBLISH live (keep-local overridden)  
+**Taylor:** PUBLISH GO (not keep-local)  
 **Luma:** Done  
 **Inbox:** `ceilinggate@agentmail.to`  
-**GH:** browser in flight (MANAGER) — push when remote URL exists
+**GH/Convex:** MANAGER clearing Google auth on the box — will push when remote exists
 
-## Green locally
-- [x] Everyday money-claim UI + originality
-- [x] `npm run demo:gate` / `demo:offline`
-- [x] `npm run build`
-- [x] Webhook route `/agentmail/webhook` → pipeline
-- [x] `hackathon.md` / `BLOCKERS.md` current
+## Green / merge-ready
+- [x] Everyday expense sentence front-and-center
+- [x] Forensic board (not chat-demo)
+- [x] Eve fixtures **28** on `master`
+- [x] `npm run demo:offline` PASS
+- [x] Webhook route → `ceilinggate@agentmail.to`
 
 ## Next
-- [ ] Public GitHub push (await remote)
-- [ ] Convex deploy / convex.site
-- [ ] Live Firecrawl + webhook secret in Convex env
+- [ ] MANAGER: public GH push of `/workspace/ceilinggate`
+- [ ] MANAGER/Create: Convex deploy → `*.convex.site` + env keys
