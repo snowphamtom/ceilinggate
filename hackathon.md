@@ -92,6 +92,12 @@ Email a money claim with a public receipt link. CeilingGate scrapes the receipt,
 - [ ] Create: git push when remote URL appears
 - [ ] Convex login → `*.convex.site` + env keys
 
+
+### 2026-09-05 — Drive fuel fixtures
+- [x] Loaded Eve brief `1l1wjwE8…` + priority fileIds into `fixtures/demo.json` (14 forensic cases)
+- [x] Labels = forensic claim↔receipt examples (not chat)
+- [x] Offline `demo:offline` still green
+
 ## Remaining (MANAGER login unblocks)
 
 1. Convex login / `CONVEX_DEPLOY_KEY` → hosting on `*.convex.site`

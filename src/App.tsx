@@ -27,7 +27,10 @@ const LINE_ITEMS = demo.lineItems as string[];
 const hasConvex = Boolean(import.meta.env.VITE_CONVEX_URL);
 
 function money(n: number) {
-  return `$${n.toFixed(0)}`;
+  if (!Number.isFinite(n)) return String(n);
+  if (Math.abs(n) >= 1000) return `$${n.toLocaleString("en-US", { maximumFractionDigits: 2 })}`;
+  if (Math.abs(n) > 0 && Math.abs(n) < 0.01) return String(n);
+  return `$${n.toLocaleString("en-US", { maximumFractionDigits: 2 })}`;
 }
 
 /** Plain-English overclaim lines for everyday users (not SDK jargon). */
@@ -140,8 +143,8 @@ export default function App() {
         <section className="panel">
           <h2>Claims inbox</h2>
           <p className="muted small">
-            Sample claims from a real T&amp;E-style spreadsheet — not fake
-            placeholder text.
+            Forensic examples from Monsters Ink Drive fuel (claim↔receipt) — not chat
+            transcripts.
           </p>
           <div className="list">
             {demo.fixtures.map((f) => {

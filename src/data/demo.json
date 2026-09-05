@@ -1,6 +1,6 @@
 {
-  "version": "1.1.0",
-  "source": "Monsters Ink Drive fuel \u2014 ResidualGates Lean samples mapped to T&E residual-honesty line items (not lorem)",
+  "version": "2.0.0",
+  "source": "Eve Drive fuel brief 1l1wjwE8SfhDgEX9F_hPNjZHQGPSkVZRAr7QjZCDv5z4 + priority fileIds (forensic claim\u2194receipt, not chat)",
   "org": "Monsters Ink LLC",
   "lineItems": [
     "fuel",
@@ -8,21 +8,23 @@
     "meals",
     "misc"
   ],
-  "driveFuel": {
-    "sku": "$1,000 T&E residual-honesty 1:1 PDF",
-    "driveFileId": "1QlpSaLHOs8IiqStB0v7MCFN_i3GYA6Q7PxCacEJg-rY",
-    "uspatoCustomer": "242979",
-    "note": "Demo vectors are Lean sample_valid / sample_invalid; labels are accounting, not product mythos."
-  },
+  "briefFileId": "1l1wjwE8SfhDgEX9F_hPNjZHQGPSkVZRAr7QjZCDv5z4",
   "fixtures": [
     {
       "id": "te-grant",
-      "caseId": "CG-TE-001",
-      "label": "Under budget \u2014 all lines OK",
+      "caseId": "CG-LEAN-001",
+      "label": "GRANT \u2014 Lean sample under ceiling",
+      "kind": "lean-sample",
+      "lineItems": [
+        "fuel",
+        "lodging",
+        "meals",
+        "misc"
+      ],
       "email": {
-        "subject": "Expense claim \u2014 fuel, lodging, meals, misc",
+        "subject": "Expense claim \u2014 under receipt totals",
         "from": "claims@monstersink.example",
-        "body": "CLAIMED: 98, 49, 25, 9\nLINE_ITEMS: fuel, lodging, meals, misc\nPUBLIC_SOURCE: https://monsters-ink-107139.square.site\nDrive fuel: residual-honesty brief 1QlpSaLHOs8IiqStB0v7MCFN_i3GYA6Q7PxCacEJg-rY\nUSPTO customer 242979 = mail-not-grant (not a bid award).",
+        "body": "CLAIMED: 98, 49, 25, 9\nLINE_ITEMS: fuel, lodging, meals, misc\nPUBLIC_SOURCE: https://monsters-ink-107139.square.site",
         "receiptUrl": "https://monsters-ink-107139.square.site"
       },
       "claimed": [
@@ -42,16 +44,24 @@
         "mask": 0,
         "failedIndices": []
       },
-      "scrapeFixtureText": "INTERIOR: 100, 50, 25, 10\nSOURCE: fixture stand-in for Firecrawl scrape of public shop page\nORG: Monsters Ink LLC \u2014 public Square lists only the $1,000 T&E 1:1 PDF\nNOTE: Live judgments require Firecrawl when a URL exists."
+      "driveFileIds": [],
+      "scrapeFixtureText": "INTERIOR: 100, 50, 25, 10\nSOURCE: Lean sample_valid (offline)"
     },
     {
       "id": "te-refuse",
-      "caseId": "CG-TE-002",
-      "label": "Over on lodging and misc",
+      "caseId": "CG-LEAN-002",
+      "label": "REFUSE \u2014 Lean sample lodging+misc over",
+      "kind": "lean-sample",
+      "lineItems": [
+        "fuel",
+        "lodging",
+        "meals",
+        "misc"
+      ],
       "email": {
         "subject": "Expense claim \u2014 over on lodging & misc",
         "from": "claims@monstersink.example",
-        "body": "CLAIMED: 98, 51, 25, 11\nLINE_ITEMS: fuel, lodging, meals, misc\nPUBLIC_SOURCE: https://monsters-ink-107139.square.site\nFailed indices expected: 1 (lodging), 3 (misc) \u2192 bitmask 10.",
+        "body": "CLAIMED: 98, 51, 25, 11\nPUBLIC_SOURCE: https://monsters-ink-107139.square.site",
         "receiptUrl": "https://monsters-ink-107139.square.site"
       },
       "claimed": [
@@ -74,11 +84,458 @@
           3
         ]
       },
-      "scrapeFixtureText": "INTERIOR: 100, 50, 25, 10\nSOURCE: fixture stand-in for Firecrawl scrape of public shop page\nORG: Monsters Ink LLC\nNOTE: Live judgments require Firecrawl when a URL exists."
+      "driveFileIds": [],
+      "scrapeFixtureText": "INTERIOR: 100, 50, 25, 10\nSOURCE: Lean sample_invalid"
+    },
+    {
+      "id": "drive-pass-job",
+      "caseId": "CG-DRV-003",
+      "label": "GRANT \u2014 well_conditioned_3x3 pass_job (Drive)",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "dim0",
+        "dim1",
+        "dim2",
+        "dim3"
+      ],
+      "email": {
+        "subject": "[FORENSIC] pass_job.json \u2014 claimed \u2264 interior",
+        "from": "drive-fuel@monstersink.example",
+        "body": "CLAIMED: 9.8, 4.9, 2.5, 0.99\nINTERIOR: 10, 5, 2.5, 1\nDrive: pass_job.json (batch3)",
+        "receiptUrl": "https://www.nist.gov/cyberframework"
+      },
+      "claimed": [
+        9.8,
+        4.9,
+        2.5,
+        0.99
+      ],
+      "interior": [
+        10,
+        5,
+        2.5,
+        1
+      ],
+      "expect": {
+        "status": "grant",
+        "mask": 0,
+        "failedIndices": []
+      },
+      "driveFileIds": [
+        "1Z0O-8pUKMqxboYCjv8n7KLnz7dy4i3jr"
+      ],
+      "scrapeFixtureText": "INTERIOR: 10, 5, 2.5, 1\nFORENSIC: pass_job.json well_conditioned_3x3 GRANT seed"
+    },
+    {
+      "id": "drive-fail-job",
+      "caseId": "CG-DRV-004",
+      "label": "REFUSE \u2014 fail_job enclosure breach dims 1&3",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "dim0",
+        "dim1",
+        "dim2",
+        "dim3"
+      ],
+      "email": {
+        "subject": "[FORENSIC] fail_job.json \u2014 enclosure + corrupt",
+        "from": "drive-fuel@monstersink.example",
+        "body": "CLAIMED: 9.8, 5.01, 2.5, 1.05\nINTERIOR: 10, 5, 2.5, 1\nFailed dims 1 and 3",
+        "receiptUrl": "https://www.nist.gov/cyberframework"
+      },
+      "claimed": [
+        9.8,
+        5.01,
+        2.5,
+        1.05
+      ],
+      "interior": [
+        10,
+        5,
+        2.5,
+        1
+      ],
+      "expect": {
+        "status": "refuse",
+        "mask": 10,
+        "failedIndices": [
+          1,
+          3
+        ]
+      },
+      "driveFileIds": [
+        "1zPXW7i3Yz2Uzsd-X6WilIH25FfrA3Mp-"
+      ],
+      "scrapeFixtureText": "INTERIOR: 10, 5, 2.5, 1\nFORENSIC: fail_job dual REFUSE"
+    },
+    {
+      "id": "drive-ssv-residual",
+      "caseId": "CG-DRV-005",
+      "label": "GRANT \u2014 SSV residual 0.11 \u2264 interior 0.90",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "max_residual",
+        "living_residual"
+      ],
+      "email": {
+        "subject": "[FORENSIC] Dual-gate SSV sealed receipt",
+        "from": "drive-fuel@monstersink.example",
+        "body": "CLAIMED: 0.11, 0.12\nINTERIOR: 0.90, 0.90\nfileId 14AMY87yvc1bUcrf62-XVopY6eBSzwSaMce6zYK1_N9M",
+        "receiptUrl": "https://www.darpa.mil/research/research-spotlights/formal-methods"
+      },
+      "claimed": [
+        0.11,
+        0.12
+      ],
+      "interior": [
+        0.9,
+        0.9
+      ],
+      "expect": {
+        "status": "grant",
+        "mask": 0,
+        "failedIndices": []
+      },
+      "driveFileIds": [
+        "14AMY87yvc1bUcrf62-XVopY6eBSzwSaMce6zYK1_N9M"
+      ],
+      "scrapeFixtureText": "INTERIOR: 0.90, 0.90\nFORENSIC: SSV A0 max residual 0.11\u22640.90; living 0.12"
+    },
+    {
+      "id": "drive-bits-balanced",
+      "caseId": "CG-DRV-006",
+      "label": "GRANT \u2014 48 claimed bits \u2264 48 verified",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "claimed_bits"
+      ],
+      "email": {
+        "subject": "[FORENSIC] Self-audit claimed bits vs verified interior",
+        "from": "drive-fuel@monstersink.example",
+        "body": "CLAIMED: 48\nINTERIOR: 48\nfileId 1GBuXSiNGN6EPX4CtnGejFh6v4exi_Aqgk2OuQhaYVG4",
+        "receiptUrl": "https://sigplan.org/Awards/Software/"
+      },
+      "claimed": [
+        48
+      ],
+      "interior": [
+        48
+      ],
+      "expect": {
+        "status": "grant",
+        "mask": 0,
+        "failedIndices": []
+      },
+      "driveFileIds": [
+        "1GBuXSiNGN6EPX4CtnGejFh6v4exi_Aqgk2OuQhaYVG4"
+      ],
+      "scrapeFixtureText": "INTERIOR: 48\nFORENSIC: Total Verified Interior 48; \u0394C_amort=0"
+    },
+    {
+      "id": "drive-phi-refuse",
+      "caseId": "CG-DRV-007",
+      "label": "REFUSE \u2014 \u03a6 surplus claim with no power-dissipation interior",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "phi_surplus_claim"
+      ],
+      "email": {
+        "subject": "[FORENSIC] \u03a6\u22650.60 vacuum surplus \u2014 REFUSED",
+        "from": "drive-fuel@monstersink.example",
+        "body": "CLAIMED: 60\nINTERIOR: 0\nNo empirical power dissipation logged",
+        "receiptUrl": "https://sigplan.org/Awards/Software/"
+      },
+      "claimed": [
+        60
+      ],
+      "interior": [
+        0
+      ],
+      "expect": {
+        "status": "refuse",
+        "mask": 1,
+        "failedIndices": [
+          0
+        ]
+      },
+      "driveFileIds": [
+        "1GBuXSiNGN6EPX4CtnGejFh6v4exi_Aqgk2OuQhaYVG4"
+      ],
+      "scrapeFixtureText": "INTERIOR: 0\nFORENSIC: \u03a6 surplus REFUSED \u2014 Claimed \u2264 Interior violated"
+    },
+    {
+      "id": "drive-ceiling-as-cash",
+      "caseId": "CG-DRV-008",
+      "label": "REFUSE \u2014 vehicle ceilings treated as obligated cash",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "hiddenlayer_idiq_M",
+        "cdao_vehicle_M",
+        "applied_intuition_M"
+      ],
+      "email": {
+        "subject": "[FORENSIC] T&E spend table \u2014 ceiling \u2260 award",
+        "from": "drive-fuel@monstersink.example",
+        "body": "CLAIMED: 151000, 200, 171.1\nINTERIOR: 0, 0, 0\nfileId 1QlpSaLHOs8IiqStB0v7MCFN_i3GYA6Q7PxCacEJg-rY\n($M vehicle ceilings vs Unknown obligated)",
+        "receiptUrl": "https://www.diu.mil/work-with-us/open-solicitations"
+      },
+      "claimed": [
+        151000,
+        200,
+        171.1
+      ],
+      "interior": [
+        0,
+        0,
+        0
+      ],
+      "expect": {
+        "status": "refuse",
+        "mask": 7,
+        "failedIndices": [
+          0,
+          1,
+          2
+        ]
+      },
+      "driveFileIds": [
+        "1QlpSaLHOs8IiqStB0v7MCFN_i3GYA6Q7PxCacEJg-rY"
+      ],
+      "scrapeFixtureText": "INTERIOR: 0, 0, 0\nFORENSIC: obligated/awarded Unknown \u2014 ceiling \u2260 cash interior"
+    },
+    {
+      "id": "drive-guard-milestones",
+      "caseId": "CG-DRV-009",
+      "label": "REFUSE \u2014 GUARD $6.31M if-all-milestones vs unpaid interior",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "guard_all_milestones_usd"
+      ],
+      "email": {
+        "subject": "[FORENSIC] GUARD conditional claim vs pay unknown",
+        "from": "drive-fuel@monstersink.example",
+        "body": "CLAIMED: 6314531.75\nINTERIOR: 0\nSame T&E brief table",
+        "receiptUrl": "https://www.diu.mil/work-with-us/open-solicitations"
+      },
+      "claimed": [
+        6314531.75
+      ],
+      "interior": [
+        0
+      ],
+      "expect": {
+        "status": "refuse",
+        "mask": 1,
+        "failedIndices": [
+          0
+        ]
+      },
+      "driveFileIds": [
+        "1QlpSaLHOs8IiqStB0v7MCFN_i3GYA6Q7PxCacEJg-rY"
+      ],
+      "scrapeFixtureText": "INTERIOR: 0\nFORENSIC: GUARD milestone pay Unknown"
+    },
+    {
+      "id": "drive-diu-slogan",
+      "caseId": "CG-DRV-010",
+      "label": "REFUSE \u2014 DIU $100B+ slogan vs 0 live openings",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "slogan_scale_B"
+      ],
+      "email": {
+        "subject": "[FORENSIC] DIU slogan-scale vs live openings=0",
+        "from": "drive-fuel@monstersink.example",
+        "body": "CLAIMED: 100\nINTERIOR: 0\nNOT TAM \u2014 live openings empty",
+        "receiptUrl": "https://www.diu.mil/work-with-us/open-solicitations"
+      },
+      "claimed": [
+        100
+      ],
+      "interior": [
+        0
+      ],
+      "expect": {
+        "status": "refuse",
+        "mask": 1,
+        "failedIndices": [
+          0
+        ]
+      },
+      "driveFileIds": [
+        "1QlpSaLHOs8IiqStB0v7MCFN_i3GYA6Q7PxCacEJg-rY"
+      ],
+      "scrapeFixtureText": "INTERIOR: 0\nFORENSIC: DIU live openings = 0"
+    },
+    {
+      "id": "drive-uspto-fees",
+      "caseId": "CG-DRV-011",
+      "label": "REFUSE \u2014 $1004 deposit claim vs $70 filing paid",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "fee_2111",
+        "fee_2311",
+        "fee_2051",
+        "fee_2252"
+      ],
+      "email": {
+        "subject": "[FORENSIC] PAY_AND_FILE deposit vs basic filing paid",
+        "from": "drive-fuel@monstersink.example",
+        "body": "CLAIMED: 308, 352, 68, 276\nINTERIOR: 70, 0, 0, 0\nfileId 1Rw2uazrzGcAEJnZhB8cLv74fs4o8ok3i\nApp 19/658,750 Conf 3591 \u2014 payment\u2260grant",
+        "receiptUrl": "https://patentcenter.uspto.gov/"
+      },
+      "claimed": [
+        308,
+        352,
+        68,
+        276
+      ],
+      "interior": [
+        70,
+        0,
+        0,
+        0
+      ],
+      "expect": {
+        "status": "refuse",
+        "mask": 15,
+        "failedIndices": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      "driveFileIds": [
+        "1Rw2uazrzGcAEJnZhB8cLv74fs4o8ok3i",
+        "1WuGM3Nu16u73V3deA30mmmZkwGwMZfzJ"
+      ],
+      "scrapeFixtureText": "INTERIOR: 70, 0, 0, 0\nFORENSIC: basic filing $70 paid; deposit schedule $1004 not all paid interior"
+    },
+    {
+      "id": "drive-enclosure",
+      "caseId": "CG-DRV-012",
+      "label": "REFUSE \u2014 live_job_enclosure claimed 11 > interior 10",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "tol_scale",
+        "resource_a",
+        "resource_b"
+      ],
+      "email": {
+        "subject": "[FORENSIC] live_job_enclosure enclosure breach",
+        "from": "drive-fuel@monstersink.example",
+        "body": "CLAIMED: 0, 11, 3\nINTERIOR: 0.00000001, 10, 10",
+        "receiptUrl": "https://www.nist.gov/cyberframework"
+      },
+      "claimed": [
+        0,
+        11,
+        3
+      ],
+      "interior": [
+        1e-08,
+        10,
+        10
+      ],
+      "expect": {
+        "status": "refuse",
+        "mask": 2,
+        "failedIndices": [
+          1
+        ]
+      },
+      "driveFileIds": [
+        "13H0OO5Obv49CY-PEtvOHBVNCgq-NPMwW"
+      ],
+      "scrapeFixtureText": "INTERIOR: 1e-8, 10, 10\nFORENSIC: enclosure breach dim1"
+    },
+    {
+      "id": "drive-lean-kernel",
+      "caseId": "CG-DRV-013",
+      "label": "REFUSE \u2014 Lean theorems accepted vs Mathlib/physical refused",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "theorems_ok",
+        "mathlib_installed",
+        "physical_promotion"
+      ],
+      "email": {
+        "subject": "[FORENSIC] lean_kernel_receipt.json honesty",
+        "from": "drive-fuel@monstersink.example",
+        "body": "CLAIMED: 11, 1, 1\nINTERIOR: 11, 0, 0\nfileId 1QYziICQ_BlbKo0IIzzpxRluYtIzDOSfM\nlake EXIT 0 but mathlib NOT_INSTALLED; physical REFUSED",
+        "receiptUrl": "https://www.darpa.mil/research/research-spotlights/formal-methods"
+      },
+      "claimed": [
+        11,
+        1,
+        1
+      ],
+      "interior": [
+        11,
+        0,
+        0
+      ],
+      "expect": {
+        "status": "refuse",
+        "mask": 6,
+        "failedIndices": [
+          1,
+          2
+        ]
+      },
+      "driveFileIds": [
+        "1QYziICQ_BlbKo0IIzzpxRluYtIzDOSfM",
+        "1-WVaKfcMxgY_dTx2Yf2dgIEQuvuImuCZ1QuziIHXe08"
+      ],
+      "scrapeFixtureText": "INTERIOR: 11, 0, 0\nFORENSIC: theorems accepted; Mathlib/physical promotion refused"
+    },
+    {
+      "id": "drive-atec-silicon",
+      "caseId": "CG-DRV-014",
+      "label": "REFUSE \u2014 ATEC QUALIFIED claim vs silicon OPEN",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "lean_cbmc_qualified",
+        "silicon_logs",
+        "live_te_stream"
+      ],
+      "email": {
+        "subject": "[FORENSIC] ATEC Phase2 \u2014 qualified vs open hardware",
+        "from": "drive-fuel@monstersink.example",
+        "body": "CLAIMED: 1, 1, 1\nINTERIOR: 1, 0, 0\nfileId 1BAL7-Sn4XVx_1gyl5TPdGu42DIXECAh9",
+        "receiptUrl": "https://www.nist.gov/system/files/documents/2025/07/15/Outline_%20Proposed%20Zero%20Draft%20for%20a%20Standard%20on%20AI%20TEVV-for-web.pdf"
+      },
+      "claimed": [
+        1,
+        1,
+        1
+      ],
+      "interior": [
+        1,
+        0,
+        0
+      ],
+      "expect": {
+        "status": "refuse",
+        "mask": 6,
+        "failedIndices": [
+          1,
+          2
+        ]
+      },
+      "driveFileIds": [
+        "1BAL7-Sn4XVx_1gyl5TPdGu42DIXECAh9"
+      ],
+      "scrapeFixtureText": "INTERIOR: 1, 0, 0\nFORENSIC: Lean/CBMC QUALIFIED; silicon + live T&E OPEN"
     }
   ],
   "seedUrls": [
     "https://monsters-ink-107139.square.site",
-    "https://www.uspto.gov/"
+    "https://www.diu.mil/work-with-us/open-solicitations",
+    "https://patentcenter.uspto.gov/",
+    "https://www.nist.gov/cyberframework",
+    "https://sigplan.org/Awards/Software/",
+    "https://www.darpa.mil/research/research-spotlights/formal-methods"
   ]
 }
