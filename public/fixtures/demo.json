@@ -3156,6 +3156,123 @@
         "15RjPss4-7ws-DJd3Dz8bM2KSHllezkmI"
       ],
       "scrapeFixtureText": "INTERIOR: 1, 0, 0\nFORENSIC Eve Batch14: Patent Center May9 submission-receipt UI; no FEE CODE / not PAID / not grant"
+    },
+    {
+      "id": "img-0414-missing-parts-900",
+      "caseId": "CG-EVE-B15-01",
+      "label": "REFUSE \u2014 Missing Parts $900 TOTAL FEE BALANCE DUE unpaid (not EPR/grant; fee\u2260prize)",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "fee_balance_due",
+        "paid_in_full",
+        "patent_grant"
+      ],
+      "email": {
+        "subject": "[FORENSIC] IMG_0414 Missing Parts $900 TOTAL FEE BALANCE DUE \u2014 Eve",
+        "from": "eve-fuel@monstersink.example",
+        "body": "CLAIMED: 900, 1, 1\nINTERIOR: 900, 0, 0\nfileId 1mXnCcuKT7F5YW-0I8_rVYafrfG12GP8L\nTOTAL FEE BALANCE DUE $900 ($172+$68+$308+$352) \u2194 unpaid / not EPR / not grant. \u2260 $1004 EOT / \u2260 N417 $70 EPR.",
+        "receiptUrl": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule"
+      },
+      "claimed": [
+        900,
+        1,
+        1
+      ],
+      "interior": [
+        900,
+        0,
+        0
+      ],
+      "expect": {
+        "status": "refuse",
+        "mask": 6,
+        "failedIndices": [
+          1,
+          2
+        ]
+      },
+      "driveFileIds": [
+        "1mXnCcuKT7F5YW-0I8_rVYafrfG12GP8L"
+      ],
+      "scrapeFixtureText": "INTERIOR: 900, 0, 0\nFORENSIC Eve Batch15: TOTAL FEE BALANCE DUE $900; unpaid; public fee schedule https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule"
+    },
+    {
+      "id": "img-0415-missing-parts-notice",
+      "caseId": "CG-EVE-B15-02",
+      "label": "REFUSE \u2014 Notice to File Missing Parts mailed 05/28/2026 unpaid demand \u2260 grant",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "notice_mailed",
+        "fees_paid",
+        "patent_grant"
+      ],
+      "email": {
+        "subject": "[FORENSIC] IMG_0415 Notice to File Missing Parts 05/28/2026 \u2014 Eve",
+        "from": "eve-fuel@monstersink.example",
+        "body": "CLAIMED: 1, 1, 1\nINTERIOR: 1, 0, 0\nfileId 1zKAvQ4xpm-Kd9W9kLlwGwrMVP0i0F8-M\nApp 19/658,750 \u2014 mailed notice \u2194 unpaid demand / not grant (pairs with IMG_0414).",
+        "receiptUrl": "https://patentcenter.uspto.gov/"
+      },
+      "claimed": [
+        1,
+        1,
+        1
+      ],
+      "interior": [
+        1,
+        0,
+        0
+      ],
+      "expect": {
+        "status": "refuse",
+        "mask": 6,
+        "failedIndices": [
+          1,
+          2
+        ]
+      },
+      "driveFileIds": [
+        "1zKAvQ4xpm-Kd9W9kLlwGwrMVP0i0F8-M"
+      ],
+      "scrapeFixtureText": "INTERIOR: 1, 0, 0\nFORENSIC Eve Batch15: Missing Parts notice mailed 05/28/2026; unpaid"
+    },
+    {
+      "id": "img-0416-ffl-sibling",
+      "caseId": "CG-EVE-B15-03",
+      "label": "REFUSE \u2014 IMG_0416 FFL/small-entity sibling \u2260 grant / not PAID",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "ffl_doc",
+        "fees_paid",
+        "patent_grant"
+      ],
+      "email": {
+        "subject": "[FORENSIC] IMG_0416 FFL/small-entity sibling \u2014 Eve",
+        "from": "eve-fuel@monstersink.example",
+        "body": "CLAIMED: 1, 1, 1\nINTERIOR: 1, 0, 0\nfileId 1-9benefbYBN6-WJZOR7MkM4RyHmXm3Uu\nFFL/small-entity sibling \u2194 not grant / not PAID.",
+        "receiptUrl": "https://patentcenter.uspto.gov/"
+      },
+      "claimed": [
+        1,
+        1,
+        1
+      ],
+      "interior": [
+        1,
+        0,
+        0
+      ],
+      "expect": {
+        "status": "refuse",
+        "mask": 6,
+        "failedIndices": [
+          1,
+          2
+        ]
+      },
+      "driveFileIds": [
+        "1-9benefbYBN6-WJZOR7MkM4RyHmXm3Uu"
+      ],
+      "scrapeFixtureText": "INTERIOR: 1, 0, 0\nFORENSIC Eve Batch15: FFL/small-entity sibling; not PAID / not grant"
     }
   ],
   "seedUrls": [
@@ -3192,7 +3309,7 @@
     "drive-fail-job",
     "readme-1004-vs-70",
     "uspto-receipt-history",
-    "track-one-skeleton-unpaid"
+    "img-0414-missing-parts-900"
   ],
   "batch4BriefFileId": "1a0Hcs28fpH3s3oGvc8MbgegyBVGN4hOg",
   "note": "shipShortlist (~14) = demo quality only, NOT prize. All Gas cash = $10k/$5k/$1.5k (Luma). cip-track-one-2100 kept full-pack only \u2014 USPTO fee noise (stale $2100 memo / ~$1806 live), never prize/prefer ship copy.",
