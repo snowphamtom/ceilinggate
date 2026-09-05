@@ -1,5 +1,7 @@
 # CeilingGate — Convex All Gas build log
 
+**Cash tiers (Luma only):** $10k / $5k / $1.5k. USPTO fee fixtures (e.g. $2,100 Track One) are not prize money.
+
 - **App:** CeilingGate — everyday money-claim checker (small biz / contractors / grant seekers)
 - **Path (box):** `/workspace/ceilinggate`
 - **Started:** 2026-09-05

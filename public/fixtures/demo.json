@@ -3038,7 +3038,7 @@
     {
       "id": "cip-track-one-2100",
       "caseId": "CG-EVE-B13-01",
-      "label": "REFUSE \u2014 CIP/Track One $2,100 PE fee named vs unpaid/unfiled",
+      "label": "REFUSE \u2014 USPTO CIP/Track One $2,100 PE fee named vs unpaid (NOT a prize tier)",
       "kind": "forensic-drive",
       "lineItems": [
         "pe_fee_named_usd",
@@ -3049,7 +3049,7 @@
       "email": {
         "subject": "[FORENSIC] CIP/Track One memo $2100 \u2014 Eve batch13",
         "from": "eve-fuel@monstersink.example",
-        "body": "CLAIMED: 2100, 1, 1, 1\nINTERIOR: 2100, 0, 0, 0\nfileId 1we7zaGMXZjSxBBQ2gpxEKOMob6HgwzdGOQKydyZH2oA\n$2100 small-entity PE fee named \u2194 unpaid / no EPR / CIP unfiled",
+        "body": "CLAIMED: 2100, 1, 1, 1\nINTERIOR: 2100, 0, 0, 0\nfileId 1we7zaGMXZjSxBBQ2gpxEKOMob6HgwzdGOQKydyZH2oA\n$2100 small-entity PE fee named \u2194 unpaid / no EPR / CIP unfiled\nNOTE: All Gas cash tiers are 10k/5k/1.5k only \u2014 this is a USPTO fee line, not prize money.",
         "receiptUrl": "https://patentcenter.uspto.gov/"
       },
       "claimed": [
@@ -3155,7 +3155,7 @@
     "uspto-receipt-history"
   ],
   "batch4BriefFileId": "1a0Hcs28fpH3s3oGvc8MbgegyBVGN4hOg",
-  "note": "Quality over volume: shipShortlist (~14) for demo; full pack kept for forensic depth. Batch4 mythos/COHOCF skipped.",
+  "note": "Quality over volume: shipShortlist (~14) is demo/fixture quality, NOT prize tiers. All Gas cash = $10k/$5k/$1.5k only (Luma). Batch13 cip-track-one-2100 is USPTO PE fee refuse noise.",
   "batch5BriefFileId": "1cJwsN_NMLgjMAdSydkOqejlQO2dQkl46",
   "eveBatch5BriefFileId": "1cJwsN_NMLgjMAdSydkOqejlQO2dQkl46",
   "eveBatch6FileIds": [
@@ -3197,5 +3197,11 @@
   "eveBatch13FileIds": [
     "1we7zaGMXZjSxBBQ2gpxEKOMob6HgwzdGOQKydyZH2oA",
     "1MdoQek5IfNGQC6fYotsatCp0iHfhM4TX"
-  ]
+  ],
+  "prizeCashTiersUsd": [
+    10000,
+    5000,
+    1500
+  ],
+  "prizeCashSource": "https://luma.com/convex-allgas-hackathon"
 }

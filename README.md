@@ -1,5 +1,7 @@
 # CeilingGate
 
+
+**All Gas cash (Luma):** $10,000 / $5,000 / $1,500 only — [register](https://luma.com/convex-allgas-hackathon). Demo `shipShortlist` fixtures (e.g. USPTO $2,100 Track One PE fee) are residual-gate samples, **not** prize tiers.
 **Everyday money-claim checker** for small businesses, contractors, and grant seekers — not a chat app, not a developer SDK.
 
 **Everyday sentence:** Email your expense claim with a public receipt link — CeilingGate checks each line against the scraped receipt and tells you GRANT, or which lines are over (in plain English).
