@@ -14,7 +14,9 @@
     "dev:frontend": "vite",
     "dev:backend": "convex dev",
     "convex:deploy": "convex deploy",
-    "test:gate": "node scripts/test-gate.mjs"
+    "test:gate": "node scripts/test-gate.mjs",
+    "test": "vitest run && node scripts/test-gate.mjs",
+    "demo:offline": "npm run demo:gate && npm run build"
   },
   "dependencies": {
     "@agentmail/convex": "^0.1.0",

@@ -1,131 +1,96 @@
 # CeilingGate
 
-**Honesty gate for dollar claims that arrive by email.**
+**Everyday money-claim checker** for small businesses, contractors, and grant seekers — not a chat app, not a developer SDK.
 
-An AgentMail inbox receives a claim. Firecrawl scrapes the linked public receipt
-(interior). Convex stores claimed vs interior vectors and runs ResidualGates:
+Someone emails a claim with a public receipt link. CeilingGate scrapes the receipt, compares each line, and returns **GRANT** or **REFUSE** with failed lines in plain English (e.g. “Lodging is $1 over the receipt”).
 
-> **GRANT** iff `claimed ≤ interior` componentwise; else **REFUSE** with a bitmask of failed indices.
+Under the hood: GRANT iff `claimed ≤ interior` componentwise; else REFUSE with a failure bitmask (ResidualGates).
 
-Lean semantic oracle: `/workspace/cohocf-beta3/ResidualGatesMathlib.lean`  
-Runtime port: `convex/lib/gates.ts` (numbers, no Lean in this repo)
+**Deadline:** Tue Sep 22, 2026 · 12:00 PM PT · host `*.convex.site` · public GitHub when Origin/`gh` unblocked.
 
-One-liner: *Email claims a ceiling; the public receipt is the interior; Convex refuses the overclaim in realtime.*
+**KEEP LOCAL** on `/workspace/ceilinggate` until public push is unblocked. See `BLOCKERS.md`.
 
-## Stack
+---
 
-| Layer | Tech |
-|-------|------|
-| Frontend | Vite + React + TypeScript |
-| Backend | Convex (`queries` / `mutations` / `actions` / `http`) |
-| Scrape | `@firecrawl/firecrawl-convex` component |
-| Inbox | `@agentmail/convex` + webhook on `*.convex.site` |
+## Hackathon rules checklist
 
-## Quick start (local, no network keys)
+| # | Rule | CeilingGate |
+|---|------|-------------|
+| 1 | New full-stack app | Yes — this repo, not a fork rebrand |
+| 2 | Convex backend | `convex/` schema + pipeline + http |
+| 3 | Firecrawl feeds data | Mandatory scrape when claim has a public URL; no judgment without scraped interior |
+| 4 | AgentMail inbox | Claim ingress `ceilinggate@agentmail.to` (not chat transcript export) |
+| 5 | Built with agent / Codex + Convex plugin | Scaffolded under Create + Convex/Firecrawl/AgentMail plugins |
+| 6 | Host frontend on convex.site OR chatgpt.site | Target `*.convex.site` (blocked until deploy key) |
+| 7 | Public GitHub (not private) | Blocked: Origin namespace / `gh` auth — keep local until then |
+| 8 | No localhost submission | Offline board is for build; submission is hosted |
+| 9 | Video on vibeapps.dev by Sep 22 12:00 PM PT | Streamer draft later; Taylor asks |
+| 10 | Social tags @convex @OpenAI @firecrawl @agentmail | Taylor sends (draft-only here) |
+| 11 | Luma registered | Done (“You’re In”) |
+
+---
+
+## Originality vs chat-demo toys
+
+**Not** `waynesutton/convex-agentmail-hackathon-demo` and **not** a Firecrawl docs-search chat.
+
+| Chat-demo pattern | CeilingGate |
+|-------------------|-------------|
+| Email ↔ AI buddy thread UI | Forensic **case docket + verdict board + ledger** |
+| AgentMail as chat export | AgentMail = **claim ingress only** |
+| Firecrawl optional / search toy | Firecrawl **required** for live judgment when URL exists |
+| LLM “looks fine” approve | ResidualGates **mask** — machine-checkable GRANT/REFUSE |
+| Lorem / sample receipts | Fixtures from **Monsters Ink Drive fuel** (T&E residual-honesty vectors + Lean samples) |
+| Soft product copy | Accounting / forensic voice |
+
+Core loop: **claim vectors vs interior vectors → bitmask**.
+
+---
+
+## Architecture
+
+```
+AgentMail claim email ──► Convex claims ──► Firecrawl scrape (mandatory if URL)
+                                      │
+                                      ▼
+                         ResidualGates gateB → GRANT / REFUSE + mask
+                                      │
+                                      ▼
+                         Forensic UI (docket · ledger · verdict)
+```
+
+Offline: Drive-fuel fixtures ship with **fixture scrape** text as interior stand-in so the board demos without keys.
+
+## Quick start
 
 ```bash
 cd /workspace/ceilinggate
-npm install
-npm run demo:gate    # asserts refuse mask === 10 (Lean sample_invalid)
-npm run dev          # UI offline fixture demo (no VITE_CONVEX_URL)
+/usr/bin/npm install
+/usr/bin/npm run demo:gate     # Lean samples: grant + refuse mask 10
+/usr/bin/npm run build
+/usr/bin/npm run preview       # forensic board
 ```
 
-Expected demo output includes:
+## ResidualGates samples (Drive-fuel labeled)
 
-```
-ok: sampleInvalid mask 10 (bits 1 and 3)
-CeilingGate ResidualGates demo PASSED
-```
+| Case | Interior | Claimed | Result |
+|------|----------|---------|--------|
+| `CG-TE-001` te-grant | `[100,50,25,10]` | `[98,49,25,9]` | GRANT / mask `0` |
+| `CG-TE-002` te-refuse | `[100,50,25,10]` | `[98,51,25,11]` | REFUSE / mask `10` (lodging+misc) |
 
-## Convex setup (needs login)
+Line items: fuel, lodging, meals, misc — mapped from Lean `sample_valid` / `sample_invalid`.
 
-```bash
-npx convex login          # interactive — blocker if no account on this machine
-npx convex dev            # creates deployment, regenerates convex/_generated
-npx convex env set FIRECRAWL_API_KEY fc-...
-npx convex env set AGENTMAIL_API_KEY ...
-npx convex env set AGENTMAIL_WEBHOOK_SECRET whsec_...
-# optional:
-npx convex env set FIRECRAWL_WEBHOOK_SECRET whsec-...
-```
+## Env blockers
 
-Copy the printed Convex URL into `.env.local`:
-
-```bash
-VITE_CONVEX_URL=https://YOUR_DEPLOYMENT.convex.cloud
-```
-
-Then:
-
-```bash
-npm run dev
-```
-
-### Webhooks
-
-| Service | URL |
+| Blocker | Why |
 |---------|-----|
-| AgentMail | `https://<deployment>.convex.site/agentmail/webhook` |
-| Firecrawl | `https://<deployment>.convex.site/firecrawl/webhook` (component mount) |
+| Origin / `gh` | Public GitHub |
+| `CONVEX_DEPLOY_KEY` / login | `*.convex.site` |
+| `FIRECRAWL_API_KEY` | Live scrapes (required for live judgment) |
+| AgentMail webhook secret | Verify inbound |
 
-Register the AgentMail URL in the AgentMail dashboard and store the Svix secret as `AGENTMAIL_WEBHOOK_SECRET`.
+Inbox: `ceilinggate@agentmail.to`
 
-## Env vars
+## Out of scope
 
-| Name | Where | Purpose |
-|------|-------|---------|
-| `VITE_CONVEX_URL` | Vite `.env.local` | Frontend Convex client |
-| `FIRECRAWL_API_KEY` | Convex env | Firecrawl scrapes |
-| `FIRECRAWL_WEBHOOK_SECRET` | Convex env | Optional crawl webhook verify |
-| `AGENTMAIL_API_KEY` | Convex env | Inbox API |
-| `AGENTMAIL_WEBHOOK_SECRET` | Convex env | Svix verify (`whsec_…`) |
-
-Never commit real keys.
-
-## ResidualGates samples
-
-| Fixture | Interior | Claimed | Result |
-|---------|----------|---------|--------|
-| `fuel-grant` | `[100,50,25,10]` | `[98,49,25,9]` | GRANT / mask `0` |
-| `fuel-refuse` | `[100,50,25,10]` | `[98,51,25,11]` | REFUSE / mask `10` (bits 1 & 3) |
-
-## Project layout
-
-```
-convex/
-  lib/gates.ts          # gateB, enclosedR, breachesR, maskOf
-  schema.ts             # inboxes, claims, fixtures
-  claims.ts / fixtures.ts / inboxes.ts
-  firecrawl.ts          # scrape action (component client)
-  agentmail.ts          # onMessageReceived → claim row
-  http.ts               # POST /agentmail/webhook
-  convex.config.ts      # firecrawl + agentmail components
-fixtures/demo-fixtures.json
-scripts/demo-gate.js    # offline unit check
-src/App.tsx             # GRANT/REFUSE UI + paste-fixture button
-```
-
-## Hackathon submission notes
-
-- Event: **Convex All Gas** (OpenAI · Firecrawl · AgentMail)
-- Deadline: **Tue Sep 22, 2026 · 12:00 PM PT**
-- Host frontend on **`*.convex.site`** (or chatgpt.site) — not localhost-only
-- Public GitHub repo required; include this README + `hackathon.md`
-- Design notes: `/workspace/ceilinggate-design.md`
-- Luma register: **HELD** until Taylor confirms
-
-### If Convex login is blocked
-
-Keep developing against `npm run demo:gate` + offline UI. Document the blocker; leave this runnable structure. After login, `npx convex dev` replaces stub `convex/_generated/*`.
-
-### If Origin / GitHub push is blocked
-
-Code lives on the box at `/workspace/ceilinggate`. Taylor can publish by:
-
-1. Copying the tree to a machine with `gh` auth, or
-2. Creating a public repo and pushing from Cursor Origin / GitHub integration, or
-3. `tar czf ceilinggate.tgz -C /workspace ceilinggate` and uploading.
-
-## License
-
-Hackathon demo — see sponsor terms for submission.
+No Square shop edits, no COHOCF mythos products, no MAGPIE SKU, no “AI buddy” framing.

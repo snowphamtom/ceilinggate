@@ -1,41 +1,77 @@
 # CeilingGate — Convex All Gas build log
 
-- **App:** CeilingGate
+- **App:** CeilingGate — everyday money-claim checker (small biz / contractors / grant seekers)
+- **Path (box):** `/workspace/ceilinggate`
 - **Started:** 2026-09-05
 - **Deadline:** 2026-09-22 12:00 PM PT
-- **Live URL:** _pending — need Convex project → *.convex.site_
-- **Public repo:** _pending — gh auth / Origin namespace_
-- **Luma register:** **HELD**
+- **Publish:** KEEP LOCAL until Origin/`gh` unblocked → then public GitHub
+- **Live URL:** _pending — Convex project → `*.convex.site` static host_
+- **Public repo:** _deferred (blocker)_
+- **Luma register:** Done (“You’re In”)
+- **Inbox:** `ceilinggate@agentmail.to`
 
-## Stack
+## Everyday pitch (judging)
 
-- Convex (DB, functions, realtime, static hosting target)
-- AgentMail (`@agentmail/convex`) — claim inbox
-- Firecrawl (`@firecrawl/firecrawl-convex`) — scrape public receipt interiors
-- ResidualGates port (`convex/gateLogic.ts`) — GRANT iff claimed ≤ interior
+Email a money claim with a public receipt link. CeilingGate scrapes the receipt, compares each line to what was claimed, and returns **GRANT** or **REFUSE** with failed lines in plain English (e.g. “Lodging is $1 over the receipt”).
 
-## What shipped so far
+**Not** a chat app. **Not** a gate SDK. **Not** docs-search. **Not** a copy of the AgentMail chat demo.
 
-- [x] Design doc (`docs/design.md`, also `/workspace/ceilinggate-design.md`)
-- [x] Vite + React + TS scaffold
-- [x] Schema: claims, interiors, gateDecisions, vectors
-- [x] Gate logic + offline Lean sample self-check (`npm run test:gate`)
-- [x] Fixture runner (fuel-grant / fuel-refuse, mask 10)
-- [x] Pipeline stubs: AgentMail webhook → parse → Firecrawl scrape → gateB → UI
-- [x] 3-screen UI (Inbox / Gate / Fixtures)
-- [ ] Convex cloud deploy + convex.site
-- [ ] Live AgentMail inbox + webhook
-- [ ] Live Firecrawl scrape of public receipt
+## Stack (required artifacts)
+
+| Artifact | Status |
+|----------|--------|
+| New full-stack app | Yes — `/workspace/ceilinggate` |
+| Convex backend | `convex/` schema, mutations, queries, actions, http |
+| Firecrawl Convex component | `convex/convex.config.ts` uses `@firecrawl/firecrawl-convex`; `pipeline.scrapeAndGate` |
+| AgentMail real ingress | Component + inbox `ceilinggate@agentmail.to`; webhook stub `/agentmail/webhook` |
+| Live queries/mutations | `claims`, `gates`, `fixtures`, `pipeline`, `inboxes` |
+| Path to convex.site | Vite `build` → deploy static to Convex hosting when deploy key exists |
+| ResidualGates math | Runtime port; offline `demo:gate` PASS |
+
+## Build log (chronological)
+
+### 2026-09-05 — scaffold
+- [x] Design (`docs/design.md`)
+- [x] Vite + React + TS
+- [x] Schema: claims, interiors, gateDecisions, vectors, scrapes, inboxes
+- [x] Gate logic + `npm run demo:gate` → GRANT + REFUSE mask **10**
+- [x] AgentMail inbox created: `ceilinggate@agentmail.to`
+- [x] Firecrawl + AgentMail components wired in `convex.config.ts`
+- [x] Pipeline: AgentMail → parse → Firecrawl scrape → gateB
+- [x] Offline board UI + `npm run build` green
+
+### 2026-09-05 — originality harden
+- [x] Forensic board (not chat thread)
+- [x] Firecrawl mandatory for live judgment when URL exists
+- [x] Drive-fuel fixtures (Monsters Ink T&E), not lorem
+- [x] README rules checklist 1–11
+
+### 2026-09-05 — judging pivot (everyday apps)
+- [x] UI/copy reframed for normal-person money claims
+- [x] Plain-English failed lines (no SDK-first framing)
+- [x] Claims inbox + result board language
+- [ ] Convex cloud deploy + `*.convex.site`
+- [ ] Live AgentMail webhook + Firecrawl key in Convex env
 - [ ] Public GitHub
-- [ ] Social tags + vibeapps video
+- [ ] vibeapps.dev video + social (Taylor sends)
 
-## Blockers
 
-1. **Origin namespace** — CloudAgent `new_repo` blocked (`cursor.com/codebase/get-started`)
-2. **GitHub auth** — `gh` not logged in on build box
-3. **API keys** — `AGENTMAIL_API_KEY`, `AGENTMAIL_WEBHOOK_SECRET`, `FIRECRAWL_API_KEY` (+ optional webhook secret)
-4. **Convex project / deploy account** — required for `npx convex dev` codegen + hosting
+### 2026-09-05 — offline demo FLAG
+- [x] **Offline gate demo WORKS** (`npm run demo:gate` PASS; `npm run build` green; everyday UI preview)
+- Public GH still waiting on Origin or Taylor repo URL
 
-## Demo path without keys
+## Blockers (work around — do not wait)
 
-`npm run test:gate` then, after Convex login: `npx convex dev` → UI Fixtures → Run all → GRANT + REFUSE mask 10.
+1. Convex login / `CONVEX_DEPLOY_KEY` → hosting on `*.convex.site`
+2. `FIRECRAWL_API_KEY` in Convex env → live scrapes
+3. AgentMail webhook secret → verified ingress
+4. Origin namespace / `gh` auth → public GitHub
+
+## Demo without keys
+
+```bash
+cd /workspace/ceilinggate
+npm install && npm run demo:gate && npm run build && npm run preview
+```
+
+Click **Check sample claims** → GRANT (all lines OK) + REFUSE (lodging & misc over).

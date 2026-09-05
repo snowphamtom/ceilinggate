@@ -4,9 +4,18 @@
 **Event:** Convex All Gas (OpenAI · Firecrawl · AgentMail)  
 **Deadline:** Tue Sep 22, 2026 · 12:00 PM PT  
 **Lean reference:** `/workspace/cohocf-beta3/ResidualGatesMathlib.lean` (`ℚ` lists so `native_decide` is legal)  
-**Status:** Build hold lifted — scaffold + design in parallel. Luma register still **HELD** until Taylor confirms.
+**Status:** BUILD GO. Luma registered (“You’re In”). Originality lock: forensic board, not chat-demo.
 
 ---
+
+## Originality lock (vs chat-demo)
+
+CeilingGate is **not** a chat-with-email rebrand of waynesutton/convex-agentmail-hackathon-demo or a Firecrawl docs-search toy.
+
+- UI = case docket + ledger + verdict stamp (forensic/accounting voice)
+- AgentMail = claim ingress only
+- Firecrawl mandatory when a public URL exists — no judgment without scraped interior
+- Fixtures = Monsters Ink Drive fuel (T&E residual-honesty + Lean samples), not lorem
 
 ## Pitch
 
@@ -189,8 +198,8 @@ Undistorted fuel = Drive-honest T&E/ceiling examples aligned to Lean samples (no
 
 Canonical fixtures:
 
-1. **fuel-grant** — claimed `[98,49,25,9]` ≤ interior `[100,50,25,10]` → GRANT / mask 0  
-2. **fuel-refuse** — claimed `[98,51,25,11]` ≰ interior → REFUSE / mask 10 / failed `[1,3]`
+1. **te-grant** — claimed `[98,49,25,9]` ≤ interior `[100,50,25,10]` → GRANT / mask 0  
+2. **te-refuse** — claimed `[98,51,25,11]` ≰ interior → REFUSE / mask 10 / failed `[1,3]`
 
 Line items metaphor (demo copy only): `[fuel, lodging, meals, misc]` dollar ceilings vs receipt totals.
 
@@ -201,8 +210,8 @@ Line items metaphor (demo copy only): `[fuel, lodging, meals, misc]` dollar ceil
 | t | Action |
 |---|--------|
 | 0–5s | Open `*.convex.site` — Inbox screen, “CeilingGate” title. |
-| 5–15s | Fixture runner → **fuel-grant** → green **GRANT**, mask `0`. |
-| 15–30s | **fuel-refuse** → red **REFUSE**, mask `10`, chips on indices 1 & 3. Say: “claimed ≤ interior, else bitmask.” |
+| 5–15s | Fixture runner → **te-grant** → green **GRANT**, mask `0`. |
+| 15–30s | **te-refuse** → red **REFUSE**, mask `10`, chips on indices 1 & 3. Say: “claimed ≤ interior, else bitmask.” |
 | 30–45s | Show (or simulate) AgentMail claim email + Firecrawl scrape status flipping to gated. |
 | 45–55s | Point at Convex dashboard / live query — no refresh. |
 | 55–60s | Close: “Email claim · public receipt · ResidualGates · Convex realtime.” |

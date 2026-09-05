@@ -1,7 +1,7 @@
 /**
- * ResidualGates runtime port for Convex backend.
+ * ResidualGates runtime port (TypeScript / Vite UI).
  * GRANT iff claimed ≤ interior componentwise; else REFUSE + bitmask.
- * Keep in sync with src/lib/residualGates.ts
+ * Matches Lean ResidualGatesMathlib samples.
  */
 export type GateStatus = "grant" | "refuse";
 

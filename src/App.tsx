@@ -1,246 +1,299 @@
-import { useState } from "react";
-import { useMutation, useQuery } from "convex/react";
-import { api } from "../convex/_generated/api";
-import type { Id } from "../convex/_generated/dataModel";
+import { useCallback, useMemo, useState } from "react";
+import demo from "./data/demo.json";
+import {
+  gateB,
+  granted,
+  type GateDecision,
+} from "./lib/residualGates";
+import "./index.css";
 
-type Screen = "inbox" | "decision" | "fixtures";
+type Fixture = (typeof demo.fixtures)[number];
+
+type LocalDecision = {
+  id: string;
+  caseId: string;
+  label: string;
+  claimed: number[];
+  interior: number[];
+  decision: GateDecision;
+  source: "fixture-scrape" | "convex";
+  receiptUrl: string;
+  lineItems: string[];
+  subject: string;
+  from: string;
+};
+
+const LINE_ITEMS = demo.lineItems as string[];
+const hasConvex = Boolean(import.meta.env.VITE_CONVEX_URL);
+
+function money(n: number) {
+  return `$${n.toFixed(0)}`;
+}
+
+/** Plain-English overclaim lines for everyday users (not SDK jargon). */
+function plainFailures(
+  lineItems: string[],
+  claimed: number[],
+  interior: number[],
+  failedIndices: number[],
+): string[] {
+  return failedIndices.map((i) => {
+    const name = lineItems[i] ?? `line ${i + 1}`;
+    const c = claimed[i] ?? 0;
+    const n = interior[i] ?? 0;
+    const over = c - n;
+    return `${capitalize(name)} is ${money(over)} over the receipt (${money(c)} claimed vs ${money(n)} on the source).`;
+  });
+}
+
+function capitalize(s: string) {
+  return s.length ? s[0].toUpperCase() + s.slice(1) : s;
+}
+
+function runFixture(f: Fixture): LocalDecision {
+  const decision = gateB(f.interior, f.claimed);
+  return {
+    id: f.id,
+    caseId: f.caseId,
+    label: f.label,
+    claimed: f.claimed,
+    interior: f.interior,
+    decision,
+    source: "fixture-scrape",
+    receiptUrl: f.email.receiptUrl,
+    lineItems: LINE_ITEMS,
+    subject: f.email.subject,
+    from: f.email.from,
+  };
+}
 
 export default function App() {
-  const [screen, setScreen] = useState<Screen>("fixtures");
-  const [selected, setSelected] = useState<Id<"claims"> | null>(null);
-  const rows = useQuery(api.claims.listDecisions, { limit: 40 });
-  const fixtureDefs = useQuery(api.fixtures.listFixtureDefs);
-  const leanCheck = useQuery(api.fixtures.leanSampleSelfCheck);
-  const runFixture = useMutation(api.fixtures.runFixture);
-  const runAll = useMutation(api.fixtures.runAllFixtures);
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [results, setResults] = useState<LocalDecision[]>([]);
+
+  const selfCheckOk = useMemo(() => {
+    const grant = gateB([100, 50, 25, 10], [98, 49, 25, 9]);
+    const refuse = gateB([100, 50, 25, 10], [98, 51, 25, 11]);
+    return (
+      granted(grant) &&
+      refuse.status === "refuse" &&
+      refuse.mask === 10
+    );
+  }, []);
+
+  const loadAll = useCallback(() => {
+    const next = demo.fixtures.map(runFixture);
+    setResults(next);
+    setSelectedId(next[0]?.id ?? null);
+  }, []);
+
+  const runOne = useCallback((f: Fixture) => {
+    const d = runFixture(f);
+    setResults((prev) => {
+      const others = prev.filter((r) => r.id !== d.id);
+      return [d, ...others];
+    });
+    setSelectedId(d.id);
+  }, []);
+
+  const selected =
+    results.find((r) => r.id === selectedId) ?? results[0] ?? null;
+
+  const plain = selected
+    ? plainFailures(
+        selected.lineItems,
+        selected.claimed,
+        selected.interior,
+        selected.decision.failedIndices,
+      )
+    : [];
 
   return (
-    <div className="shell">
+    <div className="shell board">
       <header className="top">
         <div>
+          <p className="eyebrow">For small businesses · contractors · grant seekers</p>
           <h1>CeilingGate</h1>
-          <p className="muted">
-            AgentMail claim → Firecrawl interior → ResidualGates → realtime UI
+          <p className="lede">
+            Someone emails a money claim with a public receipt link. We pull the
+            receipt, compare each line to what they claimed, and say{" "}
+            <strong>GRANT</strong> or <strong>REFUSE</strong> — with the failed
+            lines in plain English.
           </p>
         </div>
-        <nav className="tabs">
-          {(
-            [
-              ["inbox", "1 · Inbox"],
-              ["decision", "2 · Gate"],
-              ["fixtures", "3 · Fixtures"],
-            ] as const
-          ).map(([id, label]) => (
-            <button
-              key={id}
-              className={screen === id ? "tab on" : "tab"}
-              onClick={() => setScreen(id)}
-            >
-              {label}
-            </button>
-          ))}
-        </nav>
+        <div className="actions">
+          <button type="button" className="primary" onClick={loadAll}>
+            Check sample claims
+          </button>
+        </div>
       </header>
 
-      {leanCheck && (
-        <div className="lean">
-          Lean samples: grant={String(leanCheck.sample_valid_grant)} refuse=
-          {String(leanCheck.sample_invalid_refuse)} mask10=
-          {String(leanCheck.sample_invalid_mask_ten)}
-        </div>
-      )}
+      <div className="lean">
+        How it works: claim email → scrape public source → line-by-line check.
+        Inbox: <code>ceilinggate@agentmail.to</code>
+        {hasConvex ? " · live Convex connected" : " · demo mode (sample receipts)"}
+        {" · "}
+        self-check {selfCheckOk ? "ok" : "fail"}
+      </div>
 
-      {screen === "inbox" && (
-        <section>
-          <h2>Inbox / Claims</h2>
+      <div className="board-grid">
+        <section className="panel">
+          <h2>Claims inbox</h2>
+          <p className="muted small">
+            Sample claims from a real T&amp;E-style spreadsheet — not fake
+            placeholder text.
+          </p>
           <div className="list">
-            {(rows ?? []).map(({ claim, decision }) => (
+            {demo.fixtures.map((f) => {
+              const expect = gateB(f.interior, f.claimed);
+              const active = selectedId === f.id;
+              return (
+                <button
+                  key={f.id}
+                  type="button"
+                  className={
+                    "row docket" +
+                    (active ? " on" : "") +
+                    (expect.status === "grant" ? " edge-grant" : " edge-refuse")
+                  }
+                  onClick={() => runOne(f)}
+                >
+                  <span className="subj">{f.email.subject}</span>
+                  <span className="meta">
+                    from {f.email.from} · receipt on file
+                  </span>
+                  <StatusPill status={expect.status} />
+                </button>
+              );
+            })}
+          </div>
+        </section>
+
+        <section className="panel verdict-panel">
+          <h2>Result</h2>
+          {!selected ? (
+            <p className="muted">
+              Pick a claim or hit <strong>Check sample claims</strong>.
+            </p>
+          ) : (
+            <div
+              className={
+                selected.decision.status === "grant"
+                  ? "card grant big"
+                  : "card refuse big"
+              }
+            >
+              <p className="eyebrow">{selected.caseId}</p>
+              <h3>
+                {selected.decision.status === "grant"
+                  ? "GRANT — claim is under the receipt"
+                  : "REFUSE — some lines are over the receipt"}
+              </h3>
+              <div className="badge stamp">
+                {selected.decision.status === "grant" ? "GRANT" : "REFUSE"}
+              </div>
+
+              {plain.length > 0 ? (
+                <ul className="plain-fail">
+                  {plain.map((line) => (
+                    <li key={line}>{line}</li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="ok-line">
+                  Every line is at or under the scraped receipt totals.
+                </p>
+              )}
+
+              <table className="ledger">
+                <thead>
+                  <tr>
+                    <th>Line</th>
+                    <th>Claimed</th>
+                    <th>On receipt</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {selected.lineItems.map((name, i) => {
+                    const c = selected.claimed[i] ?? 0;
+                    const n = selected.interior[i] ?? 0;
+                    const fail = selected.decision.failedIndices.includes(i);
+                    return (
+                      <tr key={name} className={fail ? "fail" : ""}>
+                        <td>{capitalize(name)}</td>
+                        <td>
+                          <code>{money(c)}</code>
+                        </td>
+                        <td>
+                          <code>{money(n)}</code>
+                        </td>
+                        <td>{fail ? "Over" : "OK"}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+
+              <div className="evidence">
+                <h4>What we checked</h4>
+                <p>
+                  <strong>Claim email</strong> {selected.subject}
+                </p>
+                <p>
+                  <strong>Public source</strong>{" "}
+                  <code>{selected.receiptUrl}</code>
+                </p>
+                <p>
+                  <strong>Receipt pull</strong>{" "}
+                  {selected.source === "fixture-scrape"
+                    ? "sample scrape (demo) — live mode uses Firecrawl"
+                    : "live scrape"}
+                </p>
+              </div>
+            </div>
+          )}
+        </section>
+      </div>
+
+      {results.length > 0 && (
+        <section className="panel">
+          <h2>Checked this session</h2>
+          <div className="list">
+            {results.map((r) => (
               <button
-                key={claim._id}
+                key={r.id}
+                type="button"
                 className="row"
-                onClick={() => {
-                  setSelected(claim._id);
-                  setScreen("decision");
-                }}
+                onClick={() => setSelectedId(r.id)}
               >
-                <span className="subj">{claim.subject}</span>
+                <span className="subj">{r.subject}</span>
                 <span className="meta">
-                  {claim.status} · claimed [{claim.claimed.join(", ")}]
+                  {r.decision.status === "grant"
+                    ? "All lines OK"
+                    : plainFailures(
+                        r.lineItems,
+                        r.claimed,
+                        r.interior,
+                        r.decision.failedIndices,
+                      ).join(" ")}
                 </span>
-                <StatusPill status={decision?.status} mask={decision?.mask} />
+                <StatusPill status={r.decision.status} />
               </button>
             ))}
-            {!rows?.length && (
-              <p className="muted">No claims yet — run fixtures or send mail.</p>
-            )}
           </div>
         </section>
       )}
 
-      {screen === "decision" && (
-        <DecisionPanel
-          claimId={selected}
-          onPick={(id) => setSelected(id)}
-          rows={rows}
-        />
-      )}
-
-      {screen === "fixtures" && (
-        <section>
-          <h2>Fixture runner (Drive undistorted fuel)</h2>
-          <div className="actions">
-            <button
-              className="primary"
-              onClick={() => void runAll()}
-            >
-              Run all fixtures
-            </button>
-          </div>
-          <div className="grid">
-            {(fixtureDefs ?? []).map((f) => (
-              <div
-                key={f.id}
-                className={
-                  f.expect.status === "grant" ? "card grant" : "card refuse"
-                }
-              >
-                <h3>{f.label}</h3>
-                <p>
-                  claimed [{f.claimed.join(", ")}] vs interior [
-                  {f.interior.join(", ")}]
-                </p>
-                <p>
-                  expect {f.expect.status.toUpperCase()} · mask {f.expect.mask}
-                  {f.expect.failedIndices.length
-                    ? ` · failed [${f.expect.failedIndices.join(", ")}]`
-                    : ""}
-                </p>
-                <button
-                  onClick={async () => {
-                    const r = await runFixture({ fixtureId: f.id });
-                    setSelected(r.claimId);
-                    setScreen("decision");
-                  }}
-                >
-                  Run {f.id}
-                </button>
-              </div>
-            ))}
-          </div>
-        </section>
-      )}
+      <footer className="lean">
+        CeilingGate is a money-claim checker — not a chat bot, not a developer
+        SDK. Email in → receipt scrape → clear GRANT or REFUSE.
+      </footer>
     </div>
   );
 }
 
-function StatusPill({
-  status,
-  mask,
-}: {
-  status?: "grant" | "refuse";
-  mask?: number;
-}) {
-  if (!status) return <span className="pill wait">PENDING</span>;
-  if (status === "grant")
-    return <span className="pill grant">GRANT · {mask ?? 0}</span>;
-  return <span className="pill refuse">REFUSE · mask {mask}</span>;
-}
-
-function DecisionPanel({
-  claimId,
-  onPick,
-  rows,
-}: {
-  claimId: Id<"claims"> | null;
-  onPick: (id: Id<"claims">) => void;
-  rows:
-    | {
-        claim: { _id: Id<"claims">; subject: string; claimed: number[] };
-        decision: {
-          status: "grant" | "refuse";
-          mask: number;
-          failedIndices: number[];
-          interior: number[];
-          claimed: number[];
-        } | null;
-      }[]
-    | undefined;
-}) {
-  const claim = useQuery(
-    api.claims.get,
-    claimId ? { claimId } : "skip",
-  );
-  const decision = useQuery(
-    api.claims.getDecision,
-    claimId ? { claimId } : "skip",
-  );
-  const interior = useQuery(
-    api.claims.getInterior,
-    claimId ? { claimId } : "skip",
-  );
-
-  if (!claimId) {
-    return (
-      <section>
-        <h2>Gate decision</h2>
-        <p className="muted">Select a claim from Inbox or run a fixture.</p>
-        <div className="list">
-          {(rows ?? []).map(({ claim: c, decision: d }) => (
-            <button key={c._id} className="row" onClick={() => onPick(c._id)}>
-              <span className="subj">{c.subject}</span>
-              <StatusPill status={d?.status} mask={d?.mask} />
-            </button>
-          ))}
-        </div>
-      </section>
-    );
-  }
-
-  return (
-    <section>
-      <h2>Gate decision</h2>
-      <div
-        className={
-          decision?.status === "grant"
-            ? "card grant big"
-            : decision?.status === "refuse"
-              ? "card refuse big"
-              : "card"
-        }
-      >
-        <h3>{claim?.subject ?? "…"}</h3>
-        <div className="badge">
-          {decision
-            ? `${decision.status.toUpperCase()} · mask ${decision.mask}`
-            : claim?.status ?? "loading"}
-        </div>
-        <div className="cols">
-          <div>
-            <h4>Claimed</h4>
-            <code>[{(decision?.claimed ?? claim?.claimed ?? []).join(", ")}]</code>
-          </div>
-          <div>
-            <h4>Interior</h4>
-            <code>
-              [
-              {(decision?.interior ?? interior?.interior ?? []).join(", ")}]
-            </code>
-          </div>
-        </div>
-        {decision?.failedIndices?.length ? (
-          <p>
-            Failed indices:{" "}
-            {decision.failedIndices.map((i) => (
-              <span key={i} className="chip">
-                {i}
-              </span>
-            ))}
-          </p>
-        ) : null}
-        {interior?.url ? (
-          <p className="muted">Scraped: {interior.url}</p>
-        ) : null}
-      </div>
-    </section>
-  );
+function StatusPill({ status }: { status: "grant" | "refuse" }) {
+  if (status === "grant") return <span className="pill grant">GRANT</span>;
+  return <span className="pill refuse">REFUSE</span>;
 }

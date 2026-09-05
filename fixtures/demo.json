@@ -1,0 +1,84 @@
+{
+  "version": "1.1.0",
+  "source": "Monsters Ink Drive fuel \u2014 ResidualGates Lean samples mapped to T&E residual-honesty line items (not lorem)",
+  "org": "Monsters Ink LLC",
+  "lineItems": [
+    "fuel",
+    "lodging",
+    "meals",
+    "misc"
+  ],
+  "driveFuel": {
+    "sku": "$1,000 T&E residual-honesty 1:1 PDF",
+    "driveFileId": "1QlpSaLHOs8IiqStB0v7MCFN_i3GYA6Q7PxCacEJg-rY",
+    "uspatoCustomer": "242979",
+    "note": "Demo vectors are Lean sample_valid / sample_invalid; labels are accounting, not product mythos."
+  },
+  "fixtures": [
+    {
+      "id": "te-grant",
+      "caseId": "CG-TE-001",
+      "label": "Under budget \u2014 all lines OK",
+      "email": {
+        "subject": "Expense claim \u2014 fuel, lodging, meals, misc",
+        "from": "claims@monstersink.example",
+        "body": "CLAIMED: 98, 49, 25, 9\nLINE_ITEMS: fuel, lodging, meals, misc\nPUBLIC_SOURCE: https://monsters-ink-107139.square.site\nDrive fuel: residual-honesty brief 1QlpSaLHOs8IiqStB0v7MCFN_i3GYA6Q7PxCacEJg-rY\nUSPTO customer 242979 = mail-not-grant (not a bid award).",
+        "receiptUrl": "https://monsters-ink-107139.square.site"
+      },
+      "claimed": [
+        98,
+        49,
+        25,
+        9
+      ],
+      "interior": [
+        100,
+        50,
+        25,
+        10
+      ],
+      "expect": {
+        "status": "grant",
+        "mask": 0,
+        "failedIndices": []
+      },
+      "scrapeFixtureText": "INTERIOR: 100, 50, 25, 10\nSOURCE: fixture stand-in for Firecrawl scrape of public shop page\nORG: Monsters Ink LLC \u2014 public Square lists only the $1,000 T&E 1:1 PDF\nNOTE: Live judgments require Firecrawl when a URL exists."
+    },
+    {
+      "id": "te-refuse",
+      "caseId": "CG-TE-002",
+      "label": "Over on lodging and misc",
+      "email": {
+        "subject": "Expense claim \u2014 over on lodging & misc",
+        "from": "claims@monstersink.example",
+        "body": "CLAIMED: 98, 51, 25, 11\nLINE_ITEMS: fuel, lodging, meals, misc\nPUBLIC_SOURCE: https://monsters-ink-107139.square.site\nFailed indices expected: 1 (lodging), 3 (misc) \u2192 bitmask 10.",
+        "receiptUrl": "https://monsters-ink-107139.square.site"
+      },
+      "claimed": [
+        98,
+        51,
+        25,
+        11
+      ],
+      "interior": [
+        100,
+        50,
+        25,
+        10
+      ],
+      "expect": {
+        "status": "refuse",
+        "mask": 10,
+        "failedIndices": [
+          1,
+          3
+        ]
+      },
+      "scrapeFixtureText": "INTERIOR: 100, 50, 25, 10\nSOURCE: fixture stand-in for Firecrawl scrape of public shop page\nORG: Monsters Ink LLC\nNOTE: Live judgments require Firecrawl when a URL exists."
+    }
+  ],
+  "seedUrls": [
+    "https://monsters-ink-107139.square.site",
+    "https://www.uspto.gov/"
+  ]
+}

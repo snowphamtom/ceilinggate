@@ -1,11 +1,2 @@
-export {
-  enclosedR,
-  breachesR,
-  maskOf,
-  gateB,
-  granted,
-  sampleInterior,
-  sampleValid,
-  sampleInvalid,
-} from "./lib/gates";
-export type { GateStatus, GateDecision } from "./lib/gates";
+/** @deprecated prefer ./lib/gates — re-export for existing imports */
+export * from "./lib/gates";

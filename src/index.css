@@ -36,3 +36,27 @@ h1 { margin: 0 0 0.25rem; font-size: 1.75rem; letter-spacing: -0.02em; }
 .primary, button { cursor: pointer; }
 .primary { background: #2a6df4; color: white; border: 0; border-radius: 8px; padding: 0.55rem 0.9rem; font-weight: 600; }
 code { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+
+/* Forensic board */
+.eyebrow { margin: 0; font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: #7a93b5; }
+.board-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 1.25rem; margin-top: 1rem; }
+@media (max-width: 800px) { .board-grid { grid-template-columns: 1fr; } }
+.panel { background: #0e1626; border: 1px solid #1e2c44; border-radius: 12px; padding: 1rem 1.1rem; }
+.panel h2 { margin: 0 0 0.5rem; font-size: 1rem; letter-spacing: 0.04em; text-transform: uppercase; color: #a8bdd8; }
+.small { font-size: 0.8rem; }
+.row.docket { grid-template-columns: 1fr auto; }
+.row.docket.on { outline: 1px solid #2a6df4; }
+.row.edge-grant { border-left: 3px solid #1f9d63; }
+.row.edge-refuse { border-left: 3px solid #d64545; }
+.ledger { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin: 0.75rem 0 1rem; }
+.ledger th, .ledger td { text-align: left; padding: 0.4rem 0.5rem; border-bottom: 1px solid #1e2c44; }
+.ledger th { color: #7a93b5; font-weight: 600; font-size: 0.75rem; text-transform: uppercase; }
+.ledger tr.fail td { background: rgba(214, 69, 69, 0.12); color: #ffb0b0; }
+.evidence { margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px dashed #2a3a55; font-size: 0.9rem; }
+.evidence h4 { margin: 0 0 0.4rem; font-size: 0.8rem; text-transform: uppercase; color: #7a93b5; }
+.evidence p { margin: 0.25rem 0; }
+.stamp { font-size: 1.1rem; }
+.lede { color: #c5d4e8; font-size: 1.05rem; max-width: 36rem; margin: 0.35rem 0 0; }
+.plain-fail { margin: 0.5rem 0 1rem; padding-left: 1.1rem; color: #ffb0b0; }
+.plain-fail li { margin: 0.35rem 0; }
+.ok-line { color: #3dde95; font-weight: 600; }

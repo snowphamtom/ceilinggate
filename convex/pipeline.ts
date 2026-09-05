@@ -39,15 +39,19 @@ export const onMessageReceived = internalMutation({
       typeof fromRaw === "string" ? fromRaw : JSON.stringify(fromRaw);
     const claimed = parseClaimed(String(text));
     const sourceUrls = parseSourceUrls(String(text));
+    const now = Date.now();
     const claimId = await ctx.db.insert("claims", {
       threadId: args.message?.thread_id,
       messageId: args.message?.message_id,
+      emailId: args.message?.message_id,
       subject,
       from,
-      receivedAt: Date.now(),
+      receivedAt: now,
+      createdAt: now,
       bodyText: String(text).slice(0, 8000),
       claimed,
       sourceUrls,
+      sourceUrl: sourceUrls[0],
       status: sourceUrls.length ? "scraping" : "ready",
     });
     await ctx.db.insert("vectors", {
@@ -154,13 +158,16 @@ export const ingestManualClaim = mutation({
   handler: async (ctx, args) => {
     const claimed = parseClaimed(args.bodyText);
     const sourceUrls = parseSourceUrls(args.bodyText);
+    const now = Date.now();
     const claimId = await ctx.db.insert("claims", {
       subject: args.subject,
       from: args.from,
-      receivedAt: Date.now(),
+      receivedAt: now,
+      createdAt: now,
       bodyText: args.bodyText.slice(0, 8000),
       claimed,
       sourceUrls,
+      sourceUrl: sourceUrls[0],
       status: sourceUrls.length ? "scraping" : "ready",
     });
     if (sourceUrls[0]) {
