@@ -1,5 +1,5 @@
 {
-  "version": "2.7.0",
+  "version": "2.8.0",
   "source": "Eve Drive fuel briefs 1l1wjwE8\u2026 + batch2 sibling 1iNnqPeHizQyiOYvDnhjypbqVXyAXPUBT + priority/Batch2 fileIds (forensic claim\u2194receipt, not chat)",
   "org": "Monsters Ink LLC",
   "lineItems": [
@@ -2798,6 +2798,46 @@
         "1JPIB9FIR5WKGKwLN8fuGLL3tCM2yjx1P"
       ],
       "scrapeFixtureText": "INTERIOR: 100, 300, 0\nFORENSIC Eve: ROI table $100\u2013$300; unvalidated"
+    },
+    {
+      "id": "royalty-2pct-no-receipt",
+      "caseId": "CG-EVE-B9-01",
+      "label": "REFUSE \u2014 2% gross royalty / hard % performance vs no invoice/award/sales receipt",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "royalty_2pct_claimed",
+        "hard_pct_performance",
+        "invoice_or_award_receipt"
+      ],
+      "email": {
+        "subject": "[FORENSIC] 4(4(.pdf royalty claims \u2014 Eve selective post-B8",
+        "from": "eve-fuel@monstersink.example",
+        "body": "CLAIMED: 2, 1, 1\nINTERIOR: 0, 0, 0\nfileId 1-24UqpbJrE5ytL0vUB_37BtAO1str0bs\nMandatory 2% gross royalty + hard % performance \u2014 no invoice/award/sales receipt",
+        "receiptUrl": "https://www.sba.gov/"
+      },
+      "claimed": [
+        2,
+        1,
+        1
+      ],
+      "interior": [
+        0,
+        0,
+        0
+      ],
+      "expect": {
+        "status": "refuse",
+        "mask": 7,
+        "failedIndices": [
+          0,
+          1,
+          2
+        ]
+      },
+      "driveFileIds": [
+        "1-24UqpbJrE5ytL0vUB_37BtAO1str0bs"
+      ],
+      "scrapeFixtureText": "INTERIOR: 0, 0, 0\nFORENSIC Eve: no invoice/award/sales receipt backing royalty/% claims"
     }
   ],
   "seedUrls": [
@@ -2858,5 +2898,9 @@
   "eveBatch8FileIds": [
     "1bkziTxlc_u8IOrpaYE9Ft06JzGefLS89oVGdq9yBYiI",
     "1JPIB9FIR5WKGKwLN8fuGLL3tCM2yjx1P"
+  ],
+  "eveBatch9BriefFileId": "1Ri8JvkN8f7Kfx8Y2U_4OwkXD5lJZ71y4",
+  "eveBatch9FileIds": [
+    "1-24UqpbJrE5ytL0vUB_37BtAO1str0bs"
   ]
 }
