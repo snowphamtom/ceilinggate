@@ -1,0 +1,32 @@
+{
+  "version": "1.0.0",
+  "source": "ResidualGatesMathlib.lean samples / Drive undistorted fuel",
+  "fixtures": [
+    {
+      "id": "fuel-grant",
+      "label": "Lean sampleValid → GRANT",
+      "email": {
+        "subject": "T&E claim — fuel/lodging/meals/misc",
+        "from": "traveler@example.com",
+        "body": "CLAIMED: 98, 49, 25, 9\nRECEIPT: https://example.com/receipt/grant",
+        "receiptUrl": "https://example.com/receipt/grant"
+      },
+      "claimed": [98, 49, 25, 9],
+      "interior": [100, 50, 25, 10],
+      "expect": { "status": "grant", "mask": 0, "failedIndices": [] }
+    },
+    {
+      "id": "fuel-refuse",
+      "label": "Lean sampleInvalid → REFUSE mask 10",
+      "email": {
+        "subject": "T&E claim — overceiling",
+        "from": "traveler@example.com",
+        "body": "CLAIMED: 98, 51, 25, 11\nRECEIPT: https://example.com/receipt/refuse",
+        "receiptUrl": "https://example.com/receipt/refuse"
+      },
+      "claimed": [98, 51, 25, 11],
+      "interior": [100, 50, 25, 10],
+      "expect": { "status": "refuse", "mask": 10, "failedIndices": [1, 3] }
+    }
+  ]
+}

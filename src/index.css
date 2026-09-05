@@ -1,0 +1,38 @@
+:root {
+  font-family: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  color: #e8eef7;
+  background: #0b1220;
+  line-height: 1.45;
+}
+* { box-sizing: border-box; }
+body { margin: 0; }
+.shell { max-width: 960px; margin: 0 auto; padding: 1.5rem; }
+.top { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+h1 { margin: 0 0 0.25rem; font-size: 1.75rem; letter-spacing: -0.02em; }
+.muted { color: #8fa3bf; font-size: 0.95rem; }
+.tabs { display: flex; gap: 0.5rem; }
+.tab { background: #162033; border: 1px solid #24324a; color: #cfe0f7; padding: 0.5rem 0.85rem; border-radius: 999px; cursor: pointer; }
+.tab.on { background: #2a6df4; border-color: #2a6df4; color: white; }
+.lean { margin: 1rem 0; padding: 0.6rem 0.8rem; background: #121a2b; border-radius: 8px; font-size: 0.85rem; color: #9fb4d0; }
+.list { display: flex; flex-direction: column; gap: 0.5rem; }
+.row { text-align: left; display: grid; grid-template-columns: 1fr auto; gap: 0.25rem 1rem; background: #121a2b; border: 1px solid #223149; border-radius: 10px; padding: 0.85rem 1rem; color: inherit; cursor: pointer; }
+.subj { font-weight: 600; }
+.meta { grid-column: 1; color: #8fa3bf; font-size: 0.85rem; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
+.card { background: #121a2b; border: 1px solid #223149; border-radius: 12px; padding: 1rem; }
+.card.grant { border-color: #1f9d63; box-shadow: inset 0 0 0 1px rgba(31,157,99,0.35); }
+.card.refuse { border-color: #d64545; box-shadow: inset 0 0 0 1px rgba(214,69,69,0.35); }
+.card.big { padding: 1.25rem; }
+.badge { display: inline-block; margin: 0.5rem 0 1rem; padding: 0.35rem 0.7rem; border-radius: 8px; font-weight: 700; letter-spacing: 0.04em; background: #0b1220; }
+.grant .badge { color: #3dde95; }
+.refuse .badge { color: #ff7b7b; }
+.pill { padding: 0.2rem 0.55rem; border-radius: 999px; font-size: 0.75rem; font-weight: 700; align-self: center; }
+.pill.grant { background: #143528; color: #3dde95; }
+.pill.refuse { background: #3a1820; color: #ff8d8d; }
+.pill.wait { background: #2a3142; color: #b7c4d8; }
+.chip { display: inline-block; margin-right: 0.35rem; padding: 0.15rem 0.45rem; border-radius: 6px; background: #3a1820; color: #ffb0b0; }
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.actions { margin-bottom: 1rem; }
+.primary, button { cursor: pointer; }
+.primary { background: #2a6df4; color: white; border: 0; border-radius: 8px; padding: 0.55rem 0.9rem; font-weight: 600; }
+code { font-family: "IBM Plex Mono", ui-monospace, monospace; }
