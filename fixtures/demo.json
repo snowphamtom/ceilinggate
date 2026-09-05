@@ -1,5 +1,5 @@
 {
-  "version": "2.8.0",
+  "version": "2.9.0",
   "source": "Eve Drive fuel briefs 1l1wjwE8\u2026 + batch2 sibling 1iNnqPeHizQyiOYvDnhjypbqVXyAXPUBT + priority/Batch2 fileIds (forensic claim\u2194receipt, not chat)",
   "org": "Monsters Ink LLC",
   "lineItems": [
@@ -2838,6 +2838,81 @@
         "1-24UqpbJrE5ytL0vUB_37BtAO1str0bs"
       ],
       "scrapeFixtureText": "INTERIOR: 0, 0, 0\nFORENSIC Eve: no invoice/award/sales receipt backing royalty/% claims"
+    },
+    {
+      "id": "magpie-90d-option-draft",
+      "caseId": "CG-EVE-B10-01",
+      "label": "REFUSE \u2014 MAGPIE 90-day option $5k\u2013$15k draft vs unsigned/not license",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "fee_band_low",
+        "fee_band_high",
+        "signed_license"
+      ],
+      "email": {
+        "subject": "[FORENSIC] MAGPIE 90-day option DRAFT \u2014 Eve batch10",
+        "from": "eve-fuel@monstersink.example",
+        "body": "CLAIMED: 5000, 15000, 1\nINTERIOR: 0, 0, 0\nfileId 1fhcdR-VsQ8u-Lz05jjhTvdqOK04brzhu\nDRAFT fee band; unsigned / not license / not grant",
+        "receiptUrl": "https://www.sba.gov/"
+      },
+      "claimed": [
+        5000,
+        15000,
+        1
+      ],
+      "interior": [
+        0,
+        0,
+        0
+      ],
+      "expect": {
+        "status": "refuse",
+        "mask": 7,
+        "failedIndices": [
+          0,
+          1,
+          2
+        ]
+      },
+      "driveFileIds": [
+        "1fhcdR-VsQ8u-Lz05jjhTvdqOK04brzhu"
+      ],
+      "scrapeFixtureText": "INTERIOR: 0, 0, 0\nFORENSIC Eve: option term sheet DRAFT; no signed fee/license"
+    },
+    {
+      "id": "transmittal-136a-eot",
+      "caseId": "CG-EVE-B10-02",
+      "label": "REFUSE \u2014 37 CFR 1.136(a) 2-mo EOT fee auth vs patent grant",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "eot_fee_auth",
+        "patent_grant"
+      ],
+      "email": {
+        "subject": "[FORENSIC] 00_TRANSMITTAL_136a \u2014 Eve batch10",
+        "from": "eve-fuel@monstersink.example",
+        "body": "CLAIMED: 1, 1\nINTERIOR: 1, 0\nfileId 1P6jNfCJwURyXPz68b1tqCJYYuumrvZqb\n2-mo EOT fee auth \u2260 patent grant",
+        "receiptUrl": "https://patentcenter.uspto.gov/"
+      },
+      "claimed": [
+        1,
+        1
+      ],
+      "interior": [
+        1,
+        0
+      ],
+      "expect": {
+        "status": "refuse",
+        "mask": 2,
+        "failedIndices": [
+          1
+        ]
+      },
+      "driveFileIds": [
+        "1P6jNfCJwURyXPz68b1tqCJYYuumrvZqb"
+      ],
+      "scrapeFixtureText": "INTERIOR: 1, 0\nFORENSIC Eve: 136(a) EOT fee auth; not a patent grant"
     }
   ],
   "seedUrls": [
@@ -2902,5 +2977,10 @@
   "eveBatch9BriefFileId": "1Ri8JvkN8f7Kfx8Y2U_4OwkXD5lJZ71y4",
   "eveBatch9FileIds": [
     "1-24UqpbJrE5ytL0vUB_37BtAO1str0bs"
+  ],
+  "eveBatch10BriefFileId": "1TxjxyjiU5vnbd6jqWf9SRh2aL0uTzkOT",
+  "eveBatch10FileIds": [
+    "1fhcdR-VsQ8u-Lz05jjhTvdqOK04brzhu",
+    "1P6jNfCJwURyXPz68b1tqCJYYuumrvZqb"
   ]
 }
