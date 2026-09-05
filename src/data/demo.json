@@ -1,5 +1,5 @@
 {
-  "version": "2.12.0",
+  "version": "2.13.0",
   "source": "Eve Drive fuel briefs 1l1wjwE8\u2026 + batch2 sibling 1iNnqPeHizQyiOYvDnhjypbqVXyAXPUBT + priority/Batch2 fileIds (forensic claim\u2194receipt, not chat)",
   "org": "Monsters Ink LLC",
   "lineItems": [
@@ -3034,6 +3034,88 @@
         "12BHCKrV8-npFjOG11c3KXY4gtL_sXDsB"
       ],
       "scrapeFixtureText": "INTERIOR: 0, 0, 0\nFORENSIC Eve: no award/obligated $ for MAGPIE-UAS claims"
+    },
+    {
+      "id": "cip-track-one-2100",
+      "caseId": "CG-EVE-B13-01",
+      "label": "REFUSE \u2014 CIP/Track One $2,100 PE fee named vs unpaid/unfiled",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "pe_fee_named_usd",
+        "pe_fee_paid",
+        "epr_filed",
+        "cip_filed"
+      ],
+      "email": {
+        "subject": "[FORENSIC] CIP/Track One memo $2100 \u2014 Eve batch13",
+        "from": "eve-fuel@monstersink.example",
+        "body": "CLAIMED: 2100, 1, 1, 1\nINTERIOR: 2100, 0, 0, 0\nfileId 1we7zaGMXZjSxBBQ2gpxEKOMob6HgwzdGOQKydyZH2oA\n$2100 small-entity PE fee named \u2194 unpaid / no EPR / CIP unfiled",
+        "receiptUrl": "https://patentcenter.uspto.gov/"
+      },
+      "claimed": [
+        2100,
+        1,
+        1,
+        1
+      ],
+      "interior": [
+        2100,
+        0,
+        0,
+        0
+      ],
+      "expect": {
+        "status": "refuse",
+        "mask": 14,
+        "failedIndices": [
+          1,
+          2,
+          3
+        ]
+      },
+      "driveFileIds": [
+        "1we7zaGMXZjSxBBQ2gpxEKOMob6HgwzdGOQKydyZH2oA"
+      ],
+      "scrapeFixtureText": "INTERIOR: 2100, 0, 0, 0\nFORENSIC Eve: $2100 PE fee named; unpaid; CIP/EPR unfiled"
+    },
+    {
+      "id": "solo-fee-calc-unfiled",
+      "caseId": "CG-EVE-B13-02",
+      "label": "REFUSE \u2014 SOLO.pdf fee-calc package vs unfiled/no paid line",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "fee_calc_package",
+        "epr_present",
+        "fees_paid_line"
+      ],
+      "email": {
+        "subject": "[FORENSIC] SOLO.pdf fee-calc \u2014 Eve batch13",
+        "from": "eve-fuel@monstersink.example",
+        "body": "CLAIMED: 1, 1, 1\nINTERIOR: 1, 0, 0\nfileId 1MdoQek5IfNGQC6fYotsatCp0iHfhM4TX\nUnfiled / no EPR / no $ paid line",
+        "receiptUrl": "https://patentcenter.uspto.gov/"
+      },
+      "claimed": [
+        1,
+        1,
+        1
+      ],
+      "interior": [
+        1,
+        0,
+        0
+      ],
+      "expect": {
+        "status": "refuse",
+        "mask": 6,
+        "failedIndices": [
+          1,
+          2
+        ]
+      },
+      "driveFileIds": [
+        "1MdoQek5IfNGQC6fYotsatCp0iHfhM4TX"
+      ],
+      "scrapeFixtureText": "INTERIOR: 1, 0, 0\nFORENSIC Eve: fee-calc package; unfiled; no paid line"
     }
   ],
   "seedUrls": [
@@ -3069,7 +3151,7 @@
     "drive-pass-job",
     "drive-fail-job",
     "readme-1004-vs-70",
-    "track-one-skeleton-unpaid",
+    "cip-track-one-2100",
     "uspto-receipt-history"
   ],
   "batch4BriefFileId": "1a0Hcs28fpH3s3oGvc8MbgegyBVGN4hOg",
@@ -3110,5 +3192,10 @@
     "1uKr005YuoPxI9J2DPSscpe88cxB5lVEz",
     "1MxyBaG-wBsdEyzT0iiL8g6uSLxC8lEiP",
     "12BHCKrV8-npFjOG11c3KXY4gtL_sXDsB"
+  ],
+  "eveBatch13BriefFileId": "1Ll0QO_Awl1sjXQ2s8CUy95vbAJuUo30A",
+  "eveBatch13FileIds": [
+    "1we7zaGMXZjSxBBQ2gpxEKOMob6HgwzdGOQKydyZH2oA",
+    "1MdoQek5IfNGQC6fYotsatCp0iHfhM4TX"
   ]
 }
