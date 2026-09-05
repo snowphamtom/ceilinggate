@@ -140,5 +140,5 @@ Click **Check sample claims** → GRANT (all lines OK) + REFUSE (lodging & misc 
 - [x] Tip a2223a5+ (see STATUS.md)
 - [x] Firecrawl Y · AgentMail Y · inbox `ceilinggate-claims@agentmail.to`
 - [x] Cash prizes ONLY $10k/$5k/$1.5k (Luma)
-- [ ] vibeapps screenshots + video
+- [x] vibeapps screenshots (`/workspace/ceilinggate-demo/shots/`) + [ ] video
 - [ ] Submit https://vibeapps.dev/judging/convex-all-gas-hackathon-openai/submit

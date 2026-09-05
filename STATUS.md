@@ -34,3 +34,9 @@
 ## Next
 - [ ] vibeapps screenshots + 60s video (Streamer when Taylor asks)
 - [ ] Submit before Sep 22 noon PT
+
+## Screenshots (vibeapps)
+- `/workspace/ceilinggate-demo/shots/01-hero.png`
+- `/workspace/ceilinggate-demo/shots/02-grant.png`
+- `/workspace/ceilinggate-demo/shots/03-refuse.png`
+- `/workspace/ceilinggate-demo/shots/04-inbox.png`
