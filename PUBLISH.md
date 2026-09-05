@@ -1,13 +1,13 @@
 # CeilingGate — PUBLISH GO handoff
 
-**Taylor authorized.** Create owns prep; MANAGER owns GH + Convex browser login/create.
+**Taylor authorized.** Origin blocked — **GitHub public repo path only.** Create owns prep; MANAGER owns GH + Convex browser login/create.
 
 ## Ready on disk
 - Path: `/workspace/ceilinggate`
 - Gate demo: `npm run demo:gate` / `npm run demo:offline` PASS
 - Everyday UI + originality hardening in place
 - No secrets tracked (`.env*` gitignored except `.env.example`)
-- Inbox (public): `ceilinggate@agentmail.to`
+- Inbox (public): `ceilinggate-claims@agentmail.to`
 
 ## MANAGER: after GH login
 ```bash
@@ -27,7 +27,7 @@ npx convex dev   # creates project + writes VITE_CONVEX_URL to .env.local
 npx convex env set FIRECRAWL_API_KEY <key>          # when available
 npx convex env set AGENTMAIL_API_KEY <key>
 npx convex env set AGENTMAIL_WEBHOOK_SECRET <whsec>
-npx convex env set AGENTMAIL_INBOX_EMAIL ceilinggate@agentmail.to
+npx convex env set AGENTMAIL_INBOX_EMAIL ceilinggate-claims@agentmail.to
 # AGENTMAIL_INBOX_ID from AgentMail Create (not the email string if distinct)
 npm run build
 npx convex deploy
@@ -35,3 +35,9 @@ npx convex deploy
 Host frontend on `*.convex.site` per hackathon rules (see `docs/deploy-convex-site.md`).
 
 Ping Create with: public repo URL + `VITE_CONVEX_URL` / site URL when live.
+
+## Keys (when Taylor fills secret cards)
+Env may receive `FIRECRAWL_API_KEY` and `CONVEX_DEPLOY_KEY` without further asks. Create wires them into Convex when present.
+
+## AgentMail
+Prefer inbox username `ceilinggate-claims` via connector (in addition to existing `ceilinggate-claims@agentmail.to` if already created).
