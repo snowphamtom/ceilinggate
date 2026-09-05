@@ -98,6 +98,12 @@ Email a money claim with a public receipt link. CeilingGate scrapes the receipt,
 - [x] Labels = forensic claim↔receipt examples (not chat)
 - [x] Offline `demo:offline` still green
 
+
+### 2026-09-05 — Eve Batch2 fixtures merged
+- [x] Sibling brief `1iNnqPeHizQyiOYvDnhjypbqVXyAXPUBT` + listed Batch2 fileIds
+- [x] Fixtures total 23 (Lean 2 + forensic Drive); all 8 requested fileIds covered
+- [x] CISA/IC3/NIST/Verizon URL seeds added; offline demo still green
+
 ## Remaining (MANAGER login unblocks)
 
 1. Convex login / `CONVEX_DEPLOY_KEY` → hosting on `*.convex.site`
