@@ -2,7 +2,7 @@
 
 **Everyday money-claim checker** for small businesses, contractors, and grant seekers — not a chat app, not a developer SDK.
 
-Someone emails a claim with a public receipt link. CeilingGate scrapes the receipt, compares each line, and returns **GRANT** or **REFUSE** with failed lines in plain English (e.g. “Lodging is $1 over the receipt”).
+**Everyday sentence:** Email your expense claim with a public receipt link — CeilingGate checks each line against the scraped receipt and tells you GRANT, or which lines are over (in plain English).
 
 Under the hood: GRANT iff `claimed ≤ interior` componentwise; else REFUSE with a failure bitmask (ResidualGates).
 

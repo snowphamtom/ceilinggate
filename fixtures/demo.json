@@ -1,5 +1,5 @@
 {
-  "version": "2.1.0",
+  "version": "2.2.0",
   "source": "Eve Drive fuel briefs 1l1wjwE8\u2026 + batch2 sibling 1iNnqPeHizQyiOYvDnhjypbqVXyAXPUBT + priority/Batch2 fileIds (forensic claim\u2194receipt, not chat)",
   "org": "Monsters Ink LLC",
   "lineItems": [
@@ -868,6 +868,188 @@
         "1kmbb6DXU0pc-GcgCXIoHZyR1iA0EbJ_G"
       ],
       "scrapeFixtureText": "INTERIOR: 11, 0, 0\nFORENSIC: synthetic pulse grants; not hardware telemetry"
+    },
+    {
+      "id": "drive-mathlib-twin",
+      "caseId": "CG-B4-024",
+      "label": "GRANT \u2014 ResidualGatesMathlib sampleValid (Lean twin)",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "fuel",
+        "lodging",
+        "meals",
+        "misc"
+      ],
+      "email": {
+        "subject": "[FORENSIC] ResidualGatesMathlib.lean sampleValid",
+        "from": "drive-fuel@monstersink.example",
+        "body": "CLAIMED: 98, 49, 25, 9\nINTERIOR: 100, 50, 25, 10\nfileId 1U5Iij2UqjoJd2w7Ac1ySElF7uxJ5Ws8a\nMathlib twin \u2260 Python float monitor proof",
+        "receiptUrl": "https://live.lean-lang.org/"
+      },
+      "claimed": [
+        98,
+        49,
+        25,
+        9
+      ],
+      "interior": [
+        100,
+        50,
+        25,
+        10
+      ],
+      "expect": {
+        "status": "grant",
+        "mask": 0,
+        "failedIndices": []
+      },
+      "driveFileIds": [
+        "1U5Iij2UqjoJd2w7Ac1ySElF7uxJ5Ws8a"
+      ],
+      "scrapeFixtureText": "INTERIOR: 100, 50, 25, 10\nFORENSIC: Gate B sampleValid GRANT mask0"
+    },
+    {
+      "id": "drive-mhz-unmeasured",
+      "caseId": "CG-B4-025",
+      "label": "REFUSE \u2014 1.2 MHz hardware claim vs unmeasured interior",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "mhz_lock_claim",
+        "physical_measurement"
+      ],
+      "email": {
+        "subject": "[FORENSIC] Lynchpin/vesica 1.2MHz claim without measured lock",
+        "from": "drive-fuel@monstersink.example",
+        "body": "CLAIMED: 1.2, 1\nINTERIOR: 0, 0\nfileIds 1jvFOf\u2026 / 1j7-i8DQ\u2026 \u2014 code defaults not hardware telemetry",
+        "receiptUrl": "https://www.nist.gov/cyberframework"
+      },
+      "claimed": [
+        1.2,
+        1
+      ],
+      "interior": [
+        0,
+        0
+      ],
+      "expect": {
+        "status": "refuse",
+        "mask": 3,
+        "failedIndices": [
+          0,
+          1
+        ]
+      },
+      "driveFileIds": [
+        "1jvFOf-iYhvczr2OoN_Tb5krMV8w8zBeB",
+        "1j7-i8DQcbBCzN2yirlmOOXBlr8LEO5J1"
+      ],
+      "scrapeFixtureText": "INTERIOR: 0, 0\nFORENSIC: 1.2e6/temp defaults unmeasured \u2014 REFUSE promotion"
+    },
+    {
+      "id": "drive-global-residual",
+      "caseId": "CG-B4-026",
+      "label": "GRANT \u2014 global residual 0.120 inside interior 0.90",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "global_residual"
+      ],
+      "email": {
+        "subject": "[FORENSIC] Live Agency / COHOCF residual inside bound",
+        "from": "drive-fuel@monstersink.example",
+        "body": "CLAIMED: 0.120\nINTERIOR: 0.90\nfileIds Live Agency Stack / COHOCF \u2014 patent/DIU still open apertures",
+        "receiptUrl": "https://www.darpa.mil/research/research-spotlights/formal-methods"
+      },
+      "claimed": [
+        0.12
+      ],
+      "interior": [
+        0.9
+      ],
+      "expect": {
+        "status": "grant",
+        "mask": 0,
+        "failedIndices": []
+      },
+      "driveFileIds": [
+        "1Z5rsylWbK753Ze01Gl0iYPjhF-DGh7c8QIY2LHP8cK8",
+        "10FU8WVaPvJrLiPh-qJ8UdSbLcXFjujHlUTiWrXjh_p4"
+      ],
+      "scrapeFixtureText": "INTERIOR: 0.90\nFORENSIC: residual 0.120 \u2264 0.90; awards still open"
+    },
+    {
+      "id": "drive-diu-aoi-closed",
+      "caseId": "CG-B4-027",
+      "label": "REFUSE \u2014 DIU materialization claim vs closed AOI / award unknown",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "solution_brief_ready",
+        "open_aoi",
+        "award"
+      ],
+      "email": {
+        "subject": "[FORENSIC] DIU Materialization Readiness \u2014 AOI closed",
+        "from": "drive-fuel@monstersink.example",
+        "body": "CLAIMED: 1, 1, 1\nINTERIOR: 1, 0, 0\nfileId 1cdm7-v6BfL3Pph4vgpYR3gWdHGXe57U_pYsKZTEuAwo\nPROJ00663 All Players CLOSED 8 Jun 2026",
+        "receiptUrl": "https://www.diu.mil/work-with-us/open-solicitations"
+      },
+      "claimed": [
+        1,
+        1,
+        1
+      ],
+      "interior": [
+        1,
+        0,
+        0
+      ],
+      "expect": {
+        "status": "refuse",
+        "mask": 6,
+        "failedIndices": [
+          1,
+          2
+        ]
+      },
+      "driveFileIds": [
+        "1cdm7-v6BfL3Pph4vgpYR3gWdHGXe57U_pYsKZTEuAwo"
+      ],
+      "scrapeFixtureText": "INTERIOR: 1, 0, 0\nFORENSIC: prior AOI closed; does not invent open solicitations"
+    },
+    {
+      "id": "drive-live-job-grant",
+      "caseId": "CG-B3-028",
+      "label": "GRANT \u2014 live_job.json claimed \u2264 interior (batch3)",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "tol_scale",
+        "resource_a",
+        "resource_b"
+      ],
+      "email": {
+        "subject": "[FORENSIC] live_job.json SPD8 solve GRANT",
+        "from": "drive-fuel@monstersink.example",
+        "body": "CLAIMED: 0.00000000000000977, 3, 3\nINTERIOR: 0.00000001, 10, 10\nfileId 1IxKzLnTTLEyggqtQxYVnv13d5iR5j-nk",
+        "receiptUrl": "https://www.nist.gov/cyberframework"
+      },
+      "claimed": [
+        9.77e-15,
+        3,
+        3
+      ],
+      "interior": [
+        1e-08,
+        10,
+        10
+      ],
+      "expect": {
+        "status": "grant",
+        "mask": 0,
+        "failedIndices": []
+      },
+      "driveFileIds": [
+        "1IxKzLnTTLEyggqtQxYVnv13d5iR5j-nk"
+      ],
+      "scrapeFixtureText": "INTERIOR: 1e-8, 10, 10\nFORENSIC: live_spd8_solve GRANT"
     }
   ],
   "seedUrls": [
@@ -882,7 +1064,8 @@
     "https://www.ic3.gov/",
     "https://www.verizon.com/business/resources/reports/dbir/",
     "https://www.cisa.gov/report",
-    "https://www.cisa.gov/cross-sector-cybersecurity-performance-goals"
+    "https://www.cisa.gov/cross-sector-cybersecurity-performance-goals",
+    "https://live.lean-lang.org/"
   ],
   "batch2BriefFileId": "1iNnqPeHizQyiOYvDnhjypbqVXyAXPUBT"
 }

@@ -117,11 +117,14 @@ export default function App() {
         <div>
           <p className="eyebrow">For small businesses · contractors · grant seekers</p>
           <h1>CeilingGate</h1>
-          <p className="lede">
-            Someone emails a money claim with a public receipt link. We pull the
-            receipt, compare each line to what they claimed, and say{" "}
-            <strong>GRANT</strong> or <strong>REFUSE</strong> — with the failed
-            lines in plain English.
+          <p className="lede everyday">
+            Email your expense claim with a public receipt link — CeilingGate
+            checks each line against the scraped receipt and tells you{" "}
+            <strong>GRANT</strong>, or which lines are over (in plain English).
+          </p>
+          <p className="muted small">
+            Not a chat bot. Not a developer toolkit. Claim in → receipt scrape →
+            clear result.
           </p>
         </div>
         <div className="actions">

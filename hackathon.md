@@ -104,6 +104,11 @@ Email a money claim with a public receipt link. CeilingGate scrapes the receipt,
 - [x] Fixtures total 23 (Lean 2 + forensic Drive); all 8 requested fileIds covered
 - [x] CISA/IC3/NIST/Verizon URL seeds added; offline demo still green
 
+
+### 2026-09-05 — everyday sentence + more Eve fuel
+- [x] UI/README lead with judging everyday expense sentence
+- [x] Fixtures now 28 (Batch2/3/4 strong pairs added); demo still green
+
 ## Remaining (MANAGER login unblocks)
 
 1. Convex login / `CONVEX_DEPLOY_KEY` → hosting on `*.convex.site`
