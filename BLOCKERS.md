@@ -1,17 +1,21 @@
-# CeilingGate blockers
+# CeilingGate — remaining (PUBLISH live)
 
-## Cleared
-- Public GitHub: https://github.com/snowphamtom/ceilinggate (tip 36496c9+)
-- Convex site: https://quirky-rhinoceros-204.convex.site/ (health OK)
-- FIRECRAWL_API_KEY in Convex env + Firecrawl component
-- AgentMail primary inbox: `ceilinggate-claims@agentmail.to`
-- AgentMail webhook registered: `POST https://quirky-rhinoceros-204.convex.site/agentmail/webhook`
-  (AGENTMAIL_API_KEY + AGENTMAIL_WEBHOOK_SECRET in Convex env; `.env.local` not committed)
+**Taylor PUBLISH live.** Offline demo green. Public site green.
 
-## Open
-- Optional: production Convex deploy key if we outgrow the current dev deployment
-- Optional: live end-to-end claim email smoke test
+| Item | Status |
+|------|--------|
+| Luma registration | **Done** (“You’re In”) |
+| Public GitHub | **Green** — https://github.com/snowphamtom/ceilinggate |
+| Convex / `*.convex.site` | **Green** — https://quirky-rhinoceros-204.convex.site/ (+ health) |
+| `VITE_CONVEX_URL` / deploy key | **Done** — wired (MANAGER/Create) |
+| `FIRECRAWL_API_KEY` | **Done** — set on deployment (MANAGER) |
+| Offline gate demo | **Green** — `npm run demo:gate` / `demo:offline` |
+| AgentMail inbox (public) | **Done** — `ceilinggate-claims@agentmail.to` |
+| `AGENTMAIL_API_KEY` | **Done** — in Convex env (Create; no paste) |
+| `AGENTMAIL_WEBHOOK_SECRET` | **Done** — webhook created + set (Create; no paste) |
+| AgentMail webhook URL | **Live** — `POST https://quirky-rhinoceros-204.convex.site/agentmail/webhook` |
+| Origin namespace | Skipped — GitHub path used instead |
+| Eve Drive fuel | **In progress** — quiet NEW money/receipt fixtures only; shortlist 14 |
+| vibeapps video / social | Later (Taylor asks) |
 
-## Do not
-- Re-run GitHub device auth
-- Paste secrets in chat
+**Do not paste secrets into chat.** Secrets: `/workspace/ceilinggate/.env.local` + `npx convex env set` only.
