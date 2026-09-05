@@ -1,5 +1,5 @@
 {
-  "version": "2.5.0",
+  "version": "2.6.0",
   "source": "Eve Drive fuel briefs 1l1wjwE8\u2026 + batch2 sibling 1iNnqPeHizQyiOYvDnhjypbqVXyAXPUBT + priority/Batch2 fileIds (forensic claim\u2194receipt, not chat)",
   "org": "Monsters Ink LLC",
   "lineItems": [
@@ -2337,6 +2337,204 @@
         "19v_NzPeoA5oV3HPxp3OukVTuakhDSFoc"
       ],
       "scrapeFixtureText": "INTERIOR: 1, 1, 0\nFORENSIC Eve: receipt history \u2260 issued grant"
+    },
+    {
+      "id": "sba-oed-sb-26-004",
+      "caseId": "CG-EVE-B6-01",
+      "label": "REFUSE \u2014 SBA $1.25M request vs not-eligible prime / obligated unknown",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "award_request",
+        "contractor_ask",
+        "prime_eligible",
+        "obligated"
+      ],
+      "email": {
+        "subject": "[FORENSIC] SBA_SB-OEDSB-26-004 \u2014 Eve batch6",
+        "from": "eve-fuel@monstersink.example",
+        "body": "CLAIMED: 1250000, 280000, 1, 1\nINTERIOR: 0, 0, 0, 0\nfileId 1y2T9AA5fGqgpbbLZpnbxfZG3iABqu_vS\nNot eligible prime; obligated unknown",
+        "receiptUrl": "https://www.sba.gov/"
+      },
+      "claimed": [
+        1250000,
+        280000,
+        1,
+        1
+      ],
+      "interior": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "expect": {
+        "status": "refuse",
+        "mask": 15,
+        "failedIndices": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      "driveFileIds": [
+        "1y2T9AA5fGqgpbbLZpnbxfZG3iABqu_vS"
+      ],
+      "scrapeFixtureText": "INTERIOR: 0, 0, 0, 0\nFORENSIC Eve: SBA request $1.25M / $280k contractor \u2014 not eligible prime; obligated unknown"
+    },
+    {
+      "id": "transmittal-missing-parts-2252",
+      "caseId": "CG-EVE-B6-02",
+      "label": "REFUSE \u2014 Missing Parts fee 2252 auth vs patent grant",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "fee_2252_auth",
+        "search_exam_surcharge_auth",
+        "patent_grant"
+      ],
+      "email": {
+        "subject": "[FORENSIC] 01_TRANSMITTAL_MISSING_PARTS \u2014 Eve batch6",
+        "from": "eve-fuel@monstersink.example",
+        "body": "CLAIMED: 1, 1, 1\nINTERIOR: 1, 1, 0\nfileId 1rCaz52svswDtMXLB_roCKTrCgHcEwAvN\nMissing Parts \u2260 patent grant",
+        "receiptUrl": "https://patentcenter.uspto.gov/"
+      },
+      "claimed": [
+        1,
+        1,
+        1
+      ],
+      "interior": [
+        1,
+        1,
+        0
+      ],
+      "expect": {
+        "status": "refuse",
+        "mask": 4,
+        "failedIndices": [
+          2
+        ]
+      },
+      "driveFileIds": [
+        "1rCaz52svswDtMXLB_roCKTrCgHcEwAvN"
+      ],
+      "scrapeFixtureText": "INTERIOR: 1, 1, 0\nFORENSIC Eve: fee 2252 + search/exam auth; Missing Parts \u2260 grant"
+    },
+    {
+      "id": "missing-parts-docx-twin",
+      "caseId": "CG-EVE-B6-03",
+      "label": "REFUSE \u2014 Missing Parts .docx twin receipts vs grant",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "receipt_75547675",
+        "receipt_76049174",
+        "patent_grant"
+      ],
+      "email": {
+        "subject": "[FORENSIC] Missing Parts .docx twin \u2014 Eve batch6",
+        "from": "eve-fuel@monstersink.example",
+        "body": "CLAIMED: 1, 1, 1\nINTERIOR: 1, 1, 0\nfileId 1z1Zz45ohcZ_E0Z3NGfNj6wcMYbX4YOkQ\nReceipts corroborate filing fees only",
+        "receiptUrl": "https://patentcenter.uspto.gov/"
+      },
+      "claimed": [
+        1,
+        1,
+        1
+      ],
+      "interior": [
+        1,
+        1,
+        0
+      ],
+      "expect": {
+        "status": "refuse",
+        "mask": 4,
+        "failedIndices": [
+          2
+        ]
+      },
+      "driveFileIds": [
+        "1z1Zz45ohcZ_E0Z3NGfNj6wcMYbX4YOkQ"
+      ],
+      "scrapeFixtureText": "INTERIOR: 1, 1, 0\nFORENSIC Eve: twin receipts 75547675/76049174 \u2260 patent grant"
+    },
+    {
+      "id": "dr4g0n-canon-attorney-review",
+      "caseId": "CG-EVE-B6-04",
+      "label": "REFUSE \u2014 DR4G0N patent master attorney-review NOT FILED",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "attorney_review_complete",
+        "uspto_receipt",
+        "patent_grant"
+      ],
+      "email": {
+        "subject": "[FORENSIC] DR4G0N_CANONICAL_PATENT_MASTER \u2014 Eve batch6",
+        "from": "eve-fuel@monstersink.example",
+        "body": "CLAIMED: 1, 1, 1\nINTERIOR: 1, 0, 0\nfileId 1aquiHZCKmjmSUMqimGYyLMQ4cCs1nxl8\nATTORNEY-REVIEW NOT FILED \u2014 no USPTO receipt/grant",
+        "receiptUrl": "https://patentcenter.uspto.gov/"
+      },
+      "claimed": [
+        1,
+        1,
+        1
+      ],
+      "interior": [
+        1,
+        0,
+        0
+      ],
+      "expect": {
+        "status": "refuse",
+        "mask": 6,
+        "failedIndices": [
+          1,
+          2
+        ]
+      },
+      "driveFileIds": [
+        "1aquiHZCKmjmSUMqimGYyLMQ4cCs1nxl8"
+      ],
+      "scrapeFixtureText": "INTERIOR: 1, 0, 0\nFORENSIC Eve: attorney-review draft; not filed; no receipt/grant"
+    },
+    {
+      "id": "clean-spec-claims-v4-not-filed",
+      "caseId": "CG-EVE-B6-05",
+      "label": "REFUSE \u2014 CLEAN_SPEC v4 attorney-review NOT FILED",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "spec_packet_ready",
+        "uspto_filed",
+        "patent_grant"
+      ],
+      "email": {
+        "subject": "[FORENSIC] CLEAN_SPECIFICATION_CLAIMS_ABSTRACT_v4 \u2014 Eve batch6",
+        "from": "eve-fuel@monstersink.example",
+        "body": "CLAIMED: 1, 1, 1\nINTERIOR: 1, 0, 0\nfileId 1DpZkf8Gl9LWUkt_5RbxSctc1P_05cU-x\nATTORNEY-REVIEW NOT FILED",
+        "receiptUrl": "https://patentcenter.uspto.gov/"
+      },
+      "claimed": [
+        1,
+        1,
+        1
+      ],
+      "interior": [
+        1,
+        0,
+        0
+      ],
+      "expect": {
+        "status": "refuse",
+        "mask": 6,
+        "failedIndices": [
+          1,
+          2
+        ]
+      },
+      "driveFileIds": [
+        "1DpZkf8Gl9LWUkt_5RbxSctc1P_05cU-x"
+      ],
+      "scrapeFixtureText": "INTERIOR: 1, 0, 0\nFORENSIC Eve: clean spec v4 ready; not filed; no grant"
     }
   ],
   "seedUrls": [
@@ -2378,5 +2576,12 @@
   "batch4BriefFileId": "1a0Hcs28fpH3s3oGvc8MbgegyBVGN4hOg",
   "note": "Quality over volume: shipShortlist (~14) for demo; full pack kept for forensic depth. Batch4 mythos/COHOCF skipped.",
   "batch5BriefFileId": "1cJwsN_NMLgjMAdSydkOqejlQO2dQkl46",
-  "eveBatch5BriefFileId": "1cJwsN_NMLgjMAdSydkOqejlQO2dQkl46"
+  "eveBatch5BriefFileId": "1cJwsN_NMLgjMAdSydkOqejlQO2dQkl46",
+  "eveBatch6FileIds": [
+    "1y2T9AA5fGqgpbbLZpnbxfZG3iABqu_vS",
+    "1rCaz52svswDtMXLB_roCKTrCgHcEwAvN",
+    "1z1Zz45ohcZ_E0Z3NGfNj6wcMYbX4YOkQ",
+    "1aquiHZCKmjmSUMqimGYyLMQ4cCs1nxl8",
+    "1DpZkf8Gl9LWUkt_5RbxSctc1P_05cU-x"
+  ]
 }
