@@ -1,9 +1,9 @@
-# CeilingGate blockers
+# CeilingGate — true hard blockers only
 
-1. **Keep local** — no public GitHub push until Taylor says publish
-2. **Convex project** — need logged-in account for `npx convex dev` / deploy / `*.convex.site`
-3. **API keys (Convex env, never commit)** — `AGENTMAIL_API_KEY`, `AGENTMAIL_WEBHOOK_SECRET`, `FIRECRAWL_API_KEY` (+ optional `FIRECRAWL_WEBHOOK_SECRET`)
-4. **Origin / gh auth** — deferred; when publishing: Origin namespace or `gh` login
-5. **Luma register** — HELD pending Taylor
+Things we **cannot** route around without an external login/namespace (no asks — just flags):
 
-Offline OK: `npm run test:gate` and `npm test` (Lean refuse mask 10 PASS).
+1. **Public GitHub** — `gh` not authenticated; no `GH_TOKEN`/`GITHUB_TOKEN`; CloudAgent `new_repo` fails: Origin namespace missing ([get-started](https://cursor.com/codebase/get-started)). Last-resort tarball: `/workspace/releases/ceilinggate-offline-20260905.tar.gz` + `/workspace/releases/ceilinggate-PUBLIC-REPO.md`.
+2. **`*.convex.site` host** — needs Convex login / deploy key. Offline board + `npm run demo:gate` work without it.
+3. **Live Firecrawl scrapes** — needs `FIRECRAWL_API_KEY` in Convex env. Demo uses fixture scrape stand-in; live judgment correctly withheld without Firecrawl.
+
+**Not blockers for the offline demo:** AgentMail inbox exists (`ceilinggate@agentmail.to`); gate math PASS; everyday UI builds.

@@ -60,6 +60,14 @@ Email a money claim with a public receipt link. CeilingGate scrapes the receipt,
 - [x] **Offline gate demo WORKS** (`npm run demo:gate` PASS; `npm run build` green; everyday UI preview)
 - Public GH still waiting on Origin or Taylor repo URL
 
+
+### 2026-09-05 — autonomous: no Taylor asks
+- [x] Local git commit `1acbfec`
+- [x] Tried `gh` — not logged in
+- [x] Tried CloudAgent new_repo — Origin namespace missing
+- [x] Last-resort tarball prepared under `/workspace/releases/`
+- Everyday framing + originality unchanged; offline demo still PASS
+
 ## Blockers (work around — do not wait)
 
 1. Convex login / `CONVEX_DEPLOY_KEY` → hosting on `*.convex.site`
