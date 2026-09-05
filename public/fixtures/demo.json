@@ -1,5 +1,5 @@
 {
-  "version": "2.4.1",
+  "version": "2.4.2",
   "source": "Eve Drive fuel briefs 1l1wjwE8\u2026 + batch2 sibling 1iNnqPeHizQyiOYvDnhjypbqVXyAXPUBT + priority/Batch2 fileIds (forensic claim\u2194receipt, not chat)",
   "org": "Monsters Ink LLC",
   "lineItems": [
@@ -409,7 +409,8 @@
       },
       "driveFileIds": [
         "1Rw2uazrzGcAEJnZhB8cLv74fs4o8ok3i",
-        "1WuGM3Nu16u73V3deA30mmmZkwGwMZfzJ"
+        "1WuGM3Nu16u73V3deA30mmmZkwGwMZfzJ",
+        "1xdiBE85MvWLphr03VQ0tP8BWlQwNwX8m"
       ],
       "scrapeFixtureText": "INTERIOR: 70, 0, 0, 0\nFORENSIC: basic filing $70 paid; deposit schedule $1004 not all paid interior"
     },
@@ -447,7 +448,8 @@
         ]
       },
       "driveFileIds": [
-        "13H0OO5Obv49CY-PEtvOHBVNCgq-NPMwW"
+        "13H0OO5Obv49CY-PEtvOHBVNCgq-NPMwW",
+        "1GBTKRwI-l6nf_mGweDb4yv2Ok_na6Erb"
       ],
       "scrapeFixtureText": "INTERIOR: 1e-8, 10, 10\nFORENSIC: enclosure breach dim1"
     },
@@ -561,7 +563,9 @@
         ]
       },
       "driveFileIds": [
-        "1n1u4RUteXufUxpv_tOkq1ofnP1hVSsDJ"
+        "1NgUw7GmXKerOf2yYSDb70R8tFt5Fi045",
+        "1n1u4RUteXufUxpv_tOkq1ofnP1hVSsDJ",
+        "1xhlrJMTMEQKXtDQ5mzz3hECTqh-aLDGL"
       ],
       "scrapeFixtureText": "INTERIOR: 70, 0\nFORENSIC: Electronic Payment Receipt \u2014 Patent Center payment\u2260grant"
     },
@@ -1049,6 +1053,7 @@
         "failedIndices": []
       },
       "driveFileIds": [
+        "13z8-TCXXfNzTGc6uocpSDqALcrMCDXdz",
         "1IxKzLnTTLEyggqtQxYVnv13d5iR5j-nk"
       ],
       "scrapeFixtureText": "INTERIOR: 1e-8, 10, 10\nFORENSIC: live_spd8_solve GRANT"
@@ -1081,6 +1086,7 @@
         ]
       },
       "driveFileIds": [
+        "16z6LViQl-6EgetJm5plVhZyuAK7xwSvx",
         "1SfL157TVMuB5i2jIzYKKey2KOZrJjNaT"
       ],
       "scrapeFixtureText": "INTERIOR: 1e-10\nFORENSIC: Gate A corrupt-x REFUSE seed"
@@ -1838,7 +1844,8 @@
         "failedIndices": []
       },
       "driveFileIds": [
-        "1Rw2uazrzGcAEJnZhB8cLv74fs4o8ok3i"
+        "1Rw2uazrzGcAEJnZhB8cLv74fs4o8ok3i",
+        "1xdiBE85MvWLphr03VQ0tP8BWlQwNwX8m"
       ],
       "scrapeFixtureText": "INTERIOR: 1004, 70\nFORENSIC Eve: fee schedule + prior $70 paid documented"
     },
@@ -1947,6 +1954,49 @@
         "1-WVaKfcMxgY_dTx2Yf2dgIEQuvuImuCZ1QuziIHXe08"
       ],
       "scrapeFixtureText": "INTERIOR: 1, 1, 0\nFORENSIC Eve: Python+Lean EXIT 0; Classiq/Braket not claimed"
+    },
+    {
+      "id": "drive-track-one-unpaid",
+      "caseId": "CG-B5-044",
+      "label": "REFUSE \u2014 Path-to-Grant materials vs Track One fees unpaid",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "materials_prepared",
+        "track_one_fees_paid",
+        "uspto_filing_done",
+        "complete_hw_sw_package"
+      ],
+      "email": {
+        "subject": "[FORENSIC] GR21 PathToGrant \u2014 Track One unpaid",
+        "from": "drive-fuel@monstersink.example",
+        "body": "CLAIMED: 1, 1, 1, 1\nINTERIOR: 1, 0, 0, 0\nfileId 1cio8oI-eAEkiB6wkzWR8E0_iLhttGSlY\nTrack One + micro-entity fees NOT paid; USPTO filing NOT performed",
+        "receiptUrl": "https://patentcenter.uspto.gov/"
+      },
+      "claimed": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "interior": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "expect": {
+        "status": "refuse",
+        "mask": 14,
+        "failedIndices": [
+          1,
+          2,
+          3
+        ]
+      },
+      "driveFileIds": [
+        "1cio8oI-eAEkiB6wkzWR8E0_iLhttGSlY"
+      ],
+      "scrapeFixtureText": "INTERIOR: 1, 0, 0, 0\nFORENSIC Batch5: Path-to-Grant prepared; fees/filing not done"
     }
   ],
   "seedUrls": [
@@ -1986,5 +2036,6 @@
     "drive-fail-job"
   ],
   "batch4BriefFileId": "1a0Hcs28fpH3s3oGvc8MbgegyBVGN4hOg",
-  "note": "Quality over volume: shipShortlist (~14) for demo; full pack kept for forensic depth. Batch4 mythos/COHOCF skipped."
+  "note": "Quality over volume: shipShortlist (~14) for demo; full pack kept for forensic depth. Batch4 mythos/COHOCF skipped.",
+  "batch5BriefFileId": "1cJwsN_NMLgjMAdSydkOqejlQO2dQkl46"
 }
