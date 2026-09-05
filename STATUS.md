@@ -1,23 +1,23 @@
-# CeilingGate STATUS
+# CeilingGate STATUS (LOCAL ONLY)
 
-**Updated:** 2026-09-05 evening CT
+**Updated:** 2026-09-05 evening CT  
+**Publish:** KEEP LOCAL — no GitHub/Origin until later go
 
-## Shipped
-- ResidualGates runtime + `demo:gate` PASS (grant + refuse mask 10)
-- Forensic board UI (docket · ledger · verdict) — not chat
-- Drive-fuel fixtures `te-grant` / `te-refuse` (Monsters Ink T&E labels)
-- AgentMail inbox `ceilinggate@agentmail.to`
-- Convex pipeline stubs (AgentMail → Firecrawl → gate)
-- Firecrawl rule: live judgment blocked without scrape when URL exists
-- README hackathon rules checklist 1–11 + originality table
-- `npm run build` green
+## Local finish checklist
+- [x] Everyday money-claim UI (claims inbox + plain-English REFUSE lines)
+- [x] Originality: not chat-demo / not SDK / not docs-search
+- [x] Fixtures `te-grant` / `te-refuse` (Drive-fuel T&E labels)
+- [x] `npm run demo:gate` PASS (GRANT + REFUSE mask 10)
+- [x] `npm run build` green
+- [x] `hackathon.md` build log + rules path
+- [x] AgentMail inbox `ceilinggate@agentmail.to` (ingress ready; webhook waits deploy)
+- [x] Firecrawl + AgentMail Convex components in `convex.config.ts`
+- [ ] Convex deploy / `*.convex.site` — deferred (needs key; not local-blocker for demo)
+- [ ] Public GitHub — deferred by Taylor
 
-## Blocked (work around, don’t wait on Taylor)
-- Origin namespace / `gh` → public GitHub
-- Convex deploy key / login → `*.convex.site`
-- `FIRECRAWL_API_KEY` → live scrapes
-
-## Next
-- Wire webhook + deploy when keys appear
-- Streamer video draft when Taylor asks
-- Social drafts only; Taylor sends
+## Run locally
+```bash
+cd /workspace/ceilinggate
+npm run demo:offline
+npm run preview   # Check sample claims
+```

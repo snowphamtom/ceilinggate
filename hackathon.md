@@ -4,7 +4,7 @@
 - **Path (box):** `/workspace/ceilinggate`
 - **Started:** 2026-09-05
 - **Deadline:** 2026-09-22 12:00 PM PT
-- **Publish:** KEEP LOCAL until Origin/`gh` unblocked → then public GitHub
+- **Publish:** **KEEP LOCAL ONLY** — Taylor: no GitHub/Origin push until later go
 - **Live URL:** _pending — Convex project → `*.convex.site` static host_
 - **Public repo:** _deferred (blocker)_
 - **Luma register:** Done (“You’re In”)
@@ -67,6 +67,12 @@ Email a money claim with a public receipt link. CeilingGate scrapes the receipt,
 - [x] Tried CloudAgent new_repo — Origin namespace missing
 - [x] Last-resort tarball prepared under `/workspace/releases/`
 - Everyday framing + originality unchanged; offline demo still PASS
+
+
+### 2026-09-05 — LOCAL-ONLY lock (Taylor via MANAGER)
+- [x] No GitHub / Origin push until later go
+- [x] Finish local scaffold, gate demo, hackathon.md, fixtures
+- Publish deferred; tarball may exist but is not a publish step
 
 ## Blockers (work around — do not wait)
 
