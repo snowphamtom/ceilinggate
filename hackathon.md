@@ -4,7 +4,7 @@
 - **Path (box):** `/workspace/ceilinggate`
 - **Started:** 2026-09-05
 - **Deadline:** 2026-09-22 12:00 PM PT
-- **Publish:** **LIVE GO** — Taylor override; keep-local cancelled; GH browser in flight (MANAGER)
+- **Publish:** **LIVE GO** — Taylor override; publish-go cancelled; GH browser in flight (MANAGER)
 - **Live URL:** _pending — MANAGER Convex login → `*.convex.site`_
 - **Public repo:** _in flight — MANAGER GH browser; Create pushes when remote URL exists_
 - **Luma register:** **Done** (“You’re In”)
@@ -69,7 +69,7 @@ Email a money claim with a public receipt link. CeilingGate scrapes the receipt,
 - Everyday framing + originality unchanged; offline demo still PASS
 
 
-### 2026-09-05 — LOCAL-ONLY lock (Taylor via MANAGER)
+### 2026-09-05 — PUBLISH GO lock (Taylor via MANAGER)
 - [x] No GitHub / Origin push until later go
 - [x] Finish local scaffold, gate demo, hackathon.md, fixtures
 - Publish deferred; tarball may exist but is not a publish step

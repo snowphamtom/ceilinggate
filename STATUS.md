@@ -1,7 +1,7 @@
 # CeilingGate STATUS — PUBLISH GO
 
 **Updated:** 2026-09-05 evening CT  
-**Taylor:** PUBLISH GO (not keep-local)  
+**Taylor:** PUBLISH GO (not publish-go)  
 **Luma:** Done  
 **Inbox:** `ceilinggate@agentmail.to`  
 **GH/Convex:** MANAGER clearing Google auth on the box — will push when remote exists

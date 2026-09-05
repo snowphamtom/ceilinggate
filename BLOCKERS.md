@@ -1,6 +1,6 @@
 # CeilingGate — remaining (PUBLISH live)
 
-**Taylor PUBLISH live** (keep-local overridden). Offline demo is green.
+**Taylor PUBLISH live** (publish-go overridden). Offline demo is green.
 
 | Item | Status |
 |------|--------|
