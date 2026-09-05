@@ -1,18 +1,36 @@
-# CeilingGate STATUS — PUBLISH GO
+# CeilingGate STATUS — LIVE
 
 **Updated:** 2026-09-05 evening CT  
-**Taylor:** PUBLISH GO (not publish-go)  
-**Luma:** Done  
-**Inbox:** `ceilinggate-claims@agentmail.to`  
-**GH/Convex:** MANAGER clearing Google auth on the box — will push when remote exists
+**Taylor:** FULL GO (All Gas win path)  
+**Deadline:** Tue Sep 22, 2026 · 12:00 PM PT  
+**Tip:** `a2223a5` (refresh after this polish push)
 
-## Green / merge-ready
-- [x] Everyday expense sentence front-and-center
+## Live
+| Item | URL / value |
+|------|-------------|
+| App | https://quirky-rhinoceros-204.convex.site/ |
+| Health | https://quirky-rhinoceros-204.convex.site/health |
+| Convex cloud | https://quirky-rhinoceros-204.convex.cloud |
+| Public GitHub | https://github.com/snowphamtom/ceilinggate |
+| Claims inbox | `ceilinggate-claims@agentmail.to` |
+| Webhook | `POST https://quirky-rhinoceros-204.convex.site/agentmail/webhook` |
+| Luma | https://luma.com/convex-allgas-hackathon — You’re In |
+| Cash prizes | **$10k / $5k / $1.5k only** (not USPTO fee fixtures) |
+| Submit (later) | https://vibeapps.dev/judging/convex-all-gas-hackathon-openai/submit |
+
+## Green
+- [x] Everyday expense pitch front-and-center
 - [x] Forensic board (not chat-demo)
-- [x] Eve fixtures **28** on `master`
-- [x] `npm run demo:offline` PASS
-- [x] Webhook route → `ceilinggate-claims@agentmail.to`
+- [x] Firecrawl component + env
+- [x] AgentMail API + webhook secret + inbox
+- [x] Public GH + convex.site SPA
+- [x] Offline `demo:gate` / `demo:offline` PASS
+- [x] shipShortlist ~14 (demo quality; not prize tiers)
+
+## Hard stops
+- Square / T&E commercial SKU — off
+- $2100 Track One — USPTO fee noise only (full pack), not prize/prefer ship copy
 
 ## Next
-- [ ] MANAGER: public GH push of `/workspace/ceilinggate`
-- [ ] MANAGER/Create: Convex deploy → `*.convex.site` + env keys
+- [ ] vibeapps screenshots + 60s video (Streamer when Taylor asks)
+- [ ] Submit before Sep 22 noon PT

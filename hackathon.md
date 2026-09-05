@@ -6,9 +6,9 @@
 - **Path (box):** `/workspace/ceilinggate`
 - **Started:** 2026-09-05
 - **Deadline:** 2026-09-22 12:00 PM PT
-- **Publish:** **LIVE GO** — Taylor override; publish-go cancelled; GH browser in flight (MANAGER)
-- **Live URL:** _pending — MANAGER Convex login → `*.convex.site`_
-- **Public repo:** _in flight — MANAGER GH browser; Create pushes when remote URL exists_
+- **Publish:** **LIVE** — Taylor FULL GO
+- **Live URL:** https://quirky-rhinoceros-204.convex.site/
+- **Public repo:** https://github.com/snowphamtom/ceilinggate
 - **Luma register:** **Done** (“You’re In”)
 - **Inbox:** `ceilinggate-claims@agentmail.to`
 
@@ -52,9 +52,9 @@ Email a money claim with a public receipt link. CeilingGate scrapes the receipt,
 - [x] UI/copy reframed for normal-person money claims
 - [x] Plain-English failed lines (no SDK-first framing)
 - [x] Claims inbox + result board language
-- [ ] Convex cloud deploy + `*.convex.site`
-- [ ] Live AgentMail webhook + Firecrawl key in Convex env
-- [ ] Public GitHub
+- [x] Convex cloud deploy + `*.convex.site`
+- [x] Live AgentMail webhook + Firecrawl key in Convex env
+- [x] Public GitHub
 - [ ] vibeapps.dev video + social (Taylor sends)
 
 
@@ -132,3 +132,13 @@ npm install && npm run demo:gate && npm run build && npm run preview
 ```
 
 Click **Check sample claims** → GRANT (all lines OK) + REFUSE (lodging & misc over).
+
+
+## LIVE (2026-09-05 evening CT)
+- [x] Site https://quirky-rhinoceros-204.convex.site/ (+ /health)
+- [x] GH https://github.com/snowphamtom/ceilinggate
+- [x] Tip a2223a5+ (see STATUS.md)
+- [x] Firecrawl Y · AgentMail Y · inbox `ceilinggate-claims@agentmail.to`
+- [x] Cash prizes ONLY $10k/$5k/$1.5k (Luma)
+- [ ] vibeapps screenshots + video
+- [ ] Submit https://vibeapps.dev/judging/convex-all-gas-hackathon-openai/submit

@@ -25,15 +25,20 @@ type LocalDecision = {
 
 const LINE_ITEMS = demo.lineItems as string[];
 const hasConvex = Boolean(import.meta.env.VITE_CONVEX_URL);
+const SHORT = ((demo as { shipShortlist?: string[] }).shipShortlist ?? []).filter(
+  Boolean,
+);
+const SHIP_FIXTURES: Fixture[] = SHORT.length
+  ? demo.fixtures.filter((f) => SHORT.includes(f.id))
+  : demo.fixtures.slice(0, 14);
 
 function money(n: number) {
   if (!Number.isFinite(n)) return String(n);
-  if (Math.abs(n) >= 1000) return `$${n.toLocaleString("en-US", { maximumFractionDigits: 2 })}`;
-  if (Math.abs(n) > 0 && Math.abs(n) < 0.01) return String(n);
+  if (Math.abs(n) >= 1000)
+    return `$${n.toLocaleString("en-US", { maximumFractionDigits: 2 })}`;
   return `$${n.toLocaleString("en-US", { maximumFractionDigits: 2 })}`;
 }
 
-/** Plain-English overclaim lines for everyday users (not SDK jargon). */
 function plainFailures(
   lineItems: string[],
   claimed: number[],
@@ -64,10 +69,26 @@ function runFixture(f: Fixture): LocalDecision {
     decision,
     source: "fixture-scrape",
     receiptUrl: f.email.receiptUrl,
-    lineItems: LINE_ITEMS,
+    lineItems: (f as { lineItems?: string[] }).lineItems?.length
+      ? (f as { lineItems: string[] }).lineItems
+      : LINE_ITEMS,
     subject: f.email.subject,
     from: f.email.from,
   };
+}
+
+function pickByExpect(status: "grant" | "refuse"): Fixture | undefined {
+  const preferIds =
+    status === "grant"
+      ? ["te-grant", "drive-pass-job"]
+      : ["te-refuse", "te-spend-ceilings", "drive-fail-job"];
+  for (const id of preferIds) {
+    const f = SHIP_FIXTURES.find((x) => x.id === id);
+    if (f && gateB(f.interior, f.claimed).status === status) return f;
+  }
+  return SHIP_FIXTURES.find(
+    (f) => gateB(f.interior, f.claimed).status === status,
+  );
 }
 
 export default function App() {
@@ -78,18 +99,12 @@ export default function App() {
     const grant = gateB([100, 50, 25, 10], [98, 49, 25, 9]);
     const refuse = gateB([100, 50, 25, 10], [98, 51, 25, 11]);
     return (
-      granted(grant) &&
-      refuse.status === "refuse" &&
-      refuse.mask === 10
+      granted(grant) && refuse.status === "refuse" && refuse.mask === 10
     );
   }, []);
 
   const loadAll = useCallback(() => {
-    const short = (demo as { shipShortlist?: string[] }).shipShortlist;
-    const pack = short?.length
-      ? demo.fixtures.filter((f) => short.includes(f.id))
-      : demo.fixtures;
-    const next = (pack.length ? pack : demo.fixtures).map(runFixture);
+    const next = SHIP_FIXTURES.map(runFixture);
     setResults(next);
     setSelectedId(next[0]?.id ?? null);
   }, []);
@@ -102,6 +117,16 @@ export default function App() {
     });
     setSelectedId(d.id);
   }, []);
+
+  const demoGrant = useCallback(() => {
+    const f = pickByExpect("grant");
+    if (f) runOne(f);
+  }, [runOne]);
+
+  const demoRefuse = useCallback(() => {
+    const f = pickByExpect("refuse");
+    if (f) runOne(f);
+  }, [runOne]);
 
   const selected =
     results.find((r) => r.id === selectedId) ?? results[0] ?? null;
@@ -119,7 +144,9 @@ export default function App() {
     <div className="shell board">
       <header className="top">
         <div>
-          <p className="eyebrow">For small businesses · contractors · grant seekers</p>
+          <p className="eyebrow">
+            For small businesses · contractors · grant seekers
+          </p>
           <h1>CeilingGate</h1>
           <p className="lede everyday">
             Email your expense claim with a public receipt link — CeilingGate
@@ -131,30 +158,51 @@ export default function App() {
             clear result.
           </p>
         </div>
-        <div className="actions">
+        <div className="actions stack-actions">
           <button type="button" className="primary" onClick={loadAll}>
             Check sample claims (ship set)
           </button>
+          <div className="oneclick">
+            <button type="button" className="grant-btn" onClick={demoGrant}>
+              Demo GRANT
+            </button>
+            <button type="button" className="refuse-btn" onClick={demoRefuse}>
+              Demo REFUSE
+            </button>
+          </div>
         </div>
       </header>
 
+      <div className="stack-strip" aria-label="Required stack">
+        <span className={"chip-stack" + (hasConvex ? " on" : "")}>
+          Convex {hasConvex ? "live" : "demo"}
+        </span>
+        <span className="chip-stack on">Firecrawl scrape</span>
+        <span className="chip-stack on">
+          AgentMail · <code>ceilinggate-claims@agentmail.to</code>
+        </span>
+        <span className="chip-stack muted-chip">
+          ResidualGates · self-check {selfCheckOk ? "ok" : "fail"}
+        </span>
+      </div>
+
       <div className="lean">
-        How it works: claim email → scrape public source → line-by-line check.
-        Inbox: <code>ceilinggate-claims@agentmail.to</code>
-        {hasConvex ? " · live Convex connected" : " · demo mode (sample receipts)"}
-        {" · "}
-        self-check {selfCheckOk ? "ok" : "fail"}
+        How it works: claim email → Firecrawl public receipt → line-by-line
+        GRANT/REFUSE. Live board on{" "}
+        <code>quirky-rhinoceros-204.convex.site</code>
+        {hasConvex ? " · Convex connected" : " · sample receipts until Convex URL"}
+        .
       </div>
 
       <div className="board-grid">
         <section className="panel">
           <h2>Claims inbox</h2>
           <p className="muted small">
-            Forensic examples from Monsters Ink Drive fuel (claim↔receipt) — not chat
-            transcripts.
+            Ship-set expense examples (claim↔receipt) — not chat transcripts.
+            One click runs the gate.
           </p>
           <div className="list">
-            {demo.fixtures.map((f) => {
+            {SHIP_FIXTURES.map((f) => {
               const expect = gateB(f.interior, f.claimed);
               const active = selectedId === f.id;
               return (
@@ -183,7 +231,8 @@ export default function App() {
           <h2>Result</h2>
           {!selected ? (
             <p className="muted">
-              Pick a claim or hit <strong>Check sample claims (ship set)</strong>.
+              Hit <strong>Demo GRANT</strong> or <strong>Demo REFUSE</strong>,
+              or pick a claim.
             </p>
           ) : (
             <div
@@ -230,7 +279,7 @@ export default function App() {
                     const n = selected.interior[i] ?? 0;
                     const fail = selected.decision.failedIndices.includes(i);
                     return (
-                      <tr key={name} className={fail ? "fail" : ""}>
+                      <tr key={`${name}-${i}`} className={fail ? "fail" : ""}>
                         <td>{capitalize(name)}</td>
                         <td>
                           <code>{money(c)}</code>
@@ -257,8 +306,12 @@ export default function App() {
                 <p>
                   <strong>Receipt pull</strong>{" "}
                   {selected.source === "fixture-scrape"
-                    ? "sample scrape (demo) — live mode uses Firecrawl"
-                    : "live scrape"}
+                    ? "sample scrape (demo) — live ingress uses Firecrawl"
+                    : "live Firecrawl scrape"}
+                </p>
+                <p>
+                  <strong>Ingress</strong> AgentMail →{" "}
+                  <code>ceilinggate-claims@agentmail.to</code>
                 </p>
               </div>
             </div>
@@ -297,7 +350,8 @@ export default function App() {
 
       <footer className="lean">
         CeilingGate is a money-claim checker — not a chat bot, not a developer
-        SDK. Email in → receipt scrape → clear GRANT or REFUSE.
+        SDK. Email in → Firecrawl receipt scrape → clear GRANT or REFUSE. Cash
+        prizes for All Gas: $10k / $5k / $1.5k only.
       </footer>
     </div>
   );

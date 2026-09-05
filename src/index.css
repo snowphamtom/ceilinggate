@@ -61,3 +61,14 @@ code { font-family: "IBM Plex Mono", ui-monospace, monospace; }
 .plain-fail li { margin: 0.35rem 0; }
 .ok-line { color: #3dde95; font-weight: 600; }
 .lede.everyday { font-size: 1.15rem; font-weight: 500; color: #e8eef7; max-width: 40rem; }
+
+.stack-strip { display: flex; flex-wrap: wrap; gap: 0.45rem; margin: 0.85rem 0 0.35rem; }
+.chip-stack { font-size: 0.78rem; padding: 0.35rem 0.65rem; border-radius: 999px; background: #162033; border: 1px solid #2a3a55; color: #9fb4d0; }
+.chip-stack.on { background: #143528; border-color: #1f9d63; color: #3dde95; }
+.chip-stack.muted-chip { color: #8fa3bf; }
+.chip-stack code { font-size: 0.72rem; }
+.stack-actions { display: flex; flex-direction: column; gap: 0.5rem; align-items: stretch; }
+.oneclick { display: flex; gap: 0.45rem; }
+.grant-btn, .refuse-btn { flex: 1; border: 0; border-radius: 8px; padding: 0.5rem 0.75rem; font-weight: 700; cursor: pointer; }
+.grant-btn { background: #1f9d63; color: #04140c; }
+.refuse-btn { background: #d64545; color: #fff; }
