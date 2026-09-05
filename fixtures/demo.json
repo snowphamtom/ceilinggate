@@ -1,5 +1,5 @@
 {
-  "version": "2.2.0",
+  "version": "2.3.0",
   "source": "Eve Drive fuel briefs 1l1wjwE8\u2026 + batch2 sibling 1iNnqPeHizQyiOYvDnhjypbqVXyAXPUBT + priority/Batch2 fileIds (forensic claim\u2194receipt, not chat)",
   "org": "Monsters Ink LLC",
   "lineItems": [
@@ -197,7 +197,8 @@
         "failedIndices": []
       },
       "driveFileIds": [
-        "14AMY87yvc1bUcrf62-XVopY6eBSzwSaMce6zYK1_N9M"
+        "14AMY87yvc1bUcrf62-XVopY6eBSzwSaMce6zYK1_N9M",
+        "1vmgy2DvO1lFw4oq59OeM3wNXV8cKoWlY"
       ],
       "scrapeFixtureText": "INTERIOR: 0.90, 0.90\nFORENSIC: SSV A0 max residual 0.11\u22640.90; living 0.12"
     },
@@ -1050,6 +1051,611 @@
         "1IxKzLnTTLEyggqtQxYVnv13d5iR5j-nk"
       ],
       "scrapeFixtureText": "INTERIOR: 1e-8, 10, 10\nFORENSIC: live_spd8_solve GRANT"
+    },
+    {
+      "id": "drive-live-corrupt-residual",
+      "caseId": "CG-B3-029",
+      "label": "REFUSE \u2014 live_job_corrupt residual over tol (Gate A)",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "reconstructed_residual"
+      ],
+      "email": {
+        "subject": "[FORENSIC] live_job_corrupt.json \u2014 residual honesty fail",
+        "from": "drive-fuel@monstersink.example",
+        "body": "CLAIMED: 0.00137\nINTERIOR: 0.0000000001\nfileId 1SfL157TVMuB5i2jIzYKKey2KOZrJjNaT\nEnclosure dims OK; residual~1.37e-3 > tol",
+        "receiptUrl": "https://www.nist.gov/cyberframework"
+      },
+      "claimed": [
+        0.00137
+      ],
+      "interior": [
+        1e-10
+      ],
+      "expect": {
+        "status": "refuse",
+        "mask": 1,
+        "failedIndices": [
+          0
+        ]
+      },
+      "driveFileIds": [
+        "1SfL157TVMuB5i2jIzYKKey2KOZrJjNaT"
+      ],
+      "scrapeFixtureText": "INTERIOR: 1e-10\nFORENSIC: Gate A corrupt-x REFUSE seed"
+    },
+    {
+      "id": "drive-completion-packet",
+      "caseId": "CG-B3-030",
+      "label": "REFUSE \u2014 completion_packet COMMITTED vs Lean/physical open",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "claimed_le_interior",
+        "lean_compile",
+        "physical_promotion",
+        "open_residuals_cleared"
+      ],
+      "email": {
+        "subject": "[FORENSIC] completion_packet.json \u2014 3 open residuals",
+        "from": "drive-fuel@monstersink.example",
+        "body": "CLAIMED: 1, 1, 1, 1\nINTERIOR: 1, 0, 0, 0\nfileId 14UQy8Ujm1GTW2QZpst1VwX81KXlNDifO\ngate_mask=0 but lean NOT_RUN / physical REFUSED / residual_count_open=3",
+        "receiptUrl": "https://www.darpa.mil/research/research-spotlights/formal-methods"
+      },
+      "claimed": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "interior": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "expect": {
+        "status": "refuse",
+        "mask": 14,
+        "failedIndices": [
+          1,
+          2,
+          3
+        ]
+      },
+      "driveFileIds": [
+        "14UQy8Ujm1GTW2QZpst1VwX81KXlNDifO"
+      ],
+      "scrapeFixtureText": "INTERIOR: 1, 0, 0, 0\nFORENSIC: COMMITTED mask0 with open Lean/physical/residuals"
+    },
+    {
+      "id": "drive-invariants-portable",
+      "caseId": "CG-B3-031",
+      "label": "REFUSE \u2014 invariants.json law claimed as Lean/hardware certificate",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "gateB_law",
+        "lean_kernel_cert",
+        "hardware_G3_G6",
+        "patent_issued"
+      ],
+      "email": {
+        "subject": "[FORENSIC] invariants.json \u2014 portable \u2260 measured",
+        "from": "drive-fuel@monstersink.example",
+        "body": "CLAIMED: 1, 1, 1, 1\nINTERIOR: 1, 0, 0, 0\nfileId 1PNT3Vj1foVFbYhKOexHLfwXZPVOw1nhw",
+        "receiptUrl": "https://live.lean-lang.org/"
+      },
+      "claimed": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "interior": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "expect": {
+        "status": "refuse",
+        "mask": 14,
+        "failedIndices": [
+          1,
+          2,
+          3
+        ]
+      },
+      "driveFileIds": [
+        "1PNT3Vj1foVFbYhKOexHLfwXZPVOw1nhw"
+      ],
+      "scrapeFixtureText": "INTERIOR: 1, 0, 0, 0\nFORENSIC: portable inequalities \u2014 NOT Lean/hardware certificate"
+    },
+    {
+      "id": "drive-diu-swap-usv",
+      "caseId": "CG-B3-032",
+      "label": "REFUSE \u2014 DIU SWAP-USV $40M OT ROM vs award unknown",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "m1_usd",
+        "m2_usd",
+        "m3_usd",
+        "m4_usd"
+      ],
+      "email": {
+        "subject": "[FORENSIC] DIU PROJ00687 OT ROM $40M \u2260 obligated",
+        "from": "drive-fuel@monstersink.example",
+        "body": "CLAIMED: 5000000, 12000000, 13000000, 10000000\nINTERIOR: 0, 0, 0, 0\nfileId 1KLLr26S2GSR_VXoeljzt453OcN_-2zqCGUZRgxToV5o",
+        "receiptUrl": "https://www.diu.mil/work-with-us/submit-solution/PROJ00687"
+      },
+      "claimed": [
+        5000000,
+        12000000,
+        13000000,
+        10000000
+      ],
+      "interior": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "expect": {
+        "status": "refuse",
+        "mask": 15,
+        "failedIndices": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      "driveFileIds": [
+        "1KLLr26S2GSR_VXoeljzt453OcN_-2zqCGUZRgxToV5o"
+      ],
+      "scrapeFixtureText": "INTERIOR: 0, 0, 0, 0\nFORENSIC: OT ROM ceiling \u2014 award/obligated Unknown"
+    },
+    {
+      "id": "drive-uspto-filings-pdf",
+      "caseId": "CG-B3-033",
+      "label": "REFUSE \u2014 USPTO filings.pdf 8 receipts \u2260 grant",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "filings_submitted",
+        "allowance_grant"
+      ],
+      "email": {
+        "subject": "[FORENSIC] Uspto filings.pdf \u2014 receipt history honesty",
+        "from": "drive-fuel@monstersink.example",
+        "body": "CLAIMED: 8, 1\nINTERIOR: 8, 0\nfileId 1ZTJEjmIbikf7-RqRo1F0NDoPPTrtcDjd\n8 submissions including 19/658,750 \u2014 no allowance column",
+        "receiptUrl": "https://patentcenter.uspto.gov/"
+      },
+      "claimed": [
+        8,
+        1
+      ],
+      "interior": [
+        8,
+        0
+      ],
+      "expect": {
+        "status": "refuse",
+        "mask": 2,
+        "failedIndices": [
+          1
+        ]
+      },
+      "driveFileIds": [
+        "1ZTJEjmIbikf7-RqRo1F0NDoPPTrtcDjd"
+      ],
+      "scrapeFixtureText": "INTERIOR: 8, 0\nFORENSIC: filing receipts only; payment\u2260grant"
+    },
+    {
+      "id": "drive-gr21-zk-unverified",
+      "caseId": "CG-B3-034",
+      "label": "REFUSE \u2014 GR21 ZK Claimed\u2264Interior without live reserve proof",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "zk_spec",
+        "live_reserve_proof"
+      ],
+      "email": {
+        "subject": "[FORENSIC] GR21 ZK engine \u2014 spec \u2260 live proof",
+        "from": "drive-fuel@monstersink.example",
+        "body": "CLAIMED: 1, 1\nINTERIOR: 1, 0\nfileId 15DbjjFXNSVOiCrI3j8qqHZ6BCH6fn5KRqt7SeUWmf74",
+        "receiptUrl": "https://www.nist.gov/cyberframework"
+      },
+      "claimed": [
+        1,
+        1
+      ],
+      "interior": [
+        1,
+        0
+      ],
+      "expect": {
+        "status": "refuse",
+        "mask": 2,
+        "failedIndices": [
+          1
+        ]
+      },
+      "driveFileIds": [
+        "15DbjjFXNSVOiCrI3j8qqHZ6BCH6fn5KRqt7SeUWmf74"
+      ],
+      "scrapeFixtureText": "INTERIOR: 1, 0\nFORENSIC: ZK architecture \u2014 no live verification receipt"
+    },
+    {
+      "id": "drive-sovereign-receipt-neq-grant",
+      "caseId": "CG-B3-035",
+      "label": "REFUSE \u2014 SOVEREIGN operator: receipt/hash treated as grant",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "claim_le_evidence",
+        "patent_as_grant",
+        "submission_as_award",
+        "hash_as_truth"
+      ],
+      "email": {
+        "subject": "[FORENSIC] SOVEREIGN_RESIDUAL_HONEST_AI_OPERATOR L1\u2013L7",
+        "from": "drive-fuel@monstersink.example",
+        "body": "CLAIMED: 1, 1, 1, 1\nINTERIOR: 1, 0, 0, 0\nfileId 1MhWOCS3AP2027nRGxkwYiFUmUV1XOUK8",
+        "receiptUrl": "https://patentcenter.uspto.gov/"
+      },
+      "claimed": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "interior": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "expect": {
+        "status": "refuse",
+        "mask": 14,
+        "failedIndices": [
+          1,
+          2,
+          3
+        ]
+      },
+      "driveFileIds": [
+        "1MhWOCS3AP2027nRGxkwYiFUmUV1XOUK8"
+      ],
+      "scrapeFixtureText": "INTERIOR: 1, 0, 0, 0\nFORENSIC: patent app\u2260grant; receipt\u2260award; hash\u2260truth"
+    },
+    {
+      "id": "drive-complete-master-open",
+      "caseId": "CG-B3-036",
+      "label": "REFUSE \u2014 COMPLETE master solvent claims vs open G3+/patent",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "c001_c006_solvent",
+        "physical_magpie",
+        "issued_patent",
+        "mhz_1_2"
+      ],
+      "email": {
+        "subject": "[FORENSIC] COMPLETE_RESIDUAL_HONEST_MASTER opens",
+        "from": "drive-fuel@monstersink.example",
+        "body": "CLAIMED: 1, 1, 1, 1\nINTERIOR: 1, 0, 0, 0\nfileId 1XCxiV9HHPi4fVxnQc1kPk9g8d_rXIUPS\nFiling ~$70 REC only",
+        "receiptUrl": "https://patentcenter.uspto.gov/"
+      },
+      "claimed": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "interior": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "expect": {
+        "status": "refuse",
+        "mask": 14,
+        "failedIndices": [
+          1,
+          2,
+          3
+        ]
+      },
+      "driveFileIds": [
+        "1XCxiV9HHPi4fVxnQc1kPk9g8d_rXIUPS"
+      ],
+      "scrapeFixtureText": "INTERIOR: 1, 0, 0, 0\nFORENSIC: C-001..C-006 solvent; physical/patent/1.2MHz OPEN"
+    },
+    {
+      "id": "drive-ssv-md-sibling",
+      "caseId": "CG-B3-037",
+      "label": "GRANT \u2014 SSV md sibling residual 0.11 \u2264 0.90",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "max_residual",
+        "living_residual"
+      ],
+      "email": {
+        "subject": "[FORENSIC] RESIDUAL_HONEST_DUAL_GATE_SSV md export",
+        "from": "drive-fuel@monstersink.example",
+        "body": "CLAIMED: 0.11, 0.12\nINTERIOR: 0.90, 0.90\nfileId 1vmgy2DvO1lFw4oq59OeM3wNXV8cKoWlY",
+        "receiptUrl": "https://www.darpa.mil/research/research-spotlights/formal-methods"
+      },
+      "claimed": [
+        0.11,
+        0.12
+      ],
+      "interior": [
+        0.9,
+        0.9
+      ],
+      "expect": {
+        "status": "grant",
+        "mask": 0,
+        "failedIndices": []
+      },
+      "driveFileIds": [
+        "1vmgy2DvO1lFw4oq59OeM3wNXV8cKoWlY"
+      ],
+      "scrapeFixtureText": "INTERIOR: 0.90, 0.90\nFORENSIC: SSV sealed receipt; no universal physical proof claimed"
+    },
+    {
+      "id": "drive-hybrid-surplus-slogan",
+      "caseId": "CG-B3-038",
+      "label": "REFUSE \u2014 hybrid \u03a6/1\u26051 slogans authorizing COMMIT",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "claimed_le_interior",
+        "phi_commit_authority",
+        "uspto_grant",
+        "diu_award"
+      ],
+      "email": {
+        "subject": "[FORENSIC] HYBRID ResidualHonest \u2014 slogans \u2260 authorization",
+        "from": "drive-fuel@monstersink.example",
+        "body": "CLAIMED: 1, 1, 1, 1\nINTERIOR: 1, 0, 0, 0\nfileId 15tfqLICmtZNvdlcvaXO233dI7SgihCLR",
+        "receiptUrl": "https://www.nist.gov/cyberframework"
+      },
+      "claimed": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "interior": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "expect": {
+        "status": "refuse",
+        "mask": 14,
+        "failedIndices": [
+          1,
+          2,
+          3
+        ]
+      },
+      "driveFileIds": [
+        "15tfqLICmtZNvdlcvaXO233dI7SgihCLR"
+      ],
+      "scrapeFixtureText": "INTERIOR: 1, 0, 0, 0\nFORENSIC: \u03a6_c/1\u26051 orientation only \u2014 do NOT authorize COMMIT"
+    },
+    {
+      "id": "drive-rrsa-unified",
+      "caseId": "CG-B3-039",
+      "label": "REFUSE \u2014 RRSA UNIFIED task-complete vs G3+/award open",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "task_complete",
+        "g3_hardware",
+        "diu_award",
+        "patent_issuance"
+      ],
+      "email": {
+        "subject": "[FORENSIC] RRSA UNIFIED \u2014 TASK COMPLETE \u2260 COMMITMENT CLEARED",
+        "from": "drive-fuel@monstersink.example",
+        "body": "CLAIMED: 1, 1, 1, 1\nINTERIOR: 1, 0, 0, 0\nfileId 1EoKKOpRetj-kziB05FdzErqEZv9-qqujZsI7jV0RYfc",
+        "receiptUrl": "https://www.diu.mil/work-with-us/open-solicitations"
+      },
+      "claimed": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "interior": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "expect": {
+        "status": "refuse",
+        "mask": 14,
+        "failedIndices": [
+          1,
+          2,
+          3
+        ]
+      },
+      "driveFileIds": [
+        "1EoKKOpRetj-kziB05FdzErqEZv9-qqujZsI7jV0RYfc"
+      ],
+      "scrapeFixtureText": "INTERIOR: 1, 0, 0, 0\nFORENSIC: C+O+Q law; G3+/DIU/patent non-awards"
+    },
+    {
+      "id": "drive-apex-physics-open",
+      "caseId": "CG-B3-040",
+      "label": "REFUSE \u2014 APEX COMMIT residual=0 vs physics/legal open",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "software_residual0",
+        "experimental_physics",
+        "legal_title"
+      ],
+      "email": {
+        "subject": "[FORENSIC] APEX_Residual_Honest_Hybrid non-claims",
+        "from": "drive-fuel@monstersink.example",
+        "body": "CLAIMED: 1, 1, 1\nINTERIOR: 1, 0, 0\nfileId 1dSfd4XEzms_ohZWMSEvfuRWG53YLzYrn",
+        "receiptUrl": "https://www.nist.gov/cyberframework"
+      },
+      "claimed": [
+        1,
+        1,
+        1
+      ],
+      "interior": [
+        1,
+        0,
+        0
+      ],
+      "expect": {
+        "status": "refuse",
+        "mask": 6,
+        "failedIndices": [
+          1,
+          2
+        ]
+      },
+      "driveFileIds": [
+        "1dSfd4XEzms_ohZWMSEvfuRWG53YLzYrn"
+      ],
+      "scrapeFixtureText": "INTERIOR: 1, 0, 0\nFORENSIC: software measurement only; physics/legal PENDING"
+    },
+    {
+      "id": "drive-combined-set-awards",
+      "caseId": "CG-B3-041",
+      "label": "REFUSE \u2014 combined Drive set COMMITTED vs USPTO/DIU absent",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "drive_set_committed",
+        "uspto_grant",
+        "diu_award",
+        "physical_validation"
+      ],
+      "email": {
+        "subject": "[FORENSIC] COMBINED_Full_Drive_ResidualHonest_Set",
+        "from": "drive-fuel@monstersink.example",
+        "body": "CLAIMED: 1, 1, 1, 1\nINTERIOR: 1, 0, 0, 0\nfileId 1-C6Kkvy36BMlnr-W5ARStpskTr5Chvw6",
+        "receiptUrl": "https://patentcenter.uspto.gov/"
+      },
+      "claimed": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "interior": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "expect": {
+        "status": "refuse",
+        "mask": 14,
+        "failedIndices": [
+          1,
+          2,
+          3
+        ]
+      },
+      "driveFileIds": [
+        "1-C6Kkvy36BMlnr-W5ARStpskTr5Chvw6"
+      ],
+      "scrapeFixtureText": "INTERIOR: 1, 0, 0, 0\nFORENSIC: 15-artifact set COMMITTED; awards/hardware absent"
+    },
+    {
+      "id": "drive-hybrid-master-silicon",
+      "caseId": "CG-B3-042",
+      "label": "REFUSE \u2014 00_HYBRID_MASTER $70 REC vs silicon/grant OPEN",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "filing_fee_rec",
+        "issued_patent",
+        "silicon_axi",
+        "mhz_universal"
+      ],
+      "email": {
+        "subject": "[FORENSIC] 00_HYBRID_MASTER_COMPLETE payment REC",
+        "from": "drive-fuel@monstersink.example",
+        "body": "CLAIMED: 70, 1, 1, 1\nINTERIOR: 70, 0, 0, 0\nfileId 1-imNIQqGFZnXYaoJ4ksvX8mIA7kL6q-0\nConfirmation 3591 $70 REC filing",
+        "receiptUrl": "https://patentcenter.uspto.gov/"
+      },
+      "claimed": [
+        70,
+        1,
+        1,
+        1
+      ],
+      "interior": [
+        70,
+        0,
+        0,
+        0
+      ],
+      "expect": {
+        "status": "refuse",
+        "mask": 14,
+        "failedIndices": [
+          1,
+          2,
+          3
+        ]
+      },
+      "driveFileIds": [
+        "1-imNIQqGFZnXYaoJ4ksvX8mIA7kL6q-0"
+      ],
+      "scrapeFixtureText": "INTERIOR: 70, 0, 0, 0\nFORENSIC: payment REC evidenced; silicon/grant/1.2MHz OPEN"
+    },
+    {
+      "id": "drive-integrated-state-open",
+      "caseId": "CG-B3-043",
+      "label": "REFUSE \u2014 integrated state Lean-closed vs ODE/sensor OPEN",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "lean_closed_gates",
+        "continuous_ode",
+        "sensor_models",
+        "phi_surplus_auth"
+      ],
+      "email": {
+        "subject": "[FORENSIC] Residual_Honest_System_Integrated_State opens",
+        "from": "drive-fuel@monstersink.example",
+        "body": "CLAIMED: 1, 1, 1, 1\nINTERIOR: 1, 0, 0, 0\nfileId 1LfGF0r5QCD_vYxwHwE6T1renWRM-xciX",
+        "receiptUrl": "https://www.nist.gov/cyberframework"
+      },
+      "claimed": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "interior": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "expect": {
+        "status": "refuse",
+        "mask": 14,
+        "failedIndices": [
+          1,
+          2,
+          3
+        ]
+      },
+      "driveFileIds": [
+        "1LfGF0r5QCD_vYxwHwE6T1renWRM-xciX"
+      ],
+      "scrapeFixtureText": "INTERIOR: 1, 0, 0, 0\nFORENSIC: Lean closed; ODE/sensors OPEN; \u03a6 surplus not free auth"
     }
   ],
   "seedUrls": [
@@ -1065,7 +1671,10 @@
     "https://www.verizon.com/business/resources/reports/dbir/",
     "https://www.cisa.gov/report",
     "https://www.cisa.gov/cross-sector-cybersecurity-performance-goals",
-    "https://live.lean-lang.org/"
+    "https://live.lean-lang.org/",
+    "https://www.diu.mil/work-with-us/submit-solution/PROJ00687",
+    "https://drive.google.com/drive/folders/10UauSXl-kqwYLsjGvfMyc85nc6g_T_vQ"
   ],
-  "batch2BriefFileId": "1iNnqPeHizQyiOYvDnhjypbqVXyAXPUBT"
+  "batch2BriefFileId": "1iNnqPeHizQyiOYvDnhjypbqVXyAXPUBT",
+  "batch3BriefFileId": "1GRhQrnN5MasH7_Soyj1DeFeVM3K92AZp"
 }

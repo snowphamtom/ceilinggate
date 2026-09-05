@@ -109,6 +109,12 @@ Email a money claim with a public receipt link. CeilingGate scrapes the receipt,
 - [x] UI/README lead with judging everyday expense sentence
 - [x] Fixtures now 28 (Batch2/3/4 strong pairs added); demo still green
 
+
+### 2026-09-05 — Eve Batch3 fixtures merged
+- [x] Sibling brief `1GRhQrnN5MasH7_Soyj1DeFeVM3K92AZp`
+- [x] All 18 requested Batch3 fileIds covered; fixtures total **43**
+- [x] Offline demo still green
+
 ## Remaining (MANAGER login unblocks)
 
 1. Convex login / `CONVEX_DEPLOY_KEY` → hosting on `*.convex.site`
