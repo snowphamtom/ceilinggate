@@ -5,7 +5,7 @@
 | Item | Status |
 |------|--------|
 | Luma registration | **Done** (“You’re In”) |
-| AgentMail inbox | **Done** — `ceilinggate@agentmail.to` (webhook wired in code) |
+| AgentMail inbox | **Done** — `ceilinggate-claims@agentmail.to` (webhook wired in code) |
 | Offline gate demo | **Green** — `npm run demo:gate` / `demo:offline` |
 | Public GitHub | **In flight** — MANAGER browser login/create; push when remote URL exists |
 | Origin namespace | Blocked — using GitHub path instead |

@@ -8,7 +8,7 @@
 - **Live URL:** _pending — MANAGER Convex login → `*.convex.site`_
 - **Public repo:** _in flight — MANAGER GH browser; Create pushes when remote URL exists_
 - **Luma register:** **Done** (“You’re In”)
-- **Inbox:** `ceilinggate@agentmail.to`
+- **Inbox:** `ceilinggate-claims@agentmail.to`
 
 ## Everyday pitch (judging)
 
@@ -23,7 +23,7 @@ Email a money claim with a public receipt link. CeilingGate scrapes the receipt,
 | New full-stack app | Yes — `/workspace/ceilinggate` |
 | Convex backend | `convex/` schema, mutations, queries, actions, http |
 | Firecrawl Convex component | `convex/convex.config.ts` uses `@firecrawl/firecrawl-convex`; `pipeline.scrapeAndGate` |
-| AgentMail real ingress | Component + inbox `ceilinggate@agentmail.to`; webhook stub `/agentmail/webhook` |
+| AgentMail real ingress | Component + inbox `ceilinggate-claims@agentmail.to`; webhook stub `/agentmail/webhook` |
 | Live queries/mutations | `claims`, `gates`, `fixtures`, `pipeline`, `inboxes` |
 | Path to convex.site | Vite `build` → deploy static to Convex hosting when deploy key exists |
 | ResidualGates math | Runtime port; offline `demo:gate` PASS |
@@ -35,7 +35,7 @@ Email a money claim with a public receipt link. CeilingGate scrapes the receipt,
 - [x] Vite + React + TS
 - [x] Schema: claims, interiors, gateDecisions, vectors, scrapes, inboxes
 - [x] Gate logic + `npm run demo:gate` → GRANT + REFUSE mask **10**
-- [x] AgentMail inbox created: `ceilinggate@agentmail.to`
+- [x] AgentMail inbox created: `ceilinggate-claims@agentmail.to`
 - [x] Firecrawl + AgentMail components wired in `convex.config.ts`
 - [x] Pipeline: AgentMail → parse → Firecrawl scrape → gateB
 - [x] Offline board UI + `npm run build` green
@@ -86,7 +86,7 @@ Email a money claim with a public receipt link. CeilingGate scrapes the receipt,
 ### 2026-09-05 — PUBLISH LIVE (Taylor override)
 - [x] Keep-local overridden — publish authorized
 - [x] Luma done
-- [x] AgentMail `ceilinggate@agentmail.to` exists; webhook path in `convex/http.ts`
+- [x] AgentMail `ceilinggate-claims@agentmail.to` exists; webhook path in `convex/http.ts`
 - [x] Offline tests kept green
 - [ ] GH public remote — browser create/login in flight (MANAGER)
 - [ ] Create: git push when remote URL appears

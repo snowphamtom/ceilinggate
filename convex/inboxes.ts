@@ -60,8 +60,8 @@ export const syncFromEnv = mutation({
     if (existing) return { ok: true as const, id: existing._id, inboxId };
     const id = await ctx.db.insert("inboxes", {
       agentMailInboxId: inboxId,
-      displayName: process.env.AGENTMAIL_INBOX_EMAIL ?? "ceilinggate@agentmail.to",
-      email: process.env.AGENTMAIL_INBOX_EMAIL ?? "ceilinggate@agentmail.to",
+      displayName: process.env.AGENTMAIL_INBOX_EMAIL ?? "ceilinggate-claims@agentmail.to",
+      email: process.env.AGENTMAIL_INBOX_EMAIL ?? "ceilinggate-claims@agentmail.to",
       createdAt: Date.now(),
     });
     return { ok: true as const, id, inboxId };
@@ -72,9 +72,9 @@ export const syncFromEnv = mutation({
 export const seedPrimary = mutation({
   args: {},
   handler: async (ctx) => {
-    const agentMailInboxId = "ceilinggate@agentmail.to";
-    const email = "ceilinggate@agentmail.to";
-    const displayName = "CeilingGate Claims";
+    const agentMailInboxId = "ceilinggate-claims@agentmail.to";
+    const email = "ceilinggate-claims@agentmail.to";
+    const displayName = "CeilingGate Claims Ingress";
     const existing = await ctx.db
       .query("inboxes")
       .withIndex("by_agentMailInboxId", (q) =>
