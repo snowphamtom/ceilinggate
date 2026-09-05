@@ -1,5 +1,5 @@
 {
-  "version": "2.6.0",
+  "version": "2.7.0",
   "source": "Eve Drive fuel briefs 1l1wjwE8\u2026 + batch2 sibling 1iNnqPeHizQyiOYvDnhjypbqVXyAXPUBT + priority/Batch2 fileIds (forensic claim\u2194receipt, not chat)",
   "org": "Monsters Ink LLC",
   "lineItems": [
@@ -2535,6 +2535,269 @@
         "1DpZkf8Gl9LWUkt_5RbxSctc1P_05cU-x"
       ],
       "scrapeFixtureText": "INTERIOR: 1, 0, 0\nFORENSIC Eve: clean spec v4 ready; not filed; no grant"
+    },
+    {
+      "id": "readme-1004-vs-70",
+      "caseId": "CG-EVE-B7-01",
+      "label": "REFUSE \u2014 README $1,004 due vs $70 paid (4011)",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "fees_due_1004",
+        "paid_4011_70",
+        "fully_paid"
+      ],
+      "email": {
+        "subject": "[FORENSIC] README $1004 due \u2014 Eve batch7",
+        "from": "eve-fuel@monstersink.example",
+        "body": "CLAIMED: 1004, 70, 1\nINTERIOR: 1004, 70, 0\nfileId 1wZ1-XmCMgAGp0pNhj6u4L0hG3YetN4YO\n$70 paid 4011; $1004 still due \u2014 not fully paid / not grant",
+        "receiptUrl": "https://patentcenter.uspto.gov/"
+      },
+      "claimed": [
+        1004,
+        70,
+        1
+      ],
+      "interior": [
+        1004,
+        70,
+        0
+      ],
+      "expect": {
+        "status": "refuse",
+        "mask": 4,
+        "failedIndices": [
+          2
+        ]
+      },
+      "driveFileIds": [
+        "1wZ1-XmCMgAGp0pNhj6u4L0hG3YetN4YO"
+      ],
+      "scrapeFixtureText": "INTERIOR: 1004, 70, 0\nFORENSIC Eve: $70 paid; $1004 due; not fully paid"
+    },
+    {
+      "id": "track-one-skeleton-unpaid",
+      "caseId": "CG-EVE-B7-02",
+      "label": "REFUSE \u2014 Track One skeleton vs unpaid fees",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "skeleton_prepared",
+        "track_one_fees_paid",
+        "uspto_filed"
+      ],
+      "email": {
+        "subject": "[FORENSIC] Track One skeleton unpaid \u2014 Eve batch7",
+        "from": "eve-fuel@monstersink.example",
+        "body": "CLAIMED: 1, 1, 1\nINTERIOR: 1, 0, 0\nfileId 1X4Fhkv9T3SK_gUCTu9MTklUgOSsLm18z",
+        "receiptUrl": "https://patentcenter.uspto.gov/"
+      },
+      "claimed": [
+        1,
+        1,
+        1
+      ],
+      "interior": [
+        1,
+        0,
+        0
+      ],
+      "expect": {
+        "status": "refuse",
+        "mask": 6,
+        "failedIndices": [
+          1,
+          2
+        ]
+      },
+      "driveFileIds": [
+        "1X4Fhkv9T3SK_gUCTu9MTklUgOSsLm18z"
+      ],
+      "scrapeFixtureText": "INTERIOR: 1, 0, 0\nFORENSIC Eve: Track One skeleton; fees unpaid; not filed"
+    },
+    {
+      "id": "img-2636-preexam",
+      "caseId": "CG-EVE-B7-03",
+      "label": "REFUSE \u2014 IMG_2636 Preexam vs patent grant",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "preexam_notice",
+        "patent_grant"
+      ],
+      "email": {
+        "subject": "[FORENSIC] IMG_2636 Preexam \u2014 Eve batch7 optional",
+        "from": "eve-fuel@monstersink.example",
+        "body": "CLAIMED: 1, 1\nINTERIOR: 1, 0\nfileId 1YeB8UmmQKNPe1QK6clskVGPNM4-4HKz8",
+        "receiptUrl": "https://patentcenter.uspto.gov/"
+      },
+      "claimed": [
+        1,
+        1
+      ],
+      "interior": [
+        1,
+        0
+      ],
+      "expect": {
+        "status": "refuse",
+        "mask": 2,
+        "failedIndices": [
+          1
+        ]
+      },
+      "driveFileIds": [
+        "1YeB8UmmQKNPe1QK6clskVGPNM4-4HKz8"
+      ],
+      "scrapeFixtureText": "INTERIOR: 1, 0\nFORENSIC Eve: Preexam notice \u2260 patent grant"
+    },
+    {
+      "id": "img-0971-ffl-p2",
+      "caseId": "CG-EVE-B7-04",
+      "label": "REFUSE \u2014 IMG_0971 FFL p2 vs utility grant",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "ffl_page",
+        "utility_grant"
+      ],
+      "email": {
+        "subject": "[FORENSIC] IMG_0971 FFL p2 \u2014 Eve batch7 optional",
+        "from": "eve-fuel@monstersink.example",
+        "body": "CLAIMED: 1, 1\nINTERIOR: 1, 0\nfileId 1O1opPLEpFsI4LhIeCs5gxJPtF3uX2K1B",
+        "receiptUrl": "https://patentcenter.uspto.gov/"
+      },
+      "claimed": [
+        1,
+        1
+      ],
+      "interior": [
+        1,
+        0
+      ],
+      "expect": {
+        "status": "refuse",
+        "mask": 2,
+        "failedIndices": [
+          1
+        ]
+      },
+      "driveFileIds": [
+        "1O1opPLEpFsI4LhIeCs5gxJPtF3uX2K1B"
+      ],
+      "scrapeFixtureText": "INTERIOR: 1, 0\nFORENSIC Eve: FFL page \u2260 utility grant"
+    },
+    {
+      "id": "option-fee-one-pager",
+      "caseId": "CG-EVE-B7-05",
+      "label": "REFUSE \u2014 option-fee one-pager vs paid/filed",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "option_fee_described",
+        "fee_paid",
+        "application_filed"
+      ],
+      "email": {
+        "subject": "[FORENSIC] option-fee one-pager \u2014 Eve batch7 optional",
+        "from": "eve-fuel@monstersink.example",
+        "body": "CLAIMED: 1, 1, 1\nINTERIOR: 1, 0, 0\nfileId 1ymGVXer-jnrAa2sJsp39sGFMr0lg3ycY",
+        "receiptUrl": "https://patentcenter.uspto.gov/"
+      },
+      "claimed": [
+        1,
+        1,
+        1
+      ],
+      "interior": [
+        1,
+        0,
+        0
+      ],
+      "expect": {
+        "status": "refuse",
+        "mask": 6,
+        "failedIndices": [
+          1,
+          2
+        ]
+      },
+      "driveFileIds": [
+        "1ymGVXer-jnrAa2sJsp39sGFMr0lg3ycY"
+      ],
+      "scrapeFixtureText": "INTERIOR: 1, 0, 0\nFORENSIC Eve: option fee described; not paid/filed"
+    },
+    {
+      "id": "uei-verified-sam-pending",
+      "caseId": "CG-EVE-B8-01",
+      "label": "REFUSE \u2014 UEI VERIFIED vs SAM Active/CAGE PENDING",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "uei_verified",
+        "sam_active",
+        "cage_assigned"
+      ],
+      "email": {
+        "subject": "[FORENSIC] UEI vs SAM/CAGE \u2014 Eve batch8",
+        "from": "eve-fuel@monstersink.example",
+        "body": "CLAIMED: 1, 1, 1\nINTERIOR: 1, 0, 0\nfileId 1bkziTxlc_u8IOrpaYE9Ft06JzGefLS89oVGdq9yBYiI\nUEI verified; SAM Active/CAGE PENDING",
+        "receiptUrl": "https://sam.gov/"
+      },
+      "claimed": [
+        1,
+        1,
+        1
+      ],
+      "interior": [
+        1,
+        0,
+        0
+      ],
+      "expect": {
+        "status": "refuse",
+        "mask": 6,
+        "failedIndices": [
+          1,
+          2
+        ]
+      },
+      "driveFileIds": [
+        "1bkziTxlc_u8IOrpaYE9Ft06JzGefLS89oVGdq9yBYiI"
+      ],
+      "scrapeFixtureText": "INTERIOR: 1, 0, 0\nFORENSIC Eve: UEI ok; SAM Active/CAGE pending"
+    },
+    {
+      "id": "msac-roi-unvalidated",
+      "caseId": "CG-EVE-B8-02",
+      "label": "REFUSE \u2014 MSAC $100\u2013$300 ROI table vs unvalidated",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "roi_low",
+        "roi_high",
+        "validated"
+      ],
+      "email": {
+        "subject": "[FORENSIC] MSAC ROI table \u2014 Eve batch8",
+        "from": "eve-fuel@monstersink.example",
+        "body": "CLAIMED: 100, 300, 1\nINTERIOR: 100, 300, 0\nfileId 1JPIB9FIR5WKGKwLN8fuGLL3tCM2yjx1P\nROI table present; unvalidated",
+        "receiptUrl": "https://www.sba.gov/"
+      },
+      "claimed": [
+        100,
+        300,
+        1
+      ],
+      "interior": [
+        100,
+        300,
+        0
+      ],
+      "expect": {
+        "status": "refuse",
+        "mask": 4,
+        "failedIndices": [
+          2
+        ]
+      },
+      "driveFileIds": [
+        "1JPIB9FIR5WKGKwLN8fuGLL3tCM2yjx1P"
+      ],
+      "scrapeFixtureText": "INTERIOR: 100, 300, 0\nFORENSIC Eve: ROI table $100\u2013$300; unvalidated"
     }
   ],
   "seedUrls": [
@@ -2564,14 +2827,14 @@
     "ssv-residual",
     "atec-phase2",
     "uspto-receipt-history",
-    "pay-and-file-1004",
     "lean-kernel-receipt",
     "bits-48",
     "gate-b-host",
     "drive-diu-swap-usv",
     "drive-n417-filing-fee",
     "drive-pass-job",
-    "drive-fail-job"
+    "drive-fail-job",
+    "track-one-skeleton-unpaid"
   ],
   "batch4BriefFileId": "1a0Hcs28fpH3s3oGvc8MbgegyBVGN4hOg",
   "note": "Quality over volume: shipShortlist (~14) for demo; full pack kept for forensic depth. Batch4 mythos/COHOCF skipped.",
@@ -2584,5 +2847,16 @@
     "1aquiHZCKmjmSUMqimGYyLMQ4cCs1nxl8",
     "1DpZkf8Gl9LWUkt_5RbxSctc1P_05cU-x"
   ],
-  "eveBatch6BriefFileId": "18uxHFSPwLbxDWlmsv9IJh1dP6yUVKf11"
+  "eveBatch6BriefFileId": "18uxHFSPwLbxDWlmsv9IJh1dP6yUVKf11",
+  "eveBatch7FileIds": [
+    "1wZ1-XmCMgAGp0pNhj6u4L0hG3YetN4YO",
+    "1X4Fhkv9T3SK_gUCTu9MTklUgOSsLm18z",
+    "1YeB8UmmQKNPe1QK6clskVGPNM4-4HKz8",
+    "1O1opPLEpFsI4LhIeCs5gxJPtF3uX2K1B",
+    "1ymGVXer-jnrAa2sJsp39sGFMr0lg3ycY"
+  ],
+  "eveBatch8FileIds": [
+    "1bkziTxlc_u8IOrpaYE9Ft06JzGefLS89oVGdq9yBYiI",
+    "1JPIB9FIR5WKGKwLN8fuGLL3tCM2yjx1P"
+  ]
 }
