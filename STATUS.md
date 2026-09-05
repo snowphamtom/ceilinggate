@@ -1,25 +1,19 @@
-# CeilingGate STATUS — PUBLISH GO
+# CeilingGate STATUS — PUBLISH LIVE
 
 **Updated:** 2026-09-05 evening CT  
-**Taylor:** authorized account creation / publish  
-**Roles:** Create = prep + push when remote exists; MANAGER = GH/Convex browser login
+**Taylor:** PUBLISH live (keep-local overridden)  
+**Luma:** Done  
+**Inbox:** `ceilinggate@agentmail.to`  
+**GH:** browser in flight (MANAGER) — push when remote URL exists
 
-## Local (green)
-- [x] Everyday money-claim UI
-- [x] Originality hardening (not chat-demo)
-- [x] Fixtures `te-grant` / `te-refuse`
-- [x] `npm run demo:gate` PASS (mask 10)
-- [x] `npm run build` green
-- [x] `hackathon.md` + `PUBLISH.md`
-- [x] Inbox `ceilinggate@agentmail.to`
+## Green locally
+- [x] Everyday money-claim UI + originality
+- [x] `npm run demo:gate` / `demo:offline`
+- [x] `npm run build`
+- [x] Webhook route `/agentmail/webhook` → pipeline
+- [x] `hackathon.md` / `BLOCKERS.md` current
 
-## Publish track
-- [ ] Public GitHub (MANAGER login → Create push)
-- [ ] Convex project + `*.convex.site` (MANAGER login → Create wire)
-- [ ] Live Firecrawl + AgentMail webhook secrets in Convex env
-- [ ] vibeapps video + social (later; Taylor sends)
-
-## Run
-```bash
-cd /workspace/ceilinggate && npm run demo:offline && npm run preview
-```
+## Next
+- [ ] Public GitHub push (await remote)
+- [ ] Convex deploy / convex.site
+- [ ] Live Firecrawl + webhook secret in Convex env

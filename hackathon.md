@@ -4,10 +4,10 @@
 - **Path (box):** `/workspace/ceilinggate`
 - **Started:** 2026-09-05
 - **Deadline:** 2026-09-22 12:00 PM PT
-- **Publish:** **PUBLISH GO** — Taylor authorized; MANAGER does GH/Convex login; Create pushes when remote exists
+- **Publish:** **LIVE GO** — Taylor override; keep-local cancelled; GH browser in flight (MANAGER)
 - **Live URL:** _pending — MANAGER Convex login → `*.convex.site`_
-- **Public repo:** _pending — MANAGER `gh` login → Create push_
-- **Luma register:** Done (“You’re In”)
+- **Public repo:** _in flight — MANAGER GH browser; Create pushes when remote URL exists_
+- **Luma register:** **Done** (“You’re In”)
 - **Inbox:** `ceilinggate@agentmail.to`
 
 ## Everyday pitch (judging)
@@ -81,6 +81,16 @@ Email a money claim with a public receipt link. CeilingGate scrapes the receipt,
 - [ ] MANAGER: GH login + public repo create
 - [ ] MANAGER: Convex login + project
 - [ ] Create: `git push` + `convex deploy` / site wire when creds exist
+
+
+### 2026-09-05 — PUBLISH LIVE (Taylor override)
+- [x] Keep-local overridden — publish authorized
+- [x] Luma done
+- [x] AgentMail `ceilinggate@agentmail.to` exists; webhook path in `convex/http.ts`
+- [x] Offline tests kept green
+- [ ] GH public remote — browser create/login in flight (MANAGER)
+- [ ] Create: git push when remote URL appears
+- [ ] Convex login → `*.convex.site` + env keys
 
 ## Remaining (MANAGER login unblocks)
 
