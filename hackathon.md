@@ -69,7 +69,7 @@ Email a money claim with a public receipt link. CeilingGate scrapes the receipt,
 - Everyday framing + originality unchanged; offline demo still PASS
 
 
-### 2026-09-05 — PUBLISH GO lock (Taylor via MANAGER)
+### 2026-09-05 — local lock then overridden (historical)
 - [x] No GitHub / Origin push until later go
 - [x] Finish local scaffold, gate demo, hackathon.md, fixtures
 - Publish deferred; tarball may exist but is not a publish step
