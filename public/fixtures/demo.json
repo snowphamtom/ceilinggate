@@ -1,5 +1,5 @@
 {
-  "version": "2.4.2",
+  "version": "2.5.0",
   "source": "Eve Drive fuel briefs 1l1wjwE8\u2026 + batch2 sibling 1iNnqPeHizQyiOYvDnhjypbqVXyAXPUBT + priority/Batch2 fileIds (forensic claim\u2194receipt, not chat)",
   "org": "Monsters Ink LLC",
   "lineItems": [
@@ -1997,6 +1997,346 @@
         "1cio8oI-eAEkiB6wkzWR8E0_iLhttGSlY"
       ],
       "scrapeFixtureText": "INTERIOR: 1, 0, 0, 0\nFORENSIC Batch5: Path-to-Grant prepared; fees/filing not done"
+    },
+    {
+      "id": "n417-70-blank-patent",
+      "caseId": "CG-EVE-B5-01",
+      "label": "REFUSE \u2014 N417 $70 paid vs blank PATENT # (not a grant)",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "filing_fee_paid",
+        "patent_number_issued"
+      ],
+      "email": {
+        "subject": "[FORENSIC] N417.PYMT \u2014 Eve n417-70-blank-patent",
+        "from": "eve-fuel@monstersink.example",
+        "body": "CLAIMED: 70, 1\nINTERIOR: 70, 0\nfileId 1NgUw7GmXKerOf2yYSDb70R8tFt5Fi045\nPATENT # blank; ack \u2260 issued grant",
+        "receiptUrl": "https://patentcenter.uspto.gov/"
+      },
+      "claimed": [
+        70,
+        1
+      ],
+      "interior": [
+        70,
+        0
+      ],
+      "expect": {
+        "status": "refuse",
+        "mask": 2,
+        "failedIndices": [
+          1
+        ]
+      },
+      "driveFileIds": [
+        "1NgUw7GmXKerOf2yYSDb70R8tFt5Fi045"
+      ],
+      "scrapeFixtureText": "INTERIOR: 70, 0\nFORENSIC Eve: $70 payment receipt; PATENT # blank"
+    },
+    {
+      "id": "pay-and-file-docx-1004",
+      "caseId": "CG-EVE-B5-02",
+      "label": "REFUSE \u2014 $1004 fees-to-pay vs Missing Parts packet (no grant)",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "fees_to_pay",
+        "already_paid_4011",
+        "patent_granted"
+      ],
+      "email": {
+        "subject": "[FORENSIC] PAY_AND_FILE.docx \u2014 Eve pay-and-file-docx-1004",
+        "from": "eve-fuel@monstersink.example",
+        "body": "CLAIMED: 1004, 70, 1\nINTERIOR: 0, 70, 0\nfileId 1xdiBE85MvWLphr03VQ0tP8BWlQwNwX8m\nFees TO PAY not yet paid interior; packet \u2260 grant",
+        "receiptUrl": "https://patentcenter.uspto.gov/"
+      },
+      "claimed": [
+        1004,
+        70,
+        1
+      ],
+      "interior": [
+        0,
+        70,
+        0
+      ],
+      "expect": {
+        "status": "refuse",
+        "mask": 5,
+        "failedIndices": [
+          0,
+          2
+        ]
+      },
+      "driveFileIds": [
+        "1xdiBE85MvWLphr03VQ0tP8BWlQwNwX8m"
+      ],
+      "scrapeFixtureText": "INTERIOR: 0, 70, 0\nFORENSIC Eve: $70 paid; $1004 still TO PAY; no grant"
+    },
+    {
+      "id": "img-2633-npa-filing",
+      "caseId": "CG-EVE-B5-03",
+      "label": "REFUSE \u2014 NPA filing receipt $70 vs patent grant",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "fil_fee_recd",
+        "patent_grant"
+      ],
+      "email": {
+        "subject": "[FORENSIC] IMG_2633 filing receipt \u2014 Eve img-2633-npa-filing",
+        "from": "eve-fuel@monstersink.example",
+        "body": "CLAIMED: 70, 1\nINTERIOR: 70, 0\nfileId 1xhlrJMTMEQKXtDQ5mzz3hECTqh-aLDGL\nExam pending \u2014 not a patent grant",
+        "receiptUrl": "https://patentcenter.uspto.gov/"
+      },
+      "claimed": [
+        70,
+        1
+      ],
+      "interior": [
+        70,
+        0
+      ],
+      "expect": {
+        "status": "refuse",
+        "mask": 2,
+        "failedIndices": [
+          1
+        ]
+      },
+      "driveFileIds": [
+        "1xhlrJMTMEQKXtDQ5mzz3hECTqh-aLDGL"
+      ],
+      "scrapeFixtureText": "INTERIOR: 70, 0\nFORENSIC Eve: FIL FEE RECD 70; grant not issued"
+    },
+    {
+      "id": "img-0970-prov-156",
+      "caseId": "CG-EVE-B5-04",
+      "label": "REFUSE \u2014 provisional $156 + FFL vs utility grant",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "prov_fee_recd",
+        "ffl_granted",
+        "utility_patent_grant"
+      ],
+      "email": {
+        "subject": "[FORENSIC] IMG_0970 provisional \u2014 Eve img-0970-prov-156",
+        "from": "eve-fuel@monstersink.example",
+        "body": "CLAIMED: 156, 1, 1\nINTERIOR: 156, 1, 0\nfileId 1-6RAWhAoWyQb_lLifba2OlP8ML11jKVs\nProvisional NOT examined; abandons \u226412 months",
+        "receiptUrl": "https://patentcenter.uspto.gov/"
+      },
+      "claimed": [
+        156,
+        1,
+        1
+      ],
+      "interior": [
+        156,
+        1,
+        0
+      ],
+      "expect": {
+        "status": "refuse",
+        "mask": 4,
+        "failedIndices": [
+          2
+        ]
+      },
+      "driveFileIds": [
+        "1-6RAWhAoWyQb_lLifba2OlP8ML11jKVs"
+      ],
+      "scrapeFixtureText": "INTERIOR: 156, 1, 0\nFORENSIC Eve: FFL yes; utility grant no"
+    },
+    {
+      "id": "img-2634-prov-65",
+      "caseId": "CG-EVE-B5-05",
+      "label": "REFUSE \u2014 provisional $65 + FFL vs patentability grant",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "prov_fee_recd",
+        "ffl_granted",
+        "patentability_grant"
+      ],
+      "email": {
+        "subject": "[FORENSIC] IMG_2634 provisional \u2014 Eve img-2634-prov-65",
+        "from": "eve-fuel@monstersink.example",
+        "body": "CLAIMED: 65, 1, 1\nINTERIOR: 65, 1, 0\nfileId 1LYuK9HlfsJtNojaHedxOVJh93QT664bn",
+        "receiptUrl": "https://patentcenter.uspto.gov/"
+      },
+      "claimed": [
+        65,
+        1,
+        1
+      ],
+      "interior": [
+        65,
+        1,
+        0
+      ],
+      "expect": {
+        "status": "refuse",
+        "mask": 4,
+        "failedIndices": [
+          2
+        ]
+      },
+      "driveFileIds": [
+        "1LYuK9HlfsJtNojaHedxOVJh93QT664bn"
+      ],
+      "scrapeFixtureText": "INTERIOR: 65, 1, 0\nFORENSIC Eve: provisional not examined for patentability"
+    },
+    {
+      "id": "solvency-cert-2026-09-03",
+      "caseId": "CG-EVE-B5-06",
+      "label": "REFUSE \u2014 solvency cert \u03a6-gate / grant claims vs open apertures",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "bits_balanced",
+        "phi_physical",
+        "patent_grant"
+      ],
+      "email": {
+        "subject": "[FORENSIC] SOLVENCY_CERTIFICATE \u2014 Eve solvency-cert-2026-09-03",
+        "from": "eve-fuel@monstersink.example",
+        "body": "CLAIMED: 48, 1, 1\nINTERIOR: 48, 0, 0\nfileId 1Po2YSHtlaSzbQesaAtSVDyfzUMEfq0P6\n\u03a6 unmeasured; NOT a grant; open apertures 6",
+        "receiptUrl": "https://www.nist.gov/cyberframework"
+      },
+      "claimed": [
+        48,
+        1,
+        1
+      ],
+      "interior": [
+        48,
+        0,
+        0
+      ],
+      "expect": {
+        "status": "refuse",
+        "mask": 6,
+        "failedIndices": [
+          1,
+          2
+        ]
+      },
+      "driveFileIds": [
+        "1Po2YSHtlaSzbQesaAtSVDyfzUMEfq0P6"
+      ],
+      "scrapeFixtureText": "INTERIOR: 48, 0, 0\nFORENSIC Eve: C,I,debt=48,48,0; \u03a6/grant REFUSED"
+    },
+    {
+      "id": "gr21-track-one-unpaid",
+      "caseId": "CG-EVE-B5-07",
+      "label": "REFUSE \u2014 Path-to-Grant vs Track One fees unpaid",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "materials_prepared",
+        "track_one_fees_paid",
+        "uspto_filing_done"
+      ],
+      "email": {
+        "subject": "[FORENSIC] GR21 PathToGrant \u2014 Eve gr21-track-one-unpaid",
+        "from": "eve-fuel@monstersink.example",
+        "body": "CLAIMED: 1, 1, 1\nINTERIOR: 1, 0, 0\nfileId 1cio8oI-eAEkiB6wkzWR8E0_iLhttGSlY",
+        "receiptUrl": "https://patentcenter.uspto.gov/"
+      },
+      "claimed": [
+        1,
+        1,
+        1
+      ],
+      "interior": [
+        1,
+        0,
+        0
+      ],
+      "expect": {
+        "status": "refuse",
+        "mask": 6,
+        "failedIndices": [
+          1,
+          2
+        ]
+      },
+      "driveFileIds": [
+        "1cio8oI-eAEkiB6wkzWR8E0_iLhttGSlY"
+      ],
+      "scrapeFixtureText": "INTERIOR: 1, 0, 0\nFORENSIC Eve: materials prepared; fees/filing not done"
+    },
+    {
+      "id": "gr21-priority-support",
+      "caseId": "CG-EVE-B5-08",
+      "label": "REFUSE \u2014 DIU receipts as USPTO priority / grant",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "diu_provenance",
+        "uspto_priority_date",
+        "patent_grant"
+      ],
+      "email": {
+        "subject": "[FORENSIC] GR21 priority support \u2014 Eve gr21-priority-support",
+        "from": "eve-fuel@monstersink.example",
+        "body": "CLAIMED: 1, 1, 1\nINTERIOR: 1, 0, 0\nfileId 1sMM6YrstyTlMidfxcmYLPDYCzQD0jfRhQo1Mb8-FAoc\nDIU\u2260patent grant/filing date",
+        "receiptUrl": "https://www.diu.mil/work-with-us/open-solicitations"
+      },
+      "claimed": [
+        1,
+        1,
+        1
+      ],
+      "interior": [
+        1,
+        0,
+        0
+      ],
+      "expect": {
+        "status": "refuse",
+        "mask": 6,
+        "failedIndices": [
+          1,
+          2
+        ]
+      },
+      "driveFileIds": [
+        "1sMM6YrstyTlMidfxcmYLPDYCzQD0jfRhQo1Mb8-FAoc"
+      ],
+      "scrapeFixtureText": "INTERIOR: 1, 0, 0\nFORENSIC Eve: DIU provenance \u2260 USPTO priority/grant"
+    },
+    {
+      "id": "ip-strategy-receipt-chrono",
+      "caseId": "CG-EVE-B5-09",
+      "label": "REFUSE \u2014 receipt chronology vs issued grant",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "receipt_chronology",
+        "section111_ack",
+        "issued_grant"
+      ],
+      "email": {
+        "subject": "[FORENSIC] IP Strategy receipt chrono \u2014 Eve ip-strategy-receipt-chrono",
+        "from": "eve-fuel@monstersink.example",
+        "body": "CLAIMED: 1, 1, 1\nINTERIOR: 1, 1, 0\nfileId 19v_NzPeoA5oV3HPxp3OukVTuakhDSFoc\nPriority only where \u00a7112(a) support; receipt \u2260 grant",
+        "receiptUrl": "https://patentcenter.uspto.gov/workbench/receiptHistory?customerNumbers=232494,232194"
+      },
+      "claimed": [
+        1,
+        1,
+        1
+      ],
+      "interior": [
+        1,
+        1,
+        0
+      ],
+      "expect": {
+        "status": "refuse",
+        "mask": 4,
+        "failedIndices": [
+          2
+        ]
+      },
+      "driveFileIds": [
+        "19v_NzPeoA5oV3HPxp3OukVTuakhDSFoc"
+      ],
+      "scrapeFixtureText": "INTERIOR: 1, 1, 0\nFORENSIC Eve: receipt history \u2260 issued grant"
     }
   ],
   "seedUrls": [
@@ -2037,5 +2377,6 @@
   ],
   "batch4BriefFileId": "1a0Hcs28fpH3s3oGvc8MbgegyBVGN4hOg",
   "note": "Quality over volume: shipShortlist (~14) for demo; full pack kept for forensic depth. Batch4 mythos/COHOCF skipped.",
-  "batch5BriefFileId": "1cJwsN_NMLgjMAdSydkOqejlQO2dQkl46"
+  "batch5BriefFileId": "1cJwsN_NMLgjMAdSydkOqejlQO2dQkl46",
+  "eveBatch5BriefFileId": "1cJwsN_NMLgjMAdSydkOqejlQO2dQkl46"
 }
