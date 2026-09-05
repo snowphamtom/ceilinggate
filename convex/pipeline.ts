@@ -5,9 +5,8 @@ import {
   internalMutation,
   mutation,
 } from "./_generated/server";
-import { components, internal } from "./_generated/api";
+import { api, components, internal } from "./_generated/api";
 import { AgentMail } from "@agentmail/convex";
-import FirecrawlClient from "@firecrawl/firecrawl-convex";
 import { gateB } from "./lib/gates";
 import {
   parseClaimed,
@@ -15,9 +14,7 @@ import {
   parseSourceUrls,
 } from "./parse";
 
-const firecrawl = new FirecrawlClient(components.firecrawl);
-
-export const agentmail = new AgentMail(components.agentmail, {
+export const agentmail: any = new AgentMail(components.agentmail, {
   onMessageReceived: internal.pipeline.onMessageReceived,
 });
 
@@ -74,19 +71,10 @@ export const scrapeAndGate = internalAction({
   args: { claimId: v.id("claims"), url: v.string() },
   handler: async (ctx, args) => {
     try {
-      const doc = await firecrawl.scrape(ctx, args.url, {
-        formats: ["markdown"],
-      });
-      const md =
-        (doc as { markdown?: string }).markdown ??
-        (doc as { content?: string }).content ??
-        JSON.stringify(doc).slice(0, 4000);
-      const interior = parseInteriorFromMarkdown(md);
-      await ctx.runMutation(internal.pipeline.gateWithInterior, {
-        claimId: args.claimId,
-        interior,
+      // Prefer our Firecrawl/fixture action (no component key required at deploy).
+      await ctx.runAction(api.firecrawl.scrapeUrl, {
         url: args.url,
-        rawMarkdown: md.slice(0, 12000),
+        claimId: args.claimId,
       });
     } catch (e) {
       await ctx.runMutation(internal.pipeline.markError, {

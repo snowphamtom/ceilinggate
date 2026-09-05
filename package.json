@@ -20,8 +20,10 @@
   },
   "dependencies": {
     "@agentmail/convex": "^0.1.0",
+    "@convex-dev/static-hosting": "^0.2.1",
     "@firecrawl/firecrawl-convex": "^0.1.1",
     "convex": "^1.45.0",
+    "mime-types": "^3.0.2",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "svix": "^1.45.0"

@@ -1,6 +1,6 @@
 import { v } from "convex/values";
 import { action, internalMutation } from "./_generated/server";
-import { api, internal } from "./_generated/api";
+import { internal } from "./_generated/api";
 
 /**
  * Scrape action with layered fallbacks (never invents API keys):
@@ -51,21 +51,19 @@ function parseInterior(text: string): number[] | null {
 }
 
 async function maybeGate(
-  ctx: { runQuery: Function; runMutation: Function },
+  ctx: { runMutation: Function },
   claimId: unknown,
   text: string,
+  url: string,
 ) {
   const interior = parseInterior(text);
   if (!claimId || !interior) return;
-  const claim = await ctx.runQuery(api.claims.getClaim, { id: claimId });
-  if (claim) {
-    await ctx.runMutation(api.gates.runGate, {
-      claimId,
-      claimed: claim.claimed,
-      interior,
-      label: claim.label,
-    });
-  }
+  await ctx.runMutation(internal.pipeline.gateWithInterior, {
+    claimId,
+    interior,
+    url,
+    rawMarkdown: text,
+  });
 }
 
 export const scrapeUrl = action({
@@ -74,7 +72,13 @@ export const scrapeUrl = action({
     claimId: v.optional(v.id("claims")),
     fixtureText: v.optional(v.string()),
   },
-  handler: async (ctx, args) => {
+  handler: async (ctx, args): Promise<{
+    scrapeId: string;
+    source: "firecrawl" | "fixture" | "fetch";
+    text: string;
+    note?: string;
+    gated?: false;
+  }> => {
     const apiKey = process.env.FIRECRAWL_API_KEY;
 
     if (apiKey) {
@@ -101,7 +105,7 @@ export const scrapeUrl = action({
         source: "firecrawl",
         claimId: args.claimId,
       });
-      await maybeGate(ctx, args.claimId, text);
+      await maybeGate(ctx, args.claimId, text, args.url);
       return { scrapeId, source: "firecrawl" as const, text };
     }
 
@@ -118,7 +122,7 @@ export const scrapeUrl = action({
         source: "fixture",
         claimId: args.claimId,
       });
-      await maybeGate(ctx, args.claimId, text);
+      await maybeGate(ctx, args.claimId, text, args.url);
       return {
         scrapeId,
         source: "fixture" as const,

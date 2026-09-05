@@ -92,4 +92,19 @@ export default defineSchema({
     expectMask: v.number(),
     expectFailedIndices: v.array(v.number()),
   }).index("by_fixtureId", ["fixtureId"]),
+
+  siteAssets: defineTable({
+    path: v.string(),
+    storageId: v.id("_storage"),
+    contentType: v.string(),
+    deploymentId: v.string(),
+  })
+    .index("by_deployment_path", ["deploymentId", "path"])
+    .index("by_deployment", ["deploymentId"]),
+
+  siteMeta: defineTable({
+    key: v.string(),
+    deploymentId: v.string(),
+    updatedAt: v.number(),
+  }).index("by_key", ["key"]),
 });

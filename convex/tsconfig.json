@@ -5,7 +5,12 @@
     "moduleResolution": "Bundler",
     "jsx": "preserve",
     "strict": true,
-    "noEmit": true
+    "noEmit": true,
+    "types": [
+      "node"
+    ]
   },
-  "include": ["./**/*"]
+  "include": [
+    "./**/*"
+  ]
 }
