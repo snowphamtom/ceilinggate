@@ -85,7 +85,11 @@ export default function App() {
   }, []);
 
   const loadAll = useCallback(() => {
-    const next = demo.fixtures.map(runFixture);
+    const short = (demo as { shipShortlist?: string[] }).shipShortlist;
+    const pack = short?.length
+      ? demo.fixtures.filter((f) => short.includes(f.id))
+      : demo.fixtures;
+    const next = (pack.length ? pack : demo.fixtures).map(runFixture);
     setResults(next);
     setSelectedId(next[0]?.id ?? null);
   }, []);
@@ -129,7 +133,7 @@ export default function App() {
         </div>
         <div className="actions">
           <button type="button" className="primary" onClick={loadAll}>
-            Check sample claims
+            Check sample claims (ship set)
           </button>
         </div>
       </header>
@@ -179,7 +183,7 @@ export default function App() {
           <h2>Result</h2>
           {!selected ? (
             <p className="muted">
-              Pick a claim or hit <strong>Check sample claims</strong>.
+              Pick a claim or hit <strong>Check sample claims (ship set)</strong>.
             </p>
           ) : (
             <div

@@ -1,5 +1,5 @@
 {
-  "version": "2.4.0",
+  "version": "2.4.1",
   "source": "Eve Drive fuel briefs 1l1wjwE8\u2026 + batch2 sibling 1iNnqPeHizQyiOYvDnhjypbqVXyAXPUBT + priority/Batch2 fileIds (forensic claim\u2194receipt, not chat)",
   "org": "Monsters Ink LLC",
   "lineItems": [
@@ -601,7 +601,8 @@
         ]
       },
       "driveFileIds": [
-        "1GcHhOyk1w5rQDtrSeYRX5vdooDE0OZl_"
+        "1GcHhOyk1w5rQDtrSeYRX5vdooDE0OZl_",
+        "1ycaCjMoihN3AeIRazx_JtGQCkkJ1qDGK"
       ],
       "scrapeFixtureText": "INTERIOR: 0, 0, 0\nFORENSIC: public loss shape; vendor 60% slogans NOT granted"
     },
@@ -1610,7 +1611,8 @@
         ]
       },
       "driveFileIds": [
-        "1-imNIQqGFZnXYaoJ4ksvX8mIA7kL6q-0"
+        "1-imNIQqGFZnXYaoJ4ksvX8mIA7kL6q-0",
+        "1uFcPkx4Us1m25mdDGdqDX84ZopHjdXC5"
       ],
       "scrapeFixtureText": "INTERIOR: 70, 0, 0, 0\nFORENSIC: payment REC evidenced; silicon/grant/1.2MHz OPEN"
     },
@@ -1875,7 +1877,8 @@
         ]
       },
       "driveFileIds": [
-        "1QYziICQ_BlbKo0IIzzpxRluYtIzDOSfM"
+        "1QYziICQ_BlbKo0IIzzpxRluYtIzDOSfM",
+        "1sZoQL_ujtYvckvp7Yo3PHvPotIhNx7zR"
       ],
       "scrapeFixtureText": "INTERIOR: 11, 0, 0\nFORENSIC Eve: lake EXIT 0; mathlib NOT_INSTALLED; physical REFUSED"
     },
@@ -1965,5 +1968,23 @@
   ],
   "batch2BriefFileId": "1iNnqPeHizQyiOYvDnhjypbqVXyAXPUBT",
   "batch3BriefFileId": "1GRhQrnN5MasH7_Soyj1DeFeVM3K92AZp",
-  "eveBriefFileId": "1l1wjwE8SfhDgEX9F_hPNjZHQGPSkVZRAr7QjZCDv5z4"
+  "eveBriefFileId": "1l1wjwE8SfhDgEX9F_hPNjZHQGPSkVZRAr7QjZCDv5z4",
+  "shipShortlist": [
+    "te-grant",
+    "te-refuse",
+    "te-spend-ceilings",
+    "ssv-residual",
+    "atec-phase2",
+    "uspto-receipt-history",
+    "pay-and-file-1004",
+    "lean-kernel-receipt",
+    "bits-48",
+    "gate-b-host",
+    "drive-diu-swap-usv",
+    "drive-n417-filing-fee",
+    "drive-pass-job",
+    "drive-fail-job"
+  ],
+  "batch4BriefFileId": "1a0Hcs28fpH3s3oGvc8MbgegyBVGN4hOg",
+  "note": "Quality over volume: shipShortlist (~14) for demo; full pack kept for forensic depth. Batch4 mythos/COHOCF skipped."
 }
