@@ -11,7 +11,7 @@
 - [x] `npm run demo:gate` PASS (mask 10)
 - [x] `npm run build` green
 - [x] `hackathon.md` + `PUBLISH.md`
-- [x] Inbox `ceilinggate-claims@agentmail.to`
+- [x] Inbox `ceilinggate@agentmail.to`
 
 ## Publish track
 - [ ] Public GitHub (MANAGER login → Create push)

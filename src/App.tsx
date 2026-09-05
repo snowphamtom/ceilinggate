@@ -130,7 +130,7 @@ export default function App() {
 
       <div className="lean">
         How it works: claim email → scrape public source → line-by-line check.
-        Inbox: <code>ceilinggate-claims@agentmail.to</code>
+        Inbox: <code>ceilinggate@agentmail.to</code>
         {hasConvex ? " · live Convex connected" : " · demo mode (sample receipts)"}
         {" · "}
         self-check {selfCheckOk ? "ok" : "fail"}

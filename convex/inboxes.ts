@@ -67,3 +67,30 @@ export const syncFromEnv = mutation({
     return { ok: true as const, id, inboxId };
   },
 });
+
+/** Seed the known Create inbox (webhook target). Safe to call repeatedly. */
+export const seedPrimary = mutation({
+  args: {},
+  handler: async (ctx) => {
+    const agentMailInboxId = "ceilinggate@agentmail.to";
+    const email = "ceilinggate@agentmail.to";
+    const displayName = "CeilingGate Claims";
+    const existing = await ctx.db
+      .query("inboxes")
+      .withIndex("by_agentMailInboxId", (q) =>
+        q.eq("agentMailInboxId", agentMailInboxId),
+      )
+      .unique();
+    if (existing) {
+      await ctx.db.patch(existing._id, { email, displayName });
+      return { ok: true as const, id: existing._id, agentMailInboxId, seeded: false };
+    }
+    const id = await ctx.db.insert("inboxes", {
+      agentMailInboxId,
+      email,
+      displayName,
+      createdAt: Date.now(),
+    });
+    return { ok: true as const, id, agentMailInboxId, seeded: true };
+  },
+});

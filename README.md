@@ -19,7 +19,7 @@ Under the hood: GRANT iff `claimed ≤ interior` componentwise; else REFUSE with
 | 1 | New full-stack app | Yes — this repo, not a fork rebrand |
 | 2 | Convex backend | `convex/` schema + pipeline + http |
 | 3 | Firecrawl feeds data | Mandatory scrape when claim has a public URL; no judgment without scraped interior |
-| 4 | AgentMail inbox | Claim ingress `ceilinggate-claims@agentmail.to` (not chat transcript export) |
+| 4 | AgentMail inbox | Claim ingress `ceilinggate@agentmail.to` (not chat transcript export) |
 | 5 | Built with agent / Codex + Convex plugin | Scaffolded under Create + Convex/Firecrawl/AgentMail plugins |
 | 6 | Host frontend on convex.site OR chatgpt.site | Target `*.convex.site` (MANAGER Convex login) |
 | 7 | Public GitHub (not private) | PUBLISH GO — MANAGER login then push |
@@ -89,7 +89,7 @@ Line items: fuel, lodging, meals, misc — mapped from Lean `sample_valid` / `sa
 | `FIRECRAWL_API_KEY` | Live scrapes (required for live judgment) |
 | AgentMail webhook secret | Verify inbound |
 
-Inbox: `ceilinggate-claims@agentmail.to`
+Inbox: `ceilinggate@agentmail.to`
 
 ## Out of scope
 
