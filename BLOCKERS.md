@@ -1,9 +1,9 @@
-# CeilingGate — true hard blockers only
+# CeilingGate — remaining after PUBLISH GO
 
-Things we **cannot** route around without an external login/namespace (no asks — just flags):
+Not local demo blockers. MANAGER unblocks via browser login:
 
-1. **Public GitHub** — `gh` not authenticated; no `GH_TOKEN`/`GITHUB_TOKEN`; CloudAgent `new_repo` fails: Origin namespace missing ([get-started](https://cursor.com/codebase/get-started)). Last-resort tarball: `/workspace/releases/ceilinggate-offline-20260905.tar.gz` + `/workspace/releases/ceilinggate-PUBLIC-REPO.md`.
-2. **`*.convex.site` host** — needs Convex login / deploy key. Offline board + `npm run demo:gate` work without it.
-3. **Live Firecrawl scrapes** — needs `FIRECRAWL_API_KEY` in Convex env. Demo uses fixture scrape stand-in; live judgment correctly withheld without Firecrawl.
+1. **Public GitHub** — `gh auth login` (or UI create) → Create pushes `/workspace/ceilinggate`
+2. **Convex / `*.convex.site`** — `npx convex login` → Create deploys
+3. **Live scrapes / webhook** — `FIRECRAWL_API_KEY`, `AGENTMAIL_API_KEY`, webhook secret in Convex env
 
-**Not blockers for the offline demo:** AgentMail inbox exists (`ceilinggate@agentmail.to`); gate math PASS; everyday UI builds.
+Offline demo already green. See `PUBLISH.md`.

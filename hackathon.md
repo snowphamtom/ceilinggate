@@ -4,9 +4,9 @@
 - **Path (box):** `/workspace/ceilinggate`
 - **Started:** 2026-09-05
 - **Deadline:** 2026-09-22 12:00 PM PT
-- **Publish:** **KEEP LOCAL ONLY** — Taylor: no GitHub/Origin push until later go
-- **Live URL:** _pending — Convex project → `*.convex.site` static host_
-- **Public repo:** _deferred (blocker)_
+- **Publish:** **PUBLISH GO** — Taylor authorized; MANAGER does GH/Convex login; Create pushes when remote exists
+- **Live URL:** _pending — MANAGER Convex login → `*.convex.site`_
+- **Public repo:** _pending — MANAGER `gh` login → Create push_
 - **Luma register:** Done (“You’re In”)
 - **Inbox:** `ceilinggate@agentmail.to`
 
@@ -74,7 +74,15 @@ Email a money claim with a public receipt link. CeilingGate scrapes the receipt,
 - [x] Finish local scaffold, gate demo, hackathon.md, fixtures
 - Publish deferred; tarball may exist but is not a publish step
 
-## Blockers (work around — do not wait)
+
+### 2026-09-05 — PUBLISH GO
+- [x] Taylor authorized account creation
+- [x] Repo prepped (`PUBLISH.md`); gate demo re-verified PASS
+- [ ] MANAGER: GH login + public repo create
+- [ ] MANAGER: Convex login + project
+- [ ] Create: `git push` + `convex deploy` / site wire when creds exist
+
+## Remaining (MANAGER login unblocks)
 
 1. Convex login / `CONVEX_DEPLOY_KEY` → hosting on `*.convex.site`
 2. `FIRECRAWL_API_KEY` in Convex env → live scrapes

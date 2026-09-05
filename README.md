@@ -8,7 +8,7 @@ Under the hood: GRANT iff `claimed ≤ interior` componentwise; else REFUSE with
 
 **Deadline:** Tue Sep 22, 2026 · 12:00 PM PT · host `*.convex.site` · public GitHub when Origin/`gh` unblocked.
 
-**KEEP LOCAL** on `/workspace/ceilinggate` until public push is unblocked. See `BLOCKERS.md`.
+**PUBLISH GO** — see `PUBLISH.md`. Path: `/workspace/ceilinggate`.
 
 ---
 
@@ -21,8 +21,8 @@ Under the hood: GRANT iff `claimed ≤ interior` componentwise; else REFUSE with
 | 3 | Firecrawl feeds data | Mandatory scrape when claim has a public URL; no judgment without scraped interior |
 | 4 | AgentMail inbox | Claim ingress `ceilinggate@agentmail.to` (not chat transcript export) |
 | 5 | Built with agent / Codex + Convex plugin | Scaffolded under Create + Convex/Firecrawl/AgentMail plugins |
-| 6 | Host frontend on convex.site OR chatgpt.site | Target `*.convex.site` (blocked until deploy key) |
-| 7 | Public GitHub (not private) | Blocked: Origin namespace / `gh` auth — keep local until then |
+| 6 | Host frontend on convex.site OR chatgpt.site | Target `*.convex.site` (MANAGER Convex login) |
+| 7 | Public GitHub (not private) | PUBLISH GO — MANAGER login then push |
 | 8 | No localhost submission | Offline board is for build; submission is hosted |
 | 9 | Video on vibeapps.dev by Sep 22 12:00 PM PT | Streamer draft later; Taylor asks |
 | 10 | Social tags @convex @OpenAI @firecrawl @agentmail | Taylor sends (draft-only here) |
