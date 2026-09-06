@@ -444,10 +444,11 @@ function AppForgePanel() {
     <section className="panel forge-panel">
       <h2>App Forge</h2>
       <p className="muted small">
-        Recursive create factory — prove a regular person can make{" "}
-        <strong>another</strong> app on Convex + Firecrawl + AgentMail.
-        Not an inbox yes/no chat. Spawned apps inherit cascading access.
+        <strong>Judge demo path:</strong> (1) Demo signature GRANT→$1 REFUSE above,
+        (2) Forge a second micro-app here. Same stack: Convex + Firecrawl + AgentMail.
+        Not an inbox yes/no chat. Spawned apps inherit cascading STANDING_ACCESS.
       </p>
+      <p className="eyebrow">Recursive create — apps that create apps</p>
       <label className="forge-label">
         Micro-app title
         <input
@@ -466,7 +467,7 @@ function AppForgePanel() {
         />
       </label>
       <button type="button" className="primary" onClick={forge}>
-        Forge micro-app (live Convex spawn)
+        Spawn second micro-app (live)
       </button>
       {log ? <p className="lean forge-log">{log}</p> : null}
       <h3 className="forge-sub">Spawned apps (live)</h3>
