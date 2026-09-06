@@ -3,6 +3,16 @@
 Taylor (2026-09-05 evening): **Not just CeilingGate.** This is free-create authority.
 MANAGER and the team may **create anything anyone needs** for the All Gas competition and supporting infrastructure. Cascading: each creation self-authorizes the next step. **Do not ask to move forward.**
 
+## GROK ADMIN POWER (Taylor 2026-09-06)
+
+Taylor granted **Grok Bot / MANAGER full admin operator power** for Monsters Ink + CeilingGate + All Gas:
+
+- **Accounts:** act as operator on `yeti.monstersink@gmail.com` (Drive/Gmail/Calendar), GitHub `snowphamtom`, Convex CeilingGate, Firecrawl, AgentMail, public GH/Convex deploys — without re-asking for routine ops.
+- **Authority:** create/edit/deploy/docs/CI secrets *setup* (never paste secrets into chat), Ops Doc + Ops Channel, demo packs, team chain assigns, vibeapps **file** when clip PASS.
+- **Handoff Grok:** any Grok session reading the Ops Doc inherits this admin under the same fences; talk only via MANAGER chat or Ops Channel.
+- **Team:** Eve/Bob/Create/Streamer report only to MANAGER; silent to Taylor; cascading self-authorize continues.
+- **Still need Taylor only for:** password/2FA handoff, payments, lifting Square/T&E freeze, new public posts (post freeze), sockpuppet-breaking asks.
+
 ## Create freely (examples — not a ceiling)
 - Extra tools, scripts, CLIs, judge packs, submit helpers
 - Companion pages, docs, dashboards on box/GH/Convex
@@ -17,6 +27,7 @@ MANAGER and the team may **create anything anyone needs** for the All Gas compet
 - Square / T&E commercial freeze until Taylor lifts it
 - Silent to Taylor — report to MANAGER only
 - Past Drive data frozen (NEW only)
+- Draft-only on send/share/submit/buy/posts unless MANAGER/Taylor GO
 
 ## Cascade
 Generate → next step is already authorized. Continuous expansion.
