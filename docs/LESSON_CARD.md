@@ -1,7 +1,7 @@
-# Lesson card — 05bd24a
+# Lesson card — 1a42492
 
 1. What changed
-forge: fault taxonomy LIVE + GRANT⇔mask==0 teach on verdict (residual honesty)
+forge: chat shrug trap LIVE — totals OK + line OVER → REFUSE (Block/GIW foil)
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
