@@ -3,7 +3,7 @@
 **Updated:** 2026-09-05 evening CT  
 **Taylor:** FULL GO (All Gas win path)  
 **Deadline:** Tue Sep 22, 2026 · 12:00 PM PT  
-**Tip:** `master` @ https://github.com/snowphamtom/ceilinggate (check latest SHA)
+**Tip:** git `HEAD` (`fa60905` at push; prefer `git rev-parse --short HEAD`)
 
 ## Live
 | Item | URL / value |
@@ -33,7 +33,7 @@
 
 ## Next
 - [x] vibeapps screenshots (01–04 under ceilinggate-demo/shots)
-- [x] 60s / <3m vibeapps video — **FULL GO** cut at `/workspace/ceilinggate-demo/out/CeilingGate-AllGas-demo.mp4` (~1:25) + release `allgas-demo-20260905` (captions optional)
+- [x] vibeapps video **FULL GO** — demo ~1:25 at `/workspace/ceilinggate-demo/out/CeilingGate-AllGas-demo.mp4` + GH release [allgas-demo-20260905](https://github.com/snowphamtom/ceilinggate/releases/tag/allgas-demo-20260905)
 - [ ] Submit before Sep 22 noon PT
 
 ## Screenshots (vibeapps)
