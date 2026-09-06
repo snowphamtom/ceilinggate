@@ -382,6 +382,25 @@ function VerdictCard({ selected }: { selected: LocalDecision; plain: string[] })
       {ok ? (
         <p className="muted small">Change lodging to 51. Surplus on fuel cannot cover it.</p>
       ) : null}
+      <div className="paper-slips" aria-label="receipt ceiling">
+        {selected.lineItems.map((name, i) => {
+          const c = claimed[i] ?? 0;
+          const n = interior[i] ?? 0;
+          const fail = decision.failedIndices.includes(i);
+          const fill = n > 0 ? Math.min(100, (c / n) * 100) : c > 0 ? 100 : 0;
+          return (
+            <div className="paper-slip" key={`slip-${name}-${i}`}>
+              <span className="paper-slip-name">{capitalize(name)}</span>
+              <div className="paper-slip-track">
+                <div className={"paper-slip-fill" + (fail ? " over" : "")} style={{ width: `${fill}%` }} />
+                <div className="paper-slip-ceiling" />
+              </div>
+              {fail ? <span className="paper-slip-tab">+{money(c - n)}</span> : <span className="paper-slip-tab empty" />}
+            </div>
+          );
+        })}
+        <p className="paper-slip-legend">Dashed edge is the receipt. A tab past it is the overclaim.</p>
+      </div>
       <table className="ledger">
         <thead><tr><th>LINE</th><th>CLAIMED</th><th>ON RECEIPT</th><th>STATUS</th></tr></thead>
         <tbody>

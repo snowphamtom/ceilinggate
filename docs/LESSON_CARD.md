@@ -1,18 +1,16 @@
-# Lesson card — ff68006
+# Lesson card — paper ceiling
 
 1. What changed
-visual: denser pass-bar + RESULT C≤S rail + tighter ledger/bits
+Each line is a slip of paper. The dashed edge is the receipt. A tab past it is the overclaim. Four punches F L M X are the mask.
 
 2. Where a human taps it
-https://quirky-rhinoceros-204.convex.site/
-Show a GRANT / Show a REFUSE
-Email ceilinggate-claims@agentmail.to
+Demo REFUSE. Lodging and misc grow a +$1 tab. L and X punch. Stamp says REFUSE.
 
 3. What GRANT looks like
-Every line is at or under the receipt.
+Every slip stops at or before the dash. Mask 0. No tabs.
 
 4. What REFUSE looks like
-A named line is over the receipt, written in dollars.
+Named dollars on the hanging stub. Mask 10 is lodging + misc, not fuel.
 
 5. What not to weld
-MAGPIE 19/658,750. A second product name. Workshop on the home board.
+Glass vessels, crew-bound, holograms, a second product.
