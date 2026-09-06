@@ -1,0 +1,8 @@
+/* Judge first paint: two buttons + ledger. Extra rooms stay in the DOM. */
+.stakes-line,
+.originality-line,
+.prize-honesty,
+#live-child-gates,
+#forge-open-live {
+  display: none !important;
+}
