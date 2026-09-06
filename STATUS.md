@@ -49,3 +49,6 @@
 ## Originality HARD LOCK
 MUST: email claim + public receipt URL → Firecrawl → ResidualGates GRANT/REFUSE + plain-English failed lines; forensic board.
 NOT: waynesutton AgentMail chat-demo rebrand, Firecrawl docs-search chat, generic AI inbox chat, Magpie/T&E commercial pitch.
+
+## Compete watch
+Hardened vs Attest / NoticeProof / Get It in Writing — hero = line ledger + ResidualGates; Demo signature GRANT→$1 REFUSE; no chat panel.

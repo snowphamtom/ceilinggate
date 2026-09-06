@@ -34,6 +34,9 @@ Under the hood: GRANT iff `claimed ≤ interior` componentwise; else REFUSE with
 
 ## Originality vs chat-demo toys
 
+Also distinct from All Gas rivals **Attest** (inbox yes/no), **NoticeProof** (recall verify), and **Get It in Writing** (page promise gaps): CeilingGate is **numeric ResidualGates** on expense lines vs scraped receipt totals — forensic ledger, never AI yes/no.
+
+
 **Not** `waynesutton/convex-agentmail-hackathon-demo` and **not** a Firecrawl docs-search chat.
 
 | Chat-demo pattern | CeilingGate |

@@ -75,3 +75,7 @@ code { font-family: "IBM Plex Mono", ui-monospace, monospace; }
 
 .orig-lock { margin: 0.75rem 0 0; padding: 0.55rem 0.75rem; border-radius: 8px; border: 1px solid #3a4a22; background: #121a12; color: #c5d8a8; font-size: 0.85rem; }
 .orig-lock strong { color: #d4f08a; }
+
+.sig-btn { background: #24324a; color: #e8eef7; border: 1px solid #3a4f6f; border-radius: 8px; padding: 0.45rem 0.75rem; font-weight: 600; cursor: pointer; }
+.sig-btn:hover { border-color: #2a6df4; }
+.ledger-cap { margin: 0.5rem 0 0.15rem; }

@@ -16,7 +16,7 @@
 
 Email a money claim with a public receipt link. CeilingGate scrapes the receipt, compares each line to what was claimed, and returns **GRANT** or **REFUSE** with failed lines in plain English (e.g. “Lodging is $1 over the receipt”).
 
-**Not** a chat app. **Not** a gate SDK. **Not** docs-search. **Not** a copy of the AgentMail chat demo.
+**Not** a chat app. **Not** a gate SDK. **Not** docs-search. **Not** a copy of the AgentMail chat demo. **Not** Attest/NoticeProof AI yes/no — ResidualGates line ledger only.
 
 ## Stack (required artifacts)
 

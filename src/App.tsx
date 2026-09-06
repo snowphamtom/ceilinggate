@@ -128,6 +128,21 @@ export default function App() {
     if (f) runOne(f);
   }, [runOne]);
 
+  /** Compete signature: CG-TE GRANT then $1 lodging/misc REFUSE */
+  const demoSignature = useCallback(() => {
+    const g = pickByExpect("grant");
+    const r = pickByExpect("refuse");
+    const next: LocalDecision[] = [];
+    if (g) next.push(runFixture(g));
+    if (r) next.push(runFixture(r));
+    if (!next.length) return;
+    setResults((prev) => {
+      const ids = new Set(next.map((d) => d.id));
+      return [...next, ...prev.filter((x) => !ids.has(x.id))];
+    });
+    setSelectedId(next[next.length - 1]?.id ?? next[0].id);
+  }, []);
+
   const selected =
     results.find((r) => r.id === selectedId) ?? results[0] ?? null;
 
@@ -149,13 +164,13 @@ export default function App() {
           </p>
           <h1>CeilingGate</h1>
           <p className="lede everyday">
-            Email your expense claim with a public receipt link — CeilingGate
-            checks each line against the scraped receipt and tells you{" "}
-            <strong>GRANT</strong>, or which lines are over (in plain English).
+            Line-by-line <strong>claimed vs scraped receipt</strong> — ResidualGates
+            returns <strong>GRANT</strong> only when every line is ≤ the receipt, or{" "}
+            <strong>REFUSE</strong> with plain-English overages (e.g. lodging $1 over).
           </p>
           <p className="muted small">
-            Not a chat bot. Not a developer toolkit. Claim in → receipt scrape →
-            clear result.
+            Email claim + public receipt URL → Firecrawl scrape → numeric gate.
+            Never “AI yes/no to your email.” Not Attest-style inbox chat.
           </p>
         </div>
         <div className="actions stack-actions">
@@ -170,11 +185,15 @@ export default function App() {
               Demo REFUSE
             </button>
           </div>
+          <button type="button" className="sig-btn" onClick={demoSignature}>
+            Demo signature: GRANT → $1 REFUSE
+          </button>
         </div>
       </header>
 
       <div className="orig-lock" role="note">
-        <strong>Forensic board</strong> — everyday expense claims. Not a chat thread, not docs-search, not an AI inbox buddy.
+        <strong>Forensic board</strong> — ResidualGates line ledger (claimed vs on-receipt).
+        Not a chat panel. Not Attest/NoticeProof-style AI yes/no. Not docs-search.
       </div>
       <div className="stack-strip" aria-label="Required stack">
         <span className={"chip-stack" + (hasConvex ? " on" : "")}>
@@ -234,8 +253,8 @@ export default function App() {
           <h2>Result</h2>
           {!selected ? (
             <p className="muted">
-              Hit <strong>Demo GRANT</strong> or <strong>Demo REFUSE</strong>,
-              or pick a claim.
+              Hit <strong>Demo signature: GRANT → $1 REFUSE</strong> (compete path),
+              or Demo GRANT / Demo REFUSE.
             </p>
           ) : (
             <div
@@ -267,6 +286,9 @@ export default function App() {
                 </p>
               )}
 
+              <p className="ledger-cap muted small">
+                Always shown: Line · Claimed · On receipt · Status (ResidualGates)
+              </p>
               <table className="ledger">
                 <thead>
                   <tr>
