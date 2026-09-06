@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useAction, useQuery } from "convex/react";
 import { api } from "../convex/_generated/api";
 import demo from "./data/demo.json";
-import { gateB, type GateDecision } from "./lib/residualGates";
+import { faultClass, faultClassLabel, gateB, type GateDecision } from "./lib/residualGates";
 import "./index.css";
 
 type Fixture = (typeof demo.fixtures)[number];
@@ -249,6 +249,7 @@ export default function App() {
         <MaskChipLitePanel />
         <UrlReceiptGatePanel />
         <DualOracleDisagreePanel />
+        <FaultTaxonomyPanel />
       </section>
 
       <section className="panel forge-panel" id="forge-open-live" aria-label="Open live Forge apps">
@@ -324,6 +325,21 @@ function VerdictCard({ selected, plain }: { selected: LocalDecision; plain: stri
     <div className={ok ? "card grant big" : "card refuse big"}>
       <p className="eyebrow">{ok ? "All lines clear" : "Over the receipt"}</p>
       <h3><span className="verdict-stamp">{ok ? "GRANT" : "REFUSE"}</span></h3>
+      <div className="mask-row">
+        <span className="mask-chip">
+          mask {selected.decision.mask}
+          {ok
+            ? " · GRANT ⇔ mask==0"
+            : selected.decision.failedIndices.length
+              ? ` · failed [${selected.decision.failedIndices.join(",")}]`
+              : " · nonzero mask"}
+        </span>
+        <span className="mask-chip">
+          {faultClassLabel(
+            faultClass(selected.interior, selected.claimed, selected.decision),
+          )}
+        </span>
+      </div>
       {selected.aiLine ? <p className="ai-line"><strong>In one line.</strong> {selected.aiLine}</p> : null}
       {plain.length > 0 ? (
         <ul className="plain-fail">{plain.map((line) => <li key={line}>{line}</li>)}</ul>
@@ -915,6 +931,114 @@ function parseInteriorText(text: string): number[] {
 /** Gate A = ResidualGates (claimed ≤ on-receipt). Gate B = enclosure caps (independent). */
 function gateEnclosure(caps: number[], claimed: number[]): GateDecision {
   return gateB(caps, claimed);
+}
+
+
+function FaultTaxonomyPanel() {
+  const [claimedStr, setClaimedStr] = useState("98, 51, 25, 11");
+  const [interiorStr, setInteriorStr] = useState("100, 50, 25, 10");
+  const [decision, setDecision] = useState<GateDecision | null>(null);
+
+  useEffect(() => {
+    setDecision(null);
+    const onPageShow = (e: PageTransitionEvent) => {
+      if (e.persisted) setDecision(null);
+    };
+    window.addEventListener("pageshow", onPageShow);
+    return () => window.removeEventListener("pageshow", onPageShow);
+  }, []);
+
+  const run = useCallback(() => {
+    setDecision(gateB(parseNumList(interiorStr), parseNumList(claimedStr)));
+  }, [claimedStr, interiorStr]);
+
+  const claimed = parseNumList(claimedStr);
+  const interior = parseNumList(interiorStr);
+  const fc = decision ? faultClass(interior, claimed, decision) : null;
+
+  return (
+    <div className="forge-child" id="fault-taxonomy-live" data-testid="fault-taxonomy-live">
+      <h3 className="forge-sub">Fault taxonomy — LIVE</h3>
+      <p className="muted small">
+        Two refuse stories, one ResidualGates: <strong>residual over</strong> (numbers too high)
+        vs <strong>length mismatch</strong> (claim shape ≠ receipt lines). Not chat yes/no.
+      </p>
+      <label className="forge-label">
+        Claimed
+        <input className="forge-input" value={claimedStr} onChange={(e) => setClaimedStr(e.target.value)} />
+      </label>
+      <label className="forge-label">
+        On-receipt
+        <input className="forge-input" value={interiorStr} onChange={(e) => setInteriorStr(e.target.value)} />
+      </label>
+      <div className="row">
+        <button
+          type="button"
+          className="ghost"
+          onClick={() => {
+            setClaimedStr("98, 51, 25, 11");
+            setInteriorStr("100, 50, 25, 10");
+            setDecision(gateB([100, 50, 25, 10], [98, 51, 25, 11]));
+          }}
+        >
+          Demo residual over
+        </button>
+        <button
+          type="button"
+          className="ghost"
+          onClick={() => {
+            setClaimedStr("98, 51, 25");
+            setInteriorStr("100, 50, 25, 10");
+            setDecision(gateB([100, 50, 25, 10], [98, 51, 25]));
+          }}
+        >
+          Demo length mismatch
+        </button>
+        <button
+          type="button"
+          className="ghost"
+          onClick={() => {
+            setClaimedStr("98, 49, 25, 9");
+            setInteriorStr("100, 50, 25, 10");
+            setDecision(gateB([100, 50, 25, 10], [98, 49, 25, 9]));
+          }}
+        >
+          Demo GRANT mask==0
+        </button>
+        <button type="button" className="ghost" onClick={() => setDecision(null)}>
+          Reset
+        </button>
+        <button type="button" className="primary" onClick={run}>
+          Run taxonomy
+        </button>
+      </div>
+      {decision ? (
+        <div className={"card " + (decision.status === "grant" ? "grant" : "refuse")}>
+          <strong>{decision.status.toUpperCase()}</strong>
+          <div className="mask-row">
+            <span className="mask-chip">
+              mask {decision.mask}
+              {decision.mask === 0 ? " · GRANT ⇔ mask==0" : ` · bits → lines [${decision.failedIndices.join(",")}]`}
+            </span>
+            {fc ? <span className="mask-chip">{faultClassLabel(fc)}</span> : null}
+          </div>
+          <GateLedgerTable
+            lines={Array.from({
+              length: Math.max(claimed.length, interior.length),
+            }).map((_, i) => ({
+              line: String(i),
+              claimed: claimed[i] ?? 0,
+              interior: interior[i] ?? 0,
+              over:
+                Number.isFinite(claimed[i]) &&
+                Number.isFinite(interior[i]) &&
+                (claimed[i] as number) > (interior[i] as number),
+            }))}
+          />
+        </div>
+      ) : null}
+    </div>
+  );
 }
 
 function DualOracleDisagreePanel() {

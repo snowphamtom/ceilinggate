@@ -62,3 +62,28 @@ export function gateB(interior: number[], claimed: number[]): GateDecision {
 export const sampleInterior = [100, 50, 25, 10];
 export const sampleValid = [98, 49, 25, 9];
 export const sampleInvalid = [98, 51, 25, 11];
+
+/** Refuse taxonomy — residual honesty (Eve unique fuel #3). */
+export type FaultClass = "clear" | "residual_over" | "length_mismatch";
+
+export function faultClass(
+  interior: number[],
+  claimed: number[],
+  d: GateDecision,
+): FaultClass {
+  if (d.status === "grant" && d.mask === 0) return "clear";
+  if (interior.length !== claimed.length) return "length_mismatch";
+  if (d.failedIndices.length > 0) return "residual_over";
+  return "length_mismatch";
+}
+
+export function faultClassLabel(fc: FaultClass): string {
+  switch (fc) {
+    case "clear":
+      return "Clear — GRANT ⇔ mask==0";
+    case "residual_over":
+      return "Residual over — claimed > on-receipt on named lines";
+    case "length_mismatch":
+      return "Length mismatch — claim vector ≠ receipt lines (corrupt shape)";
+  }
+}
