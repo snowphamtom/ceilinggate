@@ -347,6 +347,16 @@ function VerdictCard({ selected, plain }: { selected: LocalDecision; plain: stri
           })}
         </tbody>
       </table>
+      {ok ? (
+        <p className="conjunctive-line ok">
+          ADMIT: every line claimed ≤ on-receipt (componentwise) — no total-only offset.
+        </p>
+      ) : (
+        <p className="conjunctive-line">
+          Surplus on one line cannot cover a deficit on another — ADMIT only if claimed ≤
+          on-receipt on every line.
+        </p>
+      )}
       {selected.receiptUrl ? (
         <div className="evidence"><p><strong>Receipt</strong> {selected.receiptUrl}</p></div>
       ) : null}
@@ -366,27 +376,40 @@ function GateLedgerTable({
 }: {
   lines: { line: string; claimed: number; interior: number; over: boolean }[];
 }) {
+  const anyOver = lines.some((r) => r.over);
   return (
-    <table className="ledger delta-table">
-      <thead>
-        <tr>
-          <th>LINE</th>
-          <th>CLAIMED</th>
-          <th>ON RECEIPT</th>
-          <th>STATUS</th>
-        </tr>
-      </thead>
-      <tbody>
-        {lines.map((row, i) => (
-          <tr key={`${row.line}-${i}`} className={row.over ? "fail" : ""}>
-            <td>{row.line}</td>
-            <td>{money(row.claimed)}</td>
-            <td>{money(row.interior)}</td>
-            <td className={row.over ? "bad" : "ok"}>{row.over ? "OVER" : "CLEAR"}</td>
+    <>
+      <table className="ledger delta-table">
+        <thead>
+          <tr>
+            <th>LINE</th>
+            <th>CLAIMED</th>
+            <th>ON RECEIPT</th>
+            <th>STATUS</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {lines.map((row, i) => (
+            <tr key={`${row.line}-${i}`} className={row.over ? "fail" : ""}>
+              <td>{row.line}</td>
+              <td>{money(row.claimed)}</td>
+              <td>{money(row.interior)}</td>
+              <td className={row.over ? "bad" : "ok"}>{row.over ? "OVER" : "CLEAR"}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      {anyOver ? (
+        <p className="conjunctive-line">
+          Surplus on one line cannot cover a deficit on another — ADMIT only if claimed ≤
+          on-receipt on every line.
+        </p>
+      ) : (
+        <p className="conjunctive-line ok">
+          ADMIT: every line claimed ≤ on-receipt (componentwise) — no total-only offset.
+        </p>
+      )}
+    </>
   );
 }
 
@@ -742,12 +765,20 @@ function LineDeltaKitPanel() {
             </tbody>
           </table>
           {decision.failedIndices.length > 0 ? (
-            <p className="muted small">
-              {decision.failedIndices.length} line{decision.failedIndices.length === 1 ? "" : "s"} over
-              on-receipt amounts — REFUSE with mask {decision.mask}.
-            </p>
+            <>
+              <p className="muted small">
+                {decision.failedIndices.length} line{decision.failedIndices.length === 1 ? "" : "s"} over
+                on-receipt amounts — REFUSE with mask {decision.mask}.
+              </p>
+              <p className="conjunctive-line">
+                Surplus on one line cannot cover a deficit on another — ADMIT only if claimed ≤
+                on-receipt on every line.
+              </p>
+            </>
           ) : (
-            <p className="ok-line">Every line clears — claimed ≤ interior.</p>
+            <p className="conjunctive-line ok">
+              ADMIT: every line claimed ≤ on-receipt (componentwise) — no total-only offset.
+            </p>
           )}
         </div>
       ) : null}
@@ -1117,6 +1148,16 @@ function UrlReceiptGatePanel() {
               )}
             </tbody>
           </table>
+          {decision.failedIndices.length > 0 ? (
+            <p className="conjunctive-line">
+              Surplus on one line cannot cover a deficit on another — ADMIT only if claimed ≤
+              on-receipt on every line.
+            </p>
+          ) : (
+            <p className="conjunctive-line ok">
+              ADMIT: every line claimed ≤ on-receipt (componentwise) — no total-only offset.
+            </p>
+          )}
         </div>
       ) : null}
       <p className="muted small">

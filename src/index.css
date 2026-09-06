@@ -279,3 +279,14 @@ h1 { margin: 0 0 0.4rem; font-size: 2rem; letter-spacing: -0.03em; }
   text-transform: uppercase;
   color: #a8bdd8;
 }
+
+.conjunctive-line {
+  margin: 0.55rem 0 0;
+  font-size: 0.88rem;
+  line-height: 1.4;
+  color: #fca5a5;
+  font-weight: 600;
+}
+.conjunctive-line.ok {
+  color: #6ee7a8;
+}
