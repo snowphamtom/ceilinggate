@@ -462,9 +462,33 @@ function TipJarHonestyPanel() {
           />
         </label>
       </div>
-      <button type="button" className="primary" onClick={run}>
-        Run Tip Jar gate
-      </button>
+      <div className="actions">
+        <button
+          type="button"
+          className="ghost"
+          onClick={() => {
+            setClaimedTip("5.00");
+            setReceiptTotal("42.50");
+            setDecision(gateB([42.5], [5]));
+          }}
+        >
+          Demo GRANT
+        </button>
+        <button
+          type="button"
+          className="ghost"
+          onClick={() => {
+            setClaimedTip("50.00");
+            setReceiptTotal("42.50");
+            setDecision(gateB([42.5], [50]));
+          }}
+        >
+          Demo REFUSE
+        </button>
+        <button type="button" className="primary" onClick={run}>
+          Run Tip Jar gate
+        </button>
+      </div>
       {decision ? (
         <div className={"card " + (decision.status === "grant" ? "grant" : "refuse")}>
           <strong>{decision.status === "grant" ? "GRANT" : "REFUSE"}</strong>
@@ -524,9 +548,33 @@ function LineDeltaKitPanel() {
           onChange={(e) => setInteriorStr(e.target.value)}
         />
       </label>
-      <button type="button" className="primary" onClick={run}>
-        Run Line Delta gate
-      </button>
+      <div className="actions">
+        <button
+          type="button"
+          className="ghost"
+          onClick={() => {
+            setClaimedStr("98, 49, 25, 9");
+            setInteriorStr("100, 50, 25, 10");
+            setDecision(gateB([100, 50, 25, 10], [98, 49, 25, 9]));
+          }}
+        >
+          Demo GRANT
+        </button>
+        <button
+          type="button"
+          className="ghost"
+          onClick={() => {
+            setClaimedStr("98, 51, 25, 11");
+            setInteriorStr("100, 50, 25, 10");
+            setDecision(gateB([100, 50, 25, 10], [98, 51, 25, 11]));
+          }}
+        >
+          Demo REFUSE
+        </button>
+        <button type="button" className="primary" onClick={run}>
+          Run Line Delta gate
+        </button>
+      </div>
       {decision ? (
         <div className={"card " + (decision.status === "grant" ? "grant" : "refuse")}>
           <strong>{decision.status === "grant" ? "GRANT" : "REFUSE"}</strong>
@@ -689,7 +737,7 @@ function AppForgePanel() {
         .replace(/[^a-z0-9]+/g, "-")
         .replace(/^-|-$/g, "")
         .slice(0, 40) || `forge-${Date.now().toString(36)}`;
-    const path = `/workspace/forged-apps/${slug}`;
+    const path = `/forge/${slug}/`;
     setLog(`Forging ${slug} on Convex…`);
     try {
       if (hasConvex) {
@@ -746,14 +794,16 @@ function AppForgePanel() {
       <ul className="forge-list">
         {(live ?? []).map((s) => (
           <li key={s._id}>
-            <strong>{s.title}</strong> <code>{s.slug}</code>
-            <span className="muted small"> — {s.path}</span>
+            <strong>{s.title}</strong>{" "}
+            <a href={`/forge/${s.slug}/`} target="_blank" rel="noreferrer">
+              <code>/forge/{s.slug}/</code>
+            </a>
+            <span className="muted small"> — LIVE gate (not costume)</span>
           </li>
         ))}
         {!live?.length && (
           <li className="muted small">
-            Children on box: tip-jar-honesty, line-delta-kit, mask-chip-lite (loading live
-            list…)
+            Loading spawned apps… live gates at /forge/tip-jar-honesty/ + /forge/line-delta-kit/
           </li>
         )}
       </ul>

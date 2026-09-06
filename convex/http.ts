@@ -101,4 +101,17 @@ http.route({
   }),
 });
 
+http.route({
+  pathPrefix: "/forge/",
+  method: "GET",
+  handler: httpAction(async (ctx, req) => {
+    const path = new URL(req.url).pathname;
+    // /forge/slug or /forge/slug/ → index.html
+    const normalized =
+      path.endsWith("/") ? path + "index.html" :
+      path.split("/").length === 3 ? path + "/index.html" : path;
+    return serveAsset(ctx, normalized);
+  }),
+});
+
 export default http;
