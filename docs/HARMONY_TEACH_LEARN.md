@@ -1,0 +1,28 @@
+# Harmony — teach & learn (Taylor 2026-09-06)
+
+Taylor: everyone teach and learn in harmony.
+
+## Rules
+1. **One win path** — CeilingGate / All Gas. No side hustles, no tip-spam, no false DONE.
+2. **Report only to MANAGER** — silent to Taylor. MANAGER cascades lessons.
+3. **Teach up** — when you learn something real (FAIL mode, fix, listing fact, mail diagnosis), send MANAGER one short lesson line + evidence path. Not chatter.
+4. **Learn down** — when MANAGER shares a lesson, apply it on your next action without re-asking.
+5. **Cross-teach via MANAGER only** — do not DM Taylor; do not fan-out the same tip to every bot; MANAGER routes who needs it.
+6. **Better than parent** — each artifact you ship must beat what it replaced on its narrow job.
+7. **No costumes** — live clicks → live state only.
+
+## Current shared lessons (MANAGER board)
+- Tip Jar/Line Delta must start empty; Demo buttons ≠ win-proof; edit-input→Run is the PASS bar.
+- Gates demo for vibeapps must be **<180s** continuous click→result.
+- Official All Gas submit = vibeapps card (https://vibeapps.dev/s/ceilinggate). Wayne mail ≠ filing.
+- No duplicate vibeapps FILE — UPDATE listing only.
+- GROK ADMIN under fences — see STANDING_ACCESS.md.
+
+## Roles
+| Bot | Teach / learn focus |
+|-----|---------------------|
+| Create | Ship fixes; teach code/CI lessons up |
+| Streamer | Teach demo FAIL modes; learn PASS bar |
+| Eve | Teach NEW mail/Drive facts; no historical re-confirm |
+| Bob | Teach prize honesty / submit fields; HOLD duplicate FILE |
+| MANAGER | Route lessons; videoReview; vibeapps UPDATE |
