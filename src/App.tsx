@@ -240,6 +240,7 @@ export default function App() {
           <li>Run → live GRANT/REFUSE · keep demos under 180s</li>
         </ol>
         <TipJarHonestyPanel />
+        <ReceiptLineCheckPanel />
         <LineDeltaKitPanel />
         <MaskChipLitePanel />
         <UrlReceiptGatePanel />
@@ -363,6 +364,113 @@ function parseNumList(s: string): number[] {
     .map(Number)
     .filter((n) => Number.isFinite(n));
 }
+
+function ReceiptLineCheckPanel() {
+  const [label, setLabel] = useState("Fuel");
+  const [claimed, setClaimed] = useState("51.00");
+  const [interior, setInterior] = useState("50.00");
+  const [decision, setDecision] = useState<GateDecision | null>(null);
+
+  useEffect(() => {
+    setDecision(null);
+    const onPageShow = (e: PageTransitionEvent) => {
+      if (e.persisted) setDecision(null);
+    };
+    window.addEventListener("pageshow", onPageShow);
+    return () => window.removeEventListener("pageshow", onPageShow);
+  }, []);
+
+  const run = useCallback(() => {
+    const c = Number(claimed);
+    const n = Number(interior);
+    setDecision(gateB([n], [c]));
+  }, [claimed, interior]);
+
+  return (
+    <div className="forge-child" data-testid="receipt-line-check-live">
+      <h3 className="forge-sub">Receipt Line Check — LIVE</h3>
+      <p className="muted small">
+        Narrower than Tip Jar: one labeled line claimed vs on-receipt + Δ. Empty on load.
+      </p>
+      <label className="forge-label">
+        Line label
+        <input className="forge-input" value={label} onChange={(e) => setLabel(e.target.value)} />
+      </label>
+      <div className="forge-row">
+        <label className="forge-label">
+          Claimed $
+          <input
+            className="forge-input"
+            type="number"
+            step="0.01"
+            value={claimed}
+            onChange={(e) => setClaimed(e.target.value)}
+          />
+        </label>
+        <label className="forge-label">
+          On-receipt $
+          <input
+            className="forge-input"
+            type="number"
+            step="0.01"
+            value={interior}
+            onChange={(e) => setInterior(e.target.value)}
+          />
+        </label>
+      </div>
+      <div className="row">
+        <button
+          type="button"
+          className="ghost"
+          onClick={() => {
+            setClaimed("49.00");
+            setInterior("50.00");
+            setDecision(gateB([50], [49]));
+          }}
+        >
+          Demo GRANT
+        </button>
+        <button
+          type="button"
+          className="ghost"
+          onClick={() => {
+            setClaimed("51.00");
+            setInterior("50.00");
+            setDecision(gateB([50], [51]));
+          }}
+        >
+          Demo REFUSE
+        </button>
+        <button type="button" className="ghost" onClick={() => setDecision(null)}>
+          Reset
+        </button>
+        <button type="button" className="primary" onClick={run}>
+          Run line gate
+        </button>
+      </div>
+      {decision ? (
+        <div className={"card " + (decision.status === "grant" ? "grant" : "refuse")}>
+          <strong>{decision.status === "grant" ? "GRANT" : "REFUSE"}</strong>
+          <p className="muted small">
+            {label}: claimed {money(Number(claimed))} vs on-receipt {money(Number(interior))}
+          </p>
+          <p className={decision.status === "grant" ? "ok-line" : "muted small"}>
+            {decision.status === "grant"
+              ? `Δ ${money(Number(claimed) - Number(interior))} · clear`
+              : `OVER ${money(Number(claimed) - Number(interior))}`}
+          </p>
+        </div>
+      ) : null}
+      <p className="muted small">
+        Also{" "}
+        <a href="/forge/receipt-line-check/" target="_blank" rel="noreferrer">
+          /forge/receipt-line-check/
+        </a>
+      </p>
+    </div>
+  );
+}
+
 function TipJarHonestyPanel() {
   const [claimedTip, setClaimedTip] = useState("5.00");
   const [receiptTotal, setReceiptTotal] = useState("42.50");
