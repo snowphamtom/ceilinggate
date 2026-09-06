@@ -45,8 +45,8 @@ http.route({
             _id: row.claim._id,
             subject: row.claim.subject,
             from: row.claim.from,
-            claimed: row.claim.claimed,
-            interior: row.claim.interior,
+            claimed: row.decision?.claimed ?? row.claim.claimed,
+            interior: row.decision?.interior ?? row.claim.interior,
             sourceUrl: row.claim.sourceUrl,
           },
           decision: row.decision
@@ -55,6 +55,8 @@ http.route({
                 mask: row.decision.mask,
                 failedIndices: row.decision.failedIndices,
                 oneLine: row.decision.oneLine,
+                claimed: row.decision.claimed,
+                interior: row.decision.interior,
               }
             : null,
         })),
