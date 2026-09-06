@@ -29,7 +29,8 @@ All Gas cash prizes (Luma): $10,000 / $5,000 / $1,500 only — $2,100 USPTO Trac
 - Judge/eligibility: `/workspace/ceilinggate-demo/ELIGIBILITY_ONEPAGER.md`
 - UPDATE paste: `/workspace/ceilinggate-demo/VIBEAPPS_UPDATE_PASTE.md` (no duplicate FILE)
 - Live card: https://vibeapps.dev/s/ceilinggate
-- Demo release: https://github.com/snowphamtom/ceilinggate/releases/tag/allgas-demo-170s
+- Demo release (HQ): https://github.com/snowphamtom/ceilinggate/releases/tag/allgas-demo-hq
+- Demo fallback: https://github.com/snowphamtom/ceilinggate/releases/tag/allgas-demo-170s
 
 ## HARD STOP
 No fake revenue. Label any guess. OFF PHONE — docs stay on box + GH.
