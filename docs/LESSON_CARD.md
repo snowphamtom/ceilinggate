@@ -1,7 +1,7 @@
-# Lesson card — 02ce254
+# Lesson card — 6031fb3
 
 1. What changed
-docs: stamp the 30s judge path — two buttons, named overage, no ResidualGates sermon
+ui: hide prize tables and extra tools from the first screen
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
