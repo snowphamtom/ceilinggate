@@ -9,7 +9,7 @@
 - Website: https://quirky-rhinoceros-204.convex.site/
 - GitHub: https://github.com/snowphamtom/ceilinggate
 - Tags: Convex, Firecrawl, AgentMail, AllGasHackathon, OpenAI
-- Video prefer-live (SHOW3 VO · when published): https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-show/CeilingGate-Forge-gates-clip-SHOW3.mp4
+- Video prefer-live (SHOW3 VO ): https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-show/CeilingGate-Forge-gates-clip-SHOW3.mp4
 - YouTube (keep): https://www.youtube.com/watch?v=2KsM090LpdE
 - Fallback GH YT: https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-yt/CeilingGate-Forge-gates-clip-YT.mp4
 - Fallback HQ: https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-hq/CeilingGate-Forge-gates-clip-HQ.mp4
