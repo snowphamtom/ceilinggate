@@ -1569,6 +1569,47 @@ textarea.forge-input {
   text-align: center;
 }
 
+
+
+/* —— Judges 30s e: empty RESULT denser + inbox pill —— */
+.verdict-panel .empty {
+  padding: 1.25rem 1.05rem;
+  min-height: 4.5rem;
+}
+
+.verdict-panel .empty::before {
+  letter-spacing: 0.16em;
+}
+
+.row.docket .pill.grant,
+.row.docket .pill.refuse {
+  border: 1px solid transparent;
+}
+
+.row.docket.edge-grant .pill {
+  border-color: rgba(61, 222, 149, 0.35);
+}
+
+.row.docket.edge-refuse .pill {
+  border-color: rgba(255, 138, 138, 0.35);
+}
+
+
+
+/* —— Judges 30s f: ledger header chrome —— */
+.ledger thead th {
+  padding: 0.52rem 0.5rem;
+  background: linear-gradient(180deg, #1a2740, #121c30);
+}
+
+.ledger td {
+  vertical-align: middle;
+}
+
+.card.big .ai-line {
+  font-size: 0.88rem;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .card.grant,
   .card.refuse,
