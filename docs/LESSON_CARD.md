@@ -1,7 +1,7 @@
-# Lesson card — a035da1
+# Lesson card — 66b3e50
 
 1. What changed
-visual: judges 30s — Demo dock cue + teach callout + OVER tab pulse
+visual: judges 30s-b — steps amber markers + selected docket rail
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
