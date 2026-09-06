@@ -10,7 +10,7 @@ Lightweight status board. Open on desktop/browser — nothing to install, no pho
 - Demo pack: https://github.com/snowphamtom/ceilinggate/releases/tag/allgas-demo-20260905
 - Claims inbox: `ceilinggate-claims@agentmail.to`
 - Health: `/health` → CeilingGate
-- Tip: `36f4ce7` (Batch18 $1004 fee-cart shortlist) — SHOW OFF PASS held
+- Tip: `10842b7` — CASCADING ACCESS / continuous expand
 
 ## Verified
 - Demo signature / GRANT / REFUSE / ship-set samples: click-through PASS (MANAGER + Create 6/6)
