@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useMutation, useQuery } from "convex/react";
 import { api } from "../convex/_generated/api";
 import demo from "./data/demo.json";
@@ -168,6 +168,7 @@ export default function App() {
 
   return (
     <div className="shell board">
+      <PwaInstallShell />
       <header className="top">
         <div>
           <p className="eyebrow">
@@ -407,10 +408,274 @@ export default function App() {
 }
 
 
+function parseNumList(s: string): number[] {
+  return s
+    .split(/[\s,]+/)
+    .map((x) => x.trim())
+    .filter(Boolean)
+    .map(Number)
+    .filter((n) => Number.isFinite(n));
+}
+
+function TipJarHonestyPanel() {
+  const [claimedTip, setClaimedTip] = useState("5.00");
+  const [receiptTotal, setReceiptTotal] = useState("42.50");
+  const [decision, setDecision] = useState<GateDecision | null>(null);
+
+  const run = useCallback(() => {
+    const tip = Number(claimedTip);
+    const total = Number(receiptTotal);
+    if (!Number.isFinite(tip) || !Number.isFinite(total)) {
+      setDecision({ status: "refuse", mask: 1, failedIndices: [0] });
+      return;
+    }
+    // Narrow claim: tip alone vs receipt total — clearer than parent's multi-line board
+    setDecision(gateB([total], [tip]));
+  }, [claimedTip, receiptTotal]);
+
+  return (
+    <div className="forge-child">
+      <h3 className="forge-sub">Tip Jar Honesty — LIVE</h3>
+      <p className="muted small">
+        BETTER-THAN-PARENT: two clear money inputs (claimed tip vs receipt total) → instant
+        GRANT/REFUSE. No costume. NEVER NEED ACCESS.
+      </p>
+      <div className="forge-row">
+        <label className="forge-label">
+          Claimed tip ($)
+          <input
+            className="forge-input"
+            type="number"
+            step="0.01"
+            value={claimedTip}
+            onChange={(e) => setClaimedTip(e.target.value)}
+          />
+        </label>
+        <label className="forge-label">
+          Receipt total ($)
+          <input
+            className="forge-input"
+            type="number"
+            step="0.01"
+            value={receiptTotal}
+            onChange={(e) => setReceiptTotal(e.target.value)}
+          />
+        </label>
+      </div>
+      <button type="button" className="primary" onClick={run}>
+        Run Tip Jar gate
+      </button>
+      {decision ? (
+        <div className={"card " + (decision.status === "grant" ? "grant" : "refuse")}>
+          <strong>{decision.status === "grant" ? "GRANT" : "REFUSE"}</strong>
+          <div className="mask-row">
+            <span className="mask-chip">
+              mask {decision.mask}
+              {decision.failedIndices.length
+                ? ` · failed [${decision.failedIndices.join(",")}]`
+                : " · clear"}
+            </span>
+          </div>
+          <p className="muted small">
+            Claimed tip {money(Number(claimedTip))} vs receipt {money(Number(receiptTotal))}
+            {decision.status === "grant"
+              ? " — tip at or under receipt."
+              : " — tip over receipt total."}
+          </p>
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
+function LineDeltaKitPanel() {
+  const [claimedStr, setClaimedStr] = useState("98, 51, 25, 11");
+  const [interiorStr, setInteriorStr] = useState("100, 50, 25, 10");
+  const [decision, setDecision] = useState<GateDecision | null>(null);
+
+  const run = useCallback(() => {
+    const claimed = parseNumList(claimedStr);
+    const interior = parseNumList(interiorStr);
+    setDecision(gateB(interior, claimed));
+  }, [claimedStr, interiorStr]);
+
+  return (
+    <div className="forge-child">
+      <h3 className="forge-sub">Line Delta Kit — LIVE</h3>
+      <p className="muted small">
+        BETTER-THAN-PARENT: paste claimed vs interior arrays, Run → decision + mask + failed
+        indices in one shot. Narrower and clearer than the parent ship-set board.
+      </p>
+      <label className="forge-label">
+        Claimed lines (comma-separated)
+        <textarea
+          className="forge-input"
+          rows={2}
+          value={claimedStr}
+          onChange={(e) => setClaimedStr(e.target.value)}
+        />
+      </label>
+      <label className="forge-label">
+        Interior / on-receipt (comma-separated)
+        <textarea
+          className="forge-input"
+          rows={2}
+          value={interiorStr}
+          onChange={(e) => setInteriorStr(e.target.value)}
+        />
+      </label>
+      <button type="button" className="primary" onClick={run}>
+        Run Line Delta gate
+      </button>
+      {decision ? (
+        <div className={"card " + (decision.status === "grant" ? "grant" : "refuse")}>
+          <strong>{decision.status === "grant" ? "GRANT" : "REFUSE"}</strong>
+          <div className="mask-row">
+            <span className="mask-chip">
+              mask {decision.mask}
+              {decision.failedIndices.length
+                ? ` · failed indices [${decision.failedIndices.join(",")}]`
+                : " · clear"}
+            </span>
+          </div>
+          {decision.failedIndices.length > 0 ? (
+            <ul className="plain-fail">
+              {decision.failedIndices.map((i) => {
+                const c = parseNumList(claimedStr)[i] ?? 0;
+                const n = parseNumList(interiorStr)[i] ?? 0;
+                return (
+                  <li key={i}>
+                    Line {i}: claimed {money(c)} vs interior {money(n)} (
+                    {money(c - n)} over)
+                  </li>
+                );
+              })}
+            </ul>
+          ) : (
+            <p className="ok-line">Every line clears — claimed ≤ interior.</p>
+          )}
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
+function MaskChipLitePanel() {
+  const [claimedStr, setClaimedStr] = useState("98, 51, 25, 11");
+  const [interiorStr, setInteriorStr] = useState("100, 50, 25, 10");
+  const [decision, setDecision] = useState<GateDecision | null>(null);
+
+  const run = useCallback(() => {
+    setDecision(gateB(parseNumList(interiorStr), parseNumList(claimedStr)));
+  }, [claimedStr, interiorStr]);
+
+  return (
+    <div className="forge-child">
+      <h3 className="forge-sub">Mask Chip Lite — LIVE</h3>
+      <p className="muted small">
+        Focus UI: bitmask + failed indices only. Same gateB math. Click Run — no ask.
+      </p>
+      <div className="forge-row">
+        <label className="forge-label">
+          Claimed
+          <input
+            className="forge-input"
+            value={claimedStr}
+            onChange={(e) => setClaimedStr(e.target.value)}
+          />
+        </label>
+        <label className="forge-label">
+          Interior
+          <input
+            className="forge-input"
+            value={interiorStr}
+            onChange={(e) => setInteriorStr(e.target.value)}
+          />
+        </label>
+      </div>
+      <button type="button" className="primary" onClick={run}>
+        Run mask chip
+      </button>
+      {decision ? (
+        <div className={"card " + (decision.status === "grant" ? "grant" : "refuse")}>
+          <strong>{decision.status.toUpperCase()}</strong>
+          <div className="mask-row">
+            <span className="mask-chip">
+              mask {decision.mask}
+              {decision.failedIndices.length
+                ? ` · bits ${decision.failedIndices.join(",")}`
+                : " · clear"}
+            </span>
+          </div>
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
+
+/** Tiny home-screen install shell — no offline media cache. */
+function PwaInstallShell() {
+  const [deferred, setDeferred] = useState<any>(null);
+  const [hint, setHint] = useState(false);
+  const [done, setDone] = useState(false);
+
+  useEffect(() => {
+    const onBip = (e: Event) => {
+      e.preventDefault();
+      setDeferred(e);
+    };
+    const onInstalled = () => {
+      setDeferred(null);
+      setDone(true);
+    };
+    window.addEventListener("beforeinstallprompt", onBip);
+    window.addEventListener("appinstalled", onInstalled);
+    // iOS / browsers without BIP: show soft hint once
+    const ua = navigator.userAgent;
+    const isIos = /iPad|iPhone|iPod/.test(ua);
+    const standalone =
+      (window.navigator as any).standalone === true ||
+      window.matchMedia("(display-mode: standalone)").matches;
+    if (!standalone && isIos) setHint(true);
+    return () => {
+      window.removeEventListener("beforeinstallprompt", onBip);
+      window.removeEventListener("appinstalled", onInstalled);
+    };
+  }, []);
+
+  if (done) return null;
+  if (!deferred && !hint) return null;
+
+  return (
+    <div className="pwa-shell" role="region" aria-label="Install CeilingGate">
+      <span className="pwa-shell-label">
+        Home screen · tiny PWA · no media cache
+      </span>
+      {deferred ? (
+        <button
+          type="button"
+          className="ghost"
+          onClick={async () => {
+            await deferred.prompt();
+            setDeferred(null);
+          }}
+        >
+          Install app
+        </button>
+      ) : (
+        <span className="muted small">
+          Share → Add to Home Screen
+        </span>
+      )}
+    </div>
+  );
+}
+
 function AppForgePanel() {
   const [title, setTitle] = useState("Receipt Line Check");
   const [brief, setBrief] = useState(
-    "Micro-app: claimed lines ≤ public receipt totals. ResidualGates stub. Not a chat assistant.",
+    "LIVE micro-app: claimed lines ≤ public receipt totals via ResidualGates. Not a chat assistant.",
   );
   const [log, setLog] = useState<string>("");
   const spawn = useMutation(api.forge.spawn);
@@ -429,10 +694,10 @@ function AppForgePanel() {
       if (hasConvex) {
         await spawn({ slug, title, brief, path });
         setLog(
-          `LIVE SPAWN ${slug} — inherits STANDING_ACCESS. Recorded in Convex forgedApps. Box scaffold: npm run forge -- --slug ${slug}`,
+          `LIVE SPAWN ${slug} — NEVER NEED ACCESS / STANDING_ACCESS cascade. Recorded in Convex forgedApps. Box: npm run forge -- --slug ${slug}`,
         );
       } else {
-        setLog(`Demo spawn ${slug} (no VITE_CONVEX_URL) — ${brief.slice(0, 60)}…`);
+        setLog(`Local spawn ${slug} (no VITE_CONVEX_URL) — ${brief.slice(0, 60)}…`);
       }
     } catch (e) {
       setLog(String(e));
@@ -444,10 +709,17 @@ function AppForgePanel() {
       <h2>App Forge</h2>
       <p className="muted small">
         <strong>Judge demo path:</strong> (1) Demo signature GRANT→$1 REFUSE above,
-        (2) Forge a second micro-app here. Same stack: Convex + Firecrawl + AgentMail.
-        Not an inbox yes/no chat. Spawned apps inherit cascading STANDING_ACCESS.
+        (2) run live child gates below (Tip Jar / Line Delta / Mask Chip), (3) spawn another
+        micro-app. Same stack: Convex + Firecrawl + AgentMail. NEVER NEED ACCESS — nobody
+        asks to create or interact.
       </p>
-      <p className="eyebrow">Recursive create — apps that create apps</p>
+      <p className="eyebrow">Recursive create — apps that create apps · LIVE gates only</p>
+
+      <TipJarHonestyPanel />
+      <LineDeltaKitPanel />
+      <MaskChipLitePanel />
+
+      <h3 className="forge-sub">Spawn next micro-app (live)</h3>
       <label className="forge-label">
         Micro-app title
         <input
@@ -469,27 +741,24 @@ function AppForgePanel() {
         Spawn second micro-app (live)
       </button>
       {log ? <p className="lean forge-log">{log}</p> : null}
-      <div className="forge-judge-strip" role="note">
-        Judges: new spawn appears at top of the live list (Convex) — no chat, no login.
-      </div>
-      <h3 className="forge-sub">Spawned apps (live){live?.length ? ` · ${live.length}` : ""}</h3>
+      <h3 className="forge-sub">Spawned apps (live)</h3>
       <ul className="forge-list">
-        {(live ?? []).map((s, i) => (
-          <li key={s._id} className={i === 0 ? "forge-newest" : undefined}>
+        {(live ?? []).map((s) => (
+          <li key={s._id}>
             <strong>{s.title}</strong> <code>{s.slug}</code>
             <span className="muted small"> — {s.path}</span>
           </li>
         ))}
         {!live?.length && (
           <li className="muted small">
-            Children on box: tip-jar-honesty, line-delta-kit (loading live list…)
+            Children on box: tip-jar-honesty, line-delta-kit, mask-chip-lite (loading live
+            list…)
           </li>
         )}
       </ul>
       <p className="muted small">
         Box scaffold: <code>npm run forge -- --slug …</code> →{" "}
-        <code>/workspace/forged-apps/</code>. Children:{" "}
-        <code>tip-jar-honesty</code>, <code>line-delta-kit</code>.
+        <code>/workspace/forged-apps/</code> (LIVE interactive HTML + demo-gate.mjs).
       </p>
     </section>
   );
