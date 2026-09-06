@@ -1,16 +1,19 @@
 name: convex-deploy
+
 on:
-  push:
-    branches: [master]
-    paths-ignore:
-      - "docs/LESSON_CARD.md"
   workflow_dispatch:
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - docs/LESSON_CARD.md
+
 concurrency:
   group: convex-deploy-master
   cancel-in-progress: false
+
 jobs:
   deploy:
-    if: ${{ github.event_name == 'workflow_dispatch' || github.event.head_commit == null || !startsWith(github.event.head_commit.message, 'docs: lesson card') }}
     runs-on: ubuntu-latest
     permissions:
       contents: read
