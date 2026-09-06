@@ -19,8 +19,13 @@ jobs:
         env:
           CONVEX_DEPLOY_KEY: ${{ secrets.CONVEX_DEPLOY_KEY }}
         run: |
+          echo "secret_present=${{ secrets.CONVEX_DEPLOY_KEY != '' }}"
           if [ -z "$CONVEX_DEPLOY_KEY" ]; then
-            echo "CONVEX_DEPLOY_KEY secret missing — Create: add it once in repo Settings/Secrets. No paste in logs."
+            echo "CONVEX_DEPLOY_KEY empty in this job."
+            echo "Need Repository secret CONVEX_DEPLOY_KEY on snowphamtom/ceilinggate"
+            echo "https://github.com/snowphamtom/ceilinggate/settings/secrets/actions"
+            echo "Mint key: https://dashboard.convex.dev/d/quirky-rhinoceros-204/settings/deploy-keys"
+            echo "Not Vercel. Not Environment secrets. Not this log."
             exit 1
           fi
           npx convex deploy -y
