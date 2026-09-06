@@ -914,6 +914,135 @@ textarea.forge-input {
 }
 
 
+
+
+/* —— Next polish: RESULT empty + child-gates density —— */
+.verdict-panel {
+  position: relative;
+  min-height: 9.5rem;
+}
+
+.verdict-panel .empty {
+  margin: 0.35rem 0 0;
+  padding: 1.1rem 1rem;
+  border: 1px dashed rgba(58, 84, 120, 0.7);
+  border-radius: 10px;
+  background:
+    repeating-linear-gradient(
+      -12deg,
+      transparent,
+      transparent 7px,
+      rgba(91, 157, 255, 0.03) 7px,
+      rgba(91, 157, 255, 0.03) 8px
+    ),
+    rgba(8, 14, 26, 0.55);
+  color: #9eb0c8;
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  letter-spacing: 0.02em;
+  line-height: 1.45;
+  box-shadow: inset 0 0 0 1px rgba(7, 11, 20, 0.55);
+}
+
+.verdict-panel .empty::before {
+  content: "AWAITING LEDGER";
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--amber);
+  font-weight: 700;
+}
+
+#live-child-gates {
+  padding: 0.95rem 1rem 1.05rem;
+  gap: 0;
+}
+
+#live-child-gates > .muted,
+#live-child-gates > .pass-bar {
+  margin-top: 0.35rem;
+  margin-bottom: 0.45rem;
+}
+
+#live-child-gates .forge-child {
+  margin: 0.55rem 0;
+  padding: 0.72rem 0.8rem 0.85rem;
+  border-radius: 10px;
+  border-color: #2f425f;
+  background: linear-gradient(165deg, #121c30, #0b1220);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.03),
+    0 4px 14px rgba(0, 0, 0, 0.28);
+}
+
+#live-child-gates .forge-sub {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin: 0 0 0.4rem;
+  font-size: 0.92rem;
+  letter-spacing: -0.01em;
+}
+
+#live-child-gates .forge-sub::before {
+  content: "";
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: #3dde95;
+  box-shadow: 0 0 0 3px rgba(31, 157, 99, 0.2), 0 0 12px rgba(61, 222, 149, 0.65);
+  flex: none;
+}
+
+#live-child-gates .forge-label {
+  margin: 0.28rem 0;
+  font-size: 0.76rem;
+}
+
+#live-child-gates .forge-input {
+  padding: 0.42rem 0.55rem;
+  font-size: 0.86rem;
+}
+
+#live-child-gates .actions {
+  margin: 0.55rem 0 0.2rem;
+  gap: 0.4rem;
+}
+
+#live-child-gates .forge-row {
+  gap: 0.55rem;
+}
+
+.try-now {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    inset 0 0 0 1px rgba(7, 11, 20, 0.45),
+    0 10px 28px rgba(0, 0, 0, 0.32);
+  background:
+    linear-gradient(180deg, rgba(18, 28, 48, 0.95), rgba(10, 16, 28, 0.92));
+}
+
+.row.docket {
+  padding: 0.58rem 0.7rem;
+  font-size: 0.9rem;
+}
+
+.row.docket .meta {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.02em;
+}
+
+.row.docket.edge-grant {
+  box-shadow: -2px 0 12px rgba(31, 157, 99, 0.18);
+}
+
+.row.docket.edge-refuse {
+  box-shadow: -2px 0 12px rgba(224, 69, 69, 0.18);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .card.grant,
   .card.refuse,
