@@ -1,7 +1,7 @@
-# Lesson card — 41c8700
+# Lesson card — a035da1
 
 1. What changed
-visual: WIN MODE receipt-ceiling clarity — paper slips + ledger
+visual: judges 30s — Demo dock cue + teach callout + OVER tab pulse
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
