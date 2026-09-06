@@ -1232,6 +1232,85 @@ textarea.forge-input {
   color: var(--muted, #9aa);
 }
 
+/* —— Evolve: first-paint hero / try-it / inbox (judge path) —— */
+/* Visible under first-screen.css; stakes-line / workshop stay hidden. */
+.hero {
+  padding: 1.05rem 1.15rem 1.15rem;
+}
+
+.hero .eyebrow {
+  margin-bottom: 0.35rem;
+}
+
+.lede.everyday {
+  max-width: 38rem;
+  font-size: 1.02rem;
+}
+
+.stack-tags {
+  margin: 0.75rem 0 0.15rem;
+  gap: 0.35rem;
+}
+
+.stack-tags li {
+  padding: 0.26rem 0.58rem;
+  font-size: 0.68rem;
+}
+
+.try-now {
+  margin: 0.95rem 0 0.85rem;
+  padding: 0.95rem 1rem;
+  border-radius: 14px;
+}
+
+.try-label {
+  margin-bottom: 0.55rem;
+}
+
+.steps {
+  margin: 0 0 1rem;
+  padding: 0.7rem 0.75rem 0.7rem 1.4rem;
+  font-size: 0.9rem;
+}
+
+.board-grid {
+  margin-top: 0.15rem;
+}
+
+.panel.verdict-panel,
+.board-grid > .panel {
+  min-height: 11rem;
+}
+
+.row.docket {
+  gap: 0.1rem 0.55rem;
+  border-radius: 9px;
+}
+
+.row.docket .subj {
+  font-size: 0.88rem;
+  line-height: 1.3;
+}
+
+.ledger-input {
+  width: 100%;
+  max-width: 7.5rem;
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 0.82rem;
+  color: var(--ink);
+  background: #0a1220;
+  border: 1px solid #2a3a55;
+  border-radius: 6px;
+  padding: 0.28rem 0.4rem;
+}
+
+.ledger-input:focus {
+  outline: none;
+  border-color: var(--blue);
+  box-shadow: 0 0 0 2px var(--blue-dim);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .card.grant,
   .card.refuse,
