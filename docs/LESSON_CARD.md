@@ -1,7 +1,7 @@
-# Lesson card — 3111e64
+# Lesson card — 05bd24a
 
 1. What changed
-fix(ci): quote lesson-card if-expression
+forge: fault taxonomy LIVE + GRANT⇔mask==0 teach on verdict (residual honesty)
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
