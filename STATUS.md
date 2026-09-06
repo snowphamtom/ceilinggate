@@ -45,3 +45,7 @@
 ## Demo pack (off-phone)
 - GH release: https://github.com/snowphamtom/ceilinggate/releases/tag/allgas-demo-20260905
 - Shots:  (01–04; 04 = AgentMail+inbox)
+
+## Originality HARD LOCK
+MUST: email claim + public receipt URL → Firecrawl → ResidualGates GRANT/REFUSE + plain-English failed lines; forensic board.
+NOT: waynesutton AgentMail chat-demo rebrand, Firecrawl docs-search chat, generic AI inbox chat, Magpie/T&E commercial pitch.

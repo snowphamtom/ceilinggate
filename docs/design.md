@@ -37,12 +37,12 @@ Judges score **everyday usefulness** + **sponsor stack doing real work**, not an
 
 | Sponsor | Load-bearing job in CeilingGate |
 |--------|----------------------------------|
-| **AgentMail** | Claim ingress. Real inbox → webhook → Convex thread. Without AgentMail there is no product surface. |
+| **AgentMail** | Claim ingress. Real inbox → webhook → Convex claim case. Without AgentMail there is no product surface. |
 | **Firecrawl** | Independent interior. Scrapes the linked public receipt/page into numbers. Without Firecrawl, interiors are hand-waved. |
 | **Convex** | Source of truth + gate + realtime UI. Schema, actions, http webhooks, `useQuery` GRANT/REFUSE. Host on `*.convex.site`. |
 | **OpenAI / Codex** | Build + optional extract assist (parse claim text / receipt markdown). Prefer Convex AI Gateway if team is paid; otherwise fixture-first so demo never depends on a key. |
 
-Differentiation: ResidualGates is a **machine-checkable policy** (Lean-backed semantics), not an LLM “approve” button. Everyday use: T&E / fuel / vendor ceilings — a real person opens the inbox this week.
+Differentiation: ResidualGates is a **machine-checkable policy** (Lean-backed semantics), not an LLM “approve” button. Everyday use: expense / fuel / vendor ceilings — a real person opens the inbox this week.
 
 ---
 

@@ -72,3 +72,6 @@ code { font-family: "IBM Plex Mono", ui-monospace, monospace; }
 .grant-btn, .refuse-btn { flex: 1; border: 0; border-radius: 8px; padding: 0.5rem 0.75rem; font-weight: 700; cursor: pointer; }
 .grant-btn { background: #1f9d63; color: #04140c; }
 .refuse-btn { background: #d64545; color: #fff; }
+
+.orig-lock { margin: 0.75rem 0 0; padding: 0.55rem 0.75rem; border-radius: 8px; border: 1px solid #3a4a22; background: #121a12; color: #c5d8a8; font-size: 0.85rem; }
+.orig-lock strong { color: #d4f08a; }

@@ -173,6 +173,9 @@ export default function App() {
         </div>
       </header>
 
+      <div className="orig-lock" role="note">
+        <strong>Forensic board</strong> — everyday expense claims. Not a chat thread, not docs-search, not an AI inbox buddy.
+      </div>
       <div className="stack-strip" aria-label="Required stack">
         <span className={"chip-stack" + (hasConvex ? " on" : "")}>
           Convex {hasConvex ? "live" : "demo"}

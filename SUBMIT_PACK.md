@@ -11,7 +11,7 @@
 | Health | https://quirky-rhinoceros-204.convex.site/health → `{"ok":true,"app":"CeilingGate"}` |
 | Public GH | https://github.com/snowphamtom/ceilinggate |
 | Inbox | ceilinggate-claims@agentmail.to |
-| Tip | `cc0eea6` |
+| Tip | `522a36d` (STATUS video FULL GO; `cc0eea6` stale) |
 | Demo cut | `/workspace/ceilinggate-demo/out/CeilingGate-AllGas-demo.mp4` (~1:57) |
 | Shots | `01-hero` … `04-inbox` CLOSED (recrop done) |
 
@@ -44,7 +44,7 @@ Email a money claim with a public receipt link. CeilingGate scrapes the receipt,
 - **Eve:** NEW money/receipt fixtures only
 - **MANAGER:** browser submit + keep team synced; draft social for Taylor
 
-## Bob eligibility pack (2026-09-05 ~19:00 CT BUILD GO)
+## Bob eligibility pack (2026-09-05 ~19:01 CT BUILD GO)
 
 Primary: https://luma.com/convex-allgas-hackathon · https://www.convex.dev/hackathons/all-gas
 
