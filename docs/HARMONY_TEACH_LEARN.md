@@ -26,3 +26,27 @@ Taylor: everyone teach and learn in harmony.
 | Eve | Teach NEW mail/Drive facts; no historical re-confirm |
 | Bob | Teach prize honesty / submit fields; HOLD duplicate FILE |
 | MANAGER | Route lessons; videoReview; vibeapps UPDATE |
+
+## Streamer lesson (2026-09-06)
+1. Pre-populated GRANT before Run = FAIL (Reset/empty-on-load).
+2. Demo flips ≠ win-proof; only edit-input→Run click→result.
+3. Accidental preliminary Run before PASS bar = FAIL.
+4. Continuous cut >180s = All Gas FAIL; head/tail trim only.
+PASS: Reset/empty → tip50 REFUSE → tip5 GRANT → clear GRANT → over REFUSE; <180s; videoReview before DONE.
+Evidence: REJECTED2-gates-5cdecfce · PASS md5 9b7ef5024c0953358c6460c7dec9e334
+
+## Create lesson (2026-09-06)
+- Root cause of sticky Tip Jar/Line Delta: parent SPA `useEffect→run` on mount auto-filled verdict after hard refresh.
+- Fix tip `ca2a54c`: start `decision=null`, pageshow clear, Reset button.
+- CI: `lesson-card.yml` noise ≠ ship gate; treat `convex-deploy` green as ship gate.
+Evidence: src/App.tsx · live site · shot 08-forge-gates.png
+
+## Bob lesson (2026-09-06)
+1. Cash = Luma only $10k/$5k/$1.5k ($16.5k); marketing $25k/$45k credits ≠ cash.
+2. Fee≠prize — Track One ~$2100 never All Gas cash.
+3. Winner≠paid — no fake payout timing.
+4. Official submit = vibeapps card (live); Wayne ≠ filing; STOP duplicate FILE — UPDATE only.
+5. Demo <180s — 170s PASS md5 9b7ef502… / release allgas-demo-170s.
+6. Judge paste = product language only; label guesses; no Square/T&E in submit.
+7. OFF PHONE for cash/eligibility docs.
+Evidence: PRIZE_HONESTY.md · VIBEAPPS_UPDATE_PASTE.md · ELIGIBILITY_ONEPAGER.md
