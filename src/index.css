@@ -1540,6 +1540,35 @@ textarea.forge-input {
   margin: 0.1rem 0 0.55rem;
 }
 
+
+
+/* —— Judges 30s d: receipt legend + ADMIT line —— */
+.paper-slip-legend {
+  padding-top: 0.25rem;
+  border-top: 1px dashed rgba(58, 84, 120, 0.55);
+  color: #b8c9e0;
+}
+
+.paper-slip-legend::before {
+  content: "RECEIPT ";
+  color: var(--amber);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.conjunctive-line {
+  letter-spacing: 0.01em;
+}
+
+.conjunctive-line.ok {
+  font-weight: 650;
+}
+
+.status-chip {
+  min-width: 3.4rem;
+  text-align: center;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .card.grant,
   .card.refuse,
