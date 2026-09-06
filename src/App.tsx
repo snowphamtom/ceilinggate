@@ -242,6 +242,7 @@ export default function App() {
         <TipJarHonestyPanel />
         <LineDeltaKitPanel />
         <MaskChipLitePanel />
+        <UrlReceiptGatePanel />
       </section>
 
       <section className="panel forge-panel" id="forge-open-live" aria-label="Open live Forge apps">
@@ -710,4 +711,245 @@ function MaskChipLitePanel() {
   );
 }
 
+
+
+
+function parseInteriorText(text: string): number[] {
+  const tagged = text.match(/INTERIOR:\s*([0-9.,\s]+)/i);
+  if (tagged?.[1]) return parseNumList(tagged[1]);
+  const dollars = [...text.matchAll(/\$([0-9]+(?:\.[0-9]+)?)/g)].map((m) => Number(m[1]));
+  return dollars;
+}
+
+function UrlReceiptGatePanel() {
+  const [url, setUrl] = useState("/receipts/fuel-grant.html");
+  const [claimedStr, setClaimedStr] = useState("98, 49, 25, 9");
+  const [decision, setDecision] = useState<GateDecision | null>(null);
+  const [interior, setInterior] = useState<number[] | null>(null);
+  const [receiptShown, setReceiptShown] = useState("");
+  const [err, setErr] = useState<string | null>(null);
+  const [busy, setBusy] = useState(false);
+
+  useEffect(() => {
+    setDecision(null);
+    setInterior(null);
+    setErr(null);
+    const onPageShow = (e: PageTransitionEvent) => {
+      if (e.persisted) {
+        setDecision(null);
+        setInterior(null);
+        setErr(null);
+      }
+    };
+    window.addEventListener("pageshow", onPageShow);
+    return () => window.removeEventListener("pageshow", onPageShow);
+  }, []);
+
+  const resolveUrl = (raw: string) => {
+    const u = raw.trim();
+    if (!u) return "";
+    if (u.startsWith("http")) return u;
+    if (u.startsWith("/")) return `${window.location.origin}${u}`;
+    return u;
+  };
+
+  const run = useCallback(async () => {
+    setBusy(true);
+    setErr(null);
+    try {
+      const resolved = resolveUrl(url);
+      if (!resolved) throw new Error("Pick a public receipt URL");
+      const res = await fetch(resolved, { credentials: "omit" });
+      if (!res.ok) throw new Error(`fetch ${res.status}`);
+      const text = await res.text();
+      const inn = parseInteriorText(text);
+      if (!inn.length) throw new Error("no INTERIOR / $ lines on page");
+      const claimed = parseNumList(claimedStr);
+      setInterior(inn);
+      setReceiptShown(resolved);
+      setDecision(gateB(inn, claimed));
+    } catch (e) {
+      setDecision(null);
+      setInterior(null);
+      setErr(e instanceof Error ? e.message : String(e));
+    } finally {
+      setBusy(false);
+    }
+  }, [url, claimedStr]);
+
+  return (
+    <div className="forge-child" data-testid="url-receipt-gate-live">
+      <h3 className="forge-sub">URL Receipt Gate — LIVE</h3>
+      <p className="muted small">
+        Beats Attest/NoticeProof/Block: fetch a public receipt page, compare claimed ≤ on-receipt,
+        plain-English overs. Empty on load — not inbox yes/no.
+      </p>
+      <label className="forge-label">
+        Public receipt URL
+        <select
+          className="forge-input"
+          value={url.startsWith("/receipts/") ? url : ""}
+          onChange={(e) => {
+            if (e.target.value) setUrl(e.target.value);
+          }}
+        >
+          <option value="">Custom…</option>
+          <option value="/receipts/fuel-grant.html">/receipts/fuel-grant.html</option>
+          <option value="/receipts/fuel-refuse.html">/receipts/fuel-refuse.html</option>
+        </select>
+      </label>
+      <label className="forge-label">
+        Or type URL
+        <input className="forge-input" value={url} onChange={(e) => setUrl(e.target.value)} />
+      </label>
+      <label className="forge-label">
+        Claimed lines
+        <input
+          className="forge-input"
+          value={claimedStr}
+          onChange={(e) => setClaimedStr(e.target.value)}
+        />
+      </label>
+      <div className="row">
+        <button
+          type="button"
+          className="ghost"
+          disabled={busy}
+          onClick={() => {
+            setUrl("/receipts/fuel-grant.html");
+            setClaimedStr("98, 49, 25, 9");
+            void (async () => {
+              setUrl("/receipts/fuel-grant.html");
+              setClaimedStr("98, 49, 25, 9");
+              setBusy(true);
+              setErr(null);
+              try {
+                const resolved = `${window.location.origin}/receipts/fuel-grant.html`;
+                const res = await fetch(resolved);
+                const text = await res.text();
+                const inn = parseInteriorText(text);
+                setInterior(inn);
+                setReceiptShown(resolved);
+                setDecision(gateB(inn, [98, 49, 25, 9]));
+              } catch (e) {
+                setErr(e instanceof Error ? e.message : String(e));
+              } finally {
+                setBusy(false);
+              }
+            })();
+          }}
+        >
+          Demo GRANT
+        </button>
+        <button
+          type="button"
+          className="ghost"
+          disabled={busy}
+          onClick={() => {
+            void (async () => {
+              setUrl("/receipts/fuel-refuse.html");
+              setClaimedStr("98, 51, 25, 11");
+              setBusy(true);
+              setErr(null);
+              try {
+                const resolved = `${window.location.origin}/receipts/fuel-refuse.html`;
+                const res = await fetch(resolved);
+                const text = await res.text();
+                const inn = parseInteriorText(text);
+                setInterior(inn);
+                setReceiptShown(resolved);
+                setDecision(gateB(inn, [98, 51, 25, 11]));
+              } catch (e) {
+                setErr(e instanceof Error ? e.message : String(e));
+              } finally {
+                setBusy(false);
+              }
+            })();
+          }}
+        >
+          Demo REFUSE
+        </button>
+        <button
+          type="button"
+          className="ghost"
+          onClick={() => {
+            setDecision(null);
+            setInterior(null);
+            setErr(null);
+          }}
+        >
+          Reset
+        </button>
+        <button type="button" className="primary" disabled={busy} onClick={() => void run()}>
+          {busy ? "Fetching…" : "Fetch + Run gate"}
+        </button>
+      </div>
+      {err ? (
+        <div className="card refuse">
+          <strong>REFUSE</strong>
+          <p className="muted small">Could not read receipt: {err}</p>
+        </div>
+      ) : null}
+      {decision && interior ? (
+        <div className={"card " + (decision.status === "grant" ? "grant" : "refuse")}>
+          <strong>{decision.status === "grant" ? "GRANT" : "REFUSE"}</strong>
+          <p className="muted small">
+            <strong>Receipt</strong> {receiptShown}
+          </p>
+          {decision.failedIndices.length > 0 ? (
+            <ul className="plain-fail">
+              {decision.failedIndices.map((i) => {
+                const c = parseNumList(claimedStr)[i] ?? 0;
+                const n = interior[i] ?? 0;
+                return (
+                  <li key={i}>
+                    Line {i} claimed {money(c)} over on-receipt {money(n)} by {money(c - n)}
+                  </li>
+                );
+              })}
+            </ul>
+          ) : (
+            <p className="ok-line">Every line clears — claimed ≤ on-receipt.</p>
+          )}
+          <table className="delta-table">
+            <thead>
+              <tr>
+                <th>Line</th>
+                <th>Claimed</th>
+                <th>On receipt</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {Array.from({ length: Math.max(parseNumList(claimedStr).length, interior.length) }).map(
+                (_, i) => {
+                  const c = parseNumList(claimedStr)[i];
+                  const n = interior[i];
+                  const ok =
+                    Number.isFinite(c) && Number.isFinite(n) && (c as number) <= (n as number);
+                  return (
+                    <tr key={i}>
+                      <td>{i}</td>
+                      <td>{money(c ?? 0)}</td>
+                      <td>{money(n ?? 0)}</td>
+                      <td className={ok ? "ok" : "bad"}>
+                        {ok ? "CLEAR" : `OVER ${money((c ?? 0) - (n ?? 0))}`}
+                      </td>
+                    </tr>
+                  );
+                },
+              )}
+            </tbody>
+          </table>
+        </div>
+      ) : null}
+      <p className="muted small">
+        Also open{" "}
+        <a href="/forge/url-receipt-gate/" target="_blank" rel="noreferrer">
+          /forge/url-receipt-gate/
+        </a>
+      </p>
+    </div>
+  );
+}
 
