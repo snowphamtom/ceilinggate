@@ -1,7 +1,7 @@
-# Lesson card — 4916d56
+# Lesson card — b0cfd25
 
 1. What changed
-visual: judges 30s-e/f — RESULT empty denser + ledger header chrome
+visual: judges 30s-g — try-label flex + steps code chip
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
