@@ -1,7 +1,7 @@
-# Lesson card — 14e8106
+# Lesson card — ff68006
 
 1. What changed
-docs: SuperGrok Heavy master admin pass (peer to MANAGER)
+visual: denser pass-bar + RESULT C≤S rail + tighter ledger/bits
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
