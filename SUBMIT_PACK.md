@@ -11,7 +11,7 @@
 | Health | https://quirky-rhinoceros-204.convex.site/health → `{"ok":true,"app":"CeilingGate"}` |
 | Public GH | https://github.com/snowphamtom/ceilinggate |
 | Inbox | ceilinggate-claims@agentmail.to |
-| Tip | `522a36d` (STATUS video FULL GO; `cc0eea6` stale) |
+| Tip | `df057b8` (originality HARD LOCK; forensic board) |
 | Demo cut | `/workspace/ceilinggate-demo/out/CeilingGate-AllGas-demo.mp4` (~1:57) |
 | Shots | `01-hero` … `04-inbox` CLOSED (recrop done) |
 
@@ -29,10 +29,14 @@ Winner announced ≠ cash-in-hand. No Square / T&E SKU in this pack.
 - [x] Frontend on `*.convex.site`
 - [x] Public GitHub
 - [x] `04-inbox` shot recrop CLOSED
-- [ ] hackathon.md build log current (Create)
+- [x] hackathon.md build log current (Create)
 - [ ] Video demo &lt; 3 min — cut ~1:57 exists; final record/upload TBD (Streamer)
 - [ ] Social post draft tagging @convex @OpenAI @firecrawl @agentmail (Taylor sends)
 - [ ] vibeapps.dev form submitted
+
+## Originality HARD LOCK
+MUST: claim email + public receipt → Firecrawl → ResidualGates GRANT/REFUSE + plain English. Forensic board.
+NOT: waynesutton AgentMail chat-demo, docs-search chat, AI inbox buddy, Magpie/T&E commercial pitch.
 
 ## One-line pitch (judges)
 Email a money claim with a public receipt link. CeilingGate scrapes the receipt, compares each line to what was claimed, and returns GRANT or REFUSE with failed lines in plain English.
