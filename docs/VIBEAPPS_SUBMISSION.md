@@ -2,7 +2,7 @@
 
 **Listing:** https://vibeapps.dev/s/ceilinggate · **no duplicate FILE**  
 **PASS bar:** <180s continuous edit→Run  
-**Video (HQ live · 67s 30fps):** https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-hq/CeilingGate-Forge-gates-clip-HQ.mp4  
+**Video (prefer-live LOCKED · HQ · 67s 30fps):** https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-hq/CeilingGate-Forge-gates-clip-HQ.mp4  
 **Fallback (170s):** https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-170s/CeilingGate-Forge-gates-clip.mp4  
 **Differentiate:** rivals chat verdicts; CeilingGate fetches public receipt + fails lines in plain English.  
 **Box paste:** `/workspace/ceilinggate-demo/VIBEAPPS_UPDATE_PASTE.md`
