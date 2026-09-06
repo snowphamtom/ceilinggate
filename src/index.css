@@ -1697,6 +1697,25 @@ textarea.forge-input {
   box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.3), 0 0 12px rgba(91, 157, 255, 0.08);
 }
 
+
+
+/* —— Standing polish l: conjunctive ADMIT denser —— */
+.conjunctive-line {
+  padding: 0.6rem 0.75rem;
+}
+
+.conjunctive-line strong {
+  color: #ffb0b0;
+}
+
+.conjunctive-line.ok strong {
+  color: #6ee7a8;
+}
+
+.ok-line {
+  font-size: 0.9rem;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .card.grant,
   .card.refuse,
