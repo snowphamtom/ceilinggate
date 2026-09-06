@@ -323,7 +323,7 @@ function VerdictCard({ selected, plain }: { selected: LocalDecision; plain: stri
   return (
     <div className={ok ? "card grant big" : "card refuse big"}>
       <p className="eyebrow">{ok ? "All lines clear" : "Over the receipt"}</p>
-      <h3>{ok ? "GRANT" : "REFUSE"}</h3>
+      <h3><span className="verdict-stamp">{ok ? "GRANT" : "REFUSE"}</span></h3>
       {selected.aiLine ? <p className="ai-line"><strong>In one line.</strong> {selected.aiLine}</p> : null}
       {plain.length > 0 ? (
         <ul className="plain-fail">{plain.map((line) => <li key={line}>{line}</li>)}</ul>
@@ -342,7 +342,7 @@ function VerdictCard({ selected, plain }: { selected: LocalDecision; plain: stri
                 <td>{capitalize(name)}</td>
                 <td>{money(c)}</td>
                 <td>{money(n)}</td>
-                <td>{fail ? "OVER" : "CLEAR"}</td>
+                <td><span className={"status-chip " + (fail ? "over" : "clear")}>{fail ? "OVER" : "CLEAR"}</span></td>
               </tr>
             );
           })}
@@ -395,7 +395,7 @@ function GateLedgerTable({
               <td>{row.line}</td>
               <td>{money(row.claimed)}</td>
               <td>{money(row.interior)}</td>
-              <td className={row.over ? "bad" : "ok"}>{row.over ? "OVER" : "CLEAR"}</td>
+              <td className={row.over ? "bad" : "ok"}><span className={"status-chip " + (row.over ? "over" : "clear")}>{row.over ? "OVER" : "CLEAR"}</span></td>
             </tr>
           ))}
         </tbody>
@@ -1052,7 +1052,7 @@ function DualOracleDisagreePanel() {
         </button>
       </div>
       {verdictA && verdictB ? (
-        <div className="dual-oracle-grid">
+        <div className={"dual-oracle-grid" + (split ? " split" : "")}>
           {split ? (
             <p className="conjunctive-line">
               Split — Gate A and Gate B disagree. Both stay on the board (not a single
