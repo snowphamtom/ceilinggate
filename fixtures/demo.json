@@ -3423,6 +3423,131 @@
         "1z15YBzrlM_QdGz2GZDClZdnnXpWnyCzh"
       ],
       "scrapeFixtureText": "INTERIOR: 1, 0, 0\nFORENSIC Eve Batch17: PIER announcement; program\u2260paid"
+    },
+    {
+      "id": "sub-spec-clean-1004-feecart",
+      "caseId": "CG-EVE-B18-01",
+      "label": "REFUSE \u2014 Substitute spec clean body vs unpaid $1004 fee-cart (2111/2311/2051/2252)",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "spec_body",
+        "fee_2111",
+        "fee_2311",
+        "fee_2051",
+        "fee_2252",
+        "paid"
+      ],
+      "email": {
+        "subject": "[FORENSIC] 03_SUBSTITUTE_SPECIFICATION_CLEAN vs $1004 fee-cart \u2014 Eve B18",
+        "from": "eve-fuel@monstersink.example",
+        "body": "CLAIMED: 1, 160, 160, 160, 524, 1\nINTERIOR: 1, 160, 160, 160, 524, 0\nfileId 101YDrhuq3EKE2USMAtZnuP7UmkRleUQK\nFormat body vs unpaid fee-cart lines; public fee-schedule. Fee\u2260prize. Money-bar candidate.",
+        "receiptUrl": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule"
+      },
+      "claimed": [
+        1,
+        160,
+        160,
+        160,
+        524,
+        1
+      ],
+      "interior": [
+        1,
+        160,
+        160,
+        160,
+        524,
+        0
+      ],
+      "expect": {
+        "status": "refuse",
+        "mask": 32,
+        "failedIndices": [
+          5
+        ]
+      },
+      "driveFileIds": [
+        "101YDrhuq3EKE2USMAtZnuP7UmkRleUQK"
+      ],
+      "scrapeFixtureText": "INTERIOR: 1, 160, 160, 160, 524, 0\nFORENSIC Eve Batch18: sub-spec clean vs unpaid $1004 fee-cart"
+    },
+    {
+      "id": "sb0478-blank-pier",
+      "caseId": "CG-EVE-B18-02",
+      "label": "REFUSE \u2014 sb0478 blank PIER form vs public USPTO twin (filed=0/paid=0)",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "form_present",
+        "filed",
+        "paid"
+      ],
+      "email": {
+        "subject": "[FORENSIC] sb0478 blank PIER \u2014 Eve B18",
+        "from": "eve-fuel@monstersink.example",
+        "body": "CLAIMED: 1, 1, 1\nINTERIOR: 1, 0, 0\nfileId 1V0SrMfc3a7CLqlnyrWDS1-tjR2_rNzC7\nBlank PIER form \u2194 public twin; filed=0/paid=0. Fee\u2260prize.",
+        "receiptUrl": "https://www.uspto.gov/sites/default/files/documents/sb0478.pdf"
+      },
+      "claimed": [
+        1,
+        1,
+        1
+      ],
+      "interior": [
+        1,
+        0,
+        0
+      ],
+      "expect": {
+        "status": "refuse",
+        "mask": 6,
+        "failedIndices": [
+          1,
+          2
+        ]
+      },
+      "driveFileIds": [
+        "1V0SrMfc3a7CLqlnyrWDS1-tjR2_rNzC7"
+      ],
+      "scrapeFixtureText": "INTERIOR: 1, 0, 0\nFORENSIC Eve Batch18: sb0478 blank PIER; not filed/paid"
+    },
+    {
+      "id": "abstract-enclosure-not-payment",
+      "caseId": "CG-EVE-B18-03",
+      "label": "REFUSE \u2014 06_ABSTRACT enclosure vs not payment",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "abstract_enclosure",
+        "payment",
+        "grant"
+      ],
+      "email": {
+        "subject": "[FORENSIC] 06_ABSTRACT enclosure \u2014 Eve B18",
+        "from": "eve-fuel@monstersink.example",
+        "body": "CLAIMED: 1, 1, 1\nINTERIOR: 1, 0, 0\nfileId 1M1t7tVDOXUES2eUbTvHB1Po3khhjbgM6\nEnclosure vs not payment. Fee\u2260prize. Full pack.",
+        "receiptUrl": "https://patentcenter.uspto.gov/"
+      },
+      "claimed": [
+        1,
+        1,
+        1
+      ],
+      "interior": [
+        1,
+        0,
+        0
+      ],
+      "expect": {
+        "status": "refuse",
+        "mask": 6,
+        "failedIndices": [
+          1,
+          2
+        ]
+      },
+      "driveFileIds": [
+        "1M1t7tVDOXUES2eUbTvHB1Po3khhjbgM6"
+      ],
+      "scrapeFixtureText": "INTERIOR: 1, 0, 0\nFORENSIC Eve Batch18: abstract enclosure \u2260 payment"
     }
   ],
   "seedUrls": [
@@ -3452,7 +3577,7 @@
     "ssv-residual",
     "atec-phase2",
     "lean-kernel-receipt",
-    "bits-48",
+    "sub-spec-clean-1004-feecart",
     "gate-b-host",
     "drive-diu-swap-usv",
     "drive-pass-job",
