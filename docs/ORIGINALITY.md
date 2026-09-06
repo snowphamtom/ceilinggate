@@ -12,3 +12,8 @@ Email claim + public receipt URL → Firecrawl scrape → ResidualGates line led
 
 ## Demo signature
 `te-grant` then `te-refuse` ($1 lodging + misc) via **Demo signature: GRANT → $1 REFUSE**.
+
+## Forge originality micro
+`/forge/url-receipt-gate/` — public receipt URL → fetch page → ResidualGates ledger + plain English.
+Beats Attest/NoticeProof-style inbox yes/no: forensic board against a real public receipt, not a chat verdict.
+

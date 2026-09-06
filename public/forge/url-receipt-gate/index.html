@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>URL Receipt Gate — LIVE</title>
+  <style>
+    :root { color-scheme: dark; font-family: system-ui, sans-serif; }
+    body { margin: 0; background: #0b1220; color: #e8eef7; padding: 1.25rem; max-width: 40rem; }
+    h1 { font-size: 1.35rem; margin: 0 0 0.35rem; }
+    .lede { color: #a8bdd8; font-size: 0.92rem; margin: 0 0 1rem; }
+    label { display: block; margin: 0.55rem 0; font-size: 0.85rem; color: #a8bdd8; }
+    input, select { display: block; width: 100%; box-sizing: border-box; margin-top: 0.25rem;
+      padding: 0.55rem 0.65rem; border-radius: 8px; border: 1px solid #2a3a55;
+      background: #121a2b; color: #e8eef7; font: inherit; }
+    .row { display:flex; flex-wrap:wrap; gap:0.5rem; margin-top:0.75rem; }
+    button { padding: 0.55rem 0.9rem; border-radius: 8px; border: 1px solid #2a6df4;
+      background: #1a3a7a; color: #fff; font-weight: 600; cursor: pointer; }
+    button.ghost { background: transparent; border-color: #94a3b8; }
+    button:disabled { opacity: 0.5; cursor: wait; }
+    .card { margin-top: 1rem; padding: 1rem; border-radius: 10px; border: 1px solid #2a3a55; }
+    .card.grant { border-color: #1f9d63; background: rgba(31,157,99,0.12); }
+    .card.refuse { border-color: #d64545; background: rgba(214,69,69,0.12); }
+    table { width:100%; border-collapse: collapse; margin-top:0.75rem; font-size:0.88rem; }
+    th, td { text-align:left; padding:0.35rem 0.4rem; border-bottom:1px solid #2a3a55; font-family: ui-monospace, monospace; }
+    td.ok { color:#6ee7a8; } td.bad { color:#fca5a5; }
+    ul.plain { margin: 0.5rem 0 0; padding-left: 1.1rem; color: #fca5a5; font-size: 0.9rem; }
+    .chip { display:inline-block; margin-top:0.35rem; padding:0.2rem 0.5rem; border-radius:6px;
+      border:1px solid #3a4f6f; color:#9ec5ff; font-family:ui-monospace,monospace; font-size:0.8rem; }
+    a { color: #9ec5ff; }
+    .badge { display:inline-block; font-size:0.75rem; padding:0.15rem 0.45rem; border-radius:999px;
+      border:1px solid #3a4f6f; color:#a8bdd8; margin-bottom:0.5rem; }
+  </style>
+</head>
+<body>
+  <span class="badge">Not inbox chat · forensic board</span>
+  <h1>URL Receipt Gate</h1>
+  <p class="lede">
+    Better than Attest-style yes/no: paste a <strong>public receipt URL</strong>, claim lines,
+    fetch the page, compare claimed ≤ on-receipt → GRANT/REFUSE + plain English. Starts empty.
+  </p>
+  <label>Public receipt URL
+    <select id="preset">
+      <option value="">Custom URL…</option>
+      <option value="/receipts/fuel-grant.html">/receipts/fuel-grant.html</option>
+      <option value="/receipts/fuel-refuse.html">/receipts/fuel-refuse.html</option>
+    </select>
+  </label>
+  <label>Or type URL<input id="url" placeholder="https://… or /receipts/…" value="" /></label>
+  <label>Claimed lines (comma-separated)<input id="claimed" value="98, 49, 25, 9" /></label>
+  <div class="row">
+    <button type="button" class="ghost" id="demoGrant">Demo GRANT</button>
+    <button type="button" class="ghost" id="demoRefuse">Demo REFUSE</button>
+    <button type="button" class="ghost" id="reset">Reset</button>
+    <button type="button" id="run">Fetch + Run gate</button>
+  </div>
+  <div id="out" class="card" hidden></div>
+  <p class="lede"><a href="/">← CeilingGate</a> · <a href="/forge/tip-jar-honesty/">Tip Jar</a></p>
+  <script>
+    function gateB(interior, claimed) {
+      if (interior.length !== claimed.length) return { status: "refuse", mask: 1, failedIndices: [] };
+      const failed = [];
+      for (let i = 0; i < interior.length; i++) if (claimed[i] > interior[i]) failed.push(i);
+      const mask = failed.reduce((m, i) => m | (1 << i), 0);
+      return failed.length ? { status: "refuse", mask: mask || 1, failedIndices: failed }
+        : { status: "grant", mask: 0, failedIndices: [] };
+    }
+    function parseNums(s) { return s.split(/[\s,]+/).filter(Boolean).map(Number); }
+    function money(n) { return "$" + (Number.isFinite(n) ? n.toFixed(2) : "—"); }
+    function parseInterior(text) {
+      const m = text.match(/INTERIOR:\s*([0-9.,\s]+)/i);
+      if (m) return parseNums(m[1]);
+      const dollars = [...text.matchAll(/\$([0-9]+(?:\.[0-9]+)?)/g)].map(x => Number(x[1]));
+      return dollars;
+    }
+    function resolveUrl(raw) {
+      const u = (raw || "").trim();
+      if (!u) return "";
+      if (u.startsWith("http")) return u;
+      if (u.startsWith("/")) return location.origin + u;
+      return u;
+    }
+    async function fetchInterior(url) {
+      const res = await fetch(url, { credentials: "omit" });
+      if (!res.ok) throw new Error("fetch " + res.status);
+      const text = await res.text();
+      const interior = parseInterior(text);
+      if (!interior.length) throw new Error("no INTERIOR / $ lines found");
+      return interior;
+    }
+    function show(claimed, interior, url, err) {
+      const out = document.getElementById("out");
+      out.hidden = false;
+      if (err) {
+        out.className = "card refuse";
+        out.innerHTML = "<strong>REFUSE</strong><p class='lede'>Could not read receipt: " + err + "</p>";
+        return;
+      }
+      const d = gateB(interior, claimed);
+      out.className = "card " + d.status;
+      const n = Math.max(claimed.length, interior.length);
+      let rows = "";
+      const plain = [];
+      for (let i = 0; i < n; i++) {
+        const c = claimed[i], inn = interior[i];
+        const ok = Number.isFinite(c) && Number.isFinite(inn) && c <= inn;
+        const delta = Number.isFinite(c) && Number.isFinite(inn) ? c - inn : NaN;
+        if (!ok && Number.isFinite(delta)) plain.push("Line " + i + " claimed " + money(c) + " over on-receipt " + money(inn) + " by " + money(delta));
+        rows += "<tr><td>" + i + "</td><td>" + money(c) + "</td><td>" + money(inn) + "</td><td class='" +
+          (ok ? "ok" : "bad") + "'>" + (ok ? "CLEAR" : "OVER " + money(delta)) + "</td></tr>";
+      }
+      out.innerHTML = "<strong>" + d.status.toUpperCase() + "</strong>" +
+        '<div class="chip">mask ' + d.mask +
+        (d.failedIndices.length ? " · failed [" + d.failedIndices.join(",") + "]" : " · clear") + "</div>" +
+        "<p class='lede' style='margin:0.4rem 0 0'><strong>Receipt</strong> " + url + "</p>" +
+        (plain.length ? "<ul class='plain'>" + plain.map(x => "<li>" + x + "</li>").join("") + "</ul>" : "<p class='lede'>Every line clears — claimed ≤ on-receipt.</p>") +
+        "<table><thead><tr><th>Line</th><th>Claimed</th><th>On receipt</th><th>Status</th></tr></thead><tbody>" +
+        rows + "</tbody></table>";
+    }
+    document.getElementById("preset").onchange = (e) => {
+      if (e.target.value) document.getElementById("url").value = e.target.value;
+    };
+    document.getElementById("demoGrant").onclick = async () => {
+      document.getElementById("url").value = "/receipts/fuel-grant.html";
+      document.getElementById("claimed").value = "98, 49, 25, 9";
+      document.getElementById("preset").value = "/receipts/fuel-grant.html";
+      await run();
+    };
+    document.getElementById("demoRefuse").onclick = async () => {
+      document.getElementById("url").value = "/receipts/fuel-refuse.html";
+      document.getElementById("claimed").value = "98, 51, 25, 11";
+      document.getElementById("preset").value = "/receipts/fuel-refuse.html";
+      await run();
+    };
+    document.getElementById("reset").onclick = () => {
+      document.getElementById("out").hidden = true;
+      document.getElementById("out").innerHTML = "";
+    };
+    async function run() {
+      const btn = document.getElementById("run");
+      btn.disabled = true;
+      try {
+        const url = resolveUrl(document.getElementById("url").value);
+        if (!url) { show([], [], "", "pick or type a public receipt URL"); return; }
+        const claimed = parseNums(document.getElementById("claimed").value);
+        const interior = await fetchInterior(url);
+        show(claimed, interior, url, null);
+      } catch (e) {
+        show([], [], document.getElementById("url").value, String(e.message || e));
+      } finally {
+        btn.disabled = false;
+      }
+    }
+    document.getElementById("run").onclick = () => run();
+  </script>
+</body>
+</html>
