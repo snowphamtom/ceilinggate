@@ -113,4 +113,12 @@ export default defineSchema({
     deploymentId: v.string(),
     updatedAt: v.number(),
   }).index("by_key", ["key"]),
+
+  opsMessages: defineTable({
+    from: v.string(),
+    body: v.string(),
+    kind: v.string(),
+    authed: v.boolean(),
+    createdAt: v.number(),
+  }).index("by_createdAt", ["createdAt"]),
 });
