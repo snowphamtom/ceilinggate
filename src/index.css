@@ -465,6 +465,23 @@ code {
   box-shadow: inset 3px 0 0 var(--refuse);
 }
 
+.ledger-input {
+  width: 5.5rem;
+  height: 2.25rem;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #070b14;
+  color: inherit;
+  font: inherit;
+  font-variant-numeric: tabular-nums;
+  padding: 0 0.4rem;
+}
+
+.ledger-input:focus {
+  outline: 2px solid var(--blue);
+  outline-offset: 1px;
+}
+
 .delta-table td.ok { color: #6ee7a8; font-weight: 600; }
 .delta-table td.bad { color: #fca5a5; font-weight: 600; }
 

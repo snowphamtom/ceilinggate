@@ -33,6 +33,43 @@ http.route({ path: "/api/ops-messages", method: "GET", handler: opsGet });
 http.route({ path: "/api/ops-messages", method: "POST", handler: opsPost });
 http.route({ path: "/api/ops-messages", method: "OPTIONS", handler: opsGet });
 
+http.route({
+  path: "/api/decisions",
+  method: "GET",
+  handler: httpAction(async (ctx) => {
+    const rows = await ctx.runQuery(api.claims.listDecisions, { limit: 12 });
+    return new Response(
+      JSON.stringify({
+        decisions: rows.map((row) => ({
+          claim: {
+            _id: row.claim._id,
+            subject: row.claim.subject,
+            from: row.claim.from,
+            claimed: row.claim.claimed,
+            interior: row.claim.interior,
+            sourceUrl: row.claim.sourceUrl,
+          },
+          decision: row.decision
+            ? {
+                status: row.decision.status,
+                mask: row.decision.mask,
+                failedIndices: row.decision.failedIndices,
+                oneLine: row.decision.oneLine,
+              }
+            : null,
+        })),
+      }),
+      {
+        status: 200,
+        headers: {
+          "content-type": "application/json",
+          "access-control-allow-origin": "*",
+        },
+      },
+    );
+  }),
+});
+
 async function serveAsset(ctx: any, path: string) {
   let asset = await ctx.runQuery(api.site.getAsset, { path });
   if (!asset && !path.includes(".")) {

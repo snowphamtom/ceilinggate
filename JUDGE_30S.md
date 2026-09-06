@@ -6,10 +6,11 @@ Live: https://quirky-rhinoceros-204.convex.site/
 The receipt is the ceiling.
 
 1. Click **Demo GRANT** — every line at or under the receipt.
-2. Click **Demo REFUSE** — the over line is named in dollars.
-3. Optional: email a public receipt URL to `ceilinggate-claims@agentmail.to`.
-4. Firecrawl reads the page. No readable page — wait. Do not guess.
-5. OpenAI writes one sentence after the numbers. It does not decide.
+2. Change lodging to **51**. Surplus on fuel cannot cover it. The stamp becomes **REFUSE** and names the dollar.
+3. Click **Demo REFUSE** — lodging and misc over, written in dollars.
+4. Optional: email a public receipt URL to `ceilinggate-claims@agentmail.to`.
+5. Firecrawl reads the page. No readable page — wait. Do not guess.
+6. OpenAI writes one sentence after the numbers. It does not decide.
 
 A leftover on one line cannot pay a hole on another.
 

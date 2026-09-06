@@ -339,25 +339,35 @@ export default function App() {
   );
 }
 
-function VerdictCard({ selected, plain }: { selected: LocalDecision; plain: string[] }) {
-  const ok = selected.decision.status === "grant";
+function VerdictCard({ selected }: { selected: LocalDecision; plain: string[] }) {
+  const [claimed, setClaimed] = useState(selected.claimed);
+  const [interior, setInterior] = useState(selected.interior);
+
+  useEffect(() => {
+    setClaimed(selected.claimed);
+    setInterior(selected.interior);
+  }, [selected.id, selected.claimed, selected.interior]);
+
+  const decision = gateB(interior, claimed);
+  const ok = decision.status === "grant";
+  const plain = plainFailures(selected.lineItems, claimed, interior, decision.failedIndices);
+  const shrug = chatWouldShrug(interior, claimed, decision);
+
   return (
     <div className={ok ? "card grant big" : "card refuse big"}>
       <p className="eyebrow">{ok ? "All lines clear" : "Over the receipt"}</p>
       <h3><span className="verdict-stamp">{ok ? "GRANT" : "REFUSE"}</span></h3>
       <div className="mask-row">
         <span className="mask-chip">
-          mask {selected.decision.mask}
+          mask {decision.mask}
           {ok
             ? " · GRANT ⇔ mask==0"
-            : selected.decision.failedIndices.length
-              ? ` · failed [${selected.decision.failedIndices.join(",")}]`
+            : decision.failedIndices.length
+              ? ` · failed [${decision.failedIndices.join(",")}]`
               : " · nonzero mask"}
         </span>
         <span className="mask-chip">
-          {faultClassLabel(
-            faultClass(selected.interior, selected.claimed, selected.decision),
-          )}
+          {faultClassLabel(faultClass(interior, claimed, decision))}
         </span>
       </div>
       {selected.aiLine ? <p className="ai-line"><strong>In one line.</strong> {selected.aiLine}</p> : null}
@@ -366,18 +376,41 @@ function VerdictCard({ selected, plain }: { selected: LocalDecision; plain: stri
       ) : (
         <p className="ok-line">Every line is at or under the receipt.</p>
       )}
+      {ok ? (
+        <p className="muted small">Change lodging to 51. Surplus on fuel cannot cover it.</p>
+      ) : null}
       <table className="ledger">
         <thead><tr><th>LINE</th><th>CLAIMED</th><th>ON RECEIPT</th><th>STATUS</th></tr></thead>
         <tbody>
           {selected.lineItems.map((name, i) => {
-            const c = selected.claimed[i] ?? 0;
-            const n = selected.interior[i] ?? 0;
-            const fail = selected.decision.failedIndices.includes(i);
+            const fail = decision.failedIndices.includes(i);
             return (
               <tr key={`${name}-${i}`} className={fail ? "fail" : ""}>
                 <td>{capitalize(name)}</td>
-                <td>{money(c)}</td>
-                <td>{money(n)}</td>
+                <td>
+                  <input
+                    inputMode="decimal"
+                    aria-label={`Claimed ${name}`}
+                    className="ledger-input"
+                    value={Number.isFinite(claimed[i]) ? String(claimed[i]) : ""}
+                    onChange={(e) => {
+                      const n = Number(e.target.value);
+                      setClaimed((prev) => prev.map((x, idx) => (idx === i ? n : x)));
+                    }}
+                  />
+                </td>
+                <td>
+                  <input
+                    inputMode="decimal"
+                    aria-label={`Receipt ${name}`}
+                    className="ledger-input"
+                    value={Number.isFinite(interior[i]) ? String(interior[i]) : ""}
+                    onChange={(e) => {
+                      const n = Number(e.target.value);
+                      setInterior((prev) => prev.map((x, idx) => (idx === i ? n : x)));
+                    }}
+                  />
+                </td>
                 <td><span className={"status-chip " + (fail ? "over" : "clear")}>{fail ? "OVER" : "CLEAR"}</span></td>
               </tr>
             );
@@ -394,10 +427,10 @@ function VerdictCard({ selected, plain }: { selected: LocalDecision; plain: stri
           on-receipt on every line.
         </p>
       )}
-      {chatWouldShrug(selected.interior, selected.claimed, selected.decision) ? (
+      {shrug ? (
         <p className="conjunctive-line" data-testid="chat-shrug-callout">
-          Chat shrug foil: SUM claimed {vectorSum(selected.claimed)} ≤ SUM on-receipt{" "}
-          {vectorSum(selected.interior)} — Block/GIW would say totals look fine. Gate still{" "}
+          Chat shrug foil: SUM claimed {vectorSum(claimed)} ≤ SUM on-receipt{" "}
+          {vectorSum(interior)} — Block/GIW would say totals look fine. Gate still{" "}
           <strong>REFUSE</strong> on the OVER line(s).
         </p>
       ) : null}
@@ -408,9 +441,9 @@ function VerdictCard({ selected, plain }: { selected: LocalDecision; plain: stri
             className="ghost"
             onClick={() => {
               const text = refuseReceiptText(
-                selected.interior,
-                selected.claimed,
-                selected.decision,
+                interior,
+                claimed,
+                decision,
                 selected.lineItems,
               );
               void navigator.clipboard?.writeText(text);
