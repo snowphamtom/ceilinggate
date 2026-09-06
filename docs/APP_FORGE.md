@@ -19,3 +19,6 @@ Every spawned app inherits STANDING_ACCESS / FREE CREATE fences (OFF PHONE, no s
 
 ## Originality
 Forensic/create factory — **not** AgentMail chat-demo rebrand, not inbox yes/no.
+
+## Public docs seeds
+Prefer `https://docs.convex.dev/` (not www.convex.dev/documentation — 404). See `docs/FORGE_PUBLIC_URL_SEEDS_LIVE.md`.
