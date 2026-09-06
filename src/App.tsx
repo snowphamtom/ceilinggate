@@ -8,6 +8,7 @@ import {
   faultClass,
   faultClassLabel,
   gateB,
+  ketOf,
   refuseReceiptText,
   shrugTrapClaimed,
   shrugTrapInterior,
@@ -371,6 +372,9 @@ function VerdictCard({ selected }: { selected: LocalDecision; plain: string[] })
         </span>
         <span className="mask-chip">
           {faultClassLabel(faultClass(interior, claimed, decision))}
+        </span>
+        <span className="mask-chip" title="F L M X product bits">
+          {ketOf(decision.mask)} · fuel cannot flip lodging
         </span>
       </div>
       {selected.aiLine ? <p className="ai-line"><strong>In one line.</strong> {selected.aiLine}</p> : null}

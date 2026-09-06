@@ -54,6 +54,13 @@ export function decodeMask(
   return lineItems.filter((_, i) => (mask & (1 << i)) !== 0);
 }
 
+/** Computational-basis ket of the four expense bits. GRANT is |0000⟩. Lines do not entangle. */
+export function ketOf(mask: number, bits = 4): string {
+  let s = "";
+  for (let i = 0; i < bits; i++) s += (mask & (1 << i)) !== 0 ? "1" : "0";
+  return `|${s}⟩`;
+}
+
 /** gateB → { status: 'grant'|'refuse', mask, failedIndices } */
 export function gateB(interior: number[], claimed: number[]): GateDecision {
   if (enclosedR(interior, claimed)) {
