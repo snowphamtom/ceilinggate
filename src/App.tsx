@@ -197,6 +197,38 @@ export default function App() {
         <TipJarHonestyPanel />
         <LineDeltaKitPanel />
       </section>
+      <section className="panel prize-honesty" id="prize-honesty" aria-label="Prize honesty">
+        <h2>All Gas cash (Luma)</h2>
+        <table className="cash-table">
+          <thead>
+            <tr><th>Place</th><th>Cash</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Overall</td><td>$10,000</td></tr>
+            <tr><td>2nd</td><td>$5,000</td></tr>
+            <tr><td>3rd</td><td>$1,500</td></tr>
+            <tr><td><strong>Pool</strong></td><td><strong>$16,500</strong></td></tr>
+          </tbody>
+        </table>
+        <h3 className="never-h">Never say</h3>
+        <table className="never-table">
+          <thead>
+            <tr><th>Ban</th><th>Why</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>USPTO ~$2,100 Track One is prize cash</td><td>Fee≠prize</td></tr>
+            <tr><td>Guaranteed win / payout timing</td><td>Winner ≠ cash-in-hand</td></tr>
+            <tr><td>Square / $1k T&amp;E is this prize path</td><td>Commercial hard stop</td></tr>
+            <tr><td>Marketing $25k/$45k = bigger cash pool</td><td>Credits ≠ cash</td></tr>
+          </tbody>
+        </table>
+        <p className="muted small">
+          Source:{" "}
+          <a href="https://luma.com/convex-allgas-hackathon" target="_blank" rel="noreferrer">
+            Luma All Gas
+          </a>
+        </p>
+      </section>
     </div>
   );
 }

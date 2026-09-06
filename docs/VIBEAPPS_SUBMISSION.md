@@ -13,4 +13,4 @@
 - Video: https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-170s/CeilingGate-Forge-gates-clip.mp4
 - Description: Email a claim + public receipt to ceilinggate-claims@agentmail.to. Firecrawl reads the page. GRANT if every line fits; REFUSE names the overage in dollars. App Forge: spawn Tip Jar / Line Delta / Mask Chip micro-apps from the live panel.
 
-Prize honesty: $10,000 / $5,000 / $1,500 Luma only — USPTO fees not prizes. See `docs/PRIZE_HONESTY.md`.
+Prize honesty (cash table + never-say): see `docs/PRIZE_HONESTY.md` — Luma $10k/$5k/$1.5k only; Fee≠prize.
