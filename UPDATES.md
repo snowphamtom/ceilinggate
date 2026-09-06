@@ -42,6 +42,7 @@ Lightweight status board. Open on desktop/browser — nothing to install, no pho
 - Deadline: Tue Sep 22, 2026 · 12:00 PM PT
 
 ## Ops locks
+- **INCOME:** throughput → All Gas cash prizes first; see docs/INCOME_PATH.md (no fake $)
 - **SCOPE:** All Gas competition + free create anything needed (not CeilingGate-only); OFF PHONE + no sockpuppets still hold
 - **STANDING ACCESS (cascading):** every expansion self-authorizes the next step — no ask to continue (see STANDING_ACCESS.md)
 - **OFF PHONE LOCK:** all teammate creative/build on box + GH/Convex only; phone tasks canceled
