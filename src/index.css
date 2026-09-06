@@ -216,3 +216,30 @@ h1 { margin: 0 0 0.4rem; font-size: 2rem; letter-spacing: -0.03em; }
   margin: 0.6rem 0 0.2rem;
   font-weight: 600;
 }
+
+.bits { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.55rem 0; }
+.bit {
+  min-width: 2.4rem;
+  padding: 0.35rem 0.5rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(0,0,0,0.25);
+  font-family: ui-monospace, monospace;
+  font-size: 0.8rem;
+  color: #9ec5ff;
+}
+.bit.on { border-color: #d64545; background: rgba(214,69,69,0.2); color: #fca5a5; }
+.bit.off { border-color: #1f9d63; color: #6ee7a8; }
+.forge-live-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  margin-top: 0.4rem;
+}
+.forge-live-table th,
+.forge-live-table td {
+  text-align: left;
+  padding: 0.35rem 0.45rem;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.forge-live-table a { color: #9ec5ff; }

@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Receipt Line Check — LIVE gate</title>
+  <title>Receipt Line Check — LIVE</title>
   <style>
     :root { color-scheme: dark; font-family: system-ui, sans-serif; }
-    body { margin: 0; background: #0b1220; color: #e8eef7; padding: 1.25rem; max-width: 36rem; }
+    body { margin: 0; background: #0b1220; color: #e8eef7; padding: 1.25rem; max-width: 28rem; }
     h1 { font-size: 1.35rem; margin: 0 0 0.35rem; }
     .lede { color: #a8bdd8; font-size: 0.92rem; margin: 0 0 1rem; }
     label { display: block; margin: 0.55rem 0; font-size: 0.85rem; color: #a8bdd8; }
@@ -20,73 +20,56 @@
     .card { margin-top: 1rem; padding: 1rem; border-radius: 10px; border: 1px solid #2a3a55; }
     .card.grant { border-color: #1f9d63; background: rgba(31,157,99,0.12); }
     .card.refuse { border-color: #d64545; background: rgba(214,69,69,0.12); }
-    .chip { display: inline-block; margin-top: 0.35rem; padding: 0.2rem 0.5rem;
-      border-radius: 6px; border: 1px solid #3a4f6f; color: #9ec5ff; font-family: ui-monospace, monospace; font-size: 0.8rem; }
-    table { width:100%; border-collapse: collapse; margin-top:0.75rem; font-size:0.88rem; }
-    th, td { text-align:left; padding:0.35rem 0.4rem; border-bottom:1px solid #2a3a55; font-family: ui-monospace, monospace; }
-    td.ok { color:#6ee7a8; } td.bad { color:#fca5a5; }
+    .delta { font-family: ui-monospace, monospace; font-size: 1.1rem; margin-top: 0.4rem; }
     a { color: #9ec5ff; }
   </style>
 </head>
 <body>
   <h1>Receipt Line Check</h1>
-  <p class="lede">Compare claimed amounts to interior receipt lines. Grant when every claim stays at or below interior.</p>
-  <label>Claimed (comma-separated)<input id="claimed" value="98, 51, 25, 11" /></label>
-  <label>Interior / on-receipt<input id="interior" value="100, 50, 25, 10" /></label>
+  <p class="lede">Narrower than Tip Jar: one receipt line claimed vs on-receipt. Starts empty — edit → Run.</p>
+  <label>Line label<input id="label" value="Fuel" /></label>
+  <label>Claimed $<input id="claimed" type="number" step="0.01" value="51.00" /></label>
+  <label>On-receipt $<input id="interior" type="number" step="0.01" value="50.00" /></label>
   <div class="row">
     <button type="button" class="ghost" id="demoGrant">Demo GRANT</button>
     <button type="button" class="ghost" id="demoRefuse">Demo REFUSE</button>
-    <button type="button" id="run">Run gate</button>
+    <button type="button" class="ghost" id="reset">Reset</button>
+    <button type="button" id="run">Run line gate</button>
   </div>
   <div id="out" class="card" hidden></div>
   <p class="lede"><a href="/">← CeilingGate</a></p>
   <script>
-    function gateB(interior, claimed) {
-      if (interior.length !== claimed.length) return { status: "refuse", mask: 1, failedIndices: [] };
-      const failed = [];
-      for (let i = 0; i < interior.length; i++) if (claimed[i] > interior[i]) failed.push(i);
-      const mask = failed.reduce((m, i) => m | (1 << i), 0);
-      return failed.length ? { status: "refuse", mask: mask || 1, failedIndices: failed }
-        : { status: "grant", mask: 0, failedIndices: [] };
-    }
-    function parseNums(s) { return s.split(/[\s,]+/).filter(Boolean).map(Number); }
-    function money(n) { return "$" + (Number.isFinite(n) ? n.toFixed(2) : "—"); }
-    function show(claimed, interior) {
-      const d = gateB(interior, claimed);
+    function money(n) { return "$" + Number(n).toFixed(2); }
+    function show(c, n, label) {
+      const ok = c <= n;
       const out = document.getElementById("out");
       out.hidden = false;
-      out.className = "card " + d.status;
-      const n = Math.max(claimed.length, interior.length);
-      let rows = "";
-      for (let i = 0; i < n; i++) {
-        const c = claimed[i], inn = interior[i];
-        const ok = Number.isFinite(c) && Number.isFinite(inn) && c <= inn;
-        const delta = Number.isFinite(c) && Number.isFinite(inn) ? c - inn : NaN;
-        rows += "<tr><td>" + i + "</td><td>" + money(c) + "</td><td>" + money(inn) + "</td><td class='" +
-          (ok ? "ok" : "bad") + "'>" + (ok ? "CLEAR" : "OVER " + money(delta)) + "</td></tr>";
-      }
-      out.innerHTML = "<strong>" + d.status.toUpperCase() + "</strong>" +
-        '<div class="chip">mask ' + d.mask +
-        (d.failedIndices.length ? " · failed [" + d.failedIndices.join(",") + "]" : " · clear") + "</div>" +
-        "<table><thead><tr><th>Line</th><th>Claimed</th><th>Interior</th><th>Status</th></tr></thead><tbody>" +
-        rows + "</tbody></table>";
-    }
-    function read() {
-      return [parseNums(document.getElementById("claimed").value), parseNums(document.getElementById("interior").value)];
+      out.className = "card " + (ok ? "grant" : "refuse");
+      const d = c - n;
+      out.innerHTML = "<strong>" + (ok ? "GRANT" : "REFUSE") + "</strong>" +
+        "<p class='lede' style='margin:0.4rem 0 0'>" + label + ": claimed " + money(c) +
+        " vs on-receipt " + money(n) + "</p>" +
+        "<div class='delta'>" + (ok ? "Δ " + money(d) + " · clear" : "OVER " + money(d)) + "</div>";
     }
     document.getElementById("demoGrant").onclick = () => {
-      document.getElementById("claimed").value = "98, 49, 25, 9";
-      document.getElementById("interior").value = "100, 50, 25, 10";
-      show([98,49,25,9],[100,50,25,10]);
+      document.getElementById("claimed").value = "49";
+      document.getElementById("interior").value = "50";
+      show(49, 50, document.getElementById("label").value || "Line");
     };
     document.getElementById("demoRefuse").onclick = () => {
-      document.getElementById("claimed").value = "98, 51, 25, 11";
-      document.getElementById("interior").value = "100, 50, 25, 10";
-      show([98,51,25,11],[100,50,25,10]);
+      document.getElementById("claimed").value = "51";
+      document.getElementById("interior").value = "50";
+      show(51, 50, document.getElementById("label").value || "Line");
     };
-    document.getElementById("run").onclick = () => show(...read());
-    ["claimed","interior"].forEach((id) => document.getElementById(id).addEventListener("input", () => show(...read())));
-    show(...read());
+    document.getElementById("reset").onclick = () => {
+      document.getElementById("out").hidden = true;
+      document.getElementById("out").innerHTML = "";
+    };
+    document.getElementById("run").onclick = () => {
+      const c = Number(document.getElementById("claimed").value);
+      const n = Number(document.getElementById("interior").value);
+      show(c, n, document.getElementById("label").value || "Line");
+    };
   </script>
 </body>
 </html>

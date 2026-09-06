@@ -196,6 +196,62 @@ export default function App() {
         </ol>
         <TipJarHonestyPanel />
         <LineDeltaKitPanel />
+        <MaskChipLitePanel />
+      </section>
+
+      <section className="panel forge-panel" id="forge-open-live" aria-label="Open live Forge apps">
+        <h2>Open live Forge apps</h2>
+        <p className="muted small">
+          Judge-visible spawn targets — each is a real click→gate micro-app on this Convex site
+          (better than parent on its narrow claim).
+        </p>
+        <table className="forge-live-table">
+          <thead>
+            <tr>
+              <th>Child</th>
+              <th>Narrow claim</th>
+              <th>Open</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Tip Jar Honesty</td>
+              <td>tip ≤ receipt total</td>
+              <td>
+                <a href="/forge/tip-jar-honesty/" target="_blank" rel="noreferrer">
+                  /forge/tip-jar-honesty/
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <td>Line Delta Kit</td>
+              <td>claimed[] vs interior[]</td>
+              <td>
+                <a href="/forge/line-delta-kit/" target="_blank" rel="noreferrer">
+                  /forge/line-delta-kit/
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <td>Mask Chip Lite</td>
+              <td>interactive failed-line bits</td>
+              <td>
+                <a href="/forge/mask-chip-lite/" target="_blank" rel="noreferrer">
+                  /forge/mask-chip-lite/
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <td>Receipt Line Check</td>
+              <td>one labeled line + Δ</td>
+              <td>
+                <a href="/forge/receipt-line-check/" target="_blank" rel="noreferrer">
+                  /forge/receipt-line-check/
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </section>
       <section className="panel prize-honesty" id="prize-honesty" aria-label="Prize honesty">
         <h2>All Gas cash (Luma)</h2>
@@ -529,4 +585,107 @@ function LineDeltaKitPanel() {
     </div>
   );
 }
+
+
+function MaskChipLitePanel() {
+  const [claimedStr, setClaimedStr] = useState("98, 51, 25, 11");
+  const [interiorStr, setInteriorStr] = useState("100, 50, 25, 10");
+  const [decision, setDecision] = useState<GateDecision | null>(null);
+
+  const run = useCallback(() => {
+    const claimed = parseNumList(claimedStr);
+    const interior = parseNumList(interiorStr);
+    setDecision(gateB(interior, claimed));
+  }, [claimedStr, interiorStr]);
+
+  useEffect(() => {
+    setDecision(null);
+    const onPageShow = (e: PageTransitionEvent) => {
+      if (e.persisted) setDecision(null);
+    };
+    window.addEventListener("pageshow", onPageShow);
+    return () => window.removeEventListener("pageshow", onPageShow);
+  }, []);
+
+  const n = Math.max(parseNumList(claimedStr).length, parseNumList(interiorStr).length);
+
+  return (
+    <div className="forge-child" data-testid="mask-chip-lite-live">
+      <h3 className="forge-sub">Mask Chip Lite — LIVE</h3>
+      <p className="muted small">
+        Better than parent: interactive bit chips (b0=1 means line 0 over). Starts empty.. Empty on load.
+      </p>
+      <label className="forge-label">
+        Claimed
+        <input
+          className="forge-input"
+          value={claimedStr}
+          onChange={(e) => setClaimedStr(e.target.value)}
+        />
+      </label>
+      <label className="forge-label">
+        Interior
+        <input
+          className="forge-input"
+          value={interiorStr}
+          onChange={(e) => setInteriorStr(e.target.value)}
+        />
+      </label>
+      <div className="row">
+        <button
+          type="button"
+          className="ghost"
+          onClick={() => {
+            setClaimedStr("98, 49, 25, 9");
+            setInteriorStr("100, 50, 25, 10");
+            setDecision(gateB([100, 50, 25, 10], [98, 49, 25, 9]));
+          }}
+        >
+          Demo GRANT
+        </button>
+        <button
+          type="button"
+          className="ghost"
+          onClick={() => {
+            setClaimedStr("98, 51, 25, 11");
+            setInteriorStr("100, 50, 25, 10");
+            setDecision(gateB([100, 50, 25, 10], [98, 51, 25, 11]));
+          }}
+        >
+          Demo REFUSE
+        </button>
+        <button type="button" className="ghost" onClick={() => setDecision(null)}>
+          Reset
+        </button>
+        <button type="button" className="primary" onClick={run}>
+          Run Mask Chip
+        </button>
+      </div>
+      {decision ? (
+        <div className={"card " + (decision.status === "grant" ? "grant" : "refuse")}>
+          <strong>{decision.status === "grant" ? "GRANT" : "REFUSE"}</strong>
+          <div className="bits">
+            {Array.from({ length: n }).map((_, i) => {
+              const on = decision.failedIndices.includes(i);
+              return (
+                <span key={i} className={"bit " + (on ? "on" : "off")} title={"bit " + i}>
+                  b{i}={on ? "1" : "0"}
+                </span>
+              );
+            })}
+          </div>
+          <div className="mask-row">
+            <span className="mask-chip">
+              mask {decision.mask}
+              {decision.failedIndices.length
+                ? ` · failed [${decision.failedIndices.join(",")}]`
+                : " · clear"}
+            </span>
+          </div>
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
 

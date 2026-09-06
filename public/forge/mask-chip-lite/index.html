@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Mask Chip Lite — LIVE gate</title>
+  <title>Mask Chip Lite — LIVE</title>
   <style>
     :root { color-scheme: dark; font-family: system-ui, sans-serif; }
     body { margin: 0; background: #0b1220; color: #e8eef7; padding: 1.25rem; max-width: 36rem; }
@@ -20,8 +20,11 @@
     .card { margin-top: 1rem; padding: 1rem; border-radius: 10px; border: 1px solid #2a3a55; }
     .card.grant { border-color: #1f9d63; background: rgba(31,157,99,0.12); }
     .card.refuse { border-color: #d64545; background: rgba(214,69,69,0.12); }
-    .chip { display: inline-block; margin-top: 0.35rem; padding: 0.2rem 0.5rem;
-      border-radius: 6px; border: 1px solid #3a4f6f; color: #9ec5ff; font-family: ui-monospace, monospace; font-size: 0.8rem; }
+    .bits { display:flex; flex-wrap:wrap; gap:0.4rem; margin:0.65rem 0; }
+    .bit { min-width:2.4rem; padding:0.35rem 0.5rem; border-radius:8px; border:1px solid #3a4f6f;
+      background:#121a2b; font-family:ui-monospace,monospace; font-size:0.8rem; color:#9ec5ff; }
+    .bit.on { border-color:#d64545; background:rgba(214,69,69,0.2); color:#fca5a5; }
+    .bit.off { border-color:#1f9d63; color:#6ee7a8; }
     table { width:100%; border-collapse: collapse; margin-top:0.75rem; font-size:0.88rem; }
     th, td { text-align:left; padding:0.35rem 0.4rem; border-bottom:1px solid #2a3a55; font-family: ui-monospace, monospace; }
     td.ok { color:#6ee7a8; } td.bad { color:#fca5a5; }
@@ -30,12 +33,13 @@
 </head>
 <body>
   <h1>Mask Chip Lite</h1>
-  <p class="lede">Compare claimed amounts to interior receipt lines. Grant when every claim stays at or below interior.</p>
+  <p class="lede">Better than parent: interactive bit chips for each failed line (mask bit = line index). Starts empty — edit → Run.</p>
   <label>Claimed (comma-separated)<input id="claimed" value="98, 51, 25, 11" /></label>
   <label>Interior / on-receipt<input id="interior" value="100, 50, 25, 10" /></label>
   <div class="row">
     <button type="button" class="ghost" id="demoGrant">Demo GRANT</button>
     <button type="button" class="ghost" id="demoRefuse">Demo REFUSE</button>
+    <button type="button" class="ghost" id="reset">Reset</button>
     <button type="button" id="run">Run gate</button>
   </div>
   <div id="out" class="card" hidden></div>
@@ -57,6 +61,12 @@
       out.hidden = false;
       out.className = "card " + d.status;
       const n = Math.max(claimed.length, interior.length);
+      let bits = "";
+      for (let i = 0; i < n; i++) {
+        const on = d.failedIndices.includes(i);
+        bits += '<span class="bit ' + (on ? "on" : "off") + '" title="bit ' + i + '">' +
+          "b" + i + "=" + (on ? "1" : "0") + "</span>";
+      }
       let rows = "";
       for (let i = 0; i < n; i++) {
         const c = claimed[i], inn = interior[i];
@@ -66,8 +76,9 @@
           (ok ? "ok" : "bad") + "'>" + (ok ? "CLEAR" : "OVER " + money(delta)) + "</td></tr>";
       }
       out.innerHTML = "<strong>" + d.status.toUpperCase() + "</strong>" +
-        '<div class="chip">mask ' + d.mask +
-        (d.failedIndices.length ? " · failed [" + d.failedIndices.join(",") + "]" : " · clear") + "</div>" +
+        '<div class="bits">' + bits + "</div>" +
+        "<p class='lede' style='margin:0'>mask " + d.mask +
+        (d.failedIndices.length ? " · failed [" + d.failedIndices.join(",") + "]" : " · clear") + "</p>" +
         "<table><thead><tr><th>Line</th><th>Claimed</th><th>Interior</th><th>Status</th></tr></thead><tbody>" +
         rows + "</tbody></table>";
     }
@@ -84,9 +95,12 @@
       document.getElementById("interior").value = "100, 50, 25, 10";
       show([98,51,25,11],[100,50,25,10]);
     };
-    document.getElementById("run").onclick = () => show(...read());
-    ["claimed","interior"].forEach((id) => document.getElementById(id).addEventListener("input", () => show(...read())));
-    show(...read());
+    document.getElementById("reset").onclick = () => {
+      document.getElementById("out").hidden = true;
+      document.getElementById("out").innerHTML = "";
+    };
+    document.getElementById("run").onclick = () => { const [c,i] = read(); show(c,i); };
+    // empty on load — no auto-run
   </script>
 </body>
 </html>
