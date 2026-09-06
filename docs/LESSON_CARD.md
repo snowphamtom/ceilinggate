@@ -1,7 +1,7 @@
-# Lesson card — 9d7fc3a
+# Lesson card — 7807f13
 
 1. What changed
-visual: judges 30s-c — denser inbox + stronger Demo glow
+visual: judges 30s-d — RECEIPT legend + denser ADMIT/STATUS
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
