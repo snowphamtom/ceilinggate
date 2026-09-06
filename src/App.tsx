@@ -1,4 +1,6 @@
 import { useCallback, useMemo, useState } from "react";
+import { useMutation, useQuery } from "convex/react";
+import { api } from "../convex/_generated/api";
 import demo from "./data/demo.json";
 import {
   gateB,
@@ -411,9 +413,8 @@ function AppForgePanel() {
     "Micro-app: claimed lines ≤ public receipt totals. ResidualGates stub. Not a chat assistant.",
   );
   const [log, setLog] = useState<string>("");
-  const [spawned, setSpawned] = useState<
-    { slug: string; title: string; path: string }[]
-  >([]);
+  const spawn = useMutation(api.forge.spawn);
+  const live = useQuery(api.forge.list);
 
   const forge = useCallback(async () => {
     const slug =
@@ -422,19 +423,21 @@ function AppForgePanel() {
         .replace(/[^a-z0-9]+/g, "-")
         .replace(/^-|-$/g, "")
         .slice(0, 40) || `forge-${Date.now().toString(36)}`;
-    setLog(`Forging ${slug}…`);
+    const path = `/workspace/forged-apps/${slug}`;
+    setLog(`Forging ${slug} on Convex…`);
     try {
-      // Client demo: record locally + point at box scaffold convention
-      const path = `/workspace/forged-apps/${slug}`;
-      const entry = { slug, title, path };
-      setSpawned((prev) => [entry, ...prev.filter((x) => x.slug !== slug)]);
-      setLog(
-        `SPAWNED ${slug} (${brief.slice(0, 80)}…) — inherits STANDING_ACCESS. Box: npm run forge -- --slug ${slug}`,
-      );
+      if (hasConvex) {
+        await spawn({ slug, title, brief, path });
+        setLog(
+          `LIVE SPAWN ${slug} — inherits STANDING_ACCESS. Recorded in Convex forgedApps. Box scaffold: npm run forge -- --slug ${slug}`,
+        );
+      } else {
+        setLog(`Demo spawn ${slug} (no VITE_CONVEX_URL) — ${brief.slice(0, 60)}…`);
+      }
     } catch (e) {
       setLog(String(e));
     }
-  }, [title, brief]);
+  }, [title, brief, spawn]);
 
   return (
     <section className="panel forge-panel">
@@ -462,22 +465,27 @@ function AppForgePanel() {
         />
       </label>
       <button type="button" className="primary" onClick={forge}>
-        Forge micro-app (demo spawn)
+        Forge micro-app (live Convex spawn)
       </button>
       {log ? <p className="lean forge-log">{log}</p> : null}
-      {spawned.length > 0 && (
-        <ul className="forge-list">
-          {spawned.map((s) => (
-            <li key={s.slug}>
-              <strong>{s.title}</strong> <code>{s.slug}</code>
-              <span className="muted small"> — {s.path}</span>
-            </li>
-          ))}
-        </ul>
-      )}
+      <h3 className="forge-sub">Spawned apps (live)</h3>
+      <ul className="forge-list">
+        {(live ?? []).map((s) => (
+          <li key={s._id}>
+            <strong>{s.title}</strong> <code>{s.slug}</code>
+            <span className="muted small"> — {s.path}</span>
+          </li>
+        ))}
+        {!live?.length && (
+          <li className="muted small">
+            Children on box: tip-jar-honesty, line-delta-kit (loading live list…)
+          </li>
+        )}
+      </ul>
       <p className="muted small">
         Box scaffold: <code>npm run forge -- --slug …</code> →{" "}
-        <code>/workspace/forged-apps/</code>. Children: <code>tip-jar-honesty</code>, <code>line-delta-kit</code>.
+        <code>/workspace/forged-apps/</code>. Children:{" "}
+        <code>tip-jar-honesty</code>, <code>line-delta-kit</code>.
       </p>
     </section>
   );
