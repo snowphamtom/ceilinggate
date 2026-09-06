@@ -10,7 +10,7 @@ Lightweight status board. Open on desktop/browser — nothing to install, no pho
 - Demo pack: https://github.com/snowphamtom/ceilinggate/releases/tag/allgas-demo-20260905
 - Claims inbox: `ceilinggate-claims@agentmail.to`
 - Health: `/health` → CeilingGate
-- Tip: `b0467bd` — public-URL polish (undistorted \$1004 fee lines)
+- Tip: `42ab26b` — FREE CREATE judge-smoke tooling
 
 ## Support tooling
 - `scripts/allgas-judge-smoke.sh` — public judge-path smoke (box + CI-friendly)
