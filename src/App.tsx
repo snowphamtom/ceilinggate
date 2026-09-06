@@ -186,8 +186,14 @@ export default function App() {
       <section className="panel forge-panel" id="live-child-gates">
         <h2>Live child gates</h2>
         <p className="muted small">
-          BETTER-THAN-PARENT · click Demo or Run — starts empty on load (Streamer click→result).
+          Narrow tools that beat the multi-line board on clarity: Tip Jar (2 money fields) and
+          Line Delta (paste arrays → line table). Not inbox chat — claimed ≤ on-receipt only.
         </p>
+        <ol className="pass-bar muted small">
+          <li>Hard refresh / Reset — empty (no pre-filled GRANT)</li>
+          <li>Edit inputs yourself — Demo flips are practice, not the proof</li>
+          <li>Run → live GRANT/REFUSE · keep demos under 180s</li>
+        </ol>
         <TipJarHonestyPanel />
         <LineDeltaKitPanel />
       </section>
@@ -478,6 +484,14 @@ function LineDeltaKitPanel() {
               })}
             </tbody>
           </table>
+          {decision.failedIndices.length > 0 ? (
+            <p className="muted small">
+              {decision.failedIndices.length} line{decision.failedIndices.length === 1 ? "" : "s"} over
+              on-receipt amounts — REFUSE with mask {decision.mask}.
+            </p>
+          ) : (
+            <p className="ok-line">Every line clears — claimed ≤ interior.</p>
+          )}
         </div>
       ) : null}
     </div>

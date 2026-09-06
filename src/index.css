@@ -191,3 +191,9 @@ h1 { margin: 0 0 0.4rem; font-size: 2rem; letter-spacing: -0.03em; }
 .delta-table td.ok { color: #6ee7a8; }
 .delta-table td.bad { color: #fca5a5; }
 #live-child-gates { border: 1px solid #1f9d63; }
+.pass-bar {
+  margin: 0.5rem 0 0.85rem 1.1rem;
+  padding: 0;
+  line-height: 1.45;
+}
+.pass-bar li { margin: 0.2rem 0; }
