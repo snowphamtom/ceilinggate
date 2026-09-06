@@ -1,7 +1,7 @@
-# Lesson card — de5b9c4
+# Lesson card — 4f54c6a
 
 1. What changed
-visual: standing-k — Demo press + inbox meta + empty cue
+visual: standing-l — denser ADMIT/REFUSE conjunctive lines
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
