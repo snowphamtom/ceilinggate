@@ -33,7 +33,7 @@
 
 ## Next
 - [x] vibeapps screenshots (01–04 under ceilinggate-demo/shots)
-- [ ] 60s / <3m vibeapps video — **FULL GO** (Streamer shipping; not hold)
+- [x] 60s / <3m vibeapps video — **FULL GO** cut at `/workspace/ceilinggate-demo/out/CeilingGate-AllGas-demo.mp4` (~1:25) + release `allgas-demo-20260905` (captions optional)
 - [ ] Submit before Sep 22 noon PT
 
 ## Screenshots (vibeapps)

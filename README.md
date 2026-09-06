@@ -26,7 +26,7 @@ Under the hood: GRANT iff `claimed ≤ interior` componentwise; else REFUSE with
 | 6 | Host frontend on convex.site OR chatgpt.site | Target `*.convex.site` (MANAGER Convex login) |
 | 7 | Public GitHub (not private) | PUBLISH GO — MANAGER login then push |
 | 8 | No localhost submission | Offline board is for build; submission is hosted |
-| 9 | Video on vibeapps.dev by Sep 22 12:00 PM PT | Streamer draft later; Taylor asks |
+| 9 | Video on vibeapps.dev by Sep 22 12:00 PM PT | FULL GO — demo mp4 ~1:25 on box + GH release `allgas-demo-20260905` |
 | 10 | Social tags @convex @OpenAI @firecrawl @agentmail | Taylor sends (draft-only here) |
 | 11 | Luma registered | Done (“You’re In”) |
 

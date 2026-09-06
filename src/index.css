@@ -79,3 +79,8 @@ code { font-family: "IBM Plex Mono", ui-monospace, monospace; }
 .sig-btn { background: #24324a; color: #e8eef7; border: 1px solid #3a4f6f; border-radius: 8px; padding: 0.45rem 0.75rem; font-weight: 600; cursor: pointer; }
 .sig-btn:hover { border-color: #2a6df4; }
 .ledger-cap { margin: 0.5rem 0 0.15rem; }
+
+.mask-row { margin: 0.25rem 0 0.75rem; }
+.mask-chip { display: inline-block; font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.78rem; padding: 0.25rem 0.55rem; border-radius: 6px; background: #0b1220; border: 1px solid #3a4f6f; color: #9ec5ff; }
+.refuse .mask-chip { border-color: #d64545; color: #ffb0b0; }
+.grant .mask-chip { border-color: #1f9d63; color: #3dde95; }

@@ -164,8 +164,8 @@ export default function App() {
           </p>
           <h1>CeilingGate</h1>
           <p className="lede everyday">
-            Line-by-line <strong>claimed vs scraped receipt</strong> — ResidualGates
-            returns <strong>GRANT</strong> only when every line is ≤ the receipt, or{" "}
+            Line-by-line <strong>claimed ≤ scraped receipt</strong> — ResidualGates
+            returns <strong>GRANT</strong> only when every line clears, or{" "}
             <strong>REFUSE</strong> with plain-English overages (e.g. lodging $1 over).
           </p>
           <p className="muted small">
@@ -272,6 +272,14 @@ export default function App() {
               </h3>
               <div className="badge stamp">
                 {selected.decision.status === "grant" ? "GRANT" : "REFUSE"}
+              </div>
+              <div className="mask-row">
+                <span className="mask-chip" title="ResidualGates refuse bitmask — math depth, not AI yes/no">
+                  mask {selected.decision.mask}
+                  {selected.decision.status === "refuse"
+                    ? ` · bits ${selected.decision.failedIndices.join(",")}`
+                    : " · clear"}
+                </span>
               </div>
 
               {plain.length > 0 ? (

@@ -18,6 +18,10 @@ Email a money claim with a public receipt link. CeilingGate scrapes the receipt,
 
 **Not** a chat app. **Not** a gate SDK. **Not** docs-search. **Not** a copy of the AgentMail chat demo. **Not** Attest/NoticeProof AI yes/no — ResidualGates line ledger only.
 
+## Originality vs All Gas field (Attest / NoticeProof / Get It in Writing)
+
+CeilingGate is not an inbox yes/no assistant (Attest), not recall-notice verification (NoticeProof), and not “what the page promised” gap-finding (Get It in Writing). Judges see a **forensic spend ledger**: each claimed line checked ≤ Firecrawl-scraped receipt totals via **ResidualGates** (GRANT/REFUSE + refuse bitmask + plain-English overages). No chat panel.
+
 ## Stack (required artifacts)
 
 | Artifact | Status |
