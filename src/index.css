@@ -290,3 +290,18 @@ h1 { margin: 0 0 0.4rem; font-size: 2rem; letter-spacing: -0.03em; }
 .conjunctive-line.ok {
   color: #6ee7a8;
 }
+
+.dual-oracle-grid {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 0.65rem;
+}
+@media (min-width: 900px) {
+  .dual-oracle-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .dual-oracle-grid > .conjunctive-line,
+  .dual-oracle-grid > .muted {
+    grid-column: 1 / -1;
+  }
+}

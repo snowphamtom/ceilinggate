@@ -248,6 +248,7 @@ export default function App() {
         <LineDeltaKitPanel />
         <MaskChipLitePanel />
         <UrlReceiptGatePanel />
+        <DualOracleDisagreePanel />
       </section>
 
       <section className="panel forge-panel" id="forge-open-live" aria-label="Open live Forge apps">
@@ -908,6 +909,196 @@ function parseInteriorText(text: string): number[] {
   if (tagged?.[1]) return parseNumList(tagged[1]);
   const dollars = [...text.matchAll(/\$([0-9]+(?:\.[0-9]+)?)/g)].map((m) => Number(m[1]));
   return dollars;
+}
+
+
+/** Gate A = ResidualGates (claimed ≤ on-receipt). Gate B = enclosure caps (independent). */
+function gateEnclosure(caps: number[], claimed: number[]): GateDecision {
+  return gateB(caps, claimed);
+}
+
+function DualOracleDisagreePanel() {
+  const [claimedStr, setClaimedStr] = useState("98, 49, 25, 9");
+  const [interiorStr, setInteriorStr] = useState("100, 50, 25, 10");
+  const [capsStr, setCapsStr] = useState("100, 50, 20, 10");
+  const [gateA, setGateA] = useState<GateDecision | null>(null);
+  const [gateB, setGateB] = useState<GateDecision | null>(null);
+  const [mode, setMode] = useState<string | null>(null);
+
+  useEffect(() => {
+    setGateA(null);
+    setGateB(null);
+    setMode(null);
+    const onPageShow = (e: PageTransitionEvent) => {
+      if (e.persisted) {
+        setGateA(null);
+        setGateB(null);
+        setMode(null);
+      }
+    };
+    window.addEventListener("pageshow", onPageShow);
+    return () => window.removeEventListener("pageshow", onPageShow);
+  }, []);
+
+  const run = useCallback(() => {
+    const claimed = parseNumList(claimedStr);
+    const interior = parseNumList(interiorStr);
+    const caps = parseNumList(capsStr);
+    setGateA(gateB(interior, claimed));
+    setGateB(gateEnclosure(caps, claimed));
+    setMode("run");
+  }, [claimedStr, interiorStr, capsStr]);
+
+  const split =
+    gateA && gateB ? gateA.status !== gateB.status : false;
+
+  const ledgerLines = (
+    claimed: number[],
+    ceiling: number[],
+    decision: GateDecision,
+  ) =>
+    Array.from({ length: Math.max(claimed.length, ceiling.length) }).map((_, i) => ({
+      line: String(i),
+      claimed: claimed[i] ?? 0,
+      interior: ceiling[i] ?? 0,
+      over: decision.failedIndices.includes(i),
+    }));
+
+  return (
+    <div className="forge-child" id="dual-oracle-disagree-live" data-testid="dual-oracle-disagree-live">
+      <h3 className="forge-sub">Dual-oracle disagree — LIVE</h3>
+      <p className="muted small">
+        Two independent checks on the same claim — not one chat yes/no. Gate A =
+        ResidualGates (claimed ≤ on-receipt). Gate B = enclosure caps (separate
+        ceiling). When they split, both verdicts stay visible.
+      </p>
+      <label className="forge-label">
+        Claimed
+        <input className="forge-input" value={claimedStr} onChange={(e) => setClaimedStr(e.target.value)} />
+      </label>
+      <label className="forge-label">
+        On-receipt (Gate A)
+        <input className="forge-input" value={interiorStr} onChange={(e) => setInteriorStr(e.target.value)} />
+      </label>
+      <label className="forge-label">
+        Enclosure caps (Gate B)
+        <input className="forge-input" value={capsStr} onChange={(e) => setCapsStr(e.target.value)} />
+      </label>
+      <div className="row">
+        <button
+          type="button"
+          className="ghost"
+          onClick={() => {
+            setClaimedStr("98, 49, 25, 9");
+            setInteriorStr("100, 50, 25, 10");
+            setCapsStr("100, 50, 20, 10");
+            const claimed = [98, 49, 25, 9];
+            const a = gateB([100, 50, 25, 10], claimed);
+            const b = gateEnclosure([100, 50, 20, 10], claimed);
+            setGateA(a);
+            setGateB(b);
+            setMode("A GRANT · B REFUSE");
+          }}
+        >
+          Demo A GRANT · B REFUSE
+        </button>
+        <button
+          type="button"
+          className="ghost"
+          onClick={() => {
+            setClaimedStr("98, 51, 25, 11");
+            setInteriorStr("100, 50, 25, 10");
+            setCapsStr("200, 200, 200, 200");
+            const claimed = [98, 51, 25, 11];
+            const a = gateB([100, 50, 25, 10], claimed);
+            const b = gateEnclosure([200, 200, 200, 200], claimed);
+            setGateA(a);
+            setGateB(b);
+            setMode("A REFUSE · B GRANT");
+          }}
+        >
+          Demo A REFUSE · B GRANT
+        </button>
+        <button
+          type="button"
+          className="ghost"
+          onClick={() => {
+            // Fee≠prize: claim Track One ~$2100 as "prize cash" vs Luma interior 0
+            setClaimedStr("2100");
+            setInteriorStr("0");
+            setCapsStr("0");
+            const a = gateB([0], [2100]);
+            const b = gateEnclosure([0], [2100]);
+            setGateA(a);
+            setGateB(b);
+            setMode("Fee≠prize");
+          }}
+        >
+          Demo Fee≠prize REFUSE
+        </button>
+        <button
+          type="button"
+          className="ghost"
+          onClick={() => {
+            setGateA(null);
+            setGateB(null);
+            setMode(null);
+          }}
+        >
+          Reset
+        </button>
+        <button type="button" className="primary" onClick={run}>
+          Run A + B
+        </button>
+      </div>
+      {gateA && gateB ? (
+        <div className="dual-oracle-grid">
+          {split ? (
+            <p className="conjunctive-line">
+              Split — Gate A and Gate B disagree. Both stay on the board (not a single
+              yes/no).
+            </p>
+          ) : (
+            <p className="conjunctive-line ok">
+              Agree — both gates {gateA.status.toUpperCase()}.
+            </p>
+          )}
+          {mode === "Fee≠prize" ? (
+            <p className="muted small">
+              Fee≠prize: USPTO Track One ~$2,100 is a fee fixture, not All Gas prize cash
+              ($10k / $5k / $1.5k only).
+            </p>
+          ) : null}
+          <div className={"card " + (gateA.status === "grant" ? "grant" : "refuse")}>
+            <strong>Gate A · Residual · {gateA.status.toUpperCase()}</strong>
+            <div className="mask-row">
+              <span className="mask-chip">
+                mask {gateA.mask}
+                {gateA.mask === 0 ? " · GRANT ⇔ mask==0" : ` · failed [${gateA.failedIndices.join(",")}]`}
+              </span>
+            </div>
+            <GateLedgerTable
+              lines={ledgerLines(parseNumList(claimedStr), parseNumList(interiorStr), gateA)}
+            />
+          </div>
+          <div className={"card " + (gateB.status === "grant" ? "grant" : "refuse")}>
+            <strong>Gate B · Enclosure · {gateB.status.toUpperCase()}</strong>
+            <div className="mask-row">
+              <span className="mask-chip">
+                mask {gateB.mask}
+                {gateB.failedIndices.length
+                  ? ` · failed [${gateB.failedIndices.join(",")}]`
+                  : " · clear"}
+              </span>
+            </div>
+            <GateLedgerTable
+              lines={ledgerLines(parseNumList(claimedStr), parseNumList(capsStr), gateB)}
+            />
+          </div>
+        </div>
+      ) : null}
+    </div>
+  );
 }
 
 function UrlReceiptGatePanel() {
