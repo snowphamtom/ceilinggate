@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useQuery } from "convex/react";
 import { api } from "../convex/_generated/api";
 import demo from "./data/demo.json";
@@ -251,6 +251,16 @@ function TipJarHonestyPanel() {
   const [receiptTotal, setReceiptTotal] = useState("42.50");
   const [decision, setDecision] = useState<GateDecision | null>(null);
 
+  // Sticky reset: hard refresh / bfcache restore starts empty (Streamer click→result)
+  useEffect(() => {
+    setDecision(null);
+    const onPageShow = (e: PageTransitionEvent) => {
+      if (e.persisted) setDecision(null);
+    };
+    window.addEventListener("pageshow", onPageShow);
+    return () => window.removeEventListener("pageshow", onPageShow);
+  }, []);
+
   const run = useCallback(() => {
     const tip = Number(claimedTip);
     const total = Number(receiptTotal);
@@ -316,6 +326,9 @@ function TipJarHonestyPanel() {
         >
           Demo REFUSE
         </button>
+        <button type="button" className="ghost" onClick={() => setDecision(null)}>
+          Reset
+        </button>
         <button type="button" className="primary" onClick={run}>
           Run Tip Jar gate
         </button>
@@ -349,6 +362,16 @@ function LineDeltaKitPanel() {
   const [claimedStr, setClaimedStr] = useState("98, 51, 25, 11");
   const [interiorStr, setInteriorStr] = useState("100, 50, 25, 10");
   const [decision, setDecision] = useState<GateDecision | null>(null);
+
+  // Sticky reset: hard refresh / bfcache restore starts empty (Streamer click→result)
+  useEffect(() => {
+    setDecision(null);
+    const onPageShow = (e: PageTransitionEvent) => {
+      if (e.persisted) setDecision(null);
+    };
+    window.addEventListener("pageshow", onPageShow);
+    return () => window.removeEventListener("pageshow", onPageShow);
+  }, []);
 
   const run = useCallback(() => {
     const claimed = parseNumList(claimedStr);
@@ -403,6 +426,9 @@ function LineDeltaKitPanel() {
           }}
         >
           Demo REFUSE
+        </button>
+        <button type="button" className="ghost" onClick={() => setDecision(null)}>
+          Reset
         </button>
         <button type="button" className="primary" onClick={run}>
           Run Line Delta gate
