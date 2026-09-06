@@ -8,68 +8,69 @@
 | Codec | H.264 (`libx264`) |
 | Pixel format | `yuv420p` |
 | Frame rate | **≥30 fps** |
-| Quality | **CRF ≤ 20** |
+| Rate control | **CBR ~5M + filler** (default) |
 | Audio | AAC ok (or silent) |
 | Web | `+faststart` |
 
-## A — Already have a silent/raw clip
+### LESSON (Streamer · 2026-09-06)
+**CRF-only on a static SPA collapses bitrate** (long holds on Tip Jar / board look mushy or starve bits).  
+Show-off listing encodes need **CBR ≈ 5 Mbps** plus a **tiny noise filler** so static UI frames keep bitrate.
+
+| Mode | When |
+|------|------|
+| `MODE=cbr` (default) | vibeapps / SHOW-OFF / GH release demos |
+| `MODE=crf CRF≤20` | archival only — **not** listing show-off |
+
+## A — Encode raw → SHOW-OFF
 ```bash
 /workspace/ceilinggate-demo/bin/encode-show-off.sh \
   /workspace/ceilinggate-demo/out/YOUR-RAW.mp4 \
   /workspace/ceilinggate-demo/out/CeilingGate-Forge-gates-clip.mp4
 ```
-Optional: `CRF=18 FPS=60 encode-show-off.sh …`
-
-Script **fails** if CRF>20, FPS<30, or output is not h264/yuv420p.
+Optional: `BITRATE=6M FPS=60 encode-show-off.sh …`  
+Fails closed if fps&lt;30, not h264/yuv420p, or CBR output bitrate collapsed (&lt;3M).
 
 ## B — Capture box desktop/browser (X11)
 Box display is typically `DISPLAY=:6` at **1280×800**.
 
-1. Open live site on the box browser (or ask Create/computerUse to stage Tip Jar / Line Delta / URL Receipt Gate empty→Run).
-2. Record:
 ```bash
 /workspace/ceilinggate-demo/bin/capture-box-desktop.sh 50 \
   /workspace/ceilinggate-demo/out/raw-forge-capture.mkv
-```
-3. Encode to SHOW-OFF:
-```bash
 /workspace/ceilinggate-demo/bin/encode-show-off.sh \
   /workspace/ceilinggate-demo/out/raw-forge-capture.mkv \
   /workspace/ceilinggate-demo/out/CeilingGate-Forge-gates-clip.mp4
 ```
 
-### One-liner ffmpeg (encode only)
+### One-liner ffmpeg (CBR + filler — preferred)
 ```bash
 ffmpeg -y -i raw.mkv \
-  -c:v libx264 -preset fast -crf 20 \
-  -pix_fmt yuv420p -r 30 \
-  -movflags +faststart \
+  -vf "fps=30,noise=alls=1:allf=t,format=yuv420p" \
+  -c:v libx264 -preset fast \
+  -b:v 5M -minrate 5M -maxrate 5M -bufsize 10M \
+  -x264-params nal-hrd=cbr \
+  -pix_fmt yuv420p -movflags +faststart \
   -c:a aac -b:a 160k \
   out/CeilingGate-show-off.mp4
 ```
 
-### One-liner ffmpeg (x11grab raw)
+### Avoid for show-off (CRF-only)
 ```bash
-ffmpeg -y -video_size 1280x800 -framerate 30 -f x11grab -i :6.0 \
-  -t 45 -c:v libx264rgb -crf 15 -preset ultrafast \
-  out/raw-desktop.mkv
+# BAD for static SPA show-off — bitrate collapses on held UI
+ffmpeg -i raw.mkv -c:v libx264 -crf 20 -pix_fmt yuv420p out/bad.mp4
 ```
 
 ## C — Captions / 60s / pack
-After SHOW-OFF silent lands:
-- `bin/reburn-captions.sh` (forensic captions, CRF 20)
-- `bin/make-60s.sh` if vibeapps hard-caps ≤60s
-- `bin/pack-release.sh` for GH release folder
+- `bin/reburn-captions.sh` — prefer running **after** CBR show-off silent
+- `bin/make-60s.sh` · `bin/pack-release.sh`
 
-## Content rules (All Gas)
-- Real click → GRANT/REFUSE only (no costumes)
-- Empty-on-load → edit → Run (Demo flips ≠ win-proof)
-- Keep continuous cut **&lt;180s** (gates clip ~170s PASS already)
-- Product language; stack tags Convex+Firecrawl+AgentMail(+OpenAI) if spoken/on-screen
+## Content rules
+- Real click → GRANT/REFUSE · empty-on-load → edit → Run · &lt;180s continuous
+- Product language; stack tags Convex+Firecrawl+AgentMail(+OpenAI) if on-screen
 
 ## Verify
 ```bash
 ffprobe -v error -select_streams v:0 \
   -show_entries stream=codec_name,r_frame_rate,pix_fmt -of default "$OUT"
+ffprobe -v error -show_entries format=bit_rate -of default "$OUT"
 ```
-Expect: `codec_name=h264`, `pix_fmt=yuv420p`, `r_frame_rate` ≥ 30/1.
+Expect: `h264`, `yuv420p`, fps ≥ 30, format `bit_rate` near **5M** (not a few hundred kbps).

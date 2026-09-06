@@ -83,3 +83,11 @@ Evidence: `docs/PRIZE_HONESTY.md` · VIBEAPPS_UPDATE_PASTE.md · ELIGIBILITY_ONE
 Never: inbox yes/no rebrand · docs-search chat · Magpie/Square pitch.
 Evidence: live `#` stack-tags · `docs/ORIGINALITY.md` · `/forge/url-receipt-gate/`
 
+## Streamer lesson (encode · 2026-09-06)
+| Do | Don't |
+|----|-------|
+| SHOW-OFF: **CBR ~5M + noise filler**, ≥30fps, yuv420p | CRF-only on static SPA (bitrate collapses) |
+| `bin/encode-show-off.sh` default MODE=cbr | Listing encode with `-crf 20` alone |
+
+Evidence: `streamer/SHOW_OFF_ENCODE.md` · `bin/encode-show-off.sh`
+
