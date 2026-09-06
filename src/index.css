@@ -263,3 +263,19 @@ h1 { margin: 0 0 0.4rem; font-size: 2rem; letter-spacing: -0.03em; }
   background: rgba(26, 58, 122, 0.35);
 }
 .originality-line { margin: 0.35rem 0 0; max-width: 36rem; }
+
+.stakes-line {
+  margin: 0.55rem 0 0;
+  max-width: 38rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #cfe0f7;
+  line-height: 1.4;
+}
+.ledger thead th,
+.delta-table thead th {
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #a8bdd8;
+}

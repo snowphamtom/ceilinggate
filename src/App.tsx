@@ -94,6 +94,10 @@ export default function App() {
           Send a claim and a public receipt. Every line is compared.
           Under or equal is a <strong>GRANT</strong>. Over is a <strong>REFUSE</strong>.
         </p>
+        <p className="stakes-line">
+          Stakes: claimed line vs public receipt — ResidualGates{" "}
+          <strong>GRANT</strong>/<strong>REFUSE</strong> with a line ledger. Never chat yes/no.
+        </p>
         <ul className="stack-tags" aria-label="Stack">
           <li>Convex</li>
           <li>Firecrawl</li>
@@ -326,7 +330,7 @@ function VerdictCard({ selected, plain }: { selected: LocalDecision; plain: stri
         <p className="ok-line">Every line is at or under the receipt.</p>
       )}
       <table className="ledger">
-        <thead><tr><th>Line</th><th>Claimed</th><th>On receipt</th><th></th></tr></thead>
+        <thead><tr><th>LINE</th><th>CLAIMED</th><th>ON RECEIPT</th><th>STATUS</th></tr></thead>
         <tbody>
           {selected.lineItems.map((name, i) => {
             const c = selected.claimed[i] ?? 0;
@@ -337,7 +341,7 @@ function VerdictCard({ selected, plain }: { selected: LocalDecision; plain: stri
                 <td>{capitalize(name)}</td>
                 <td>{money(c)}</td>
                 <td>{money(n)}</td>
-                <td>{fail ? "Over" : "OK"}</td>
+                <td>{fail ? "OVER" : "CLEAR"}</td>
               </tr>
             );
           })}
@@ -354,6 +358,36 @@ function StatusPill({ status }: { status: "grant" | "refuse" | "wait" }) {
   if (status === "grant") return <span className="pill grant">GRANT</span>;
   if (status === "wait") return <span className="pill wait">…</span>;
   return <span className="pill refuse">REFUSE</span>;
+}
+
+
+function GateLedgerTable({
+  lines,
+}: {
+  lines: { line: string; claimed: number; interior: number; over: boolean }[];
+}) {
+  return (
+    <table className="ledger delta-table">
+      <thead>
+        <tr>
+          <th>LINE</th>
+          <th>CLAIMED</th>
+          <th>ON RECEIPT</th>
+          <th>STATUS</th>
+        </tr>
+      </thead>
+      <tbody>
+        {lines.map((row, i) => (
+          <tr key={`${row.line}-${i}`} className={row.over ? "fail" : ""}>
+            <td>{row.line}</td>
+            <td>{money(row.claimed)}</td>
+            <td>{money(row.interior)}</td>
+            <td className={row.over ? "bad" : "ok"}>{row.over ? "OVER" : "CLEAR"}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
 }
 
 function parseNumList(s: string): number[] {
@@ -451,14 +485,16 @@ function ReceiptLineCheckPanel() {
       {decision ? (
         <div className={"card " + (decision.status === "grant" ? "grant" : "refuse")}>
           <strong>{decision.status === "grant" ? "GRANT" : "REFUSE"}</strong>
-          <p className="muted small">
-            {label}: claimed {money(Number(claimed))} vs on-receipt {money(Number(interior))}
-          </p>
-          <p className={decision.status === "grant" ? "ok-line" : "muted small"}>
-            {decision.status === "grant"
-              ? `Δ ${money(Number(claimed) - Number(interior))} · clear`
-              : `OVER ${money(Number(claimed) - Number(interior))}`}
-          </p>
+          <GateLedgerTable
+            lines={[
+              {
+                line: label || "Line",
+                claimed: Number(claimed),
+                interior: Number(interior),
+                over: decision.status === "refuse",
+              },
+            ]}
+          />
         </div>
       ) : null}
       <p className="muted small">
@@ -569,14 +605,16 @@ function TipJarHonestyPanel() {
                 : " · clear"}
             </span>
           </div>
-          <p className="muted small">
-            Claimed tip {money(Number(claimedTip))} vs receipt{" "}
-            {money(Number(receiptTotal))} · Δ{" "}
-            {money(Number(claimedTip) - Number(receiptTotal))}
-            {decision.status === "grant"
-              ? " — tip at or under receipt."
-              : " — tip over receipt total."}
-          </p>
+          <GateLedgerTable
+            lines={[
+              {
+                line: "Tip",
+                claimed: Number(claimedTip),
+                interior: Number(receiptTotal),
+                over: decision.status === "refuse",
+              },
+            ]}
+          />
         </div>
       ) : null}
     </div>
@@ -673,10 +711,10 @@ function LineDeltaKitPanel() {
           <table className="delta-table">
             <thead>
               <tr>
-                <th>Line</th>
-                <th>Claimed</th>
-                <th>Interior</th>
-                <th>Status</th>
+                <th>LINE</th>
+                <th>CLAIMED</th>
+                <th>ON RECEIPT</th>
+                <th>STATUS</th>
               </tr>
             </thead>
             <tbody>
@@ -813,6 +851,18 @@ function MaskChipLitePanel() {
                 : " · clear"}
             </span>
           </div>
+          <GateLedgerTable
+            lines={Array.from({ length: n }).map((_, i) => {
+              const c = parseNumList(claimedStr)[i] ?? 0;
+              const inn = parseNumList(interiorStr)[i] ?? 0;
+              return {
+                line: String(i),
+                claimed: c,
+                interior: inn,
+                over: decision.failedIndices.includes(i),
+              };
+            })}
+          />
         </div>
       ) : null}
     </div>
@@ -1040,10 +1090,10 @@ function UrlReceiptGatePanel() {
           <table className="delta-table">
             <thead>
               <tr>
-                <th>Line</th>
-                <th>Claimed</th>
-                <th>On receipt</th>
-                <th>Status</th>
+                <th>LINE</th>
+                <th>CLAIMED</th>
+                <th>ON RECEIPT</th>
+                <th>STATUS</th>
               </tr>
             </thead>
             <tbody>
