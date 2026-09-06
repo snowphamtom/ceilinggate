@@ -1,0 +1,286 @@
+{
+  "helper_id": "CEILINGGATE_PUBLIC_URL_SEEDS_LIVE",
+  "purpose": "Unique public URLs from shipShortlist+polish+demo seedUrls (+RETURN url_seeds), with live curl -sI HTTP status. No invent.",
+  "checked_at_utc": "2026-09-06T00:23:53Z",
+  "checked_at_ct": "2026-09-05 ~19:23 CT",
+  "url_count": 39,
+  "status_histogram": {
+    "200": 37,
+    "404": 2
+  },
+  "urls": [
+    {
+      "url": "https://monsters-ink-107139.square.site",
+      "http_status": 200,
+      "curl_ok": true,
+      "final_status_after_redirects": 200,
+      "error": null
+    },
+    {
+      "url": "https://quirky-rhinoceros-204.convex.site/receipts/fuel-grant.html",
+      "http_status": 200,
+      "curl_ok": true,
+      "final_status_after_redirects": 200,
+      "error": null
+    },
+    {
+      "url": "https://quirky-rhinoceros-204.convex.site/receipts/fuel-refuse.html",
+      "http_status": 200,
+      "curl_ok": true,
+      "final_status_after_redirects": 200,
+      "error": null
+    },
+    {
+      "url": "https://www.diu.mil/work-with-us/open-solicitations",
+      "http_status": 200,
+      "curl_ok": true,
+      "final_status_after_redirects": 200,
+      "error": null
+    },
+    {
+      "url": "https://sam.gov/workspace/contract/opp/a7ce960566e242bbbf871a3e2fab3453/view",
+      "http_status": 200,
+      "curl_ok": true,
+      "final_status_after_redirects": 200,
+      "error": null
+    },
+    {
+      "url": "https://sam.gov/opp/1da89ea582ea4291b82b899d503cb0d4/view",
+      "http_status": 200,
+      "curl_ok": true,
+      "final_status_after_redirects": 200,
+      "error": null
+    },
+    {
+      "url": "https://www.nist.gov/system/files/documents/2025/07/15/Outline_%20Proposed%20Zero%20Draft%20for%20a%20Standard%20on%20AI%20TEVV-for-web.pdf",
+      "http_status": 200,
+      "curl_ok": true,
+      "final_status_after_redirects": 200,
+      "error": null
+    },
+    {
+      "url": "https://www.darpa.mil/research/research-spotlights/formal-methods",
+      "http_status": 200,
+      "curl_ok": true,
+      "final_status_after_redirects": 200,
+      "error": null
+    },
+    {
+      "url": "https://www.nist.gov/cyberframework",
+      "http_status": 200,
+      "curl_ok": true,
+      "final_status_after_redirects": 200,
+      "error": null
+    },
+    {
+      "url": "https://live.lean-lang.org/",
+      "http_status": 200,
+      "curl_ok": true,
+      "final_status_after_redirects": 200,
+      "error": null
+    },
+    {
+      "url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "http_status": 200,
+      "curl_ok": true,
+      "final_status_after_redirects": 200,
+      "error": null
+    },
+    {
+      "url": "https://patentcenter.uspto.gov/",
+      "http_status": 200,
+      "curl_ok": true,
+      "final_status_after_redirects": 200,
+      "error": null
+    },
+    {
+      "url": "https://patentcenter.uspto.gov/workbench/correspondence?customerNumbers=232494,232194",
+      "http_status": 200,
+      "curl_ok": true,
+      "final_status_after_redirects": 200,
+      "error": null
+    },
+    {
+      "url": "https://github.com/snowphamtom/ceilinggate",
+      "http_status": 200,
+      "curl_ok": true,
+      "final_status_after_redirects": 200,
+      "error": null
+    },
+    {
+      "url": "https://quirky-rhinoceros-204.convex.site/",
+      "http_status": 200,
+      "curl_ok": true,
+      "final_status_after_redirects": 200,
+      "error": null
+    },
+    {
+      "url": "https://www.diu.mil/work-with-us/submit-solution/PROJ00687",
+      "http_status": 404,
+      "curl_ok": true,
+      "final_status_after_redirects": 404,
+      "error": null
+    },
+    {
+      "url": "https://patentcenter.uspto.gov/workbench/receiptHistory?customerNumbers=232494,232194",
+      "http_status": 200,
+      "curl_ok": true,
+      "final_status_after_redirects": 200,
+      "error": null
+    },
+    {
+      "url": "https://patentcenter.uspto.gov/workbench/applications?customerNumbers=232494,232194",
+      "http_status": 200,
+      "curl_ok": true,
+      "final_status_after_redirects": 200,
+      "error": null
+    },
+    {
+      "url": "https://sigplan.org/Awards/Software/",
+      "http_status": 200,
+      "curl_ok": true,
+      "final_status_after_redirects": 200,
+      "error": null
+    },
+    {
+      "url": "https://www.cisa.gov/cyber-guidance-small-businesses",
+      "http_status": 200,
+      "curl_ok": true,
+      "final_status_after_redirects": 200,
+      "error": null
+    },
+    {
+      "url": "https://www.cisa.gov/stopransomware",
+      "http_status": 200,
+      "curl_ok": true,
+      "final_status_after_redirects": 200,
+      "error": null
+    },
+    {
+      "url": "https://www.ic3.gov/",
+      "http_status": 200,
+      "curl_ok": true,
+      "final_status_after_redirects": 200,
+      "error": null
+    },
+    {
+      "url": "https://www.verizon.com/business/resources/reports/dbir/",
+      "http_status": 200,
+      "curl_ok": true,
+      "final_status_after_redirects": 200,
+      "error": null
+    },
+    {
+      "url": "https://www.cisa.gov/report",
+      "http_status": 200,
+      "curl_ok": true,
+      "final_status_after_redirects": 200,
+      "error": null
+    },
+    {
+      "url": "https://www.cisa.gov/cross-sector-cybersecurity-performance-goals",
+      "http_status": 200,
+      "curl_ok": true,
+      "final_status_after_redirects": 200,
+      "error": null
+    },
+    {
+      "url": "https://drive.google.com/drive/folders/10UauSXl-kqwYLsjGvfMyc85nc6g_T_vQ",
+      "http_status": 200,
+      "curl_ok": true,
+      "final_status_after_redirects": 200,
+      "error": null
+    },
+    {
+      "url": "https://patentcenter.uspto.gov/workbench/saved?customerNumbers=232494,232194",
+      "http_status": 200,
+      "curl_ok": true,
+      "final_status_after_redirects": 200,
+      "error": null
+    },
+    {
+      "url": "https://hal.science/hal-05513825v1",
+      "http_status": 200,
+      "curl_ok": true,
+      "final_status_after_redirects": 200,
+      "error": null
+    },
+    {
+      "url": "https://www.absint.com/releases/260320.htm",
+      "http_status": 200,
+      "curl_ok": true,
+      "final_status_after_redirects": 200,
+      "error": null
+    },
+    {
+      "url": "https://www.uspto.gov/sites/default/files/documents/202400567-arp-rehearing-decision-20250926.pdf",
+      "http_status": 200,
+      "curl_ok": true,
+      "final_status_after_redirects": 200,
+      "error": null
+    },
+    {
+      "url": "https://www.grants.gov/",
+      "http_status": 200,
+      "curl_ok": true,
+      "final_status_after_redirects": 200,
+      "error": null
+    },
+    {
+      "url": "http://www.uspto.gov/web/offices/pac/doc/general/index.html",
+      "http_status": 404,
+      "curl_ok": true,
+      "final_status_after_redirects": 404,
+      "error": null
+    },
+    {
+      "url": "https://sam.gov/",
+      "http_status": 200,
+      "curl_ok": true,
+      "final_status_after_redirects": 200,
+      "error": null
+    },
+    {
+      "url": "https://fsd.gov",
+      "http_status": 200,
+      "curl_ok": true,
+      "final_status_after_redirects": 200,
+      "error": null
+    },
+    {
+      "url": "https://www.uspto.gov/patents/laws/patent-related-notices/patent-related-notices-2026",
+      "http_status": 200,
+      "curl_ok": true,
+      "final_status_after_redirects": 200,
+      "error": null
+    },
+    {
+      "url": "https://www.govinfo.gov/content/pkg/FR-2026-04-09/html/2026-06903.htm",
+      "http_status": 200,
+      "curl_ok": true,
+      "final_status_after_redirects": 200,
+      "error": null
+    },
+    {
+      "url": "https://www.uspto.gov/sites/default/files/documents/sb0478.pdf",
+      "http_status": 200,
+      "curl_ok": true,
+      "final_status_after_redirects": 200,
+      "error": null
+    },
+    {
+      "url": "https://www.govconwire.com/articles/diu-100-million-swap-usv-challenge-maritime-drones",
+      "http_status": 200,
+      "curl_ok": true,
+      "final_status_after_redirects": 200,
+      "error": null
+    },
+    {
+      "url": "https://github.com/snowphamtom/ceilinggate/releases/tag/allgas-demo-20260905",
+      "http_status": 200,
+      "curl_ok": true,
+      "final_status_after_redirects": 200,
+      "error": null
+    }
+  ]
+}

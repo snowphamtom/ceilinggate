@@ -1,0 +1,523 @@
+{
+  "helper_id": "CEILINGGATE_JUDGE_SIGNATURES",
+  "purpose": "Judge-strength signatures for all 14 shipShortlist slugs \u2014 claimed vs interior one-liners, public judge URLs, residual delta type. Undistorted from live demo.json + polish pack + RETURN. Fee\u2260prize. No pad/fake counts.",
+  "built_at_utc": "2026-09-06T00:24:12Z",
+  "built_at_ct": "2026-09-05 ~19:24 CT",
+  "demo_source": "/workspace/ceilinggate/src/data/demo.json",
+  "polish_pack": "/workspace/drive_inv/ceilinggate_public_url_polish_2026-09-05.json",
+  "return_fixtures": "/workspace/drive_inv/CEILINGGATE_RETURN.json",
+  "shipShortlist_count": 14,
+  "idle_watch": {
+    "cutoff_utc": "2026-09-05T18:00:00Z",
+    "new_money_bar_count": 0,
+    "note": "IDLE-WATCH: no NEW money/receipt/EPR/fee-cart/Patent Center export files after cutoff (title+PDF/image searches empty; recent mods = HACKATHON briefs / LAYERED_DRIVE_SWEEP only)."
+  },
+  "rows": [
+    {
+      "slug": "te-grant",
+      "claimed_one_liner": "Lean sample CLAIMED [98, 49, 25, 9] on ['fuel', 'lodging', 'meals', 'misc'] (expect grant)",
+      "interior_one_liner": "Lean sample INTERIOR [100, 50, 25, 10] \u2014 offline sample_valid",
+      "public_judge_urls": [
+        "https://quirky-rhinoceros-204.convex.site/receipts/fuel-grant.html"
+      ],
+      "residual_delta_type": "lean-sample",
+      "fee_ne_prize_note": null,
+      "expect_status": "grant",
+      "claimed_vector": [
+        98,
+        49,
+        25,
+        9
+      ],
+      "interior_vector": [
+        100,
+        50,
+        25,
+        10
+      ],
+      "lineItems": [
+        "fuel",
+        "lodging",
+        "meals",
+        "misc"
+      ],
+      "driveFileIds": [],
+      "sources": {
+        "demo": true,
+        "polish": false,
+        "return_fixture": false
+      }
+    },
+    {
+      "slug": "te-refuse",
+      "claimed_one_liner": "Lean sample CLAIMED [98, 51, 25, 11] on ['fuel', 'lodging', 'meals', 'misc'] (expect refuse)",
+      "interior_one_liner": "Lean sample INTERIOR [100, 50, 25, 10] \u2014 offline sample_invalid",
+      "public_judge_urls": [
+        "https://quirky-rhinoceros-204.convex.site/receipts/fuel-refuse.html"
+      ],
+      "residual_delta_type": "lean-sample",
+      "fee_ne_prize_note": null,
+      "expect_status": "refuse",
+      "claimed_vector": [
+        98,
+        51,
+        25,
+        11
+      ],
+      "interior_vector": [
+        100,
+        50,
+        25,
+        10
+      ],
+      "lineItems": [
+        "fuel",
+        "lodging",
+        "meals",
+        "misc"
+      ],
+      "driveFileIds": [],
+      "sources": {
+        "demo": true,
+        "polish": false,
+        "return_fixture": false
+      }
+    },
+    {
+      "slug": "te-spend-ceilings",
+      "claimed_one_liner": "T&E spend table CLAIMED ceilings [200,171.1,151000,100,6314531.75] M/$ on CDAO/Applied/HiddenLayer IDIQ/DIU slogan/GUARD milestones",
+      "interior_one_liner": "INTERIOR [0,0,0,0,0] \u2014 obligated Unknown for CDAO/Applied/HiddenLayer; DIU live openings=0; GUARD pay Unknown (ceiling\u2260cash)",
+      "public_judge_urls": [
+        "https://www.diu.mil/work-with-us/open-solicitations",
+        "https://sam.gov/workspace/contract/opp/a7ce960566e242bbbf871a3e2fab3453/view",
+        "https://sam.gov/opp/1da89ea582ea4291b82b899d503cb0d4/view",
+        "https://www.nist.gov/system/files/documents/2025/07/15/Outline_%20Proposed%20Zero%20Draft%20for%20a%20Standard%20on%20AI%20TEVV-for-web.pdf"
+      ],
+      "residual_delta_type": "money-line",
+      "fee_ne_prize_note": null,
+      "expect_status": "refuse",
+      "claimed_vector": [
+        200,
+        171.1,
+        151000,
+        100,
+        6314531.75
+      ],
+      "interior_vector": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "lineItems": [
+        "cdao_vehicle_M",
+        "applied_intuition_M",
+        "hiddenlayer_idiq_M",
+        "diu_slogan_B",
+        "guard_milestones_usd"
+      ],
+      "driveFileIds": [
+        "1QlpSaLHOs8IiqStB0v7MCFN_i3GYA6Q7PxCacEJg-rY"
+      ],
+      "sources": {
+        "demo": true,
+        "polish": false,
+        "return_fixture": true
+      }
+    },
+    {
+      "slug": "ssv-residual",
+      "claimed_one_liner": "SSV residual seal CLAIMED max_residual 0.11 + living_residual 0.12 (CLAIMED\u2264INTERIOR resource/evidence gates)",
+      "interior_one_liner": "INTERIOR [0.9,0.9] \u2014 SSV 5/5 \u03c3=1.000; max residual 0.11\u22640.90; living residual 0.12 inside; sealed hash 4a719bf3\u2026",
+      "public_judge_urls": [
+        "https://www.darpa.mil/research/research-spotlights/formal-methods"
+      ],
+      "residual_delta_type": "other",
+      "fee_ne_prize_note": null,
+      "expect_status": "grant",
+      "claimed_vector": [
+        0.11,
+        0.12
+      ],
+      "interior_vector": [
+        0.9,
+        0.9
+      ],
+      "lineItems": [
+        "max_residual",
+        "living_residual"
+      ],
+      "driveFileIds": [
+        "14AMY87yvc1bUcrf62-XVopY6eBSzwSaMce6zYK1_N9M"
+      ],
+      "sources": {
+        "demo": true,
+        "polish": false,
+        "return_fixture": true
+      }
+    },
+    {
+      "slug": "atec-phase2",
+      "claimed_one_liner": "ATEC RIW26 Phase2 CLAIMED Lean/CBMC QUALIFIED + silicon logs + live T&E stream [1,1,1] on lean_cbmc_qualified/silicon_logs/live_te_stream",
+      "interior_one_liner": "INTERIOR [1,0,0] \u2014 Lean 4.22 0-sorry QUALIFIED + CBMC harness 20/20; silicon GR-21/ZQ-06 OPEN; live T&E OPEN",
+      "public_judge_urls": [
+        "https://www.nist.gov/cyberframework"
+      ],
+      "residual_delta_type": "other",
+      "fee_ne_prize_note": null,
+      "expect_status": "refuse",
+      "claimed_vector": [
+        1,
+        1,
+        1
+      ],
+      "interior_vector": [
+        1,
+        0,
+        0
+      ],
+      "lineItems": [
+        "lean_cbmc_qualified",
+        "silicon_logs",
+        "live_te_stream"
+      ],
+      "driveFileIds": [
+        "1BAL7-Sn4XVx_1gyl5TPdGu42DIXECAh9"
+      ],
+      "sources": {
+        "demo": true,
+        "polish": false,
+        "return_fixture": true
+      }
+    },
+    {
+      "slug": "lean-kernel-receipt",
+      "claimed_one_liner": "lean_kernel_receipt CLAIMED [11,1,1] theorems_ok + mathlib_installed + physical_promotion (lake EXIT 0)",
+      "interior_one_liner": "INTERIOR [11,0,0] \u2014 theorems_accepted 11; mathlib NOT_INSTALLED; physical_promotion REFUSED (lean 4.33.1)",
+      "public_judge_urls": [
+        "https://live.lean-lang.org/"
+      ],
+      "residual_delta_type": "other",
+      "fee_ne_prize_note": null,
+      "expect_status": "refuse",
+      "claimed_vector": [
+        11,
+        1,
+        1
+      ],
+      "interior_vector": [
+        11,
+        0,
+        0
+      ],
+      "lineItems": [
+        "theorems_ok",
+        "mathlib_installed",
+        "physical_promotion"
+      ],
+      "driveFileIds": [
+        "1QYziICQ_BlbKo0IIzzpxRluYtIzDOSfM",
+        "1sZoQL_ujtYvckvp7Yo3PHvPotIhNx7zR"
+      ],
+      "sources": {
+        "demo": true,
+        "polish": false,
+        "return_fixture": true
+      }
+    },
+    {
+      "slug": "sub-spec-clean-1004-feecart",
+      "claimed_one_liner": "Missing Parts format-reply CLEAN substitute specification ready for App 19/658,750 Conf 3591; deposit codes 2111 $308 + 2311 $352 + 2051 $68 + 2252 $276 = $1,004 small-entity (Aug 14 2026 schedule)",
+      "interior_one_liner": "Specification PDF only \u2014 not fee-cart PAID; not EPR; search/exam/surcharge/EOT still unpaid beyond N417 $70 (4011); not grant; public fee-schedule line-level verify 2111/2311/2051/2252",
+      "public_judge_urls": [
+        "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+        "https://patentcenter.uspto.gov/",
+        "https://patentcenter.uspto.gov/workbench/correspondence?customerNumbers=232494,232194",
+        "https://github.com/snowphamtom/ceilinggate",
+        "https://quirky-rhinoceros-204.convex.site/"
+      ],
+      "residual_delta_type": "format-vs-paid",
+      "fee_ne_prize_note": "Fee\u2260prize: USPTO fee-schedule line items are filing/search/exam costs, not hackathon prize cash. Codes present: 2111, 2311, 2051, 2252.",
+      "expect_status": "refuse",
+      "claimed_vector": [
+        308,
+        352,
+        68,
+        276,
+        1
+      ],
+      "interior_vector": [
+        308,
+        352,
+        68,
+        276,
+        0
+      ],
+      "lineItems": [
+        "2111_search",
+        "2311_exam",
+        "2051_surcharge",
+        "2252_eot",
+        "fee_cart_paid"
+      ],
+      "driveFileIds": [
+        "101YDrhuq3EKE2USMAtZnuP7UmkRleUQK"
+      ],
+      "sources": {
+        "demo": true,
+        "polish": true,
+        "return_fixture": true
+      }
+    },
+    {
+      "slug": "gate-b-host",
+      "claimed_one_liner": "Gate B host note CLAIMED [1,1,0] python_pass + lean_mathlib_exit0; Classiq HOLD (0 not overclaimed)",
+      "interior_one_liner": "INTERIOR [1,1,0] \u2014 Python PASS \u03ba=3.70 host measurement not spec; Lean+Mathlib EXIT 0; Classiq/Braket not claimed",
+      "public_judge_urls": [
+        "https://live.lean-lang.org/"
+      ],
+      "residual_delta_type": "other",
+      "fee_ne_prize_note": null,
+      "expect_status": "grant",
+      "claimed_vector": [
+        1,
+        1,
+        0
+      ],
+      "interior_vector": [
+        1,
+        1,
+        0
+      ],
+      "lineItems": [
+        "python_pass",
+        "lean_mathlib_exit0",
+        "classiq_hold"
+      ],
+      "driveFileIds": [
+        "1-WVaKfcMxgY_dTx2Yf2dgIEQuvuImuCZ1QuziIHXe08"
+      ],
+      "sources": {
+        "demo": true,
+        "polish": false,
+        "return_fixture": true
+      }
+    },
+    {
+      "slug": "drive-diu-swap-usv",
+      "claimed_one_liner": "DIU PROJ00687 SWAP-USV OT ROM CLAIMED [5M,12M,13M,10M]=$40M milestones (TRL8/MRL8)",
+      "interior_one_liner": "INTERIOR [0,0,0,0] \u2014 solution brief / OT authority only; award/obligated Unknown; portal\u2260receipt (fee\u2260prize N/A \u2014 not USPTO fees)",
+      "public_judge_urls": [
+        "https://www.diu.mil/work-with-us/open-solicitations"
+      ],
+      "residual_delta_type": "money-line",
+      "fee_ne_prize_note": null,
+      "expect_status": "refuse",
+      "claimed_vector": [
+        5000000,
+        12000000,
+        13000000,
+        10000000
+      ],
+      "interior_vector": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "lineItems": [
+        "m1_usd",
+        "m2_usd",
+        "m3_usd",
+        "m4_usd"
+      ],
+      "driveFileIds": [
+        "1KLLr26S2GSR_VXoeljzt453OcN_-2zqCGUZRgxToV5o"
+      ],
+      "sources": {
+        "demo": true,
+        "polish": false,
+        "return_fixture": true
+      }
+    },
+    {
+      "slug": "drive-pass-job",
+      "claimed_one_liner": "pass_job.json well_conditioned_3x3 CLAIMED [9.8,4.9,2.5,0.99] \u2264 interior componentwise",
+      "interior_one_liner": "INTERIOR [10,5,2.5,1] \u2014 GRANT toy job; honest x_star; counterpart to fail_job",
+      "public_judge_urls": [
+        "https://www.nist.gov/cyberframework"
+      ],
+      "residual_delta_type": "other",
+      "fee_ne_prize_note": null,
+      "expect_status": "grant",
+      "claimed_vector": [
+        9.8,
+        4.9,
+        2.5,
+        0.99
+      ],
+      "interior_vector": [
+        10,
+        5,
+        2.5,
+        1
+      ],
+      "lineItems": [
+        "dim0",
+        "dim1",
+        "dim2",
+        "dim3"
+      ],
+      "driveFileIds": [
+        "1Z0O-8pUKMqxboYCjv8n7KLnz7dy4i3jr"
+      ],
+      "sources": {
+        "demo": true,
+        "polish": false,
+        "return_fixture": true
+      }
+    },
+    {
+      "slug": "drive-fail-job",
+      "claimed_one_liner": "fail_job.json CLAIMED [9.8,5.01,2.5,1.05] \u2014 dims 1&3 enclosure/corrupt breach vs interior",
+      "interior_one_liner": "INTERIOR [10,5,2.5,1] \u2014 Dual REFUSE: Gate B enclosure breach + Gate A corrupt residual (tol=1e-12)",
+      "public_judge_urls": [
+        "https://www.nist.gov/cyberframework"
+      ],
+      "residual_delta_type": "other",
+      "fee_ne_prize_note": null,
+      "expect_status": "refuse",
+      "claimed_vector": [
+        9.8,
+        5.01,
+        2.5,
+        1.05
+      ],
+      "interior_vector": [
+        10,
+        5,
+        2.5,
+        1
+      ],
+      "lineItems": [
+        "dim0",
+        "dim1",
+        "dim2",
+        "dim3"
+      ],
+      "driveFileIds": [
+        "1zPXW7i3Yz2Uzsd-X6WilIH25FfrA3Mp-"
+      ],
+      "sources": {
+        "demo": true,
+        "polish": false,
+        "return_fixture": true
+      }
+    },
+    {
+      "slug": "readme-1004-vs-70",
+      "claimed_one_liner": "PAY small-entity Missing Parts deposit TOTAL $1,004 (2111 search $308 + 2311 exam $352 + 2051 surcharge $68 + 2252 2-mo EOT $276); do not repay 4011 $70 already paid; working close 28 Sep 2026 if mail date 28 May 2026",
+      "interior_one_liner": "Packet README only \u2014 verify live Patent Center cart before pay; Missing Parts Word packet layout/order; not a Patent Center PAID receipt and not a patent grant",
+      "public_judge_urls": [
+        "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+        "https://patentcenter.uspto.gov/"
+      ],
+      "residual_delta_type": "money-line",
+      "fee_ne_prize_note": "Fee\u2260prize: USPTO fee-schedule line items are filing/search/exam costs, not hackathon prize cash. Codes present: 2111, 2311, 2051, 2252, 4011.",
+      "expect_status": "refuse",
+      "claimed_vector": [
+        1004,
+        70,
+        1
+      ],
+      "interior_vector": [
+        1004,
+        70,
+        0
+      ],
+      "lineItems": [
+        "fees_due_1004",
+        "paid_4011_70",
+        "fully_paid"
+      ],
+      "driveFileIds": [
+        "1wZ1-XmCMgAGp0pNhj6u4L0hG3YetN4YO"
+      ],
+      "sources": {
+        "demo": true,
+        "polish": true,
+        "return_fixture": true
+      }
+    },
+    {
+      "slug": "pc-receipt-history-9",
+      "claimed_one_liner": "9 Submissions on Patent Center Receipt History; NEW PC# 79232130 First Receipt 07/23/2026 for App 19/658,750 MAGPIE (plus prior 76049174 05/09/2026; 75547675 04/27/2026; provisionals 64/041,875 / 63/988,462 / 63/989,336 / 63/989,327)",
+      "interior_one_liner": "Live Receipt History UI export \u2014 filing-receipt rows only; no FEE CODE / no TOTAL AMOUNT / not Electronic Payment Receipt / not utility grant; strictly newer than 8-submission Uspto filings / Receipt History twins (adds 07/23/2026 PC# 79232130)",
+      "public_judge_urls": [
+        "https://patentcenter.uspto.gov/workbench/receiptHistory?customerNumbers=232494,232194",
+        "https://patentcenter.uspto.gov/workbench/applications?customerNumbers=232494,232194",
+        "https://patentcenter.uspto.gov/"
+      ],
+      "residual_delta_type": "receipt-count",
+      "fee_ne_prize_note": "Fee\u2260prize: Receipt History filing rows carry no FEE CODE / TOTAL AMOUNT; not EPR; not prize.",
+      "expect_status": "grant",
+      "claimed_vector": [
+        9,
+        1
+      ],
+      "interior_vector": [
+        9,
+        1
+      ],
+      "lineItems": [
+        "submissions_documented",
+        "pc_number_present"
+      ],
+      "driveFileIds": [
+        "1RZzBjp0IE1ZsmPKj_4v-O3uQ_TmyftjW"
+      ],
+      "sources": {
+        "demo": true,
+        "polish": true,
+        "return_fixture": true
+      }
+    },
+    {
+      "slug": "img-0414-missing-parts-900",
+      "claimed_one_liner": "Missing Parts SUMMARY OF FEES DUE (small entity): $172 non-DOCX + $68 surcharge + $308 search + $352 examination = $900 TOTAL FEE BALANCE DUE; previous unapplied payment $(0); inventor oath still missing for Taylor Heller",
+      "interior_one_liner": "Photograph of mailed Notice page 2/3 \u2014 balance DUE only, not Electronic Payment Receipt / not fee-cart PAID / not grant; line items match live USPTO fee schedule (2054 non-DOCX $172, 2051 surcharge $68, 2111 search $308, 2311 exam $352); distinct from $1,004 PAY_AND_FILE checklist (adds EOT2 $276, omits non-DOCX) and \u2026",
+      "public_judge_urls": [
+        "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+        "https://patentcenter.uspto.gov/",
+        "https://patentcenter.uspto.gov/workbench/correspondence?customerNumbers=232494,232194"
+      ],
+      "residual_delta_type": "money-line",
+      "fee_ne_prize_note": "Fee\u2260prize: USPTO fee-schedule line items are filing/search/exam costs, not hackathon prize cash. Codes present: 2054, 2051, 2111, 2311.",
+      "expect_status": "refuse",
+      "claimed_vector": [
+        900,
+        1,
+        1
+      ],
+      "interior_vector": [
+        900,
+        0,
+        0
+      ],
+      "lineItems": [
+        "fee_balance_due",
+        "paid_in_full",
+        "patent_grant"
+      ],
+      "driveFileIds": [
+        "1mXnCcuKT7F5YW-0I8_rVYafrfG12GP8L"
+      ],
+      "sources": {
+        "demo": true,
+        "polish": true,
+        "return_fixture": true
+      }
+    }
+  ]
+}
