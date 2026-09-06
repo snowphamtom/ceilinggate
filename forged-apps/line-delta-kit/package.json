@@ -1,0 +1,8 @@
+{
+  "name": "line-delta-kit",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "demo:gate": "node ./demo-gate.mjs"
+  }
+}

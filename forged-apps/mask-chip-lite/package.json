@@ -1,0 +1,8 @@
+{
+  "name": "mask-chip-lite",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "demo:gate": "node ./demo-gate.mjs"
+  }
+}
