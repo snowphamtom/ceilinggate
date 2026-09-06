@@ -1,7 +1,7 @@
-# Lesson card — 3796f2b
+# Lesson card — 41c8700
 
 1. What changed
-Map the four lines as a product ket.
+visual: WIN MODE receipt-ceiling clarity — paper slips + ledger
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
