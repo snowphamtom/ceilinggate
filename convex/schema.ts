@@ -117,8 +117,8 @@ export default defineSchema({
   opsMessages: defineTable({
     from: v.string(),
     body: v.string(),
-    kind: v.string(),
-    authed: v.boolean(),
+    kind: v.optional(v.string()),
+    authed: v.optional(v.boolean()),
     createdAt: v.number(),
   }).index("by_createdAt", ["createdAt"]),
 });
