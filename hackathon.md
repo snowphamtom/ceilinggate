@@ -59,7 +59,7 @@ CeilingGate is not an inbox yes/no assistant (Attest), not recall-notice verific
 - [x] Convex cloud deploy + `*.convex.site`
 - [x] Live AgentMail webhook + Firecrawl key in Convex env
 - [x] Public GitHub
-- [ ] vibeapps.dev video + social (Taylor sends)
+- [x] vibeapps video on GH release allgas-demo-20260905; social draft (Taylor sends)
 
 
 ### 2026-09-05 — offline demo FLAG
@@ -96,7 +96,7 @@ CeilingGate is not an inbox yes/no assistant (Attest), not recall-notice verific
 - [x] Offline tests kept green
 - [ ] GH public remote — browser create/login in flight (MANAGER)
 - [ ] Create: git push when remote URL appears
-- [ ] Convex login → `*.convex.site` + env keys
+- [x] Convex login → `*.convex.site` + env keys
 
 
 ### 2026-09-05 — Drive fuel fixtures
@@ -123,7 +123,7 @@ CeilingGate is not an inbox yes/no assistant (Attest), not recall-notice verific
 
 ## Remaining (MANAGER login unblocks)
 
-1. Convex login / `CONVEX_DEPLOY_KEY` → hosting on `*.convex.site`
+1. ~~Convex login / deploy~~ DONE — https://quirky-rhinoceros-204.convex.site/
 2. `FIRECRAWL_API_KEY` in Convex env → live scrapes
 3. AgentMail webhook secret → verified ingress
 4. Origin namespace / `gh` auth → public GitHub
@@ -144,6 +144,17 @@ Click **Check sample claims** → GRANT (all lines OK) + REFUSE (lodging & misc 
 - [x] Tip (see STATUS.md) — Batch15 shortlist includes Missing Parts $900 public fee-schedule URL
 - [x] Firecrawl Y · AgentMail Y · inbox `ceilinggate-claims@agentmail.to`
 - [x] Cash prizes ONLY $10k/$5k/$1.5k (Luma)
-- [x] vibeapps screenshots (`/workspace/ceilinggate-demo/shots/`) + [ ] video
+- [x] vibeapps screenshots + video on GH release allgas-demo-20260905
 - [ ] Submit https://vibeapps.dev/judging/convex-all-gas-hackathon-openai/submit
 - [x] Demo pack release https://github.com/snowphamtom/ceilinggate/releases/tag/allgas-demo-20260905 (off-phone)
+
+## For judges (no login)
+
+1. Open **https://quirky-rhinoceros-204.convex.site/** (public SPA — no account).
+2. Click **Demo GRANT**, then **Demo REFUSE** (or **Demo signature: GRANT → $1 REFUSE**).
+3. Read the ResidualGates ledger: Line · Claimed · On receipt · Status + mask chip.
+4. Source + build log: **https://github.com/snowphamtom/ceilinggate** (public).
+5. Screenshots + <3m video: **https://github.com/snowphamtom/ceilinggate/releases/tag/allgas-demo-20260905**.
+6. Optional live ingress: email a claim + public receipt URL to `ceilinggate-claims@agentmail.to` (Firecrawl scrapes; board updates). Ship-set demo does **not** require email.
+
+Judges never need Square, phone storage, Convex dashboard, or API keys.

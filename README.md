@@ -99,3 +99,15 @@ Inbox: `ceilinggate-claims@agentmail.to`
 ## Out of scope
 
 No Square shop edits, no COHOCF mythos products, no MAGPIE SKU, no “AI buddy” framing.
+
+## For judges (public — no login)
+
+| What | Where |
+|------|--------|
+| Live app | https://quirky-rhinoceros-204.convex.site/ |
+| Health | https://quirky-rhinoceros-204.convex.site/health |
+| Source | https://github.com/snowphamtom/ceilinggate |
+| Demo video + shots | https://github.com/snowphamtom/ceilinggate/releases/tag/allgas-demo-20260905 |
+| Claims inbox (optional) | `ceilinggate-claims@agentmail.to` |
+
+Click **Demo GRANT** / **Demo REFUSE** — full ResidualGates ledger works in the browser. No keys, no chat login, no Square.

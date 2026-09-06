@@ -52,3 +52,9 @@ NOT: waynesutton AgentMail chat-demo rebrand, Firecrawl docs-search chat, generi
 
 ## Compete watch
 Hardened vs Attest / NoticeProof / Get It in Writing — hero = line ledger + ResidualGates; Demo signature GRANT→$1 REFUSE; no chat panel.
+
+## Judge access (LOCKED)
+Public, no login: live SPA + GH repo + release assets (shots + video).
+Demo GRANT/REFUSE/signature work in-browser without AgentMail.
+Optional: email `ceilinggate-claims@agentmail.to` with public receipt URL.
+No Square / phone / dashboard keys required for judging.
