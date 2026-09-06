@@ -1676,6 +1676,27 @@ textarea.forge-input {
   border-width: 1.5px;
 }
 
+
+
+/* —— Standing polish k: inbox meta + empty cue —— */
+.row.docket .meta {
+  opacity: 0.9;
+}
+
+.verdict-panel .empty::before {
+  color: #e6c47a;
+}
+
+.grant-btn:active,
+.refuse-btn:active {
+  transform: translateY(1px);
+  filter: brightness(0.96);
+}
+
+.stack-tags li {
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.3), 0 0 12px rgba(91, 157, 255, 0.08);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .card.grant,
   .card.refuse,
@@ -1693,5 +1714,9 @@ textarea.forge-input {
   }
   .card.refuse.big .paper-slip-tab:not(.empty) {
     animation: none;
+  }
+  .grant-btn:active,
+  .refuse-btn:active {
+    transform: none;
   }
 }
