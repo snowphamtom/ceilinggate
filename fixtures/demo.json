@@ -2539,7 +2539,7 @@
     {
       "id": "readme-1004-vs-70",
       "caseId": "CG-EVE-B7-01",
-      "label": "REFUSE \u2014 README $1,004 due vs $70 paid (4011)",
+      "label": "REFUSE \u2014 $1004 deposit due vs $70 (4011) already paid; README \u2260 PAID receipt",
       "kind": "forensic-drive",
       "lineItems": [
         "fees_due_1004",
@@ -2549,8 +2549,8 @@
       "email": {
         "subject": "[FORENSIC] README $1004 due \u2014 Eve batch7",
         "from": "eve-fuel@monstersink.example",
-        "body": "CLAIMED: 1004, 70, 1\nINTERIOR: 1004, 70, 0\nfileId 1wZ1-XmCMgAGp0pNhj6u4L0hG3YetN4YO\n$70 paid 4011; $1004 still due \u2014 not fully paid / not grant",
-        "receiptUrl": "https://patentcenter.uspto.gov/"
+        "body": "CLAIMED: 1004, 70, 1\nINTERIOR: 1004, 70, 0\nfileId 1wZ1-XmCMgAGp0pNhj6u4L0hG3YetN4YO\nPAY small-entity Missing Parts deposit TOTAL $1,004 (2111 search $308 + 2311 exam $352 + 2051 surcharge $68 + 2252 2-mo EOT $276); do not repay 4011 $70 already paid; working close 28 Sep 2026 if mail date 28 May 2026\nINTERIOR: Packet README only \u2014 verify live Patent Center cart before pay; Missing Parts Word packet layout/order; not a Patent Center PAID receipt and not a patent grant\nLive: 1004 cart; 4011=$70. Fee\u2260prize.",
+        "receiptUrl": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule"
       },
       "claimed": [
         1004,
@@ -2572,7 +2572,11 @@
       "driveFileIds": [
         "1wZ1-XmCMgAGp0pNhj6u4L0hG3YetN4YO"
       ],
-      "scrapeFixtureText": "INTERIOR: 1004, 70, 0\nFORENSIC Eve: $70 paid; $1004 due; not fully paid"
+      "scrapeFixtureText": "INTERIOR: 1004, 70, 0\nFORENSIC Eve polish: $1004 due; $70 filing paid; not cart PAID/grant",
+      "publicUrls": [
+        "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+        "https://patentcenter.uspto.gov/"
+      ]
     },
     {
       "id": "track-one-skeleton-unpaid",
@@ -3160,7 +3164,7 @@
     {
       "id": "img-0414-missing-parts-900",
       "caseId": "CG-EVE-B15-01",
-      "label": "REFUSE \u2014 Missing Parts $900 TOTAL FEE BALANCE DUE unpaid (not EPR/grant; fee\u2260prize)",
+      "label": "REFUSE \u2014 Missing Parts $900 DUE (2054/2051/2111/2311) unpaid; not EPR/grant",
       "kind": "forensic-drive",
       "lineItems": [
         "fee_balance_due",
@@ -3170,7 +3174,7 @@
       "email": {
         "subject": "[FORENSIC] IMG_0414 Missing Parts $900 TOTAL FEE BALANCE DUE \u2014 Eve",
         "from": "eve-fuel@monstersink.example",
-        "body": "CLAIMED: 900, 1, 1\nINTERIOR: 900, 0, 0\nfileId 1mXnCcuKT7F5YW-0I8_rVYafrfG12GP8L\nTOTAL FEE BALANCE DUE $900 ($172+$68+$308+$352) \u2194 unpaid / not EPR / not grant. \u2260 $1004 EOT / \u2260 N417 $70 EPR.",
+        "body": "CLAIMED: 900, 1, 1\nINTERIOR: 900, 0, 0\nfileId 1mXnCcuKT7F5YW-0I8_rVYafrfG12GP8L\nMissing Parts SUMMARY OF FEES DUE (small entity): $172 non-DOCX + $68 surcharge + $308 search + $352 examination = $900 TOTAL FEE BALANCE DUE; previous unapplied payment $(0); inventor oath still missing for Taylor Heller\nINTERIOR: Photograph of mailed Notice page 2/3 \u2014 balance DUE only, not Electronic Payment Receipt / not fee-cart PAID / not grant; line items match live USPTO fee schedule (2054 non-DOCX $172, 2051 surcharge $68, 2111 search $308, 2311 exam $352); distinct from $1,004 PAY_AND_FILE checklist (adds EOT2 $276, omits non-DOCX) and from N417 $70 EPR\nLive: 172+68+308+352=900. Fee\u2260prize.",
         "receiptUrl": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule"
       },
       "claimed": [
@@ -3194,7 +3198,12 @@
       "driveFileIds": [
         "1mXnCcuKT7F5YW-0I8_rVYafrfG12GP8L"
       ],
-      "scrapeFixtureText": "INTERIOR: 900, 0, 0\nFORENSIC Eve Batch15: TOTAL FEE BALANCE DUE $900; unpaid; public fee schedule https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule"
+      "scrapeFixtureText": "INTERIOR: 900, 0, 0\nFORENSIC Eve polish: $900 = 2054+2051+2111+2311; unpaid",
+      "publicUrls": [
+        "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+        "https://patentcenter.uspto.gov/",
+        "https://patentcenter.uspto.gov/workbench/correspondence?customerNumbers=232494,232194"
+      ]
     },
     {
       "id": "img-0415-missing-parts-notice",
@@ -3277,7 +3286,7 @@
     {
       "id": "pc-receipt-history-9",
       "caseId": "CG-EVE-B16-01",
-      "label": "GRANT \u2014 Patent Center Receipt History 9 submissions + PC# 79232130 (beats 8-row twin)",
+      "label": "GRANT \u2014 Drive RH export 9 submissions + PC# 79232130 (PC workbench auth-walled)",
       "kind": "forensic-drive",
       "lineItems": [
         "submissions_documented",
@@ -3286,7 +3295,7 @@
       "email": {
         "subject": "[FORENSIC] Google.pdf Receipt History 9 + PC# 79232130 \u2014 Eve B16",
         "from": "eve-fuel@monstersink.example",
-        "body": "CLAIMED: 9, 1\nINTERIOR: 9, 1\nfileId 1RZzBjp0IE1ZsmPKj_4v-O3uQ_TmyftjW\n9 submissions + NEW PC# 79232130 (07/23/2026); beats 8-submission twin. Fee\u2260prize. ResidualGates line deltas.",
+        "body": "CLAIMED: 9, 1\nINTERIOR: 9, 1\nfileId 1RZzBjp0IE1ZsmPKj_4v-O3uQ_TmyftjW\n9 Submissions on Patent Center Receipt History; NEW PC# 79232130 First Receipt 07/23/2026 for App 19/658,750 MAGPIE (plus prior 76049174 05/09/2026; 75547675 04/27/2026; provisionals 64/041,875 / 63/988,462 / 63/989,336 / 63/989,327)\nINTERIOR: Live Receipt History UI export \u2014 filing-receipt rows only; no FEE CODE / no TOTAL AMOUNT / not Electronic Payment Receipt / not utility grant; strictly newer than 8-submission Uspto filings / Receipt History twins (adds 07/23/2026 PC# 79232130)\nHARD: Patent Center RH URL is login SPA \u2014 interiors from Drive export only. Fee\u2260prize.",
         "receiptUrl": "https://patentcenter.uspto.gov/"
       },
       "claimed": [
@@ -3305,7 +3314,13 @@
       "driveFileIds": [
         "1RZzBjp0IE1ZsmPKj_4v-O3uQ_TmyftjW"
       ],
-      "scrapeFixtureText": "INTERIOR: 9, 1\nFORENSIC Eve Batch16: Receipt History 9 submissions; PC# 79232130"
+      "scrapeFixtureText": "INTERIOR: 9, 1\nFORENSIC Eve polish: RH count from Drive; public PC workbench auth-walled",
+      "publicUrls": [
+        "https://patentcenter.uspto.gov/workbench/receiptHistory?customerNumbers=232494,232194",
+        "https://patentcenter.uspto.gov/workbench/applications?customerNumbers=232494,232194",
+        "https://patentcenter.uspto.gov/"
+      ],
+      "authWallNote": "patentcenter workbench RH requires login \u2014 Drive interiors retained"
     },
     {
       "id": "inventor-declaration-blank-sig",
@@ -3427,49 +3442,51 @@
     {
       "id": "sub-spec-clean-1004-feecart",
       "caseId": "CG-EVE-B18-01",
-      "label": "REFUSE \u2014 Substitute spec clean body vs unpaid $1004 fee-cart (2111/2311/2051/2252)",
+      "label": "REFUSE \u2014 CLEAN sub-spec vs unpaid $1004 fee-cart (2111/2311/2051/2252; fee\u2260prize)",
       "kind": "forensic-drive",
       "lineItems": [
-        "spec_body",
-        "fee_2111",
-        "fee_2311",
-        "fee_2051",
-        "fee_2252",
-        "paid"
+        "2111_search",
+        "2311_exam",
+        "2051_surcharge",
+        "2252_eot",
+        "fee_cart_paid"
       ],
       "email": {
-        "subject": "[FORENSIC] 03_SUBSTITUTE_SPECIFICATION_CLEAN vs $1004 fee-cart \u2014 Eve B18",
+        "subject": "[FORENSIC] Substitute CLEAN vs unpaid $1004 fee-cart (2111+2311+2051+2252) \u2014 Eve polish",
         "from": "eve-fuel@monstersink.example",
-        "body": "CLAIMED: 1, 160, 160, 160, 524, 1\nINTERIOR: 1, 160, 160, 160, 524, 0\nfileId 101YDrhuq3EKE2USMAtZnuP7UmkRleUQK\nFormat body vs unpaid fee-cart lines; public fee-schedule. Fee\u2260prize. Money-bar candidate.",
+        "body": "CLAIMED: 308, 352, 68, 276, 1\nINTERIOR: 308, 352, 68, 276, 0\nfileId 101YDrhuq3EKE2USMAtZnuP7UmkRleUQK\nMissing Parts format-reply CLEAN substitute specification ready for App 19/658,750 Conf 3591; deposit codes 2111 $308 + 2311 $352 + 2051 $68 + 2252 $276 = $1,004 small-entity (Aug 14 2026 schedule)\nINTERIOR: Specification PDF only \u2014 not fee-cart PAID; not EPR; search/exam/surcharge/EOT still unpaid beyond N417 $70 (4011); not grant; public fee-schedule line-level verify 2111/2311/2051/2252\nLive schedule: 308+352+68+276=1004. Distorted 160/524 vectors removed. Fee\u2260prize.",
         "receiptUrl": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule"
       },
       "claimed": [
-        1,
-        160,
-        160,
-        160,
-        524,
+        308,
+        352,
+        68,
+        276,
         1
       ],
       "interior": [
-        1,
-        160,
-        160,
-        160,
-        524,
+        308,
+        352,
+        68,
+        276,
         0
       ],
       "expect": {
         "status": "refuse",
-        "mask": 32,
+        "mask": 16,
         "failedIndices": [
-          5
+          4
         ]
       },
       "driveFileIds": [
         "101YDrhuq3EKE2USMAtZnuP7UmkRleUQK"
       ],
-      "scrapeFixtureText": "INTERIOR: 1, 160, 160, 160, 524, 0\nFORENSIC Eve Batch18: sub-spec clean vs unpaid $1004 fee-cart"
+      "scrapeFixtureText": "INTERIOR: 308, 352, 68, 276, 0\nFORENSIC Eve polish: fee-schedule small-entity 2111/2311/2051/2252; cart unpaid (paid=0)",
+      "publicUrls": [
+        "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+        "https://patentcenter.uspto.gov/",
+        "https://patentcenter.uspto.gov/workbench/correspondence?customerNumbers=232494,232194"
+      ]
     },
     {
       "id": "sb0478-blank-pier",
@@ -3635,5 +3652,6 @@
     5000,
     1500
   ],
-  "prizeCashSource": "https://luma.com/convex-allgas-hackathon"
+  "prizeCashSource": "https://luma.com/convex-allgas-hackathon",
+  "publicUrlPolishPack": "ceilinggate_public_url_polish_2026-09-05"
 }
