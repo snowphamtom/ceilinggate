@@ -1,7 +1,7 @@
 {
   "name": "CeilingGate + App Forge",
   "short_name": "CeilingGate",
-  "description": "All Gas — forensic spend gate + recursive App Forge. Runs from network; tiny install.",
+  "description": "All Gas \u2014 forensic spend gate + recursive App Forge. Runs from network; tiny install.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
@@ -12,13 +12,27 @@
       "src": "/pwa/192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "/pwa/192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
     },
     {
       "src": "/pwa/512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "/pwa/512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
-  ]
+  ],
+  "id": "/",
+  "lang": "en"
 }

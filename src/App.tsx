@@ -400,8 +400,7 @@ export default function App() {
 
       <footer className="lean">
         CeilingGate is a money-claim checker — not a chat bot, not a developer
-        SDK. Email in → Firecrawl receipt scrape → clear GRANT or REFUSE. Cash
-        prizes for All Gas: $10k / $5k / $1.5k only.
+        SDK. Email in → Firecrawl receipt scrape → clear GRANT or REFUSE. Cash prizes for All Gas: $10k / $5k / $1.5k only. Install: browser Add to Home Screen / Install app (PWA — no download pack).
       </footer>
     </div>
   );
