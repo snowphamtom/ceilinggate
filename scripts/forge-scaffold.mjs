@@ -50,7 +50,7 @@ ${brief}
 
 ## LIVE interactive
 Open \`src/index.html\` or https://quirky-rhinoceros-204.convex.site/forge/${slug}/
-Real gateB clicks → GRANT/REFUSE. BETTER-THAN-PARENT. NEVER NEED ACCESS.
+Interactive gateB: Demo GRANT/REFUSE on sample inputs.
 
 ## Stack
 Convex + Firecrawl + AgentMail + ResidualGates.
@@ -131,7 +131,7 @@ const html = `<!DOCTYPE html>
 </head>
 <body>
   <h1>${safeTitle}</h1>
-  <p class="lede">LIVE gateB — claimed ≤ interior. BETTER-THAN-PARENT. NEVER NEED ACCESS. NO COSTUME.</p>
+  <p class="lede">Compare claimed amounts to interior receipt lines. Grant when every claim stays at or below interior.</p>
   <label>Claimed (comma-separated)<input id="claimed" value="98, 51, 25, 11" /></label>
   <label>Interior / on-receipt<input id="interior" value="100, 50, 25, 10" /></label>
   <div class="row">

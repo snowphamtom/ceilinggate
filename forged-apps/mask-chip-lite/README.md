@@ -1,10 +1,10 @@
 # Mask Chip Lite
 
-LIVE: bitmask + failed indices on gateB.
+LIVE bitmask + failed indices via gateB.
 
 ## LIVE interactive
 Open `src/index.html` or https://quirky-rhinoceros-204.convex.site/forge/mask-chip-lite/
-Real gateB clicks → GRANT/REFUSE. BETTER-THAN-PARENT. NEVER NEED ACCESS.
+Interactive gateB: Demo GRANT/REFUSE on sample inputs.
 
 ## Stack
 Convex + Firecrawl + AgentMail + ResidualGates.

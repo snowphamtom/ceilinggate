@@ -1,10 +1,10 @@
 # Receipt Line Check
 
-LIVE: claimed lines ≤ receipt totals via gateB.
+LIVE claimed lines ≤ receipt totals via gateB.
 
 ## LIVE interactive
 Open `src/index.html` or https://quirky-rhinoceros-204.convex.site/forge/receipt-line-check/
-Real gateB clicks → GRANT/REFUSE. BETTER-THAN-PARENT. NEVER NEED ACCESS.
+Interactive gateB: Demo GRANT/REFUSE on sample inputs.
 
 ## Stack
 Convex + Firecrawl + AgentMail + ResidualGates.

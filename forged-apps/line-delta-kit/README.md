@@ -1,10 +1,10 @@
 # Line Delta Kit
 
-LIVE: claimed vs interior arrays → line table + GRANT/REFUSE + mask.
+LIVE claimed vs interior line table via gateB.
 
 ## LIVE interactive
 Open `src/index.html` or https://quirky-rhinoceros-204.convex.site/forge/line-delta-kit/
-Real gateB clicks → GRANT/REFUSE. BETTER-THAN-PARENT. NEVER NEED ACCESS.
+Interactive gateB: Demo GRANT/REFUSE on sample inputs.
 
 ## Stack
 Convex + Firecrawl + AgentMail + ResidualGates.

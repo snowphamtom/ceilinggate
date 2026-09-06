@@ -1,10 +1,10 @@
 # Tip Jar Honesty
 
-LIVE: claimed tip ≤ receipt total via gateB. Demo GRANT/REFUSE + live Δ.
+LIVE tip ≤ receipt total via gateB.
 
 ## LIVE interactive
 Open `src/index.html` or https://quirky-rhinoceros-204.convex.site/forge/tip-jar-honesty/
-Real gateB clicks → GRANT/REFUSE. BETTER-THAN-PARENT. NEVER NEED ACCESS.
+Interactive gateB: Demo GRANT/REFUSE on sample inputs.
 
 ## Stack
 Convex + Firecrawl + AgentMail + ResidualGates.

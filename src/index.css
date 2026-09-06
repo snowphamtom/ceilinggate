@@ -97,3 +97,13 @@ code { font-family: "IBM Plex Mono", ui-monospace, monospace; }
 
 .forge-newest { outline: 1px solid #2a6df4; border-radius: 6px; padding: 0.15rem 0.35rem; background: rgba(42,109,244,0.12); }
 .forge-judge-strip { margin-top: 0.5rem; font-size: 0.8rem; color: #9ec5ff; }
+
+.forge-child { margin: 1rem 0; padding: 0.85rem 0.9rem; border: 1px solid #2a3a55; border-radius: 10px; background: #0e1626; }
+.forge-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+@media (max-width: 720px) { .forge-row { grid-template-columns: 1fr; } }
+.forge-child .card { margin-top: 0.75rem; }
+.delta-table { width: 100%; border-collapse: collapse; margin-top: 0.65rem; font-size: 0.85rem; }
+.delta-table th, .delta-table td { text-align: left; padding: 0.3rem 0.4rem; border-bottom: 1px solid #2a3a55; font-family: ui-monospace, monospace; }
+.delta-table td.ok { color: #6ee7a8; }
+.delta-table td.bad { color: #fca5a5; }
+#live-child-gates { border: 1px solid #1f9d63; }

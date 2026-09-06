@@ -1,10 +1,10 @@
 {
   "slug": "tip-jar-honesty",
   "title": "Tip Jar Honesty",
-  "brief": "LIVE: claimed tip ≤ receipt total via gateB. Demo GRANT/REFUSE + live Δ.",
+  "brief": "LIVE tip ≤ receipt total via gateB.",
   "path": "/forge/tip-jar-honesty/",
   "boxPath": "/workspace/forged-apps/tip-jar-honesty",
-  "forgedAt": "2026-09-06T00:46:35.491Z",
+  "forgedAt": "2026-09-06T00:48:30.162Z",
   "live": true,
   "neverNeedAccess": true,
   "betterThanParent": true,

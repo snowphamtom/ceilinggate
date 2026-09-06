@@ -1,10 +1,10 @@
 {
   "slug": "mask-chip-lite",
   "title": "Mask Chip Lite",
-  "brief": "LIVE: bitmask + failed indices on gateB.",
+  "brief": "LIVE bitmask + failed indices via gateB.",
   "path": "/forge/mask-chip-lite/",
   "boxPath": "/workspace/forged-apps/mask-chip-lite",
-  "forgedAt": "2026-09-06T00:46:35.696Z",
+  "forgedAt": "2026-09-06T00:48:30.365Z",
   "live": true,
   "neverNeedAccess": true,
   "betterThanParent": true,

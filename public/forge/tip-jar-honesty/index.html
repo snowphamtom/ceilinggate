@@ -9,8 +9,6 @@
     body { margin: 0; background: #0b1220; color: #e8eef7; padding: 1.25rem; max-width: 28rem; }
     h1 { font-size: 1.35rem; margin: 0 0 0.35rem; }
     .lede { color: #a8bdd8; font-size: 0.92rem; margin: 0 0 1rem; line-height: 1.4; }
-    .badge { display:inline-block; font-size:0.72rem; padding:0.15rem 0.45rem; border-radius:999px;
-      border:1px solid #3a4f6f; color:#9ec5ff; margin:0 0 0.75rem; }
     label { display: block; margin: 0.55rem 0; font-size: 0.85rem; color: #a8bdd8; }
     input { display: block; width: 100%; box-sizing: border-box; margin-top: 0.25rem;
       padding: 0.55rem 0.65rem; border-radius: 8px; border: 1px solid #2a3a55;
@@ -30,9 +28,8 @@
   </style>
 </head>
 <body>
-  <span class="badge">BETTER-THAN-PARENT · NEVER NEED ACCESS · NO COSTUME</span>
   <h1>Tip Jar Honesty</h1>
-  <p class="lede">Two money fields — claimed tip vs receipt total. Live GRANT/REFUSE + Δ + plain English. Clearer than parent multi-line board on this claim.</p>
+  <p class="lede">Compare a claimed tip to the receipt total. Try Demo GRANT/REFUSE or edit the amounts.</p>
   <label>Claimed tip ($)<input id="tip" type="number" step="0.01" value="5.00" /></label>
   <label>Receipt total ($)<input id="total" type="number" step="0.01" value="42.50" /></label>
   <div class="row">
@@ -41,7 +38,7 @@
     <button type="button" id="run">Run Tip Jar gate</button>
   </div>
   <div id="out" class="card" hidden></div>
-  <p class="lede" style="margin-top:1.25rem"><a href="/">← CeilingGate parent</a> · <a href="/forge/line-delta-kit/">Line Delta Kit</a></p>
+  <p class="lede" style="margin-top:1.25rem"><a href="/">← CeilingGate</a> · <a href="/forge/line-delta-kit/">Line Delta Kit</a></p>
   <script>
     function gateB(interior, claimed) {
       if (interior.length !== claimed.length) return { status: "refuse", mask: 1, failedIndices: [] };

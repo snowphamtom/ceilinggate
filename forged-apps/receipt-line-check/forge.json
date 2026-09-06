@@ -1,10 +1,10 @@
 {
   "slug": "receipt-line-check",
   "title": "Receipt Line Check",
-  "brief": "LIVE: claimed lines ≤ receipt totals via gateB.",
+  "brief": "LIVE claimed lines ≤ receipt totals via gateB.",
   "path": "/forge/receipt-line-check/",
   "boxPath": "/workspace/forged-apps/receipt-line-check",
-  "forgedAt": "2026-09-06T00:46:35.793Z",
+  "forgedAt": "2026-09-06T00:48:30.461Z",
   "live": true,
   "neverNeedAccess": true,
   "betterThanParent": true,

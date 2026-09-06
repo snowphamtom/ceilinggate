@@ -1,10 +1,10 @@
 {
   "slug": "line-delta-kit",
   "title": "Line Delta Kit",
-  "brief": "LIVE: claimed vs interior arrays → line table + GRANT/REFUSE + mask.",
+  "brief": "LIVE claimed vs interior line table via gateB.",
   "path": "/forge/line-delta-kit/",
   "boxPath": "/workspace/forged-apps/line-delta-kit",
-  "forgedAt": "2026-09-06T00:46:35.594Z",
+  "forgedAt": "2026-09-06T00:48:30.263Z",
   "live": true,
   "neverNeedAccess": true,
   "betterThanParent": true,

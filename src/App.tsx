@@ -228,6 +228,14 @@ export default function App() {
         .
       </div>
 
+      <section className="panel forge-panel" id="live-child-gates">
+        <h2>Live child gates</h2>
+        <p className="muted small">
+          Click Demo GRANT/REFUSE or edit inputs to try the live gates.
+        </p>
+        <TipJarHonestyPanel />
+        <LineDeltaKitPanel />
+      </section>
       <AppForgePanel />
 
 
@@ -427,7 +435,7 @@ function TipJarHonestyPanel() {
       setDecision({ status: "refuse", mask: 1, failedIndices: [0] });
       return;
     }
-    // Narrow claim: tip alone vs receipt total — clearer than parent's multi-line board
+    // Narrow claim: tip alone vs receipt total
     setDecision(gateB([total], [tip]));
   }, [claimedTip, receiptTotal]);
 
@@ -436,10 +444,10 @@ function TipJarHonestyPanel() {
   }, [run]);
 
   return (
-    <div className="forge-child">
+    <div className="forge-child" data-testid="tip-jar-honesty-live">
       <h3 className="forge-sub">Tip Jar Honesty — LIVE</h3>
       <p className="muted small">
-        Check a claimed tip against the receipt total — GRANT when the tip is at or under, REFUSE when it overshoots.
+        Two money fields — claimed tip vs receipt total. Live GRANT/REFUSE with a clear delta.
       </p>
       <div className="forge-row">
         <label className="forge-label">
@@ -449,7 +457,9 @@ function TipJarHonestyPanel() {
             type="number"
             step="0.01"
             value={claimedTip}
-            onChange={(e) => setClaimedTip(e.target.value)}
+            onChange={(e) => {
+              setClaimedTip(e.target.value);
+            }}
           />
         </label>
         <label className="forge-label">
@@ -502,7 +512,9 @@ function TipJarHonestyPanel() {
             </span>
           </div>
           <p className="muted small">
-            Claimed tip {money(Number(claimedTip))} vs receipt {money(Number(receiptTotal))}
+            Claimed tip {money(Number(claimedTip))} vs receipt{" "}
+            {money(Number(receiptTotal))} · Δ{" "}
+            {money(Number(claimedTip) - Number(receiptTotal))}
             {decision.status === "grant"
               ? " — tip at or under receipt."
               : " — tip over receipt total."}
@@ -529,7 +541,7 @@ function LineDeltaKitPanel() {
   }, [run]);
 
   return (
-    <div className="forge-child">
+    <div className="forge-child" data-testid="line-delta-kit-live">
       <h3 className="forge-sub">Line Delta Kit — LIVE</h3>
       <p className="muted small">
         Paste claimed and on-receipt line amounts, then run the gate for a GRANT/REFUSE with mask and failed indices.
@@ -590,22 +602,39 @@ function LineDeltaKitPanel() {
                 : " · clear"}
             </span>
           </div>
-          {decision.failedIndices.length > 0 ? (
-            <ul className="plain-fail">
-              {decision.failedIndices.map((i) => {
-                const c = parseNumList(claimedStr)[i] ?? 0;
-                const n = parseNumList(interiorStr)[i] ?? 0;
+          <table className="delta-table">
+            <thead>
+              <tr>
+                <th>Line</th>
+                <th>Claimed</th>
+                <th>Interior</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {Array.from({
+                length: Math.max(
+                  parseNumList(claimedStr).length,
+                  parseNumList(interiorStr).length,
+                ),
+              }).map((_, i) => {
+                const c = parseNumList(claimedStr)[i];
+                const n = parseNumList(interiorStr)[i];
+                const ok =
+                  Number.isFinite(c) && Number.isFinite(n) && (c as number) <= (n as number);
                 return (
-                  <li key={i}>
-                    Line {i}: claimed {money(c)} vs interior {money(n)} (
-                    {money(c - n)} over)
-                  </li>
+                  <tr key={i}>
+                    <td>{i}</td>
+                    <td>{money(c ?? 0)}</td>
+                    <td>{money(n ?? 0)}</td>
+                    <td className={ok ? "ok" : "bad"}>
+                      {ok ? "CLEAR" : `OVER ${money((c ?? 0) - (n ?? 0))}`}
+                    </td>
+                  </tr>
                 );
               })}
-            </ul>
-          ) : (
-            <p className="ok-line">Every line clears — claimed ≤ interior.</p>
-          )}
+            </tbody>
+          </table>
         </div>
       ) : null}
     </div>
@@ -766,8 +795,9 @@ function AppForgePanel() {
       </p>
       <p className="eyebrow">Micro-apps · same stack · live gates</p>
 
-      <TipJarHonestyPanel />
-      <LineDeltaKitPanel />
+      <p className="muted small">
+        Tip Jar + Line Delta also at <a href="#live-child-gates">#live-child-gates</a>. Mask Chip:
+      </p>
       <MaskChipLitePanel />
 
       <h3 className="forge-sub">Spawn next micro-app (live)</h3>
