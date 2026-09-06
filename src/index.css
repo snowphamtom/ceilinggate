@@ -1477,6 +1477,33 @@ textarea.forge-input {
   color: #ffb0b0;
 }
 
+
+
+/* —— Judges 30s b: steps + selected docket —— */
+.steps {
+  border-style: solid;
+  border-color: rgba(58, 84, 120, 0.65);
+  background: rgba(10, 16, 28, 0.72);
+}
+
+.steps li::marker {
+  color: var(--amber);
+  font-weight: 700;
+}
+
+.row.docket.on {
+  outline: 1px solid var(--amber);
+  box-shadow: 0 0 0 3px rgba(212, 162, 76, 0.16), -2px 0 14px rgba(212, 162, 76, 0.12);
+}
+
+.board-grid .panel > h2 {
+  font-size: 0.7rem;
+}
+
+.verdict-panel {
+  min-height: 12rem;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .card.grant,
   .card.refuse,
