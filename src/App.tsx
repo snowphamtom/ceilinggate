@@ -99,22 +99,22 @@ export default function App() {
       <section className="try-now" aria-label="Try it">
         <p className="try-label">Try it</p>
         <div className="oneclick">
-          <button type="button" className="grant-btn" onClick={() => { const f = pickByExpect("grant"); if (f) runOne(f); }}>Show a GRANT</button>
-          <button type="button" className="refuse-btn" onClick={() => { const f = pickByExpect("refuse"); if (f) runOne(f); }}>Show a REFUSE</button>
+          <button type="button" className="grant-btn" onClick={() => { const f = pickByExpect("grant"); if (f) runOne(f); }}>Demo GRANT</button>
+          <button type="button" className="refuse-btn" onClick={() => { const f = pickByExpect("refuse"); if (f) runOne(f); }}>Demo REFUSE</button>
         </div>
       </section>
 
       <ol className="steps">
         <li>Email the claim and a public receipt link to <code>ceilinggate-claims@agentmail.to</code></li>
-        <li>The receipt page is read.</li>
-        <li>Each line must stay at or under the receipt.</li>
+        <li>Firecrawl reads the receipt page.</li>
+        <li>Each line must stay at or under the receipt. OpenAI writes one sentence after the numbers.</li>
       </ol>
 
       <div className="board-grid">
         <section className="panel verdict-panel">
           <h2>Result</h2>
           {!selected ? (
-            <p className="muted empty">Tap GRANT or REFUSE above.</p>
+            <p className="muted empty">Tap Demo GRANT or Demo REFUSE above.</p>
           ) : (
             <VerdictCard selected={selected} plain={plain} />
           )}
