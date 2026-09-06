@@ -83,7 +83,7 @@ http.route({
 });
 
 // SPA fallbacks for common root files
-for (const file of ["favicon.svg", "icons.svg"]) {
+for (const file of ["favicon.svg", "icons.svg", "manifest.webmanifest", "sw.js", "pwa-192.png", "pwa-512.png"]) {
   http.route({
     path: `/${file}`,
     method: "GET",
