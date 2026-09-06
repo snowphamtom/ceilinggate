@@ -1,0 +1,380 @@
+{
+  "purpose": "All Gas helper map \u2014 shipShortlist \u2194 Drive fileIds \u2194 public URLs (box only). Fee\u2260prize. No commercial T&E.",
+  "built_at_utc": "2026-09-06T00:21:21Z",
+  "shipShortlist_count": 14,
+  "polish_pack": "/workspace/drive_inv/ceilinggate_public_url_polish_2026-09-05.json",
+  "demo_source": "/workspace/ceilinggate/src/data/demo.json",
+  "rows": [
+    {
+      "shortlist_slug": "te-grant",
+      "label": "GRANT \u2014 Lean sample under ceiling",
+      "kind": "lean-sample",
+      "driveFileIds": [],
+      "claimed": [
+        98,
+        49,
+        25,
+        9
+      ],
+      "interior": [
+        100,
+        50,
+        25,
+        10
+      ],
+      "public_urls": [
+        "https://quirky-rhinoceros-204.convex.site/receipts/fuel-grant.html"
+      ],
+      "polish_notes": null,
+      "fee_codes_if_any": null
+    },
+    {
+      "shortlist_slug": "te-refuse",
+      "label": "REFUSE \u2014 Lean sample lodging+misc over",
+      "kind": "lean-sample",
+      "driveFileIds": [],
+      "claimed": [
+        98,
+        51,
+        25,
+        11
+      ],
+      "interior": [
+        100,
+        50,
+        25,
+        10
+      ],
+      "public_urls": [
+        "https://quirky-rhinoceros-204.convex.site/receipts/fuel-refuse.html"
+      ],
+      "polish_notes": null,
+      "fee_codes_if_any": null
+    },
+    {
+      "shortlist_slug": "te-spend-ceilings",
+      "label": "REFUSE \u2014 T&E spend table ceilings\u2194obligated Unknown",
+      "kind": "forensic-drive",
+      "driveFileIds": [
+        "1QlpSaLHOs8IiqStB0v7MCFN_i3GYA6Q7PxCacEJg-rY"
+      ],
+      "claimed": [
+        200,
+        171.1,
+        151000,
+        100,
+        6314531.75
+      ],
+      "interior": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "public_urls": [
+        "https://www.diu.mil/work-with-us/open-solicitations"
+      ],
+      "polish_notes": null,
+      "fee_codes_if_any": null
+    },
+    {
+      "shortlist_slug": "ssv-residual",
+      "label": "GRANT \u2014 CLAIMED\u2264INTERIOR residual seal (SSV)",
+      "kind": "forensic-drive",
+      "driveFileIds": [
+        "14AMY87yvc1bUcrf62-XVopY6eBSzwSaMce6zYK1_N9M"
+      ],
+      "claimed": [
+        0.11,
+        0.12
+      ],
+      "interior": [
+        0.9,
+        0.9
+      ],
+      "public_urls": [
+        "https://www.darpa.mil/research/research-spotlights/formal-methods"
+      ],
+      "polish_notes": null,
+      "fee_codes_if_any": null
+    },
+    {
+      "shortlist_slug": "atec-phase2",
+      "label": "REFUSE \u2014 ATEC Phase2 QUALIFIED vs silicon/live T&E OPEN",
+      "kind": "forensic-drive",
+      "driveFileIds": [
+        "1BAL7-Sn4XVx_1gyl5TPdGu42DIXECAh9"
+      ],
+      "claimed": [
+        1,
+        1,
+        1
+      ],
+      "interior": [
+        1,
+        0,
+        0
+      ],
+      "public_urls": [
+        "https://www.nist.gov/cyberframework"
+      ],
+      "polish_notes": null,
+      "fee_codes_if_any": null
+    },
+    {
+      "shortlist_slug": "lean-kernel-receipt",
+      "label": "REFUSE \u2014 lean_kernel EXIT0 vs Mathlib/physical refuse",
+      "kind": "forensic-drive",
+      "driveFileIds": [
+        "1QYziICQ_BlbKo0IIzzpxRluYtIzDOSfM",
+        "1sZoQL_ujtYvckvp7Yo3PHvPotIhNx7zR"
+      ],
+      "claimed": [
+        11,
+        1,
+        1
+      ],
+      "interior": [
+        11,
+        0,
+        0
+      ],
+      "public_urls": [
+        "https://live.lean-lang.org/"
+      ],
+      "polish_notes": null,
+      "fee_codes_if_any": null
+    },
+    {
+      "shortlist_slug": "sub-spec-clean-1004-feecart",
+      "label": "REFUSE \u2014 Substitute spec clean body vs unpaid $1004 fee-cart (2111/2311/2051/2252)",
+      "kind": "forensic-drive",
+      "driveFileIds": [
+        "101YDrhuq3EKE2USMAtZnuP7UmkRleUQK"
+      ],
+      "claimed": [
+        1,
+        160,
+        160,
+        160,
+        524,
+        1
+      ],
+      "interior": [
+        1,
+        160,
+        160,
+        160,
+        524,
+        0
+      ],
+      "public_urls": [
+        "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+        "https://patentcenter.uspto.gov/",
+        "https://patentcenter.uspto.gov/workbench/correspondence?customerNumbers=232494,232194"
+      ],
+      "polish_notes": "LIVE fee schedule (fetched 2026-09-05 CT): small-entity 2111=$308, 2311=$352, 2051=$68, 2252=$276; sum=$1,004 EXACT match to Drive claimed cart. demo.json vector currently stores distorted [1,160,160,160,524,0] for lineItems [spec_body,fee_",
+      "fee_codes_if_any": {
+        "2111": 308.0,
+        "2311": 352.0,
+        "2051": 68.0,
+        "2252": 276.0,
+        "cart_total_usd": 1004.0,
+        "prior_paid_4011_usd": 70.0,
+        "schedule_effective": "2025-01-19",
+        "schedule_last_revised": "2026-08-14",
+        "entity": "small",
+        "source": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule"
+      }
+    },
+    {
+      "shortlist_slug": "gate-b-host",
+      "label": "GRANT \u2014 Gate B two-gate note host measurements",
+      "kind": "forensic-drive",
+      "driveFileIds": [
+        "1-WVaKfcMxgY_dTx2Yf2dgIEQuvuImuCZ1QuziIHXe08"
+      ],
+      "claimed": [
+        1,
+        1,
+        0
+      ],
+      "interior": [
+        1,
+        1,
+        0
+      ],
+      "public_urls": [
+        "https://live.lean-lang.org/"
+      ],
+      "polish_notes": null,
+      "fee_codes_if_any": null
+    },
+    {
+      "shortlist_slug": "drive-diu-swap-usv",
+      "label": "REFUSE \u2014 DIU SWAP-USV $40M OT ROM vs award unknown",
+      "kind": "forensic-drive",
+      "driveFileIds": [
+        "1KLLr26S2GSR_VXoeljzt453OcN_-2zqCGUZRgxToV5o"
+      ],
+      "claimed": [
+        5000000,
+        12000000,
+        13000000,
+        10000000
+      ],
+      "interior": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "public_urls": [
+        "https://www.diu.mil/work-with-us/submit-solution/PROJ00687"
+      ],
+      "polish_notes": null,
+      "fee_codes_if_any": null
+    },
+    {
+      "shortlist_slug": "drive-pass-job",
+      "label": "GRANT \u2014 well_conditioned_3x3 pass_job (Drive)",
+      "kind": "forensic-drive",
+      "driveFileIds": [
+        "1Z0O-8pUKMqxboYCjv8n7KLnz7dy4i3jr"
+      ],
+      "claimed": [
+        9.8,
+        4.9,
+        2.5,
+        0.99
+      ],
+      "interior": [
+        10,
+        5,
+        2.5,
+        1
+      ],
+      "public_urls": [
+        "https://www.nist.gov/cyberframework"
+      ],
+      "polish_notes": null,
+      "fee_codes_if_any": null
+    },
+    {
+      "shortlist_slug": "drive-fail-job",
+      "label": "REFUSE \u2014 fail_job enclosure breach dims 1&3",
+      "kind": "forensic-drive",
+      "driveFileIds": [
+        "1zPXW7i3Yz2Uzsd-X6WilIH25FfrA3Mp-"
+      ],
+      "claimed": [
+        9.8,
+        5.01,
+        2.5,
+        1.05
+      ],
+      "interior": [
+        10,
+        5,
+        2.5,
+        1
+      ],
+      "public_urls": [
+        "https://www.nist.gov/cyberframework"
+      ],
+      "polish_notes": null,
+      "fee_codes_if_any": null
+    },
+    {
+      "shortlist_slug": "readme-1004-vs-70",
+      "label": "REFUSE \u2014 README $1,004 due vs $70 paid (4011)",
+      "kind": "forensic-drive",
+      "driveFileIds": [
+        "1wZ1-XmCMgAGp0pNhj6u4L0hG3YetN4YO"
+      ],
+      "claimed": [
+        1004,
+        70,
+        1
+      ],
+      "interior": [
+        1004,
+        70,
+        0
+      ],
+      "public_urls": [
+        "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+        "https://patentcenter.uspto.gov/"
+      ],
+      "polish_notes": "LIVE fee schedule confirms cart math: 308+352+68+276=$1,004; 4011 small-entity electronic basic filing=$70. demo claimed/interior [1004,70,1]/[1004,70,0] already undistorted (fees_due_1004 / paid_4011_70 / fully_paid=0). Patent Center cart ",
+      "fee_codes_if_any": {
+        "2111": 308.0,
+        "2311": 352.0,
+        "2051": 68.0,
+        "2252": 276.0,
+        "4011": 70.0,
+        "due_usd": 1004.0,
+        "paid_usd": 70.0,
+        "entity": "small",
+        "source": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule"
+      }
+    },
+    {
+      "shortlist_slug": "pc-receipt-history-9",
+      "label": "GRANT \u2014 Patent Center Receipt History 9 submissions + PC# 79232130 (beats 8-row twin)",
+      "kind": "forensic-drive",
+      "driveFileIds": [
+        "1RZzBjp0IE1ZsmPKj_4v-O3uQ_TmyftjW"
+      ],
+      "claimed": [
+        9,
+        1
+      ],
+      "interior": [
+        9,
+        1
+      ],
+      "public_urls": [
+        "https://patentcenter.uspto.gov/workbench/receiptHistory?customerNumbers=232494,232194",
+        "https://patentcenter.uspto.gov/workbench/applications?customerNumbers=232494,232194",
+        "https://patentcenter.uspto.gov/"
+      ],
+      "polish_notes": "HARD BLOCKER: curl of receiptHistory/applications/home (2026-09-05 CT) returned HTTP 200 Patent Center SPA shells (~17KB identical HTML) \u2014 no public submission rows, no PC# 79232130, no fee amounts without login. Do NOT invent live submissi",
+      "fee_codes_if_any": null
+    },
+    {
+      "shortlist_slug": "img-0414-missing-parts-900",
+      "label": "REFUSE \u2014 Missing Parts $900 TOTAL FEE BALANCE DUE unpaid (not EPR/grant; fee\u2260prize)",
+      "kind": "forensic-drive",
+      "driveFileIds": [
+        "1mXnCcuKT7F5YW-0I8_rVYafrfG12GP8L"
+      ],
+      "claimed": [
+        900,
+        1,
+        1
+      ],
+      "interior": [
+        900,
+        0,
+        0
+      ],
+      "public_urls": [
+        "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+        "https://patentcenter.uspto.gov/",
+        "https://patentcenter.uspto.gov/workbench/correspondence?customerNumbers=232494,232194"
+      ],
+      "polish_notes": "LIVE fee schedule (fetched 2026-09-05 CT): small-entity 2054=$172, 2051=$68, 2111=$308, 2311=$352; sum=$900 EXACT match to Drive/demo claimed balance. demo claimed/interior [900,1,1]/[900,0,0] undistorted for fee_balance_due / paid_in_full ",
+      "fee_codes_if_any": {
+        "2054": 172.0,
+        "2051": 68.0,
+        "2111": 308.0,
+        "2311": 352.0,
+        "balance_due_usd": 900.0,
+        "entity": "small",
+        "source": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule"
+      }
+    }
+  ]
+}

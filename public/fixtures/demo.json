@@ -25,7 +25,7 @@
         "subject": "Expense claim \u2014 under receipt totals",
         "from": "claims@monstersink.example",
         "body": "CLAIMED: 98, 49, 25, 9\nLINE_ITEMS: fuel, lodging, meals, misc\nPUBLIC_SOURCE: https://monsters-ink-107139.square.site",
-        "receiptUrl": "https://monsters-ink-107139.square.site"
+        "receiptUrl": "https://quirky-rhinoceros-204.convex.site/receipts/fuel-grant.html"
       },
       "claimed": [
         98,
@@ -62,7 +62,7 @@
         "subject": "Expense claim \u2014 over on lodging & misc",
         "from": "claims@monstersink.example",
         "body": "CLAIMED: 98, 51, 25, 11\nPUBLIC_SOURCE: https://monsters-ink-107139.square.site",
-        "receiptUrl": "https://monsters-ink-107139.square.site"
+        "receiptUrl": "https://quirky-rhinoceros-204.convex.site/receipts/fuel-refuse.html"
       },
       "claimed": [
         98,
