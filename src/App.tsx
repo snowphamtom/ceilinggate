@@ -4,6 +4,7 @@ import { api } from "../convex/_generated/api";
 import demo from "./data/demo.json";
 import {
   chatWouldShrug,
+  decodeMask,
   faultClass,
   faultClassLabel,
   gateB,
@@ -362,9 +363,11 @@ function VerdictCard({ selected }: { selected: LocalDecision; plain: string[] })
           mask {decision.mask}
           {ok
             ? " · GRANT ⇔ mask==0"
-            : decision.failedIndices.length
-              ? ` · failed [${decision.failedIndices.join(",")}]`
-              : " · nonzero mask"}
+            : decodeMask(decision.mask, selected.lineItems).length
+              ? ` · ${decodeMask(decision.mask, selected.lineItems).join(" · ")}`
+              : decision.failedIndices.length
+                ? ` · failed [${decision.failedIndices.join(",")}]`
+                : " · nonzero mask"}
         </span>
         <span className="mask-chip">
           {faultClassLabel(faultClass(interior, claimed, decision))}

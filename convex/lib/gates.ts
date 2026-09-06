@@ -44,6 +44,16 @@ export function maskOf(failed: number[]): number {
   return failed.reduce((acc, i) => acc | (1 << i), 0);
 }
 
+export const EXPENSE_LINES = ["fuel", "lodging", "meals", "misc"] as const;
+
+/** Bit idx set iff that expense line is over the receipt. Not an 8-bit ATEC jacket. */
+export function decodeMask(
+  mask: number,
+  lineItems: readonly string[] = EXPENSE_LINES,
+): string[] {
+  return lineItems.filter((_, i) => (mask & (1 << i)) !== 0);
+}
+
 /** gateB → { status: 'grant'|'refuse', mask, failedIndices } */
 export function gateB(interior: number[], claimed: number[]): GateDecision {
   if (enclosedR(interior, claimed)) {

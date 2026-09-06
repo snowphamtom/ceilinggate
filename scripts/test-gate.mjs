@@ -29,6 +29,12 @@ function gateB(interior, claimed) {
     failedIndices: failed,
   };
 }
+function decodeMask(mask, lineItems) {
+  const lines = lineItems || ["fuel", "lodging", "meals", "misc"];
+  return lines.filter(function (_, i) {
+    return (mask & (1 << i)) !== 0;
+  });
+}
 function granted(d) {
   return d.status === "grant" && d.mask === 0;
 }
@@ -57,6 +63,14 @@ assert(
   "failedIndices [1,3]",
 );
 assert(maskOf([1, 3]) === 10, "maskOf([1,3]) === 10");
+assert(
+  JSON.stringify(decodeMask(10)) === JSON.stringify(["lodging", "misc"]),
+  "decodeMask(10) → lodging, misc",
+);
+assert(
+  JSON.stringify(decodeMask(10)) !== JSON.stringify(["fuel", "meals"]),
+  "mask 10 is not fuel+meals (8-bit jacket is shifted)",
+);
 
 console.log("\nCeilingGate ResidualGates demo PASSED");
 console.log(JSON.stringify({ grant: grant, refuse: refuse }, null, 2));
