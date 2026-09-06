@@ -1,27 +1,31 @@
-# STANDING ACCESS / AUTHORIZATION (Taylor → MANAGER → team)
+# STANDING ACCESS / CASCADING AUTHORIZATION (Taylor → MANAGER → team)
 
-Taylor (2026-09-05): everyone always has authorization and access for what they need to create/build for CeilingGate / All Gas.
+Taylor (2026-09-05): authorization is a **cascading** effect. Anything the team generates anywhere that advances CeilingGate / All Gas **self-authorizes** the next step. Expansion is continuous. **Do not ask to move forward.**
 
-## Standing GO (no per-task ask)
-| Agent | Authorized to use | Build/create on |
-|-------|-------------------|-----------------|
-| **Create** | box `/workspace`, `gh` snowphamtom/ceilinggate (push/release), Convex deploy keys in `.env.local`, Firecrawl+AgentMail env, demo fixtures, originality harden | `/workspace/ceilinggate` + public GH + Convex site |
-| **Eve** | Google Drive + Gmail connectors (yeti), NEW Drive objects → fuel JSON on box/repo via Create | connectors → `/workspace` (never phone) |
-| **Bob** | Prize/submit honesty docs | `/workspace/ceilinggate-demo` + public UPDATES.md |
-| **Streamer** | ffmpeg + demo pack media | `/workspace/ceilinggate-demo/out` + GH release `allgas-demo-20260905` |
-| **MANAGER** | Browser/auth when a human login is required; coordinates; only voice to Taylor | all of the above |
+## Cascade rule
+1. If a task produces a new artifact, fixture, deploy, doc, demo cut, shortlist item, or tool — that output carries GO for the natural next build/polish/ship step.
+2. Create may push/deploy/release follow-ons without a fresh ask.
+3. Eve may mine the next NEW fuel batch when one lands.
+4. Streamer may reburn/recut when silent media changes.
+5. Bob may refresh prize honesty when submit copy changes.
+6. MANAGER only intervenes for true human-auth walls (login/2FA) or hard-stop collisions — not for progress permission.
 
-## Already green
-- GitHub `snowphamtom` (repo scope)
-- Gmail / Drive / Calendar / AgentMail / Notion connectors
-- Convex + Firecrawl + AgentMail keys in project env
-- Live site + public release
+## Standing tools (unchanged)
+| Agent | May always use |
+|-------|----------------|
+| Create | `/workspace`, GH `snowphamtom/ceilinggate`, Convex, Firecrawl+AgentMail env, fixtures |
+| Eve | Drive/Gmail connectors → NEW objects → box/repo |
+| Bob | prize docs on box + public UPDATES |
+| Streamer | `/workspace/ceilinggate-demo/out` + GH release |
+| MANAGER | unlock real auth walls; only voice to Taylor |
 
-## Still frozen / do not chase
-- Square / T&E commercial (hackathon HARD STOP) — Square connector needsAuth; leave it
-- Phone storage / phone downloads
-- New bot X/email/shop identities
-- Messaging Taylor directly (report to MANAGER only)
+## Hard stops (do not cascade past these)
+- OFF PHONE — no phone storage/downloads
+- No Square / T&E commercial during All Gas
+- No new bot X/email/shop identities
+- Silent to Taylor — report to MANAGER only
+- Past Drive/mail frozen (NEW objects only)
+- No fake prize numbers ($10k/$5k/$1.5k Luma cash only)
 
-## If blocked
-One-line blocker to MANAGER naming the exact missing auth. MANAGER unlocks (browser login / key / connector). Do not stop creative work waiting for permission that this doc already grants.
+## Blockers
+One-line to MANAGER only if a **hard** auth wall appears (connector needsAuth, missing key, human login). Never ask “may I continue?”
