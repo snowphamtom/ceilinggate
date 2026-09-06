@@ -921,18 +921,18 @@ function DualOracleDisagreePanel() {
   const [claimedStr, setClaimedStr] = useState("98, 49, 25, 9");
   const [interiorStr, setInteriorStr] = useState("100, 50, 25, 10");
   const [capsStr, setCapsStr] = useState("100, 50, 20, 10");
-  const [gateA, setGateA] = useState<GateDecision | null>(null);
-  const [gateB, setGateB] = useState<GateDecision | null>(null);
+  const [verdictA, setVerdictA] = useState<GateDecision | null>(null);
+  const [verdictB, setVerdictB] = useState<GateDecision | null>(null);
   const [mode, setMode] = useState<string | null>(null);
 
   useEffect(() => {
-    setGateA(null);
-    setGateB(null);
+    setVerdictA(null);
+    setVerdictB(null);
     setMode(null);
     const onPageShow = (e: PageTransitionEvent) => {
       if (e.persisted) {
-        setGateA(null);
-        setGateB(null);
+        setVerdictA(null);
+        setVerdictB(null);
         setMode(null);
       }
     };
@@ -944,13 +944,13 @@ function DualOracleDisagreePanel() {
     const claimed = parseNumList(claimedStr);
     const interior = parseNumList(interiorStr);
     const caps = parseNumList(capsStr);
-    setGateA(gateB(interior, claimed));
-    setGateB(gateEnclosure(caps, claimed));
+    setVerdictA(gateB(interior, claimed));
+    setVerdictB(gateEnclosure(caps, claimed));
     setMode("run");
   }, [claimedStr, interiorStr, capsStr]);
 
   const split =
-    gateA && gateB ? gateA.status !== gateB.status : false;
+    verdictA && verdictB ? verdictA.status !== verdictB.status : false;
 
   const ledgerLines = (
     claimed: number[],
@@ -995,8 +995,8 @@ function DualOracleDisagreePanel() {
             const claimed = [98, 49, 25, 9];
             const a = gateB([100, 50, 25, 10], claimed);
             const b = gateEnclosure([100, 50, 20, 10], claimed);
-            setGateA(a);
-            setGateB(b);
+            setVerdictA(a);
+            setVerdictB(b);
             setMode("A GRANT · B REFUSE");
           }}
         >
@@ -1012,8 +1012,8 @@ function DualOracleDisagreePanel() {
             const claimed = [98, 51, 25, 11];
             const a = gateB([100, 50, 25, 10], claimed);
             const b = gateEnclosure([200, 200, 200, 200], claimed);
-            setGateA(a);
-            setGateB(b);
+            setVerdictA(a);
+            setVerdictB(b);
             setMode("A REFUSE · B GRANT");
           }}
         >
@@ -1029,8 +1029,8 @@ function DualOracleDisagreePanel() {
             setCapsStr("0");
             const a = gateB([0], [2100]);
             const b = gateEnclosure([0], [2100]);
-            setGateA(a);
-            setGateB(b);
+            setVerdictA(a);
+            setVerdictB(b);
             setMode("Fee≠prize");
           }}
         >
@@ -1040,8 +1040,8 @@ function DualOracleDisagreePanel() {
           type="button"
           className="ghost"
           onClick={() => {
-            setGateA(null);
-            setGateB(null);
+            setVerdictA(null);
+            setVerdictB(null);
             setMode(null);
           }}
         >
@@ -1051,7 +1051,7 @@ function DualOracleDisagreePanel() {
           Run A + B
         </button>
       </div>
-      {gateA && gateB ? (
+      {verdictA && verdictB ? (
         <div className="dual-oracle-grid">
           {split ? (
             <p className="conjunctive-line">
@@ -1060,7 +1060,7 @@ function DualOracleDisagreePanel() {
             </p>
           ) : (
             <p className="conjunctive-line ok">
-              Agree — both gates {gateA.status.toUpperCase()}.
+              Agree — both gates {verdictA.status.toUpperCase()}.
             </p>
           )}
           {mode === "Fee≠prize" ? (
@@ -1069,30 +1069,30 @@ function DualOracleDisagreePanel() {
               ($10k / $5k / $1.5k only).
             </p>
           ) : null}
-          <div className={"card " + (gateA.status === "grant" ? "grant" : "refuse")}>
-            <strong>Gate A · Residual · {gateA.status.toUpperCase()}</strong>
+          <div className={"card " + (verdictA.status === "grant" ? "grant" : "refuse")}>
+            <strong>Gate A · Residual · {verdictA.status.toUpperCase()}</strong>
             <div className="mask-row">
               <span className="mask-chip">
-                mask {gateA.mask}
-                {gateA.mask === 0 ? " · GRANT ⇔ mask==0" : ` · failed [${gateA.failedIndices.join(",")}]`}
+                mask {verdictA.mask}
+                {verdictA.mask === 0 ? " · GRANT ⇔ mask==0" : ` · failed [${verdictA.failedIndices.join(",")}]`}
               </span>
             </div>
             <GateLedgerTable
-              lines={ledgerLines(parseNumList(claimedStr), parseNumList(interiorStr), gateA)}
+              lines={ledgerLines(parseNumList(claimedStr), parseNumList(interiorStr), verdictA)}
             />
           </div>
-          <div className={"card " + (gateB.status === "grant" ? "grant" : "refuse")}>
-            <strong>Gate B · Enclosure · {gateB.status.toUpperCase()}</strong>
+          <div className={"card " + (verdictB.status === "grant" ? "grant" : "refuse")}>
+            <strong>Gate B · Enclosure · {verdictB.status.toUpperCase()}</strong>
             <div className="mask-row">
               <span className="mask-chip">
-                mask {gateB.mask}
-                {gateB.failedIndices.length
-                  ? ` · failed [${gateB.failedIndices.join(",")}]`
+                mask {verdictB.mask}
+                {verdictB.failedIndices.length
+                  ? ` · failed [${verdictB.failedIndices.join(",")}]`
                   : " · clear"}
               </span>
             </div>
             <GateLedgerTable
-              lines={ledgerLines(parseNumList(claimedStr), parseNumList(capsStr), gateB)}
+              lines={ledgerLines(parseNumList(claimedStr), parseNumList(capsStr), verdictB)}
             />
           </div>
         </div>
