@@ -1610,6 +1610,27 @@ textarea.forge-input {
   font-size: 0.88rem;
 }
 
+
+
+/* —— Judges 30s g: try-label rhythm —— */
+.try-now {
+  margin-bottom: 0.75rem;
+}
+
+.try-label {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25rem 0.35rem;
+}
+
+.steps code {
+  font-size: 0.8em;
+  padding: 0.05rem 0.3rem;
+  border-radius: 4px;
+  background: rgba(91, 157, 255, 0.1);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .card.grant,
   .card.refuse,
