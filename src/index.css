@@ -36,8 +36,6 @@ h1 { margin: 0 0 0.25rem; font-size: 1.75rem; letter-spacing: -0.02em; }
 .primary, button { cursor: pointer; }
 .primary { background: #2a6df4; color: white; border: 0; border-radius: 8px; padding: 0.55rem 0.9rem; font-weight: 600; }
 code { font-family: "IBM Plex Mono", ui-monospace, monospace; }
-
-/* Forensic board */
 .eyebrow { margin: 0; font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: #7a93b5; }
 .board-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 1.25rem; margin-top: 1rem; }
 @media (max-width: 800px) { .board-grid { grid-template-columns: 1fr; } }
@@ -60,8 +58,17 @@ code { font-family: "IBM Plex Mono", ui-monospace, monospace; }
 .plain-fail { margin: 0.5rem 0 1rem; padding-left: 1.1rem; color: #ffb0b0; }
 .plain-fail li { margin: 0.35rem 0; }
 .ok-line { color: #3dde95; font-weight: 600; }
+.ai-line {
+  margin: 0.75rem 0 0.5rem;
+  padding: 0.7rem 0.85rem;
+  border-radius: 10px;
+  background: #101a2c;
+  border: 1px solid #2a4a7a;
+  color: #d7e6ff;
+  font-size: 0.95rem;
+}
+.ai-line strong { color: #7cb3ff; margin-right: 0.35rem; }
 .lede.everyday { font-size: 1.15rem; font-weight: 500; color: #e8eef7; max-width: 40rem; }
-
 .stack-strip { display: flex; flex-wrap: wrap; gap: 0.45rem; margin: 0.85rem 0 0.35rem; }
 .chip-stack { font-size: 0.78rem; padding: 0.35rem 0.65rem; border-radius: 999px; background: #162033; border: 1px solid #2a3a55; color: #9fb4d0; }
 .chip-stack.on { background: #143528; border-color: #1f9d63; color: #3dde95; }
@@ -72,32 +79,24 @@ code { font-family: "IBM Plex Mono", ui-monospace, monospace; }
 .grant-btn, .refuse-btn { flex: 1; border: 0; border-radius: 8px; padding: 0.5rem 0.75rem; font-weight: 700; cursor: pointer; }
 .grant-btn { background: #1f9d63; color: #04140c; }
 .refuse-btn { background: #d64545; color: #fff; }
-
 .orig-lock { margin: 0.75rem 0 0; padding: 0.55rem 0.75rem; border-radius: 8px; border: 1px solid #3a4a22; background: #121a12; color: #c5d8a8; font-size: 0.85rem; }
 .orig-lock strong { color: #d4f08a; }
-
 .sig-btn { background: #24324a; color: #e8eef7; border: 1px solid #3a4f6f; border-radius: 8px; padding: 0.45rem 0.75rem; font-weight: 600; cursor: pointer; }
 .sig-btn:hover { border-color: #2a6df4; }
 .ledger-cap { margin: 0.5rem 0 0.15rem; }
-
 .mask-row { margin: 0.25rem 0 0.75rem; }
 .mask-chip { display: inline-block; font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.78rem; padding: 0.25rem 0.55rem; border-radius: 6px; background: #0b1220; border: 1px solid #3a4f6f; color: #9ec5ff; }
 .refuse .mask-chip { border-color: #d64545; color: #ffb0b0; }
 .grant .mask-chip { border-color: #1f9d63; color: #3dde95; }
-
 .forge-panel { margin-top: 1.25rem; }
 .forge-label { display: block; margin: 0.5rem 0; font-size: 0.85rem; color: #a8bdd8; }
 .forge-input { display: block; width: 100%; margin-top: 0.25rem; padding: 0.5rem 0.65rem; border-radius: 8px; border: 1px solid #2a3a55; background: #0b1220; color: #e8eef7; }
 .forge-log { margin-top: 0.75rem; }
 .forge-list { margin: 0.75rem 0 0; padding-left: 1.1rem; }
-
 .forge-sub { margin: 1rem 0 0.35rem; font-size: 0.9rem; color: #a8bdd8; }
-
 .forge-panel .primary { margin-top: 0.5rem; font-size: 1rem; padding: 0.65rem 1rem; }
-
 .forge-newest { outline: 1px solid #2a6df4; border-radius: 6px; padding: 0.15rem 0.35rem; background: rgba(42,109,244,0.12); }
 .forge-judge-strip { margin-top: 0.5rem; font-size: 0.8rem; color: #9ec5ff; }
-
 .forge-child { margin: 1rem 0; padding: 0.85rem 0.9rem; border: 1px solid #2a3a55; border-radius: 10px; background: #0e1626; }
 .forge-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
 @media (max-width: 720px) { .forge-row { grid-template-columns: 1fr; } }
