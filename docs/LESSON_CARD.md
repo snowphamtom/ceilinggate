@@ -1,7 +1,7 @@
-# Lesson card — 66b3e50
+# Lesson card — 9d7fc3a
 
 1. What changed
-visual: judges 30s-b — steps amber markers + selected docket rail
+visual: judges 30s-c — denser inbox + stronger Demo glow
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
