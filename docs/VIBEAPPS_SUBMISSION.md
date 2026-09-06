@@ -1,26 +1,23 @@
-# CeilingGate — Vibe Apps / All Gas paste packet
-Ready for https://vibeapps.dev/submit
-Hackathon tag: AllGasHackathon + convex + OpenAI + Firecrawl + AgentMail + codex
+# CeilingGate — Vibe Apps edit pack
 
-This file is the official field copy. It is not a completed Vibe Apps submit.
-Vibe Apps requires Sign in. This seat cannot complete Clerk as Taylor.
+Listing already live: https://vibeapps.dev/s/ceilinggate
+Sign in as Taylor and attach the missing fields.
 
-## App Title *
-CeilingGate
+## Already on the card
+- Title: CeilingGate
+- Tagline: Email a public receipt. Get GRANT or the line that is over.
+- Website: https://quirky-rhinoceros-204.convex.site/
+- Tag: AllGasHackathon
 
-## App/Project Tagline * (140)
-Email a public receipt. CeilingGate checks each line and returns GRANT, or the line that is over.
+## Attach now
+- GitHub: https://github.com/snowphamtom/ceilinggate
+- Video: https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-20260905/CeilingGate-AllGas-demo.mp4
+- Screenshot 1: https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-20260905/02-grant.png
+- Screenshot 2: https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-20260905/03-refuse.png
+- Screenshot 3: https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-20260905/01-hero.png
 
-## App Website Link *
-https://quirky-rhinoceros-204.convex.site/
+## Description (paste if the card is still short)
+Everyday expense-line checker. Email a claim plus a public receipt URL to ceilinggate-claims@agentmail.to. Convex stores the claim. Firecrawl reads the receipt. GRANT if every line is at or under. REFUSE names the overage in dollars. OpenAI writes one sentence after the numbers and does not decide.
 
-## Video Demo
-https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-20260905/CeilingGate-AllGas-demo.mp4
-
-## GitHub
-https://github.com/snowphamtom/ceilinggate
-
-## Description
-Everyday expense-line checker. Email a claim plus a public receipt URL to ceilinggate-claims@agentmail.to. Convex stores the claim. Firecrawl reads the receipt. ResidualGates compares each line. GRANT if every line is at or under the receipt. REFUSE names the overage in dollars. OpenAI writes one sentence after the numbers and does not decide.
-
-Live: https://quirky-rhinoceros-204.convex.site/
+Demo: https://github.com/snowphamtom/ceilinggate/releases/tag/allgas-demo-20260905
+Share: https://x.com/magpie_inventor/status/2096419465973944560
