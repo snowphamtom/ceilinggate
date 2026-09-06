@@ -1,7 +1,7 @@
-# Lesson card — 1a42492
+# Lesson card — 02ce254
 
 1. What changed
-forge: chat shrug trap LIVE — totals OK + line OVER → REFUSE (Block/GIW foil)
+docs: stamp the 30s judge path — two buttons, named overage, no ResidualGates sermon
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
