@@ -28,7 +28,7 @@ Lightweight status board. Open on desktop/browser — nothing to install, no pho
 - Proof shot: `05-showoff-signature.png` on release
 
 ## In flight
-- **App Forge** — recursive apps-create-apps for judge “make another app” thesis (see docs/APP_FORGE_THESIS.md)
+- **App Forge LIVE** — tip `b411d6a`; panel on quirky-rhinoceros-204.convex.site; child `tip-jar-honesty`; docs/APP_FORGE.md
 - Silent demo refreshed on release (~68s, Demo signature click visible)
 - Captioned reburn of new ~68s silent (Demo signature on-screen) — then vibeapps submit
 
@@ -46,7 +46,7 @@ Lightweight status board. Open on desktop/browser — nothing to install, no pho
 - Prize honesty (Luma cash only): $10,000 / $5,000 / $1,500 — USPTO $2,100 Track One fixtures are **not** prizes
 
 ## In flight
-- **App Forge** — recursive apps-create-apps for judge “make another app” thesis (see docs/APP_FORGE_THESIS.md)
+- **App Forge LIVE** — tip `b411d6a`; panel on quirky-rhinoceros-204.convex.site; child `tip-jar-honesty`; docs/APP_FORGE.md
 - Demo signature re-record (compete button on-screen) → refresh release video + captions
 - vibeapps.dev submit when video+shots green
 - Deadline: Tue Sep 22, 2026 · 12:00 PM PT
