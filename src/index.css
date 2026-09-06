@@ -1060,6 +1060,119 @@ textarea.forge-input {
   box-shadow: -2px 0 12px rgba(224, 69, 69, 0.18);
 }
 
+
+
+/* —— Evolve: inbox instrument + pass-bar + mask density —— */
+.board-grid {
+  gap: 0.85rem;
+}
+
+.panel {
+  padding: 0.95rem 1rem;
+}
+
+.panel > h2 {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-bottom: 0.55rem;
+}
+
+.verdict-panel > h2::after {
+  content: "C ≤ S";
+  margin-left: auto;
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  color: var(--amber);
+  border: 1px solid rgba(212, 162, 76, 0.45);
+  border-radius: 4px;
+  padding: 0.1rem 0.35rem;
+  background: rgba(7, 11, 20, 0.45);
+}
+
+.pass-bar {
+  margin: 0.35rem 0 0.65rem 0;
+  padding: 0.55rem 0.7rem;
+  list-style: none;
+  border: 1px solid rgba(58, 84, 120, 0.55);
+  border-radius: 8px;
+  background: rgba(8, 14, 26, 0.65);
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: #a8bdd8;
+}
+
+.pass-bar li {
+  margin: 0.15rem 0;
+  padding-left: 0.85rem;
+  position: relative;
+}
+
+.pass-bar li::before {
+  content: "▸";
+  position: absolute;
+  left: 0;
+  color: var(--amber);
+  font-size: 0.7rem;
+}
+
+#live-child-gates > h2,
+.forge-panel > h2 {
+  letter-spacing: 0.12em;
+}
+
+.bits {
+  gap: 0.3rem;
+  margin: 0.4rem 0;
+}
+
+.bit {
+  min-width: 2.15rem;
+  padding: 0.28rem 0.4rem;
+  font-size: 0.72rem;
+  border-radius: 6px;
+}
+
+.mask-chip {
+  font-size: 0.72rem;
+  padding: 0.18rem 0.45rem;
+}
+
+.ledger,
+.delta-table {
+  font-size: 0.82rem;
+}
+
+.ledger th,
+.ledger td,
+.delta-table th,
+.delta-table td {
+  padding: 0.4rem 0.48rem;
+}
+
+.inbox-rail {
+  /* reserved */
+}
+
+.row.docket .pill {
+  font-size: 0.62rem;
+}
+
+.hero {
+  padding: 1.15rem 1.2rem 1.25rem;
+}
+
+.oneclick {
+  gap: 0.55rem;
+}
+
+.grant-btn,
+.refuse-btn {
+  padding: 0.82rem 0.75rem;
+  font-size: 0.95rem;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .card.grant,
   .card.refuse,
