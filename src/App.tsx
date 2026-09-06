@@ -227,6 +227,9 @@ export default function App() {
         .
       </div>
 
+      <AppForgePanel />
+
+
       <div className="board-grid">
         <section className="panel">
           <h2>Claims inbox <span className="muted small">({SHIP_FIXTURES.length} ship set)</span></h2>
@@ -394,8 +397,6 @@ export default function App() {
           </div>
         </section>
       )}
-
-      <AppForgePanel />
 
       <footer className="lean">
         CeilingGate is a money-claim checker — not a chat bot, not a developer
