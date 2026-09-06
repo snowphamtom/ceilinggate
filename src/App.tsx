@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { useQuery } from "convex/react";
+import { useAction, useQuery } from "convex/react";
 import { api } from "../convex/_generated/api";
 import demo from "./data/demo.json";
 import { gateB, type GateDecision } from "./lib/residualGates";
@@ -722,11 +722,13 @@ function parseInteriorText(text: string): number[] {
 }
 
 function UrlReceiptGatePanel() {
+  const scrapeUrl = useAction(api.firecrawl.scrapeUrl);
   const [url, setUrl] = useState("/receipts/fuel-grant.html");
   const [claimedStr, setClaimedStr] = useState("98, 49, 25, 9");
   const [decision, setDecision] = useState<GateDecision | null>(null);
   const [interior, setInterior] = useState<number[] | null>(null);
   const [receiptShown, setReceiptShown] = useState("");
+  const [source, setSource] = useState<"site-fetch" | "firecrawl" | "fixture" | "blocked" | null>(null);
   const [err, setErr] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
 
@@ -734,11 +736,13 @@ function UrlReceiptGatePanel() {
     setDecision(null);
     setInterior(null);
     setErr(null);
+    setSource(null);
     const onPageShow = (e: PageTransitionEvent) => {
       if (e.persisted) {
         setDecision(null);
         setInterior(null);
         setErr(null);
+        setSource(null);
       }
     };
     window.addEventListener("pageshow", onPageShow);
@@ -753,21 +757,54 @@ function UrlReceiptGatePanel() {
     return u;
   };
 
+  const isSameOriginReceipt = (resolved: string) => {
+    try {
+      const u = new URL(resolved);
+      return u.origin === window.location.origin && u.pathname.startsWith("/receipts/");
+    } catch {
+      return false;
+    }
+  };
+
+  const applyGate = (inn: number[], claimed: number[], resolved: string, src: typeof source) => {
+    if (!inn.length) throw new Error("no INTERIOR / $ lines on page");
+    setInterior(inn);
+    setReceiptShown(resolved);
+    setSource(src);
+    setDecision(gateB(inn, claimed));
+  };
+
   const run = useCallback(async () => {
     setBusy(true);
     setErr(null);
     try {
       const resolved = resolveUrl(url);
       if (!resolved) throw new Error("Pick a public receipt URL");
-      const res = await fetch(resolved, { credentials: "omit" });
-      if (!res.ok) throw new Error(`fetch ${res.status}`);
-      const text = await res.text();
-      const inn = parseInteriorText(text);
-      if (!inn.length) throw new Error("no INTERIOR / $ lines on page");
       const claimed = parseNumList(claimedStr);
-      setInterior(inn);
-      setReceiptShown(resolved);
-      setDecision(gateB(inn, claimed));
+
+      // Same-origin public receipts: real fetch (demo path, always interactive)
+      if (isSameOriginReceipt(resolved)) {
+        const res = await fetch(resolved, { credentials: "omit" });
+        if (!res.ok) throw new Error(`fetch ${res.status}`);
+        const text = await res.text();
+        applyGate(parseInteriorText(text), claimed, resolved, "site-fetch");
+        return;
+      }
+
+      // External URL: real Firecrawl path via Convex when wired
+      if (!hasConvex) {
+        throw new Error("Convex not configured — use /receipts/* demo URLs");
+      }
+      const scraped = await scrapeUrl({ url: resolved });
+      if (scraped.note?.includes("Judgment blocked") || scraped.text.startsWith("NO_INTERIOR")) {
+        setDecision(null);
+        setInterior(null);
+        setSource("blocked");
+        setReceiptShown(resolved);
+        throw new Error(scraped.note ?? "Firecrawl required for external URL judgment");
+      }
+      const inn = parseInteriorText(scraped.text);
+      applyGate(inn, claimed, resolved, scraped.source === "firecrawl" ? "firecrawl" : "fixture");
     } catch (e) {
       setDecision(null);
       setInterior(null);
@@ -775,14 +812,31 @@ function UrlReceiptGatePanel() {
     } finally {
       setBusy(false);
     }
-  }, [url, claimedStr]);
+  }, [url, claimedStr, scrapeUrl]);
+
+  const demoSameOrigin = async (path: string, claimed: number[]) => {
+    setUrl(path);
+    setClaimedStr(claimed.join(", "));
+    setBusy(true);
+    setErr(null);
+    try {
+      const resolved = `${window.location.origin}${path}`;
+      const res = await fetch(resolved);
+      const text = await res.text();
+      applyGate(parseInteriorText(text), claimed, resolved, "site-fetch");
+    } catch (e) {
+      setErr(e instanceof Error ? e.message : String(e));
+    } finally {
+      setBusy(false);
+    }
+  };
 
   return (
     <div className="forge-child" data-testid="url-receipt-gate-live">
       <h3 className="forge-sub">URL Receipt Gate — LIVE</h3>
       <p className="muted small">
-        Beats Attest/NoticeProof/Block: fetch a public receipt page, compare claimed ≤ on-receipt,
-        plain-English overs. Empty on load — not inbox yes/no.
+        Beats Attest/NoticeProof/Block: public receipt → scrape/fetch → claimed ≤ on-receipt.
+        Same-origin /receipts/* use site fetch; external URLs use Firecrawl via Convex. Empty on load.
       </p>
       <label className="forge-label">
         Public receipt URL
@@ -793,7 +847,7 @@ function UrlReceiptGatePanel() {
             if (e.target.value) setUrl(e.target.value);
           }}
         >
-          <option value="">Custom…</option>
+          <option value="">Custom / external…</option>
           <option value="/receipts/fuel-grant.html">/receipts/fuel-grant.html</option>
           <option value="/receipts/fuel-refuse.html">/receipts/fuel-refuse.html</option>
         </select>
@@ -815,29 +869,7 @@ function UrlReceiptGatePanel() {
           type="button"
           className="ghost"
           disabled={busy}
-          onClick={() => {
-            setUrl("/receipts/fuel-grant.html");
-            setClaimedStr("98, 49, 25, 9");
-            void (async () => {
-              setUrl("/receipts/fuel-grant.html");
-              setClaimedStr("98, 49, 25, 9");
-              setBusy(true);
-              setErr(null);
-              try {
-                const resolved = `${window.location.origin}/receipts/fuel-grant.html`;
-                const res = await fetch(resolved);
-                const text = await res.text();
-                const inn = parseInteriorText(text);
-                setInterior(inn);
-                setReceiptShown(resolved);
-                setDecision(gateB(inn, [98, 49, 25, 9]));
-              } catch (e) {
-                setErr(e instanceof Error ? e.message : String(e));
-              } finally {
-                setBusy(false);
-              }
-            })();
-          }}
+          onClick={() => void demoSameOrigin("/receipts/fuel-grant.html", [98, 49, 25, 9])}
         >
           Demo GRANT
         </button>
@@ -845,27 +877,7 @@ function UrlReceiptGatePanel() {
           type="button"
           className="ghost"
           disabled={busy}
-          onClick={() => {
-            void (async () => {
-              setUrl("/receipts/fuel-refuse.html");
-              setClaimedStr("98, 51, 25, 11");
-              setBusy(true);
-              setErr(null);
-              try {
-                const resolved = `${window.location.origin}/receipts/fuel-refuse.html`;
-                const res = await fetch(resolved);
-                const text = await res.text();
-                const inn = parseInteriorText(text);
-                setInterior(inn);
-                setReceiptShown(resolved);
-                setDecision(gateB(inn, [98, 51, 25, 11]));
-              } catch (e) {
-                setErr(e instanceof Error ? e.message : String(e));
-              } finally {
-                setBusy(false);
-              }
-            })();
-          }}
+          onClick={() => void demoSameOrigin("/receipts/fuel-refuse.html", [98, 51, 25, 11])}
         >
           Demo REFUSE
         </button>
@@ -876,6 +888,7 @@ function UrlReceiptGatePanel() {
             setDecision(null);
             setInterior(null);
             setErr(null);
+            setSource(null);
           }}
         >
           Reset
@@ -893,6 +906,11 @@ function UrlReceiptGatePanel() {
       {decision && interior ? (
         <div className={"card " + (decision.status === "grant" ? "grant" : "refuse")}>
           <strong>{decision.status === "grant" ? "GRANT" : "REFUSE"}</strong>
+          {source ? (
+            <div className="mask-row">
+              <span className="mask-chip">source {source}</span>
+            </div>
+          ) : null}
           <p className="muted small">
             <strong>Receipt</strong> {receiptShown}
           </p>
