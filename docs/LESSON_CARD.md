@@ -1,7 +1,7 @@
-# Lesson card — 13a2034
+# Lesson card — de5b9c4
 
 1. What changed
-visual: judges 30s-h/i/j — slip depth, board edge, stamp weight
+visual: standing-k — Demo press + inbox meta + empty cue
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
