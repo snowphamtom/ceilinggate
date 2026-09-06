@@ -2,6 +2,7 @@ import { httpRouter } from "convex/server";
 import { httpAction } from "./_generated/server";
 import { api, components, internal } from "./_generated/api";
 import { AgentMail } from "@agentmail/convex";
+import { httpGet as opsGet, httpPost as opsPost } from "./opsChannel";
 
 const agentmail = new AgentMail(components.agentmail, {
   onMessageReceived: internal.pipeline.onMessageReceived,
@@ -27,6 +28,10 @@ http.route({
     }),
   ),
 });
+
+http.route({ path: "/api/ops-messages", method: "GET", handler: opsGet });
+http.route({ path: "/api/ops-messages", method: "POST", handler: opsPost });
+http.route({ path: "/api/ops-messages", method: "OPTIONS", handler: opsGet });
 
 async function serveAsset(ctx: any, path: string) {
   let asset = await ctx.runQuery(api.site.getAsset, { path });
@@ -82,7 +87,6 @@ http.route({
   }),
 });
 
-// SPA fallbacks for common root files
 for (const file of ["favicon.svg", "icons.svg", "manifest.webmanifest", "sw.js", "pwa-192.png", "pwa-512.png"]) {
   http.route({
     path: `/${file}`,
@@ -90,7 +94,6 @@ for (const file of ["favicon.svg", "icons.svg", "manifest.webmanifest", "sw.js",
     handler: httpAction(async (ctx) => serveAsset(ctx, `/${file}`)),
   });
 }
-
 
 http.route({
   pathPrefix: "/pwa/",
@@ -106,7 +109,6 @@ http.route({
   method: "GET",
   handler: httpAction(async (ctx, req) => {
     const path = new URL(req.url).pathname;
-    // /forge/slug or /forge/slug/ → index.html
     const normalized =
       path.endsWith("/") ? path + "index.html" :
       path.split("/").length === 3 ? path + "/index.html" : path;
