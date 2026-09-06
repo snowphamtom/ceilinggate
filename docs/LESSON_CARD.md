@@ -1,7 +1,7 @@
-# Lesson card — b0cfd25
+# Lesson card — 13a2034
 
 1. What changed
-visual: judges 30s-g — try-label flex + steps code chip
+visual: judges 30s-h/i/j — slip depth, board edge, stamp weight
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
