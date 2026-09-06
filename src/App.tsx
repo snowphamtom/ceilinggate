@@ -149,7 +149,7 @@ export default function App() {
                         lineItems: LINE_ITEMS,
                         subject: c.subject ?? "(no subject)",
                         from: c.from ?? "",
-                        aiLine: c.aiLine,
+                        aiLine: d?.oneLine ?? (c as { aiLine?: string }).aiLine,
                       };
                       setResults((prev) => [mapped, ...prev.filter((r) => r.id !== mapped.id)]);
                       setSelectedId(mapped.id);
