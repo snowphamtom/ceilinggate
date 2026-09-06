@@ -137,7 +137,7 @@ Click **Check sample claims** → GRANT (all lines OK) + REFUSE (lodging & misc 
 ## LIVE (2026-09-05 evening CT)
 - [x] Site https://quirky-rhinoceros-204.convex.site/ (+ /health)
 - [x] GH https://github.com/snowphamtom/ceilinggate
-- [x] Tip  (+ Batch15 shortlist 00 fee-schedule URL)
+- [x] Tip (see STATUS.md) — Batch15 shortlist includes Missing Parts $900 public fee-schedule URL
 - [x] Firecrawl Y · AgentMail Y · inbox `ceilinggate-claims@agentmail.to`
 - [x] Cash prizes ONLY $10k/$5k/$1.5k (Luma)
 - [x] vibeapps screenshots (`/workspace/ceilinggate-demo/shots/`) + [ ] video

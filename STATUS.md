@@ -3,7 +3,7 @@
 **Updated:** 2026-09-05 evening CT  
 **Taylor:** FULL GO (All Gas win path)  
 **Deadline:** Tue Sep 22, 2026 · 12:00 PM PT  
-**Tip:** 
+**Tip:** `10bbe84`
 
 ## Live
 | Item | URL / value |
@@ -32,7 +32,8 @@
 - $2100 Track One — USPTO fee noise only (full pack), not prize/prefer ship copy
 
 ## Next
-- [ ] vibeapps screenshots + 60s video (Streamer when Taylor asks)
+- [x] vibeapps screenshots (01–04 under ceilinggate-demo/shots)
+- [ ] 60s video (Streamer when Taylor asks)
 - [ ] Submit before Sep 22 noon PT
 
 ## Screenshots (vibeapps)
