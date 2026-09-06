@@ -1,10 +1,6 @@
 import { defineSchema, defineTable } from "convex/server";
 import { v } from "convex/values";
 
-/**
- * CeilingGate schema stubs.
- * AgentMail / Firecrawl components keep their own sandboxed tables.
- */
 export default defineSchema({
   inboxes: defineTable({
     agentMailInboxId: v.string(),
@@ -16,7 +12,6 @@ export default defineSchema({
   claims: defineTable({
     claimed: v.array(v.number()),
     interior: v.optional(v.array(v.number())),
-    /** received | parsing | scraping | ready | gated | error */
     status: v.string(),
     mask: v.optional(v.number()),
     failedIndices: v.optional(v.array(v.number())),
@@ -58,6 +53,8 @@ export default defineSchema({
     status: v.union(v.literal("grant"), v.literal("refuse")),
     mask: v.number(),
     failedIndices: v.array(v.number()),
+    oneLine: v.optional(v.string()),
+    oneLineSource: v.optional(v.union(v.literal("openai"), v.literal("gate"))),
     decidedAt: v.number(),
   })
     .index("by_decidedAt", ["decidedAt"])
@@ -102,7 +99,6 @@ export default defineSchema({
     .index("by_deployment_path", ["deploymentId", "path"])
     .index("by_deployment", ["deploymentId"]),
 
-  
   forgedApps: defineTable({
     slug: v.string(),
     title: v.string(),
