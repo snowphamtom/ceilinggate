@@ -54,6 +54,15 @@ function plainFailures(
   });
 }
 
+function isPublicUrl(url: string) {
+  try {
+    const u = new URL(url);
+    return u.protocol === "http:" || u.protocol === "https:";
+  } catch {
+    return false;
+  }
+}
+
 function capitalize(s: string) {
   return s.length ? s[0].toUpperCase() + s.slice(1) : s;
 }
@@ -240,7 +249,10 @@ export default function App() {
                 >
                   <span className="subj">{f.email.subject}</span>
                   <span className="meta">
-                    from {f.email.from} · receipt on file
+                    from {f.email.from} ·{" "}
+                    {isPublicUrl(f.email.receiptUrl)
+                      ? "public receipt URL"
+                      : "receipt on file"}
                   </span>
                   <StatusPill status={expect.status} />
                 </button>

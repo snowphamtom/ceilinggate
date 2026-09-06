@@ -11,7 +11,7 @@
 | Health | https://quirky-rhinoceros-204.convex.site/health → `{"ok":true,"app":"CeilingGate"}` |
 | Public GH | https://github.com/snowphamtom/ceilinggate |
 | Inbox | ceilinggate-claims@agentmail.to |
-| Tip | `e04b873` (git HEAD; originality + compete harden) |
+| Tip | `dc97988` + cascading shortlist (incl. sub-spec-clean-1004-feecart) |
 | Demo cut | `/workspace/ceilinggate-demo/out/CeilingGate-AllGas-demo.mp4` (~1:25) + release `allgas-demo-20260905` |
 | Shots | `01-hero` … `04-inbox` CLOSED (recrop done) |
 
