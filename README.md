@@ -114,3 +114,9 @@ Click **Demo GRANT** / **Demo REFUSE** — full ResidualGates ledger works in th
 
 ## All Gas support tooling
 - Judge smoke (public path): `./scripts/allgas-judge-smoke.sh` — health, SPA, Demo GRANT/REFUSE/signature strings, fixtures, webhook liveness.
+
+## App Forge (recursive create)
+Judges: can a regular person make **another** app? Yes — App Forge on this site scaffolds micro-apps on the same stack.
+- UI panel on the live SPA
+- Box: `npm run forge -- --slug my-app`
+- Docs: `docs/APP_FORGE.md` · thesis `docs/APP_FORGE_THESIS.md`

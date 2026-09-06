@@ -13,6 +13,7 @@ import type * as claims from "../claims.js";
 import type * as config from "../config.js";
 import type * as firecrawl from "../firecrawl.js";
 import type * as fixtures from "../fixtures.js";
+import type * as forge from "../forge.js";
 import type * as gateLogic from "../gateLogic.js";
 import type * as http from "../http.js";
 import type * as inboxes from "../inboxes.js";
@@ -33,6 +34,7 @@ declare const fullApi: ApiFromModules<{
   config: typeof config;
   firecrawl: typeof firecrawl;
   fixtures: typeof fixtures;
+  forge: typeof forge;
   gateLogic: typeof gateLogic;
   http: typeof http;
   inboxes: typeof inboxes;

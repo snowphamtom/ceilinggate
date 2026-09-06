@@ -102,6 +102,16 @@ export default defineSchema({
     .index("by_deployment_path", ["deploymentId", "path"])
     .index("by_deployment", ["deploymentId"]),
 
+  
+  forgedApps: defineTable({
+    slug: v.string(),
+    title: v.string(),
+    brief: v.string(),
+    path: v.string(),
+    stack: v.array(v.string()),
+    inheritsAccess: v.boolean(),
+    createdAt: v.number(),
+  }).index("by_slug", ["slug"]),
   siteMeta: defineTable({
     key: v.string(),
     deploymentId: v.string(),

@@ -84,3 +84,9 @@ code { font-family: "IBM Plex Mono", ui-monospace, monospace; }
 .mask-chip { display: inline-block; font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.78rem; padding: 0.25rem 0.55rem; border-radius: 6px; background: #0b1220; border: 1px solid #3a4f6f; color: #9ec5ff; }
 .refuse .mask-chip { border-color: #d64545; color: #ffb0b0; }
 .grant .mask-chip { border-color: #1f9d63; color: #3dde95; }
+
+.forge-panel { margin-top: 1.25rem; }
+.forge-label { display: block; margin: 0.5rem 0; font-size: 0.85rem; color: #a8bdd8; }
+.forge-input { display: block; width: 100%; margin-top: 0.25rem; padding: 0.5rem 0.65rem; border-radius: 8px; border: 1px solid #2a3a55; background: #0b1220; color: #e8eef7; }
+.forge-log { margin-top: 0.75rem; }
+.forge-list { margin: 0.75rem 0 0; padding-left: 1.1rem; }

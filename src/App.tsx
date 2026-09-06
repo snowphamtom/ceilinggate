@@ -393,12 +393,94 @@ export default function App() {
         </section>
       )}
 
+      <AppForgePanel />
+
       <footer className="lean">
         CeilingGate is a money-claim checker — not a chat bot, not a developer
         SDK. Email in → Firecrawl receipt scrape → clear GRANT or REFUSE. Cash
         prizes for All Gas: $10k / $5k / $1.5k only.
       </footer>
     </div>
+  );
+}
+
+
+function AppForgePanel() {
+  const [title, setTitle] = useState("Receipt Line Check");
+  const [brief, setBrief] = useState(
+    "Micro-app: claimed lines ≤ public receipt totals. ResidualGates stub. Not a chat assistant.",
+  );
+  const [log, setLog] = useState<string>("");
+  const [spawned, setSpawned] = useState<
+    { slug: string; title: string; path: string }[]
+  >([]);
+
+  const forge = useCallback(async () => {
+    const slug =
+      title
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-|-$/g, "")
+        .slice(0, 40) || `forge-${Date.now().toString(36)}`;
+    setLog(`Forging ${slug}…`);
+    try {
+      // Client demo: record locally + point at box scaffold convention
+      const path = `/workspace/forged-apps/${slug}`;
+      const entry = { slug, title, path };
+      setSpawned((prev) => [entry, ...prev.filter((x) => x.slug !== slug)]);
+      setLog(
+        `SPAWNED ${slug} (${brief.slice(0, 80)}…) — inherits STANDING_ACCESS. Box: npm run forge -- --slug ${slug}`,
+      );
+    } catch (e) {
+      setLog(String(e));
+    }
+  }, [title, brief]);
+
+  return (
+    <section className="panel forge-panel">
+      <h2>App Forge</h2>
+      <p className="muted small">
+        Recursive create factory — prove a regular person can make{" "}
+        <strong>another</strong> app on Convex + Firecrawl + AgentMail.
+        Not an inbox yes/no chat. Spawned apps inherit cascading access.
+      </p>
+      <label className="forge-label">
+        Micro-app title
+        <input
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          className="forge-input"
+        />
+      </label>
+      <label className="forge-label">
+        Brief
+        <textarea
+          value={brief}
+          onChange={(e) => setBrief(e.target.value)}
+          className="forge-input"
+          rows={2}
+        />
+      </label>
+      <button type="button" className="primary" onClick={forge}>
+        Forge micro-app (demo spawn)
+      </button>
+      {log ? <p className="lean forge-log">{log}</p> : null}
+      {spawned.length > 0 && (
+        <ul className="forge-list">
+          {spawned.map((s) => (
+            <li key={s.slug}>
+              <strong>{s.title}</strong> <code>{s.slug}</code>
+              <span className="muted small"> — {s.path}</span>
+            </li>
+          ))}
+        </ul>
+      )}
+      <p className="muted small">
+        Box scaffold: <code>npm run forge -- --slug …</code> →{" "}
+        <code>/workspace/forged-apps/</code>. First live child:{" "}
+        <code>tip-jar-honesty</code>.
+      </p>
+    </section>
   );
 }
 

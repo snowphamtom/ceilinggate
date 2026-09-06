@@ -10,7 +10,7 @@ Lightweight status board. Open on desktop/browser — nothing to install, no pho
 - Demo pack: https://github.com/snowphamtom/ceilinggate/releases/tag/allgas-demo-20260905
 - Claims inbox: `ceilinggate-claims@agentmail.to`
 - Health: `/health` → CeilingGate
-- Tip: `8aaa264` — win-artifact priority (site/demo/submit/originality)
+- Tip: (pending App Forge scaffold) — App Forge panel + tip-jar-honesty child
 
 ## Support tooling
 - `scripts/allgas-judge-smoke.sh` — public judge-path smoke (box + CI-friendly)

@@ -18,7 +18,8 @@
     "test": "vitest run && node scripts/test-gate.mjs",
     "demo:offline": "npm run demo:gate && npm run build",
     "judge:smoke": "bash scripts/allgas-judge-smoke.sh",
-    "originality:check": "bash scripts/originality-check.sh"
+    "originality:check": "bash scripts/originality-check.sh",
+    "forge": "node scripts/forge-scaffold.mjs"
   },
   "dependencies": {
     "@agentmail/convex": "^0.1.0",
