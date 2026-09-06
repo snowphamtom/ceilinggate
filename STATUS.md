@@ -33,7 +33,7 @@
 
 ## Next
 - [x] vibeapps screenshots (01–04 under ceilinggate-demo/shots)
-- [ ] 60s video (Streamer when Taylor asks)
+- [ ] 60s / <3m vibeapps video — **FULL GO** (Streamer shipping; not hold)
 - [ ] Submit before Sep 22 noon PT
 
 ## Screenshots (vibeapps)
