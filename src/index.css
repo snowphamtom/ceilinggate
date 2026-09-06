@@ -94,3 +94,6 @@ code { font-family: "IBM Plex Mono", ui-monospace, monospace; }
 .forge-sub { margin: 1rem 0 0.35rem; font-size: 0.9rem; color: #a8bdd8; }
 
 .forge-panel .primary { margin-top: 0.5rem; font-size: 1rem; padding: 0.65rem 1rem; }
+
+.forge-newest { outline: 1px solid #2a6df4; border-radius: 6px; padding: 0.15rem 0.35rem; background: rgba(42,109,244,0.12); }
+.forge-judge-strip { margin-top: 0.5rem; font-size: 0.8rem; color: #9ec5ff; }

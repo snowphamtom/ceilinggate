@@ -470,10 +470,13 @@ function AppForgePanel() {
         Spawn second micro-app (live)
       </button>
       {log ? <p className="lean forge-log">{log}</p> : null}
-      <h3 className="forge-sub">Spawned apps (live)</h3>
+      <div className="forge-judge-strip" role="note">
+        Judges: new spawn appears at top of the live list (Convex) — no chat, no login.
+      </div>
+      <h3 className="forge-sub">Spawned apps (live){live?.length ? ` · ${live.length}` : ""}</h3>
       <ul className="forge-list">
-        {(live ?? []).map((s) => (
-          <li key={s._id}>
+        {(live ?? []).map((s, i) => (
+          <li key={s._id} className={i === 0 ? "forge-newest" : undefined}>
             <strong>{s.title}</strong> <code>{s.slug}</code>
             <span className="muted small"> — {s.path}</span>
           </li>
