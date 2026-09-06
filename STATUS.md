@@ -3,7 +3,7 @@
 **Updated:** 2026-09-05 evening CT  
 **Taylor:** FULL GO (All Gas win path)  
 **Deadline:** Tue Sep 22, 2026 · 12:00 PM PT  
-**Tip:** `b9890b2`
+**Tip:** `master` @ https://github.com/snowphamtom/ceilinggate (check latest SHA)
 
 ## Live
 | Item | URL / value |
