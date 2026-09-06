@@ -1,7 +1,7 @@
-# Lesson card — 6579d1b
+# Lesson card — 0fad0fa
 
 1. What changed
-Show the ceiling as paper.
+ci: quote workflow if-expressions so YAML parses and deploy jobs start
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
