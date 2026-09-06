@@ -38,6 +38,14 @@ Inherits STANDING_ACCESS from CeilingGate App Forge — self-authorizes next cre
 https://quirky-rhinoceros-204.convex.site/ (CeilingGate + Forge)
 
 Fee ≠ prize. OFF PHONE. No Square commercial.
+
+## Preferred public seeds
+${(() => {
+  try {
+    const pref = fs.readFileSync(new URL("../docs/FORGE_PREF_URLS.txt", import.meta.url), "utf8").trim().split(/\n+/).filter(Boolean);
+    return pref.map((u) => `- ${u}`).join("\n") || "- (none)";
+  } catch { return "- (see docs/FORGE_PUBLIC_URL_SEEDS_LIVE.md)"; }
+})()}
 `,
 );
 
