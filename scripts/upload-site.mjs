@@ -5,11 +5,15 @@ import { randomUUID } from "crypto";
 import { lookup } from "mime-types";
 
 function loadEnv() {
-  for (const line of readFileSync(".env.local", "utf8").split("\n")) {
-    const t = line.trim();
-    if (!t || t.startsWith("#") || !t.includes("=")) continue;
-    const i = t.indexOf("=");
-    process.env[t.slice(0, i)] = t.slice(i + 1);
+  try {
+    for (const line of readFileSync(".env.local", "utf8").split("\n")) {
+      const t = line.trim();
+      if (!t || t.startsWith("#") || !t.includes("=")) continue;
+      const i = t.indexOf("=");
+      process.env[t.slice(0, i)] = t.slice(i + 1);
+    }
+  } catch {
+    // CI uses CONVEX_DEPLOY_KEY; .env.local is local-only.
   }
 }
 
