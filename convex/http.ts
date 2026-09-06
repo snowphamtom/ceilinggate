@@ -91,4 +91,14 @@ for (const file of ["favicon.svg", "icons.svg", "manifest.webmanifest", "sw.js",
   });
 }
 
+
+http.route({
+  pathPrefix: "/pwa/",
+  method: "GET",
+  handler: httpAction(async (ctx, req) => {
+    const path = new URL(req.url).pathname;
+    return serveAsset(ctx, path);
+  }),
+});
+
 export default http;

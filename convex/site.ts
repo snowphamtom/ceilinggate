@@ -71,7 +71,8 @@ export const getAsset = query({
       .withIndex("by_deployment_path", (q) =>
         q.eq("deploymentId", meta.deploymentId).eq("path", path),
       )
-      .unique();
+      .order("desc")
+      .first();
     if (!asset) return null;
     const url = await ctx.storage.getUrl(asset.storageId);
     return { contentType: asset.contentType, url };
