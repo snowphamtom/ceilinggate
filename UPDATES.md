@@ -36,6 +36,7 @@ Lightweight status board. Open on desktop/browser — nothing to install, no pho
 - Deadline: Tue Sep 22, 2026 · 12:00 PM PT
 
 ## Ops locks
+- **OFF PHONE LOCK:** all teammate creative/build on box + GH/Convex only; phone tasks canceled
 - Past Drive/mail data frozen (new objects only)
 - Post/shop freeze; no Square/T&E commercial during All Gas
 - Conserve box RAM (one Chrome when needed)
