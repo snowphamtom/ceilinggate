@@ -1504,6 +1504,42 @@ textarea.forge-input {
   min-height: 12rem;
 }
 
+
+
+/* —— Judges 30s c: inbox denser + grant/refuse dock balance —— */
+.board-grid .list {
+  gap: 0.35rem;
+}
+
+.row.docket {
+  padding: 0.5rem 0.65rem;
+}
+
+.row.docket .pill {
+  font-size: 0.6rem;
+  padding: 0.15rem 0.45rem;
+}
+
+.oneclick {
+  gap: 0.6rem;
+}
+
+.grant-btn {
+  box-shadow: 0 0 28px var(--grant-glow), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.refuse-btn {
+  box-shadow: 0 0 28px var(--refuse-glow), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.hero h1 {
+  margin-bottom: 0.4rem;
+}
+
+.card.big h3 {
+  margin: 0.1rem 0 0.55rem;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .card.grant,
   .card.refuse,
