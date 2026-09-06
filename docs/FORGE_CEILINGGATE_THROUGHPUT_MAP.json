@@ -1,0 +1,50 @@
+{
+  "purpose": "Forge+CeilingGate throughput map \u2014 helpers that make the App Forge thesis judge-stronger. Fee\u2260prize. No commercial T&E.",
+  "built_at_utc": "2026-09-06T00:24:47Z",
+  "thesis": {
+    "doc": "/workspace/ceilinggate/docs/APP_FORGE_THESIS.md",
+    "claim": "App Forge recursive create on Convex+Firecrawl+AgentMail; CeilingGate is the live forensic spawn.",
+    "prize_cash_only": "$10k / $5k / $1.5k Luma (not USPTO fees)"
+  },
+  "ceilinggate_live": {
+    "spa": "https://quirky-rhinoceros-204.convex.site/",
+    "gh": "https://github.com/snowphamtom/ceilinggate",
+    "shipShortlist_n": 14,
+    "shipShortlist": [
+      "te-grant",
+      "te-refuse",
+      "te-spend-ceilings",
+      "ssv-residual",
+      "atec-phase2",
+      "lean-kernel-receipt",
+      "sub-spec-clean-1004-feecart",
+      "gate-b-host",
+      "drive-diu-swap-usv",
+      "drive-pass-job",
+      "drive-fail-job",
+      "readme-1004-vs-70",
+      "pc-receipt-history-9",
+      "img-0414-missing-parts-900"
+    ]
+  },
+  "eve_helpers_on_box": [
+    "/workspace/drive_inv/CEILINGGATE_SHORTLIST_INDEX.json",
+    "/workspace/drive_inv/CEILINGGATE_FUEL_LEDGER.json",
+    "/workspace/drive_inv/ceilinggate_public_url_polish_2026-09-05.json",
+    "/workspace/drive_inv/CEILINGGATE_JUDGE_SIGNATURES.json",
+    "/workspace/drive_inv/CEILINGGATE_PUBLIC_URL_SEEDS_LIVE.json"
+  ],
+  "judge_signature_rows": 14,
+  "public_url_live": {
+    "checked": 39,
+    "histogram": null
+  },
+  "fences": [
+    "OFF PHONE",
+    "NEW/public-URL only",
+    "no pad",
+    "no historical re-diff",
+    "silent to Taylor",
+    "Fee\u2260prize"
+  ]
+}
