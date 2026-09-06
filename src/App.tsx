@@ -614,13 +614,17 @@ function MaskChipLitePanel() {
 }
 
 
-/** Tiny home-screen install shell — no offline media cache. */
+/** Tiny home-screen install shell — always visible; no offline media cache. */
 function PwaInstallShell() {
   const [deferred, setDeferred] = useState<any>(null);
-  const [hint, setHint] = useState(false);
   const [done, setDone] = useState(false);
+  const [standalone, setStandalone] = useState(false);
 
   useEffect(() => {
+    const isStandalone =
+      (window.navigator as any).standalone === true ||
+      window.matchMedia("(display-mode: standalone)").matches;
+    setStandalone(isStandalone);
     const onBip = (e: Event) => {
       e.preventDefault();
       setDeferred(e);
@@ -631,26 +635,21 @@ function PwaInstallShell() {
     };
     window.addEventListener("beforeinstallprompt", onBip);
     window.addEventListener("appinstalled", onInstalled);
-    // iOS / browsers without BIP: show soft hint once
-    const ua = navigator.userAgent;
-    const isIos = /iPad|iPhone|iPod/.test(ua);
-    const standalone =
-      (window.navigator as any).standalone === true ||
-      window.matchMedia("(display-mode: standalone)").matches;
-    if (!standalone && isIos) setHint(true);
     return () => {
       window.removeEventListener("beforeinstallprompt", onBip);
       window.removeEventListener("appinstalled", onInstalled);
     };
   }, []);
 
-  if (done) return null;
-  if (!deferred && !hint) return null;
+  if (done || standalone) return null;
+
+  const isIos = /iPad|iPhone|iPod/.test(navigator.userAgent);
 
   return (
     <div className="pwa-shell" role="region" aria-label="Install CeilingGate">
-      <span className="pwa-shell-label">
-        Home screen · tiny PWA · no media cache
+      <strong className="pwa-shell-label">Install · Add to Home Screen</strong>
+      <span className="muted small">
+        Tiny PWA · network-only · no media cache · no release download
       </span>
       {deferred ? (
         <button
@@ -665,7 +664,9 @@ function PwaInstallShell() {
         </button>
       ) : (
         <span className="muted small">
-          Share → Add to Home Screen
+          {isIos
+            ? "Safari Share → Add to Home Screen"
+            : "Browser menu → Install app / Add to Home Screen"}
         </span>
       )}
     </div>
