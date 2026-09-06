@@ -3273,6 +3273,78 @@
         "1-9benefbYBN6-WJZOR7MkM4RyHmXm3Uu"
       ],
       "scrapeFixtureText": "INTERIOR: 1, 0, 0\nFORENSIC Eve Batch15: FFL/small-entity sibling; not PAID / not grant"
+    },
+    {
+      "id": "pc-receipt-history-9",
+      "caseId": "CG-EVE-B16-01",
+      "label": "GRANT \u2014 Patent Center Receipt History 9 submissions + PC# 79232130 (beats 8-row twin)",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "submissions_documented",
+        "pc_number_present"
+      ],
+      "email": {
+        "subject": "[FORENSIC] Google.pdf Receipt History 9 + PC# 79232130 \u2014 Eve B16",
+        "from": "eve-fuel@monstersink.example",
+        "body": "CLAIMED: 9, 1\nINTERIOR: 9, 1\nfileId 1RZzBjp0IE1ZsmPKj_4v-O3uQ_TmyftjW\n9 submissions + NEW PC# 79232130 (07/23/2026); beats 8-submission twin. Fee\u2260prize. ResidualGates line deltas.",
+        "receiptUrl": "https://patentcenter.uspto.gov/"
+      },
+      "claimed": [
+        9,
+        1
+      ],
+      "interior": [
+        9,
+        1
+      ],
+      "expect": {
+        "status": "grant",
+        "mask": 0,
+        "failedIndices": []
+      },
+      "driveFileIds": [
+        "1RZzBjp0IE1ZsmPKj_4v-O3uQ_TmyftjW"
+      ],
+      "scrapeFixtureText": "INTERIOR: 9, 1\nFORENSIC Eve Batch16: Receipt History 9 submissions; PC# 79232130"
+    },
+    {
+      "id": "inventor-declaration-blank-sig",
+      "caseId": "CG-EVE-B16-02",
+      "label": "REFUSE \u2014 Inventor declaration 1.63 body vs blank signature (executed oath=0)",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "declaration_body",
+        "executed_oath",
+        "fees_paid"
+      ],
+      "email": {
+        "subject": "[FORENSIC] 10_INVENTOR_DECLARATION blank signature \u2014 Eve B16",
+        "from": "eve-fuel@monstersink.example",
+        "body": "CLAIMED: 1, 1, 1\nINTERIOR: 1, 0, 0\nfileId 1m9abdu-1wRkVZOV-BbNWb1-4247-t_z5\n1.63 body vs blank signature; Missing Parts; not grant. Fee\u2260prize.",
+        "receiptUrl": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule"
+      },
+      "claimed": [
+        1,
+        1,
+        1
+      ],
+      "interior": [
+        1,
+        0,
+        0
+      ],
+      "expect": {
+        "status": "refuse",
+        "mask": 6,
+        "failedIndices": [
+          1,
+          2
+        ]
+      },
+      "driveFileIds": [
+        "1m9abdu-1wRkVZOV-BbNWb1-4247-t_z5"
+      ],
+      "scrapeFixtureText": "INTERIOR: 1, 0, 0\nFORENSIC Eve Batch16: inventor declaration blank signature; oath=0"
     }
   ],
   "seedUrls": [
@@ -3308,7 +3380,7 @@
     "drive-pass-job",
     "drive-fail-job",
     "readme-1004-vs-70",
-    "uspto-receipt-history",
+    "pc-receipt-history-9",
     "img-0414-missing-parts-900"
   ],
   "batch4BriefFileId": "1a0Hcs28fpH3s3oGvc8MbgegyBVGN4hOg",
