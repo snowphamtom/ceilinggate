@@ -94,6 +94,16 @@ export default function App() {
           Send a claim and a public receipt. Every line is compared.
           Under or equal is a <strong>GRANT</strong>. Over is a <strong>REFUSE</strong>.
         </p>
+        <ul className="stack-tags" aria-label="Stack">
+          <li>Convex</li>
+          <li>Firecrawl</li>
+          <li>AgentMail</li>
+          <li>OpenAI</li>
+        </ul>
+        <p className="muted small originality-line">
+          Receipt GRANT/over honesty + Forge spawn — not an inbox yes/no clone
+          (Block / NoticeProof / Attest).
+        </p>
       </header>
 
       <section className="try-now" aria-label="Try it">
@@ -107,7 +117,7 @@ export default function App() {
       <ol className="steps">
         <li>Email the claim and a public receipt link to <code>ceilinggate-claims@agentmail.to</code></li>
         <li>Firecrawl reads the receipt page.</li>
-        <li>Each line must stay at or under the receipt. OpenAI writes one sentence after the numbers.</li>
+        <li>Each line must stay at or under the receipt. OpenAI writes one sentence after the numbers (does not decide GRANT/REFUSE).</li>
       </ol>
 
       <section className="panel prize-honesty" id="prize-honesty" aria-label="Prize honesty">

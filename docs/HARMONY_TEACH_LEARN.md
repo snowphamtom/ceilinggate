@@ -64,3 +64,22 @@ Marketing “$25k/$45k” = cash **plus** credits — not a bigger cash pool.
 | Access slogans / buried prose cash | Product language; cash = table |
 
 Evidence: `docs/PRIZE_HONESTY.md` · VIBEAPPS_UPDATE_PASTE.md · ELIGIBILITY_ONEPAGER.md
+
+## Eve lesson (rivals · 2026-09-06)
+### Stack tags (listing + site)
+| Tag | Role |
+|-----|------|
+| Convex | Claims, scrapes, decisions, `*.convex.site` |
+| Firecrawl | Public receipt scrape |
+| AgentMail | Inbox + webhook |
+| OpenAI | One sentence after numbers — does **not** decide GRANT/REFUSE |
+
+### Originality vs Block / NoticeProof / Attest
+| Beat them on | How we do it |
+|--------------|--------------|
+| Receipt GRANT / over honesty | Line ledger claimed ≤ interior; REFUSE names $ overage |
+| Forge spawn | Live `/forge/{slug}/` micro-apps — not a chat clone |
+
+Never: inbox yes/no rebrand · docs-search chat · Magpie/Square pitch.
+Evidence: live `#` stack-tags · `docs/ORIGINALITY.md` · `/forge/url-receipt-gate/`
+
