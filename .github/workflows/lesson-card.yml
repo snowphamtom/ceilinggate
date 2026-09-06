@@ -10,7 +10,7 @@ concurrency:
   cancel-in-progress: true
 jobs:
   card:
-    if: ${{ github.event_name == 'workflow_dispatch' || github.event.head_commit == null || !startsWith(github.event.head_commit.message, 'docs: lesson card') }}
+    if: "${{ github.event_name == 'workflow_dispatch' || github.event.head_commit == null || !startsWith(github.event.head_commit.message, 'docs: lesson card') }}"
     runs-on: ubuntu-latest
     permissions:
       contents: write
