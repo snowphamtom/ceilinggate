@@ -87,3 +87,67 @@ export function faultClassLabel(fc: FaultClass): string {
       return "Length mismatch — claim vector ≠ receipt lines (corrupt shape)";
   }
 }
+
+
+/** Sum of finite numbers (chat-style total). */
+export function vectorSum(xs: number[]): number {
+  return xs.reduce((a, b) => a + (Number.isFinite(b) ? b : 0), 0);
+}
+
+/**
+ * Classic Block/GIW shrug: totals look fine (sum claimed ≤ sum on-receipt)
+ * but at least one line is over — ResidualGates must REFUSE.
+ */
+export function chatWouldShrug(interior: number[], claimed: number[], d: GateDecision): boolean {
+  if (d.status !== "refuse") return false;
+  if (interior.length !== claimed.length) return false;
+  return vectorSum(claimed) <= vectorSum(interior);
+}
+
+/** Fixture: sum claimed 180 ≤ sum receipt 185, but line 1 OVER (60 > 50). */
+export const shrugTrapInterior = [100, 50, 25, 10];
+export const shrugTrapClaimed = [90, 60, 20, 10];
+
+/** Plain-text refuse receipt — math Block/GIW chat cannot rewrite. */
+export function refuseReceiptText(
+  interior: number[],
+  claimed: number[],
+  d: GateDecision,
+  lineNames?: string[],
+): string {
+  const lines: string[] = [];
+  lines.push(`STATUS ${d.status.toUpperCase()} · mask ${d.mask}`);
+  lines.push(
+    `SUM claimed ${vectorSum(claimed)} · SUM on-receipt ${vectorSum(interior)}` +
+      (chatWouldShrug(interior, claimed, d)
+        ? " · chat would shrug (totals OK)"
+        : ""),
+  );
+  const n = Math.max(interior.length, claimed.length);
+  for (let i = 0; i < n; i++) {
+    const name = lineNames?.[i] ?? `line ${i}`;
+    const c = claimed[i];
+    const inn = interior[i];
+    const cOk = Number.isFinite(c);
+    const iOk = Number.isFinite(inn);
+    if (!cOk || !iOk) {
+      lines.push(`LINE ${name} · CLAIMED ${cOk ? c : "—"} · ON RECEIPT ${iOk ? inn : "—"} · STATUS SHAPE`);
+      continue;
+    }
+    const over = (c as number) > (inn as number);
+    const residual = (c as number) - (inn as number);
+    lines.push(
+      `LINE ${name} · CLAIMED ${c} · ON RECEIPT ${inn} · residual ${residual}${
+        over ? " > 0 → OVER" : " ≤ 0 → CLEAR"
+      }`,
+    );
+  }
+  if (d.status === "refuse") {
+    lines.push(
+      "ADMIT only if claimed ≤ on-receipt on every line — surplus on one line cannot cover a deficit on another.",
+    );
+  } else {
+    lines.push("ADMIT: every line claimed ≤ on-receipt (componentwise).");
+  }
+  return lines.join("\n");
+}

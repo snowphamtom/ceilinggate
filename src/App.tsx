@@ -2,7 +2,17 @@ import { useCallback, useEffect, useState } from "react";
 import { useAction, useQuery } from "convex/react";
 import { api } from "../convex/_generated/api";
 import demo from "./data/demo.json";
-import { faultClass, faultClassLabel, gateB, type GateDecision } from "./lib/residualGates";
+import {
+  chatWouldShrug,
+  faultClass,
+  faultClassLabel,
+  gateB,
+  refuseReceiptText,
+  shrugTrapClaimed,
+  shrugTrapInterior,
+  vectorSum,
+  type GateDecision,
+} from "./lib/residualGates";
 import "./index.css";
 
 type Fixture = (typeof demo.fixtures)[number];
@@ -250,6 +260,7 @@ export default function App() {
         <UrlReceiptGatePanel />
         <DualOracleDisagreePanel />
         <FaultTaxonomyPanel />
+        <ChatShrugTrapPanel />
       </section>
 
       <section className="panel forge-panel" id="forge-open-live" aria-label="Open live Forge apps">
@@ -309,6 +320,15 @@ export default function App() {
               <td>
                 <a href="/forge/url-receipt-gate/" target="_blank" rel="noreferrer">
                   /forge/url-receipt-gate/
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <td>Chat Shrug Trap</td>
+              <td>totals OK · one line OVER → REFUSE (Block/GIW foil)</td>
+              <td>
+                <a href="/forge/chat-shrug-trap/" target="_blank" rel="noreferrer">
+                  /forge/chat-shrug-trap/
                 </a>
               </td>
             </tr>
@@ -374,6 +394,32 @@ function VerdictCard({ selected, plain }: { selected: LocalDecision; plain: stri
           on-receipt on every line.
         </p>
       )}
+      {chatWouldShrug(selected.interior, selected.claimed, selected.decision) ? (
+        <p className="conjunctive-line" data-testid="chat-shrug-callout">
+          Chat shrug foil: SUM claimed {vectorSum(selected.claimed)} ≤ SUM on-receipt{" "}
+          {vectorSum(selected.interior)} — Block/GIW would say totals look fine. Gate still{" "}
+          <strong>REFUSE</strong> on the OVER line(s).
+        </p>
+      ) : null}
+      {!ok ? (
+        <div className="row" style={{ marginTop: "0.65rem" }}>
+          <button
+            type="button"
+            className="ghost"
+            onClick={() => {
+              const text = refuseReceiptText(
+                selected.interior,
+                selected.claimed,
+                selected.decision,
+                selected.lineItems,
+              );
+              void navigator.clipboard?.writeText(text);
+            }}
+          >
+            Copy refuse receipt
+          </button>
+        </div>
+      ) : null}
       {selected.receiptUrl ? (
         <div className="evidence"><p><strong>Receipt</strong> {selected.receiptUrl}</p></div>
       ) : null}
@@ -1040,6 +1086,150 @@ function FaultTaxonomyPanel() {
     </div>
   );
 }
+
+
+function ChatShrugTrapPanel() {
+  const [claimedStr, setClaimedStr] = useState(shrugTrapClaimed.join(", "));
+  const [interiorStr, setInteriorStr] = useState(shrugTrapInterior.join(", "));
+  const [decision, setDecision] = useState<GateDecision | null>(null);
+  const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    setDecision(null);
+    setCopied(false);
+    const onPageShow = (e: PageTransitionEvent) => {
+      if (e.persisted) {
+        setDecision(null);
+        setCopied(false);
+      }
+    };
+    window.addEventListener("pageshow", onPageShow);
+    return () => window.removeEventListener("pageshow", onPageShow);
+  }, []);
+
+  const claimed = parseNumList(claimedStr);
+  const interior = parseNumList(interiorStr);
+
+  const run = useCallback(() => {
+    setCopied(false);
+    setDecision(gateB(parseNumList(interiorStr), parseNumList(claimedStr)));
+  }, [claimedStr, interiorStr]);
+
+  const loadTrap = () => {
+    setClaimedStr(shrugTrapClaimed.join(", "));
+    setInteriorStr(shrugTrapInterior.join(", "));
+    setDecision(gateB(shrugTrapInterior, shrugTrapClaimed));
+    setCopied(false);
+  };
+
+  const shrug = decision ? chatWouldShrug(interior, claimed, decision) : false;
+  const receipt = decision ? refuseReceiptText(interior, claimed, decision) : "";
+
+  return (
+    <div className="forge-child" id="chat-shrug-trap" data-testid="chat-shrug-trap">
+      <h3 className="forge-sub">Chat shrug trap — LIVE</h3>
+      <p className="muted small">
+        Block / GIW chat can shrug &quot;totals look fine.&quot; ResidualGates cannot:{" "}
+        <strong>claimed ≤ on-receipt on every line</strong>. This fixture keeps the sum under
+        budget and still <strong>REFUSE</strong>s the OVER line.
+      </p>
+      <label className="forge-label">
+        Claimed
+        <input
+          className="forge-input"
+          value={claimedStr}
+          onChange={(e) => setClaimedStr(e.target.value)}
+        />
+      </label>
+      <label className="forge-label">
+        On-receipt
+        <input
+          className="forge-input"
+          value={interiorStr}
+          onChange={(e) => setInteriorStr(e.target.value)}
+        />
+      </label>
+      <div className="row">
+        <button type="button" className="ghost" onClick={loadTrap}>
+          Load shrug trap
+        </button>
+        <button
+          type="button"
+          className="ghost"
+          onClick={() => {
+            setDecision(null);
+            setCopied(false);
+          }}
+        >
+          Reset
+        </button>
+        <button type="button" className="primary" onClick={run}>
+          Run gate
+        </button>
+      </div>
+      {decision ? (
+        <div className={"card " + (decision.status === "grant" ? "grant" : "refuse")}>
+          <strong>{decision.status.toUpperCase()}</strong>
+          <div className="mask-row">
+            <span className="mask-chip">
+              mask {decision.mask}
+              {decision.mask === 0
+                ? " · GRANT ⇔ mask==0"
+                : ` · failed [${decision.failedIndices.join(",")}]`}
+            </span>
+            <span className="mask-chip">
+              SUM claimed {vectorSum(claimed)} · SUM on-receipt {vectorSum(interior)}
+            </span>
+          </div>
+          {shrug ? (
+            <p className="conjunctive-line">
+              Chat would shrug: totals OK ({vectorSum(claimed)} ≤ {vectorSum(interior)}). Gate:{" "}
+              <strong>REFUSE</strong> — surplus on a clear line cannot cover the OVER line.
+            </p>
+          ) : decision.status === "refuse" ? (
+            <p className="conjunctive-line">
+              Totals also over (or shape bad) — still line-ledger REFUSE, not chat yes/no.
+            </p>
+          ) : (
+            <p className="conjunctive-line ok">
+              ADMIT: every line claimed ≤ on-receipt (componentwise).
+            </p>
+          )}
+          <GateLedgerTable
+            lines={Array.from({
+              length: Math.max(claimed.length, interior.length),
+            }).map((_, i) => ({
+              line: String(i),
+              claimed: claimed[i] ?? 0,
+              interior: interior[i] ?? 0,
+              over:
+                Number.isFinite(claimed[i]) &&
+                Number.isFinite(interior[i]) &&
+                (claimed[i] as number) > (interior[i] as number),
+            }))}
+          />
+          <div className="row" style={{ marginTop: "0.65rem" }}>
+            <button
+              type="button"
+              className="ghost"
+              onClick={() => {
+                void navigator.clipboard?.writeText(receipt).then(() => {
+                  setCopied(true);
+                });
+              }}
+            >
+              {copied ? "Copied refuse receipt" : "Copy refuse receipt"}
+            </button>
+          </div>
+          <pre className="muted small" style={{ whiteSpace: "pre-wrap", marginTop: "0.5rem" }}>
+            {receipt}
+          </pre>
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
 
 function DualOracleDisagreePanel() {
   const [claimedStr, setClaimedStr] = useState("98, 49, 25, 9");
