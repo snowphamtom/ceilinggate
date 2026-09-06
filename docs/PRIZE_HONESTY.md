@@ -18,5 +18,11 @@ Marketing “$25,000” / “$45,000” lines include Codex / Firecrawl credits 
 ## Submit-card one-liner
 All Gas cash prizes (Luma): $10,000 / $5,000 / $1,500 only — $2,100 USPTO Track One fee fixtures are not prize money.
 
+## Related (submit helpers)
+- Income path: `docs/INCOME_PATH.md` (throughput → Luma cash only)
+- App Forge thesis: `docs/APP_FORGE.md` (apps→apps; judge “regular person can make another app”)
+- Eligibility draft (HOLD FILE): `/workspace/ceilinggate-demo/ELIGIBILITY_ONEPAGER.md`
+- Box card: `/workspace/ceilinggate-demo/SUBMIT_CARD_PRIZE.md`
+
 ## HARD STOP
-No Square / T&E SKU framing in All Gas submit materials.
+No Square / T&E SKU framing in All Gas submit materials. No fake revenue. Label any guess.
