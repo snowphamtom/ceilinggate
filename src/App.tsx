@@ -196,7 +196,7 @@ export default function App() {
 
       <div className="board-grid">
         <section className="panel">
-          <h2>Claims inbox</h2>
+          <h2>Claims inbox <span className="muted small">({SHIP_FIXTURES.length} ship set)</span></h2>
           <p className="muted small">
             Ship-set expense examples (claim↔receipt) — not chat transcripts.
             One click runs the gate.

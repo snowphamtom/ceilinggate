@@ -4,19 +4,22 @@
 **Exact submit:** https://vibeapps.dev/judging/convex-all-gas-hackathon-openai/submit  
 **Primary rules:** https://luma.com/convex-allgas-hackathon
 
-## Live artifacts (verified 2026-09-05 evening CT)
+## Live artifacts (verified 2026-09-05 ~19:00 CT — Bob)
 | Item | Value |
 |------|--------|
 | Live site | https://quirky-rhinoceros-204.convex.site |
 | Health | https://quirky-rhinoceros-204.convex.site/health → `{"ok":true,"app":"CeilingGate"}` |
 | Public GH | https://github.com/snowphamtom/ceilinggate |
 | Inbox | ceilinggate-claims@agentmail.to |
-| Tip (at pack start) | `a2223a5` |
+| Tip | `cc0eea6` |
+| Demo cut | `/workspace/ceilinggate-demo/out/CeilingGate-AllGas-demo.mp4` (~1:57) |
+| Shots | `01-hero` … `04-inbox` CLOSED (recrop done) |
 
-## Prize honesty (Bob / Luma)
+## Prize honesty (Bob / Luma) — KEEP CURRENT
 Cash tiers only: **$10,000 / $5,000 / $1,500** (= $16,500 pool).  
 Page “$25k” = cash + Codex credits — not extra cash.  
-**Not** a prize: USPTO Track One ~$2,100 / live small-entity ~$1,806 (fixture only).
+**Not** a prize: USPTO Track One ~$2,100 / live small-entity ~$1,806 (fixture `cip-track-one-2100` only).  
+Winner announced ≠ cash-in-hand. No Square / T&E SKU in this pack.
 
 ## Requirements checklist
 - [x] New app started on/after Aug 25
@@ -25,8 +28,9 @@ Page “$25k” = cash + Codex credits — not extra cash.
 - [x] AgentMail real ingress + webhook
 - [x] Frontend on `*.convex.site`
 - [x] Public GitHub
+- [x] `04-inbox` shot recrop CLOSED
 - [ ] hackathon.md build log current (Create)
-- [ ] Video demo &lt; 3 min (Streamer draft → record)
+- [ ] Video demo &lt; 3 min — cut ~1:57 exists; final record/upload TBD (Streamer)
 - [ ] Social post draft tagging @convex @OpenAI @firecrawl @agentmail (Taylor sends)
 - [ ] vibeapps.dev form submitted
 
@@ -40,7 +44,7 @@ Email a money claim with a public receipt link. CeilingGate scrapes the receipt,
 - **Eve:** NEW money/receipt fixtures only
 - **MANAGER:** browser submit + keep team synced; draft social for Taylor
 
-## Bob eligibility pack (2026-09-05 ~18:52 CT)
+## Bob eligibility pack (2026-09-05 ~19:00 CT BUILD GO)
 
 Primary: https://luma.com/convex-allgas-hackathon · https://www.convex.dev/hackathons/all-gas
 
@@ -58,7 +62,7 @@ Primary: https://luma.com/convex-allgas-hackathon · https://www.convex.dev/hack
 - [x] Public GitHub — https://github.com/snowphamtom/ceilinggate
 - [x] Live on *.convex.site — https://quirky-rhinoceros-204.convex.site/
 - [x] Firecrawl + AgentMail real work
-- [ ] Demo video <3 min (Streamer GO — Taylor full auth 2026-09-05)
+- [ ] Demo video <3 min (cut ~1:57 on box; upload TBD — Streamer FULL GO)
 - [ ] Social tags @convex @OpenAI @firecrawl @agentmail (Taylor sends)
 - [ ] Not sponsor employee/family; not OFAC/prohibited jurisdiction
 

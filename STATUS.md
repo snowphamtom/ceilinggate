@@ -40,3 +40,7 @@
 - `/workspace/ceilinggate-demo/shots/02-grant.png`
 - `/workspace/ceilinggate-demo/shots/03-refuse.png`
 - `/workspace/ceilinggate-demo/shots/04-inbox.png`
+
+## Demo pack (off-phone)
+- GH release: https://github.com/snowphamtom/ceilinggate/releases/tag/allgas-demo-20260905
+- Shots:  (01–04; 04 = AgentMail+inbox)
