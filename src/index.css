@@ -1311,6 +1311,110 @@ textarea.forge-input {
   box-shadow: 0 0 0 2px var(--blue-dim);
 }
 
+
+
+/* —— WIN MODE: receipt-ceiling clarity (paper slips + ledger) —— */
+.paper-slips {
+  gap: 0.5rem;
+  margin: 0.85rem 0 1.05rem;
+  padding: 0.7rem 0.75rem 0.65rem;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background:
+    linear-gradient(165deg, rgba(14, 22, 40, 0.95), rgba(8, 12, 22, 0.92));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+.paper-slip {
+  grid-template-columns: 4.8rem minmax(0, 1fr) 3.6rem;
+  gap: 0.5rem;
+}
+
+.paper-slip-name {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #a8bdd8;
+}
+
+.paper-slip-track {
+  height: 1.7rem;
+  border: 1px solid rgba(58, 84, 120, 0.75);
+  border-radius: 5px;
+  background: #070b14;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.35);
+}
+
+.paper-slip-fill {
+  background: linear-gradient(90deg, rgba(61, 222, 149, 0.35), rgba(61, 222, 149, 0.75));
+}
+
+.paper-slip-fill.over {
+  background: linear-gradient(90deg, rgba(224, 69, 69, 0.45), rgba(255, 138, 138, 0.85));
+}
+
+.paper-slip-ceiling {
+  border-right: 2px dashed rgba(236, 232, 223, 0.7);
+  box-shadow: 0 0 10px rgba(212, 162, 76, 0.25);
+}
+
+.paper-slip-tab {
+  min-height: 1.7rem;
+  border: 1px solid rgba(212, 69, 69, 0.55);
+  background: linear-gradient(180deg, #e86a5c, #d4544a);
+  color: #0a0c10;
+  font-size: 0.7rem;
+  letter-spacing: 0.02em;
+  box-shadow: 0 0 14px rgba(224, 69, 69, 0.35);
+}
+
+.paper-slip-legend {
+  margin: 0.35rem 0 0;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.02em;
+  color: #9eb0c8;
+}
+
+.card.big {
+  padding: 1.15rem 1.1rem 1.2rem;
+}
+
+.card .eyebrow {
+  color: var(--amber);
+  letter-spacing: 0.14em;
+}
+
+.plain-fail {
+  margin: 0.35rem 0 0.75rem;
+  padding: 0.55rem 0.7rem 0.55rem 1.15rem;
+  border-radius: 8px;
+  border: 1px solid rgba(224, 69, 69, 0.35);
+  background: rgba(224, 69, 69, 0.08);
+}
+
+.ok-line {
+  padding: 0.45rem 0.65rem;
+  border-radius: 8px;
+  border: 1px solid rgba(31, 157, 99, 0.35);
+  background: rgba(31, 157, 99, 0.08);
+}
+
+.ledger {
+  margin-top: 0.35rem;
+}
+
+.ledger thead th {
+  color: #c5d4e8;
+}
+
+.conjunctive-line {
+  margin-top: 0.75rem;
+  font-size: 0.84rem;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .card.grant,
   .card.refuse,
