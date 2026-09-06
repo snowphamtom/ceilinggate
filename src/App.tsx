@@ -139,7 +139,7 @@ export default function App() {
     if (f) runOne(f);
   }, [runOne]);
 
-  /** Compete signature: CG-TE GRANT then $1 lodging/misc REFUSE */
+  /** Sample path: GRANT then a $1 lodging/misc REFUSE */
   const demoSignature = useCallback(() => {
     const g = pickByExpect("grant");
     const r = pickByExpect("refuse");
@@ -181,13 +181,13 @@ export default function App() {
             <strong>REFUSE</strong> with plain-English overages (e.g. lodging $1 over).
           </p>
           <p className="muted small">
-            Email claim + public receipt URL → Firecrawl scrape → numeric gate.
-            Never “AI yes/no to your email.” Not Attest-style inbox chat.
+            Email claim + public receipt URL → Firecrawl scrape → numeric line gate —
+            not a chat assistant.
           </p>
         </div>
         <div className="actions stack-actions">
           <button type="button" className="primary" onClick={loadAll}>
-            Check sample claims (ship set)
+            Check sample claims
           </button>
           <div className="oneclick">
             <button type="button" className="grant-btn" onClick={demoGrant}>
@@ -198,14 +198,14 @@ export default function App() {
             </button>
           </div>
           <button type="button" className="sig-btn" onClick={demoSignature}>
-            Demo signature: GRANT → $1 REFUSE
+            Try GRANT then REFUSE
           </button>
         </div>
       </header>
 
       <div className="orig-lock" role="note">
-        <strong>Forensic board</strong> — ResidualGates line ledger (claimed vs on-receipt).
-        Not a chat panel. Not Attest/NoticeProof-style AI yes/no. Not docs-search.
+        <strong>Forensic board</strong> — ResidualGates line ledger (claimed vs on-receipt),
+        not a chat panel.
       </div>
       <div className="stack-strip" aria-label="Required stack">
         <span className={"chip-stack" + (hasConvex ? " on" : "")}>
@@ -233,10 +233,9 @@ export default function App() {
 
       <div className="board-grid">
         <section className="panel">
-          <h2>Claims inbox <span className="muted small">({SHIP_FIXTURES.length} ship set)</span></h2>
+          <h2>Claims inbox <span className="muted small">({SHIP_FIXTURES.length} samples)</span></h2>
           <p className="muted small">
-            Ship-set expense examples (claim↔receipt) — not chat transcripts.
-            One click runs the gate.
+            Sample expense claims with matching receipts. One click runs the gate.
           </p>
           <div className="list">
             {SHIP_FIXTURES.map((f) => {
@@ -271,8 +270,7 @@ export default function App() {
           <h2>Result</h2>
           {!selected ? (
             <p className="muted">
-              Hit <strong>Demo signature: GRANT → $1 REFUSE</strong> (compete path),
-              or Demo GRANT / Demo REFUSE.
+              Hit <strong>Try GRANT then REFUSE</strong>, or Demo GRANT / Demo REFUSE.
             </p>
           ) : (
             <div
@@ -400,8 +398,8 @@ export default function App() {
       )}
 
       <footer className="lean">
-        CeilingGate is a money-claim checker — not a chat bot, not a developer
-        SDK. Email in → Firecrawl receipt scrape → clear GRANT or REFUSE. Cash prizes for All Gas: $10k / $5k / $1.5k only. Install: browser Add to Home Screen / Install app (PWA — no download pack).
+        CeilingGate is a money-claim checker — email in, Firecrawl receipt scrape,
+        clear GRANT or REFUSE. Install via browser Add to Home Screen / Install app.
       </footer>
     </div>
   );
@@ -433,12 +431,15 @@ function TipJarHonestyPanel() {
     setDecision(gateB([total], [tip]));
   }, [claimedTip, receiptTotal]);
 
+  useEffect(() => {
+    run();
+  }, [run]);
+
   return (
     <div className="forge-child">
       <h3 className="forge-sub">Tip Jar Honesty — LIVE</h3>
       <p className="muted small">
-        BETTER-THAN-PARENT: two clear money inputs (claimed tip vs receipt total) → instant
-        GRANT/REFUSE. No costume. NEVER NEED ACCESS.
+        Check a claimed tip against the receipt total — GRANT when the tip is at or under, REFUSE when it overshoots.
       </p>
       <div className="forge-row">
         <label className="forge-label">
@@ -523,12 +524,15 @@ function LineDeltaKitPanel() {
     setDecision(gateB(interior, claimed));
   }, [claimedStr, interiorStr]);
 
+  useEffect(() => {
+    run();
+  }, [run]);
+
   return (
     <div className="forge-child">
       <h3 className="forge-sub">Line Delta Kit — LIVE</h3>
       <p className="muted small">
-        BETTER-THAN-PARENT: paste claimed vs interior arrays, Run → decision + mask + failed
-        indices in one shot. Narrower and clearer than the parent ship-set board.
+        Paste claimed and on-receipt line amounts, then run the gate for a GRANT/REFUSE with mask and failed indices.
       </p>
       <label className="forge-label">
         Claimed lines (comma-separated)
@@ -743,7 +747,7 @@ function AppForgePanel() {
       if (hasConvex) {
         await spawn({ slug, title, brief, path });
         setLog(
-          `LIVE SPAWN ${slug} — NEVER NEED ACCESS / STANDING_ACCESS cascade. Recorded in Convex forgedApps. Box: npm run forge -- --slug ${slug}`,
+          `Spawned ${slug} — recorded in Convex. Open /forge/${slug}/ when ready.`,
         );
       } else {
         setLog(`Local spawn ${slug} (no VITE_CONVEX_URL) — ${brief.slice(0, 60)}…`);
@@ -757,12 +761,10 @@ function AppForgePanel() {
     <section className="panel forge-panel">
       <h2>App Forge</h2>
       <p className="muted small">
-        <strong>Judge demo path:</strong> (1) Demo signature GRANT→$1 REFUSE above,
-        (2) run live child gates below (Tip Jar / Line Delta / Mask Chip), (3) spawn another
-        micro-app. Same stack: Convex + Firecrawl + AgentMail. NEVER NEED ACCESS — nobody
-        asks to create or interact.
+        Build focused claim checkers on the same ResidualGates math. Try Tip Jar, Line Delta,
+        or Mask Chip below, then spawn another micro-app on Convex.
       </p>
-      <p className="eyebrow">Recursive create — apps that create apps · LIVE gates only</p>
+      <p className="eyebrow">Micro-apps · same stack · live gates</p>
 
       <TipJarHonestyPanel />
       <LineDeltaKitPanel />
@@ -798,7 +800,7 @@ function AppForgePanel() {
             <a href={`/forge/${s.slug}/`} target="_blank" rel="noreferrer">
               <code>/forge/{s.slug}/</code>
             </a>
-            <span className="muted small"> — LIVE gate (not costume)</span>
+            <span className="muted small"> — live gate</span>
           </li>
         ))}
         {!live?.length && (
@@ -808,8 +810,7 @@ function AppForgePanel() {
         )}
       </ul>
       <p className="muted small">
-        Box scaffold: <code>npm run forge -- --slug …</code> →{" "}
-        <code>/workspace/forged-apps/</code> (LIVE interactive HTML + demo-gate.mjs).
+        Spawned apps appear under <code>/forge/&lt;slug&gt;/</code> on this site.
       </p>
     </section>
   );

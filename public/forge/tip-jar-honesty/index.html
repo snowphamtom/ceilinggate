@@ -6,33 +6,42 @@
   <title>Tip Jar Honesty — LIVE gate</title>
   <style>
     :root { color-scheme: dark; font-family: system-ui, sans-serif; }
-    body { margin: 0; background: #0b1220; color: #e8eef7; padding: 1.25rem; }
+    body { margin: 0; background: #0b1220; color: #e8eef7; padding: 1.25rem; max-width: 28rem; }
     h1 { font-size: 1.35rem; margin: 0 0 0.35rem; }
-    .lede { color: #a8bdd8; font-size: 0.92rem; margin: 0 0 1rem; }
+    .lede { color: #a8bdd8; font-size: 0.92rem; margin: 0 0 1rem; line-height: 1.4; }
+    .badge { display:inline-block; font-size:0.72rem; padding:0.15rem 0.45rem; border-radius:999px;
+      border:1px solid #3a4f6f; color:#9ec5ff; margin:0 0 0.75rem; }
     label { display: block; margin: 0.55rem 0; font-size: 0.85rem; color: #a8bdd8; }
-    input { display: block; width: min(100%, 20rem); margin-top: 0.25rem;
-      padding: 0.5rem 0.65rem; border-radius: 8px; border: 1px solid #2a3a55;
-      background: #121a2b; color: #e8eef7; font: inherit; }
-    button { margin-top: 0.75rem; padding: 0.55rem 1rem; border-radius: 8px;
-      border: 1px solid #2a6df4; background: #1a3a7a; color: #fff; font-weight: 600; cursor: pointer; }
-    .card { margin-top: 1rem; padding: 1rem; border-radius: 10px; border: 1px solid #2a3a55; max-width: 24rem; }
+    input { display: block; width: 100%; box-sizing: border-box; margin-top: 0.25rem;
+      padding: 0.55rem 0.65rem; border-radius: 8px; border: 1px solid #2a3a55;
+      background: #121a2b; color: #e8eef7; font: inherit; font-size: 1.05rem; }
+    .row { display:flex; flex-wrap:wrap; gap:0.5rem; margin-top:0.75rem; }
+    button { padding: 0.55rem 0.9rem; border-radius: 8px; border: 1px solid #2a6df4;
+      background: #1a3a7a; color: #fff; font-weight: 600; cursor: pointer; }
+    button.ghost { background: transparent; border-color: #94a3b8; }
+    .card { margin-top: 1rem; padding: 1rem; border-radius: 10px; border: 1px solid #2a3a55; }
     .card.grant { border-color: #1f9d63; background: rgba(31,157,99,0.12); }
     .card.refuse { border-color: #d64545; background: rgba(214,69,69,0.12); }
     .chip { display: inline-block; margin-top: 0.35rem; padding: 0.2rem 0.5rem;
       border-radius: 6px; border: 1px solid #3a4f6f; color: #9ec5ff; font-family: ui-monospace, monospace; font-size: 0.8rem; }
+    .plain { margin: 0.65rem 0 0; font-size: 0.95rem; line-height: 1.4; }
+    .delta { font-family: ui-monospace, monospace; font-size: 1.1rem; margin-top: 0.35rem; }
+    a { color: #9ec5ff; }
   </style>
 </head>
 <body>
+  <span class="badge">BETTER-THAN-PARENT · NEVER NEED ACCESS · NO COSTUME</span>
   <h1>Tip Jar Honesty</h1>
-  <p class="lede">LIVE: claimed tip ≤ receipt total. BETTER-THAN-PARENT narrow inputs. NEVER NEED ACCESS.</p>
+  <p class="lede">Two money fields only — claimed tip vs receipt total. Instant GRANT/REFUSE + plain English + mask. Narrower and clearer than the parent multi-line ship board.</p>
   <label>Claimed tip ($)<input id="tip" type="number" step="0.01" value="5.00" /></label>
   <label>Receipt total ($)<input id="total" type="number" step="0.01" value="42.50" /></label>
-  <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:0.75rem">
-  <button type="button" id="demoGrant">Demo GRANT</button>
-  <button type="button" id="demoRefuse">Demo REFUSE</button>
-  <button type="button" id="run">Run Tip Jar gate</button>
-</div>
+  <div class="row">
+    <button type="button" class="ghost" id="demoGrant">Demo GRANT</button>
+    <button type="button" class="ghost" id="demoRefuse">Demo REFUSE</button>
+    <button type="button" id="run">Run Tip Jar gate</button>
+  </div>
   <div id="out" class="card" hidden></div>
+  <p class="lede" style="margin-top:1.25rem"><a href="/">← CeilingGate parent</a> · <a href="/forge/line-delta-kit/">Line Delta Kit</a></p>
   <script>
     function gateB(interior, claimed) {
       if (interior.length !== claimed.length) return { status: "refuse", mask: 1, failedIndices: [] };
@@ -42,14 +51,23 @@
       return failed.length ? { status: "refuse", mask: mask || 1, failedIndices: failed }
         : { status: "grant", mask: 0, failedIndices: [] };
     }
+    function money(n) { return "$" + (Number.isFinite(n) ? n.toFixed(2) : "—"); }
     function show(tip, total) {
       const d = gateB([total], [tip]);
       const out = document.getElementById("out");
+      const delta = tip - total;
       out.hidden = false;
       out.className = "card " + d.status;
+      const plain = d.status === "grant"
+        ? "Tip clears — claimed tip is at or under the receipt total."
+        : "Tip overclaim — claimed tip is " + money(delta) + " over the receipt total.";
       out.innerHTML = "<strong>" + d.status.toUpperCase() + "</strong>" +
         '<div class="chip">mask ' + d.mask + (d.failedIndices.length ? " · failed [" + d.failedIndices.join(",") + "]" : " · clear") + "</div>" +
-        "<p>$" + tip.toFixed(2) + " tip vs $" + total.toFixed(2) + " receipt</p>";
+        '<div class="delta">' + money(tip) + " tip vs " + money(total) + " receipt · Δ " + money(delta) + "</div>" +
+        '<p class="plain">' + plain + "</p>";
+    }
+    function read() {
+      return [Number(document.getElementById("tip").value), Number(document.getElementById("total").value)];
     }
     document.getElementById("demoGrant").onclick = () => {
       document.getElementById("tip").value = "5.00";
@@ -61,11 +79,9 @@
       document.getElementById("total").value = "42.50";
       show(50, 42.5);
     };
-    document.getElementById("run").onclick = () => {
-      const tip = Number(document.getElementById("tip").value);
-      const total = Number(document.getElementById("total").value);
-      show(tip, total);
-    };
+    document.getElementById("run").onclick = () => show(...read());
+    ["tip","total"].forEach((id) => document.getElementById(id).addEventListener("input", () => show(...read())));
+    show(...read()); // live on open — never ask
   </script>
 </body>
 </html>
