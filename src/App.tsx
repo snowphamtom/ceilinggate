@@ -613,7 +613,7 @@ function MaskChipLitePanel() {
     <div className="forge-child" data-testid="mask-chip-lite-live">
       <h3 className="forge-sub">Mask Chip Lite — LIVE</h3>
       <p className="muted small">
-        Better than parent: interactive bit chips (b0=1 means line 0 over). Starts empty.. Empty on load.
+        Better than parent: interactive bit chips (b0=1 means line 0 over). Empty on load.
       </p>
       <label className="forge-label">
         Claimed
