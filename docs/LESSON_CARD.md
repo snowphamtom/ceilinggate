@@ -1,7 +1,7 @@
-# Lesson card
+# Lesson card — 3111e64
 
 1. What changed
-Stripped board — headline, two buttons, three steps, result, inbox.
+fix(ci): quote lesson-card if-expression
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
