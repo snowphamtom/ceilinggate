@@ -1,16 +1,18 @@
-# Lesson card — mask 10 is lodging + misc
+# Lesson card — cdadcbe
 
 1. What changed
-decodeMask reads the four expense bits. Bit 0 fuel, 1 lodging, 2 meals, 3 misc. GRANT is mask 0.
+decodeMask names the four expense bits.
 
 2. Where a human taps it
-Demo REFUSE, or the live lodging $1 inbox row. The chip reads mask 10 · lodging · misc.
+https://quirky-rhinoceros-204.convex.site/
+Show a GRANT / Show a REFUSE
+Email ceilinggate-claims@agentmail.to
 
 3. What GRANT looks like
-Every line at or under the receipt. Mask 0.
+Every line is at or under the receipt.
 
 4. What REFUSE looks like
-Named lines over, in dollars. Mask 10 on the $1 email is lodging and misc, not fuel and meals.
+A named line is over the receipt, written in dollars.
 
 5. What not to weld
-An 8-bit ATEC jacket (Gate A, crew, chronology, provenance). MAGPIE 19/658,750. A second product name.
+MAGPIE 19/658,750. A second product name. Workshop on the home board.
