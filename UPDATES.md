@@ -46,3 +46,7 @@ Lightweight status board. Open on desktop/browser — nothing to install, no pho
 
 ---
 *MANAGER updates this file. Bookmark this page for status.*
+
+## Prize honesty helper
+- Canonical short doc: `docs/PRIZE_HONESTY.md` (Bob FREE CREATE)
+- Box card: `/workspace/ceilinggate-demo/SUBMIT_CARD_PRIZE.md`
