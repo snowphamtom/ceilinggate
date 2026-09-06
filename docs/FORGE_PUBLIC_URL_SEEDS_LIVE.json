@@ -1,0 +1,242 @@
+{
+  "purpose": "Forge-supporting public URL seeds for CeilingGate/App Forge judge path. Skip DIU 404s. Fee\u2260prize.",
+  "built_at_utc": "2026-09-06T00:25:29Z",
+  "skipped": "DIU PROJ00687 / diu.mil portal URLs per MANAGER",
+  "checked": 46,
+  "histogram": {
+    "404": 2,
+    "200": 44
+  },
+  "seeds": [
+    {
+      "url": "https://www.convex.dev/documentation",
+      "http_status": 404,
+      "forge_preferred": true
+    },
+    {
+      "url": "https://docs.convex.dev/",
+      "http_status": 200,
+      "forge_preferred": true
+    },
+    {
+      "url": "https://www.convex.dev/",
+      "http_status": 200,
+      "forge_preferred": true
+    },
+    {
+      "url": "https://www.firecrawl.dev/docs",
+      "http_status": 200,
+      "forge_preferred": true
+    },
+    {
+      "url": "https://docs.firecrawl.dev/",
+      "http_status": 200,
+      "forge_preferred": true
+    },
+    {
+      "url": "https://www.agentmail.to/",
+      "http_status": 200,
+      "forge_preferred": true
+    },
+    {
+      "url": "https://docs.agentmail.to/",
+      "http_status": 200,
+      "forge_preferred": true
+    },
+    {
+      "url": "https://github.com/snowphamtom/ceilinggate",
+      "http_status": 200,
+      "forge_preferred": true
+    },
+    {
+      "url": "https://quirky-rhinoceros-204.convex.site/",
+      "http_status": 200,
+      "forge_preferred": true
+    },
+    {
+      "url": "https://quirky-rhinoceros-204.convex.site/health",
+      "http_status": 200,
+      "forge_preferred": true
+    },
+    {
+      "url": "https://luma.com/convex-allgas-hackathon",
+      "http_status": 200,
+      "forge_preferred": true
+    },
+    {
+      "url": "https://www.uspto.gov/learning-and-resources/fees-and-payment/uspto-fee-schedule",
+      "http_status": 200,
+      "forge_preferred": true
+    },
+    {
+      "url": "https://quirky-rhinoceros-204.convex.site/",
+      "http_status": 200,
+      "forge_preferred": false
+    },
+    {
+      "url": "https://quirky-rhinoceros-204.convex.site/receipts/fuel-grant.html",
+      "http_status": 200,
+      "forge_preferred": false
+    },
+    {
+      "url": "https://quirky-rhinoceros-204.convex.site/receipts/fuel-refuse.html",
+      "http_status": 200,
+      "forge_preferred": false
+    },
+    {
+      "url": "https://sam.gov/workspace/contract/opp/a7ce960566e242bbbf871a3e2fab3453/view",
+      "http_status": 200,
+      "forge_preferred": false
+    },
+    {
+      "url": "https://sam.gov/opp/1da89ea582ea4291b82b899d503cb0d4/view",
+      "http_status": 200,
+      "forge_preferred": false
+    },
+    {
+      "url": "https://www.nist.gov/system/files/documents/2025/07/15/Outline_%20Proposed%20Zero%20Draft%20for%20a%20Standard%20on%20AI%20TEVV-for-web.pdf",
+      "http_status": 200,
+      "forge_preferred": false
+    },
+    {
+      "url": "https://www.darpa.mil/research/research-spotlights/formal-methods",
+      "http_status": 200,
+      "forge_preferred": false
+    },
+    {
+      "url": "https://www.nist.gov/cyberframework",
+      "http_status": 200,
+      "forge_preferred": false
+    },
+    {
+      "url": "https://live.lean-lang.org/",
+      "http_status": 200,
+      "forge_preferred": false
+    },
+    {
+      "url": "https://patentcenter.uspto.gov/",
+      "http_status": 200,
+      "forge_preferred": false
+    },
+    {
+      "url": "https://patentcenter.uspto.gov/workbench/correspondence?customerNumbers=232494,232194",
+      "http_status": 200,
+      "forge_preferred": false
+    },
+    {
+      "url": "https://patentcenter.uspto.gov/workbench/receiptHistory?customerNumbers=232494,232194",
+      "http_status": 200,
+      "forge_preferred": false
+    },
+    {
+      "url": "https://patentcenter.uspto.gov/workbench/applications?customerNumbers=232494,232194",
+      "http_status": 200,
+      "forge_preferred": false
+    },
+    {
+      "url": "https://sigplan.org/Awards/Software/",
+      "http_status": 200,
+      "forge_preferred": false
+    },
+    {
+      "url": "https://www.cisa.gov/cyber-guidance-small-businesses",
+      "http_status": 200,
+      "forge_preferred": false
+    },
+    {
+      "url": "https://www.cisa.gov/stopransomware",
+      "http_status": 200,
+      "forge_preferred": false
+    },
+    {
+      "url": "https://www.ic3.gov/",
+      "http_status": 200,
+      "forge_preferred": false
+    },
+    {
+      "url": "https://www.verizon.com/business/resources/reports/dbir/",
+      "http_status": 200,
+      "forge_preferred": false
+    },
+    {
+      "url": "https://www.cisa.gov/report",
+      "http_status": 200,
+      "forge_preferred": false
+    },
+    {
+      "url": "https://www.cisa.gov/cross-sector-cybersecurity-performance-goals",
+      "http_status": 200,
+      "forge_preferred": false
+    },
+    {
+      "url": "https://drive.google.com/drive/folders/10UauSXl-kqwYLsjGvfMyc85nc6g_T_vQ",
+      "http_status": 200,
+      "forge_preferred": false
+    },
+    {
+      "url": "https://patentcenter.uspto.gov/workbench/saved?customerNumbers=232494,232194",
+      "http_status": 200,
+      "forge_preferred": false
+    },
+    {
+      "url": "https://hal.science/hal-05513825v1",
+      "http_status": 200,
+      "forge_preferred": false
+    },
+    {
+      "url": "https://www.absint.com/releases/260320.htm",
+      "http_status": 200,
+      "forge_preferred": false
+    },
+    {
+      "url": "https://www.uspto.gov/sites/default/files/documents/202400567-arp-rehearing-decision-20250926.pdf",
+      "http_status": 200,
+      "forge_preferred": false
+    },
+    {
+      "url": "https://www.grants.gov/",
+      "http_status": 200,
+      "forge_preferred": false
+    },
+    {
+      "url": "http://www.uspto.gov/web/offices/pac/doc/general/index.html",
+      "http_status": 404,
+      "forge_preferred": false
+    },
+    {
+      "url": "https://sam.gov/",
+      "http_status": 200,
+      "forge_preferred": false
+    },
+    {
+      "url": "https://fsd.gov",
+      "http_status": 200,
+      "forge_preferred": false
+    },
+    {
+      "url": "https://www.uspto.gov/patents/laws/patent-related-notices/patent-related-notices-2026",
+      "http_status": 200,
+      "forge_preferred": false
+    },
+    {
+      "url": "https://www.govinfo.gov/content/pkg/FR-2026-04-09/html/2026-06903.htm",
+      "http_status": 200,
+      "forge_preferred": false
+    },
+    {
+      "url": "https://www.uspto.gov/sites/default/files/documents/sb0478.pdf",
+      "http_status": 200,
+      "forge_preferred": false
+    },
+    {
+      "url": "https://www.govconwire.com/articles/diu-100-million-swap-usv-challenge-maritime-drones",
+      "http_status": 200,
+      "forge_preferred": false
+    },
+    {
+      "url": "https://github.com/snowphamtom/ceilinggate/releases/tag/allgas-demo-20260905",
+      "http_status": 200,
+      "forge_preferred": false
+    }
+  ]
+}
