@@ -1,7 +1,7 @@
-# Lesson card — ac0a2b1
+# Lesson card — 70c0178
 
 1. What changed
-Judge first screen: live ledger, hide workshop.
+CI now builds Vite and uploads the site.
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
