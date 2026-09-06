@@ -1,122 +1,34 @@
 # CeilingGate
 
+Email a money claim with a public receipt. CeilingGate checks each line against the receipt page and returns **GRANT**, or **REFUSE** with the over line in plain English.
 
-**All Gas cash (Luma):** $10,000 / $5,000 / $1,500 only — [register](https://luma.com/convex-allgas-hackathon). Demo `shipShortlist` fixtures (e.g. USPTO $2,100 Track One PE fee) are residual-gate samples, **not** prize tiers.
-**Everyday money-claim checker** for small businesses, contractors, and grant seekers — not a chat app, not a developer SDK.
+Not a chat app. Not a developer SDK. Not the AgentMail sample inbox assistant.
 
-**Everyday sentence:** Email your expense claim with a public receipt link — CeilingGate checks each line against the scraped receipt and tells you GRANT, or which lines are over (in plain English).
+## Judges — start here
 
-Under the hood: GRANT iff `claimed ≤ interior` componentwise; else REFUSE with a failure bitmask (ResidualGates).
+| | |
+|---|---|
+| Live | https://quirky-rhinoceros-204.convex.site/ |
+| Build log | [hackathon.md](./hackathon.md) |
+| Demo (~1 min) | [release allgas-demo-20260905](https://github.com/snowphamtom/ceilinggate/releases/tag/allgas-demo-20260905) |
+| Listing | https://vibeapps.dev/s/ceilinggate |
+| Inbox | ceilinggate-claims@agentmail.to |
+| Share | https://x.com/magpie_inventor/status/2096419465973944560 |
 
-**Deadline:** Tue Sep 22, 2026 · 12:00 PM PT · host `*.convex.site` · public GitHub when Origin/`gh` unblocked.
+Open the live app. Click **Demo GRANT**, then **Demo REFUSE**. Read the ledger. No login.
 
-**PUBLISH GO** — see `PUBLISH.md`. Path: `/workspace/ceilinggate`.
+## What each sponsor does
 
----
+- **Convex** — claims, scrapes, and decisions live in Convex. Frontend on `*.convex.site`.
+- **Firecrawl** — scrapes the public receipt. No URL, no live judgment.
+- **AgentMail** — claim ingress at `ceilinggate-claims@agentmail.to`.
+- **OpenAI** — one sentence after the numbers. It does not pick GRANT or REFUSE.
 
-## Hackathon rules checklist
-
-| # | Rule | CeilingGate |
-|---|------|-------------|
-| 1 | New full-stack app | Yes — this repo, not a fork rebrand |
-| 2 | Convex backend | `convex/` schema + pipeline + http |
-| 3 | Firecrawl feeds data | Mandatory scrape when claim has a public URL; no judgment without scraped interior |
-| 4 | AgentMail inbox | Claim ingress `ceilinggate-claims@agentmail.to` (not chat transcript export) |
-| 5 | Built with agent / Codex + Convex plugin | Scaffolded under Create + Convex/Firecrawl/AgentMail plugins |
-| 6 | Host frontend on convex.site OR chatgpt.site | Target `*.convex.site` (MANAGER Convex login) |
-| 7 | Public GitHub (not private) | PUBLISH GO — MANAGER login then push |
-| 8 | No localhost submission | Offline board is for build; submission is hosted |
-| 9 | Video on vibeapps.dev by Sep 22 12:00 PM PT | FULL GO — demo mp4 ~1:25 on box + GH release `allgas-demo-20260905` |
-| 10 | Social tags @convex @OpenAI @firecrawl @agentmail | Taylor sends (draft-only here) |
-| 11 | Luma registered | Done (“You’re In”) |
-
----
-
-## Originality vs chat-demo toys
-
-Also distinct from All Gas rivals **Attest** (inbox yes/no), **NoticeProof** (recall verify), and **Get It in Writing** (page promise gaps): CeilingGate is **numeric ResidualGates** on expense lines vs scraped receipt totals — forensic ledger, never AI yes/no.
-
-
-**Not** `waynesutton/convex-agentmail-hackathon-demo` and **not** a Firecrawl docs-search chat.
-
-| Chat-demo pattern | CeilingGate |
-|-------------------|-------------|
-| Email ↔ AI buddy thread UI | Forensic **case docket + verdict board + ledger** |
-| AgentMail as chat export | AgentMail = **claim ingress only** |
-| Firecrawl optional / search toy | Firecrawl **required** for live judgment when URL exists |
-| LLM “looks fine” approve | ResidualGates **mask** — machine-checkable GRANT/REFUSE |
-| Lorem / sample receipts | Fixtures from **Monsters Ink Drive fuel** (T&E residual-honesty vectors + Lean samples) |
-| Soft product copy | Accounting / forensic voice |
-
-Core loop: **claim vectors vs interior vectors → bitmask**.
-
----
-
-## Architecture
-
-```
-AgentMail claim email ──► Convex claims ──► Firecrawl scrape (mandatory if URL)
-                                      │
-                                      ▼
-                         ResidualGates gateB → GRANT / REFUSE + mask
-                                      │
-                                      ▼
-                         Forensic UI (docket · ledger · verdict)
-```
-
-Offline: Drive-fuel fixtures ship with **fixture scrape** text as interior stand-in so the board demos without keys.
-
-## Quick start
+## Run locally
 
 ```bash
-cd /workspace/ceilinggate
-/usr/bin/npm install
-/usr/bin/npm run demo:gate     # Lean samples: grant + refuse mask 10
-/usr/bin/npm run build
-/usr/bin/npm run preview       # forensic board
+npm install
+npm run demo:gate
+npm run build
+npm run preview
 ```
-
-## ResidualGates samples (Drive-fuel labeled)
-
-| Case | Interior | Claimed | Result |
-|------|----------|---------|--------|
-| `CG-TE-001` te-grant | `[100,50,25,10]` | `[98,49,25,9]` | GRANT / mask `0` |
-| `CG-TE-002` te-refuse | `[100,50,25,10]` | `[98,51,25,11]` | REFUSE / mask `10` (lodging+misc) |
-
-Line items: fuel, lodging, meals, misc — mapped from Lean `sample_valid` / `sample_invalid`.
-
-## Env blockers
-
-| Blocker | Why |
-|---------|-----|
-| Origin / `gh` | Public GitHub |
-| `CONVEX_DEPLOY_KEY` / login | `*.convex.site` |
-| `FIRECRAWL_API_KEY` | Live scrapes (required for live judgment) |
-| AgentMail webhook secret | Verify inbound |
-
-Inbox: `ceilinggate-claims@agentmail.to`
-
-## Out of scope
-
-No Square shop edits, no COHOCF mythos products, no MAGPIE SKU, no “AI buddy” framing.
-
-## For judges (public — no login)
-
-| What | Where |
-|------|--------|
-| Live app | https://quirky-rhinoceros-204.convex.site/ |
-| Health | https://quirky-rhinoceros-204.convex.site/health |
-| Source | https://github.com/snowphamtom/ceilinggate |
-| Demo video + shots | https://github.com/snowphamtom/ceilinggate/releases/tag/allgas-demo-20260905 |
-| Claims inbox (optional) | `ceilinggate-claims@agentmail.to` |
-
-Click **Demo GRANT** / **Demo REFUSE** — full ResidualGates ledger works in the browser. No keys, no chat login, no Square.
-
-## All Gas support tooling
-- Judge smoke (public path): `./scripts/allgas-judge-smoke.sh` — health, SPA, Demo GRANT/REFUSE/signature strings, fixtures, webhook liveness.
-
-## App Forge (recursive create)
-Judges: can a regular person make **another** app? Yes — App Forge on this site scaffolds micro-apps on the same stack.
-- UI panel on the live SPA
-- Box: `npm run forge -- --slug my-app`
-- Docs: `docs/APP_FORGE.md` · thesis `docs/APP_FORGE_THESIS.md`
