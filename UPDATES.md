@@ -10,13 +10,15 @@ Lightweight status board. Open on desktop/browser — nothing to install, no pho
 - Demo pack: https://github.com/snowphamtom/ceilinggate/releases/tag/allgas-demo-20260905
 - Claims inbox: `ceilinggate-claims@agentmail.to`
 - Health: `/health` → CeilingGate
-- Tip: `25d5f71` (judge access lock)
+- Tip: `25d5f71` (judge access lock) — SHOW OFF PASS
 
 ## Verified
-- Demo signature / GRANT / REFUSE / ship-set samples: click-through PASS
+- Demo signature / GRANT / REFUSE / ship-set samples: click-through PASS (MANAGER + Create 6/6)
 - ResidualGates demo gate: PASS (GRANT + REFUSE mask 10)
-- AgentMail inbox live; webhook rejects unsigned (401 = correct)
+- Firecrawl + AgentMail webhook env GREEN (unsigned → 401 = live)
+- AgentMail inbox live
 - Prize honesty (Luma cash only): $10,000 / $5,000 / $1,500 — USPTO $2,100 Track One fixtures are **not** prizes
+- Proof shot: `05-showoff-signature.png` on release
 
 ## In flight
 - Demo signature re-record (compete button on-screen) → refresh release video + captions
@@ -27,6 +29,7 @@ Lightweight status board. Open on desktop/browser — nothing to install, no pho
 - Past Drive/mail data frozen (new objects only)
 - Post/shop freeze; no Square/T&E commercial during All Gas
 - Conserve box RAM (one Chrome when needed)
+- Taylor interacts with MANAGER only
 
 ---
 *MANAGER updates this file. Bookmark this page for status.*
