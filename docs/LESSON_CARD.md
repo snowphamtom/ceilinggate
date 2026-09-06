@@ -1,7 +1,7 @@
-# Lesson card — 7807f13
+# Lesson card — 4916d56
 
 1. What changed
-visual: judges 30s-d — RECEIPT legend + denser ADMIT/STATUS
+visual: judges 30s-e/f — RESULT empty denser + ledger header chrome
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
