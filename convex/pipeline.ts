@@ -89,7 +89,6 @@ export const scrapeAndGate = internalAction({
         });
         return;
       } catch {
-        // Fallback: our action (fixtures / direct API key).
         await ctx.runAction(api.firecrawl.scrapeUrl, {
           url: args.url,
           claimId: args.claimId,
@@ -136,9 +135,24 @@ export const gateWithInterior = internalMutation({
       interior: args.interior,
       decidedAt: Date.now(),
     };
+    let decisionId = existing?._id;
     if (existing) await ctx.db.patch(existing._id, fields);
-    else await ctx.db.insert("gateDecisions", { claimId: args.claimId, ...fields });
+    else
+      decisionId = await ctx.db.insert("gateDecisions", {
+        claimId: args.claimId,
+        ...fields,
+      });
     await ctx.db.patch(args.claimId, { status: "gated", error: undefined });
+    if (decisionId) {
+      await ctx.scheduler.runAfter(0, internal.oneLine.annotate, {
+        decisionId,
+        status: decision.status,
+        claimed: claim.claimed,
+        interior: args.interior,
+        failedIndices: decision.failedIndices,
+        lineItems: ["fuel", "lodging", "meals", "misc"],
+      });
+    }
   },
 });
 
