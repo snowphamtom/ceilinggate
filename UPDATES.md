@@ -21,7 +21,8 @@ Lightweight status board. Open on desktop/browser — nothing to install, no pho
 - Proof shot: `05-showoff-signature.png` on release
 
 ## In flight
-- Demo signature re-record (compete button on-screen) → refresh release video + captions
+- Silent demo refreshed on release (~68s, Demo signature click visible)
+- Captioned reburn of new ~68s silent (Demo signature on-screen) — then vibeapps submit
 - vibeapps.dev submit when video+shots green
 - Deadline: Tue Sep 22, 2026 · 12:00 PM PT
 
