@@ -182,6 +182,15 @@ export default function App() {
           </div>
         </section>
       </div>
+
+      <section className="panel forge-panel" id="live-child-gates">
+        <h2>Live child gates</h2>
+        <p className="muted small">
+          BETTER-THAN-PARENT · click Demo or Run — starts empty on load (Streamer click→result).
+        </p>
+        <TipJarHonestyPanel />
+        <LineDeltaKitPanel />
+      </section>
     </div>
   );
 }
@@ -228,3 +237,224 @@ function StatusPill({ status }: { status: "grant" | "refuse" | "wait" }) {
   if (status === "wait") return <span className="pill wait">…</span>;
   return <span className="pill refuse">REFUSE</span>;
 }
+
+function parseNumList(s: string): number[] {
+  return s
+    .split(/[\s,]+/)
+    .map((x) => x.trim())
+    .filter(Boolean)
+    .map(Number)
+    .filter((n) => Number.isFinite(n));
+}
+function TipJarHonestyPanel() {
+  const [claimedTip, setClaimedTip] = useState("5.00");
+  const [receiptTotal, setReceiptTotal] = useState("42.50");
+  const [decision, setDecision] = useState<GateDecision | null>(null);
+
+  const run = useCallback(() => {
+    const tip = Number(claimedTip);
+    const total = Number(receiptTotal);
+    if (!Number.isFinite(tip) || !Number.isFinite(total)) {
+      setDecision({ status: "refuse", mask: 1, failedIndices: [0] });
+      return;
+    }
+    // Narrow claim: tip alone vs receipt total
+    setDecision(gateB([total], [tip]));
+  }, [claimedTip, receiptTotal]);
+
+
+  return (
+    <div className="forge-child" data-testid="tip-jar-honesty-live">
+      <h3 className="forge-sub">Tip Jar Honesty — LIVE</h3>
+      <p className="muted small">
+        Two money fields — claimed tip vs receipt total. Live GRANT/REFUSE with a clear delta.
+      </p>
+      <div className="forge-row">
+        <label className="forge-label">
+          Claimed tip ($)
+          <input
+            className="forge-input"
+            type="number"
+            step="0.01"
+            value={claimedTip}
+            onChange={(e) => {
+              setClaimedTip(e.target.value);
+            }}
+          />
+        </label>
+        <label className="forge-label">
+          Receipt total ($)
+          <input
+            className="forge-input"
+            type="number"
+            step="0.01"
+            value={receiptTotal}
+            onChange={(e) => setReceiptTotal(e.target.value)}
+          />
+        </label>
+      </div>
+      <div className="actions">
+        <button
+          type="button"
+          className="ghost"
+          onClick={() => {
+            setClaimedTip("5.00");
+            setReceiptTotal("42.50");
+            setDecision(gateB([42.5], [5]));
+          }}
+        >
+          Demo GRANT
+        </button>
+        <button
+          type="button"
+          className="ghost"
+          onClick={() => {
+            setClaimedTip("50.00");
+            setReceiptTotal("42.50");
+            setDecision(gateB([42.5], [50]));
+          }}
+        >
+          Demo REFUSE
+        </button>
+        <button type="button" className="primary" onClick={run}>
+          Run Tip Jar gate
+        </button>
+      </div>
+      {decision ? (
+        <div className={"card " + (decision.status === "grant" ? "grant" : "refuse")}>
+          <strong>{decision.status === "grant" ? "GRANT" : "REFUSE"}</strong>
+          <div className="mask-row">
+            <span className="mask-chip">
+              mask {decision.mask}
+              {decision.failedIndices.length
+                ? ` · failed [${decision.failedIndices.join(",")}]`
+                : " · clear"}
+            </span>
+          </div>
+          <p className="muted small">
+            Claimed tip {money(Number(claimedTip))} vs receipt{" "}
+            {money(Number(receiptTotal))} · Δ{" "}
+            {money(Number(claimedTip) - Number(receiptTotal))}
+            {decision.status === "grant"
+              ? " — tip at or under receipt."
+              : " — tip over receipt total."}
+          </p>
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
+function LineDeltaKitPanel() {
+  const [claimedStr, setClaimedStr] = useState("98, 51, 25, 11");
+  const [interiorStr, setInteriorStr] = useState("100, 50, 25, 10");
+  const [decision, setDecision] = useState<GateDecision | null>(null);
+
+  const run = useCallback(() => {
+    const claimed = parseNumList(claimedStr);
+    const interior = parseNumList(interiorStr);
+    setDecision(gateB(interior, claimed));
+  }, [claimedStr, interiorStr]);
+
+
+  return (
+    <div className="forge-child" data-testid="line-delta-kit-live">
+      <h3 className="forge-sub">Line Delta Kit — LIVE</h3>
+      <p className="muted small">
+        Paste claimed and on-receipt line amounts, then run the gate for a GRANT/REFUSE with mask and failed indices.
+      </p>
+      <label className="forge-label">
+        Claimed lines (comma-separated)
+        <textarea
+          className="forge-input"
+          rows={2}
+          value={claimedStr}
+          onChange={(e) => setClaimedStr(e.target.value)}
+        />
+      </label>
+      <label className="forge-label">
+        Interior / on-receipt (comma-separated)
+        <textarea
+          className="forge-input"
+          rows={2}
+          value={interiorStr}
+          onChange={(e) => setInteriorStr(e.target.value)}
+        />
+      </label>
+      <div className="actions">
+        <button
+          type="button"
+          className="ghost"
+          onClick={() => {
+            setClaimedStr("98, 49, 25, 9");
+            setInteriorStr("100, 50, 25, 10");
+            setDecision(gateB([100, 50, 25, 10], [98, 49, 25, 9]));
+          }}
+        >
+          Demo GRANT
+        </button>
+        <button
+          type="button"
+          className="ghost"
+          onClick={() => {
+            setClaimedStr("98, 51, 25, 11");
+            setInteriorStr("100, 50, 25, 10");
+            setDecision(gateB([100, 50, 25, 10], [98, 51, 25, 11]));
+          }}
+        >
+          Demo REFUSE
+        </button>
+        <button type="button" className="primary" onClick={run}>
+          Run Line Delta gate
+        </button>
+      </div>
+      {decision ? (
+        <div className={"card " + (decision.status === "grant" ? "grant" : "refuse")}>
+          <strong>{decision.status === "grant" ? "GRANT" : "REFUSE"}</strong>
+          <div className="mask-row">
+            <span className="mask-chip">
+              mask {decision.mask}
+              {decision.failedIndices.length
+                ? ` · failed indices [${decision.failedIndices.join(",")}]`
+                : " · clear"}
+            </span>
+          </div>
+          <table className="delta-table">
+            <thead>
+              <tr>
+                <th>Line</th>
+                <th>Claimed</th>
+                <th>Interior</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {Array.from({
+                length: Math.max(
+                  parseNumList(claimedStr).length,
+                  parseNumList(interiorStr).length,
+                ),
+              }).map((_, i) => {
+                const c = parseNumList(claimedStr)[i];
+                const n = parseNumList(interiorStr)[i];
+                const ok =
+                  Number.isFinite(c) && Number.isFinite(n) && (c as number) <= (n as number);
+                return (
+                  <tr key={i}>
+                    <td>{i}</td>
+                    <td>{money(c ?? 0)}</td>
+                    <td>{money(n ?? 0)}</td>
+                    <td className={ok ? "ok" : "bad"}>
+                      {ok ? "CLEAR" : `OVER ${money((c ?? 0) - (n ?? 0))}`}
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      ) : null}
+    </div>
+  );
+}
+

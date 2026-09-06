@@ -178,3 +178,16 @@ h1 { margin: 0 0 0.4rem; font-size: 2rem; letter-spacing: -0.03em; }
 .forge-list { padding-left: 1.1rem; }
 .pwa-note { margin-top: 0.75rem; }
 .primary { background: #2a6df4; color: white; border: 0; border-radius: 8px; padding: 0.55rem 0.9rem; font-weight: 600; }
+.forge-panel { margin-top: 1.25rem; }
+.forge-child { margin: 1rem 0; padding: 0.85rem 0.9rem; border: 1px solid #2a3a55; border-radius: 10px; background: #0e1626; }
+.forge-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+@media (max-width: 720px) { .forge-row { grid-template-columns: 1fr; } }
+.forge-child .card { margin-top: 0.75rem; }
+.forge-sub { margin: 0.35rem 0; font-size: 1.05rem; }
+.forge-label { display: block; margin: 0.45rem 0; font-size: 0.85rem; color: #a8bdd8; }
+.forge-input { display: block; width: 100%; margin-top: 0.25rem; padding: 0.5rem 0.65rem; border-radius: 8px; border: 1px solid #2a3a55; background: #121a2b; color: #e8eef7; font: inherit; box-sizing: border-box; }
+.delta-table { width: 100%; border-collapse: collapse; margin-top: 0.65rem; font-size: 0.85rem; }
+.delta-table th, .delta-table td { text-align: left; padding: 0.3rem 0.4rem; border-bottom: 1px solid #2a3a55; font-family: ui-monospace, monospace; }
+.delta-table td.ok { color: #6ee7a8; }
+.delta-table td.bad { color: #fca5a5; }
+#live-child-gates { border: 1px solid #1f9d63; }
