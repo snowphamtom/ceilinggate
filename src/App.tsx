@@ -2,11 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { useMutation, useQuery } from "convex/react";
 import { api } from "../convex/_generated/api";
 import demo from "./data/demo.json";
-import {
-  gateB,
-  granted,
-  type GateDecision,
-} from "./lib/residualGates";
+import { gateB, granted, type GateDecision } from "./lib/residualGates";
 import "./index.css";
 
 type Fixture = (typeof demo.fixtures)[number];
@@ -23,22 +19,23 @@ type LocalDecision = {
   lineItems: string[];
   subject: string;
   from: string;
+  aiLine?: string;
 };
 
 const LINE_ITEMS = demo.lineItems as string[];
 const hasConvex = Boolean(import.meta.env.VITE_CONVEX_URL);
-const SHORT = ((demo as { shipShortlist?: string[] }).shipShortlist ?? []).filter(
-  Boolean,
-);
+const SHORT = ((demo as { shipShortlist?: string[] }).shipShortlist ?? []).filter(Boolean);
 const SHIP_FIXTURES: Fixture[] = SHORT.length
   ? demo.fixtures.filter((f) => SHORT.includes(f.id))
-  : demo.fixtures.slice(0, 14);
+  : demo.fixtures.slice(0, 8);
 
 function money(n: number) {
   if (!Number.isFinite(n)) return String(n);
-  if (Math.abs(n) >= 1000)
-    return `$${n.toLocaleString("en-US", { maximumFractionDigits: 2 })}`;
   return `$${n.toLocaleString("en-US", { maximumFractionDigits: 2 })}`;
+}
+
+function capitalize(s: string) {
+  return s.length ? s[0].toUpperCase() + s.slice(1) : s;
 }
 
 function plainFailures(
@@ -51,22 +48,8 @@ function plainFailures(
     const name = lineItems[i] ?? `line ${i + 1}`;
     const c = claimed[i] ?? 0;
     const n = interior[i] ?? 0;
-    const over = c - n;
-    return `${capitalize(name)} is ${money(over)} over the receipt (${money(c)} claimed vs ${money(n)} on the source).`;
+    return `${capitalize(name)} is ${money(c - n)} over the receipt (${money(c)} claimed vs ${money(n)} on the source).`;
   });
-}
-
-function isPublicUrl(url: string) {
-  try {
-    const u = new URL(url);
-    return u.protocol === "http:" || u.protocol === "https:";
-  } catch {
-    return false;
-  }
-}
-
-function capitalize(s: string) {
-  return s.length ? s[0].toUpperCase() + s.slice(1) : s;
 }
 
 function runFixture(f: Fixture): LocalDecision {
@@ -97,35 +80,24 @@ function pickByExpect(status: "grant" | "refuse"): Fixture | undefined {
     const f = SHIP_FIXTURES.find((x) => x.id === id);
     if (f && gateB(f.interior, f.claimed).status === status) return f;
   }
-  return SHIP_FIXTURES.find(
-    (f) => gateB(f.interior, f.claimed).status === status,
-  );
+  return SHIP_FIXTURES.find((f) => gateB(f.interior, f.claimed).status === status);
 }
 
 export default function App() {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [results, setResults] = useState<LocalDecision[]>([]);
+  const [showForge, setShowForge] = useState(false);
+  const liveRows = useQuery(api.claims.listDecisions, hasConvex ? { limit: 20 } : "skip");
 
   const selfCheckOk = useMemo(() => {
     const grant = gateB([100, 50, 25, 10], [98, 49, 25, 9]);
     const refuse = gateB([100, 50, 25, 10], [98, 51, 25, 11]);
-    return (
-      granted(grant) && refuse.status === "refuse" && refuse.mask === 10
-    );
-  }, []);
-
-  const loadAll = useCallback(() => {
-    const next = SHIP_FIXTURES.map(runFixture);
-    setResults(next);
-    setSelectedId(next[0]?.id ?? null);
+    return granted(grant) && refuse.status === "refuse" && refuse.mask === 10;
   }, []);
 
   const runOne = useCallback((f: Fixture) => {
     const d = runFixture(f);
-    setResults((prev) => {
-      const others = prev.filter((r) => r.id !== d.id);
-      return [d, ...others];
-    });
+    setResults((prev) => [d, ...prev.filter((r) => r.id !== d.id)]);
     setSelectedId(d.id);
   }, []);
 
@@ -139,8 +111,7 @@ export default function App() {
     if (f) runOne(f);
   }, [runOne]);
 
-  /** Sample path: GRANT then a $1 lodging/misc REFUSE */
-  const demoSignature = useCallback(() => {
+  const demoBoth = useCallback(() => {
     const g = pickByExpect("grant");
     const r = pickByExpect("refuse");
     const next: LocalDecision[] = [];
@@ -154,97 +125,98 @@ export default function App() {
     setSelectedId(next[next.length - 1]?.id ?? next[0].id);
   }, []);
 
-  const selected =
-    results.find((r) => r.id === selectedId) ?? results[0] ?? null;
-
+  const selected = results.find((r) => r.id === selectedId) ?? results[0] ?? null;
   const plain = selected
-    ? plainFailures(
-        selected.lineItems,
-        selected.claimed,
-        selected.interior,
-        selected.decision.failedIndices,
-      )
+    ? plainFailures(selected.lineItems, selected.claimed, selected.interior, selected.decision.failedIndices)
     : [];
 
   return (
     <div className="shell board">
-      <PwaInstallShell />
-      <header className="top">
-        <div>
-          <p className="eyebrow">
-            For small businesses · contractors · grant seekers
-          </p>
-          <h1>CeilingGate</h1>
-          <p className="lede everyday">
-            Line-by-line <strong>claimed ≤ scraped receipt</strong> — ResidualGates
-            returns <strong>GRANT</strong> only when every line clears, or{" "}
-            <strong>REFUSE</strong> with plain-English overages (e.g. lodging $1 over).
-          </p>
-          <p className="muted small">
-            Email claim + public receipt URL → Firecrawl scrape → numeric line gate —
-            not a chat assistant.
-          </p>
-        </div>
-        <div className="actions stack-actions">
-          <button type="button" className="primary" onClick={loadAll}>
-            Check sample claims
-          </button>
-          <div className="oneclick">
-            <button type="button" className="grant-btn" onClick={demoGrant}>
-              Demo GRANT
-            </button>
-            <button type="button" className="refuse-btn" onClick={demoRefuse}>
-              Demo REFUSE
-            </button>
-          </div>
-          <button type="button" className="sig-btn" onClick={demoSignature}>
-            Try GRANT then REFUSE
-          </button>
-        </div>
+      <header className="hero">
+        <p className="eyebrow">Expense check · not a chat</p>
+        <h1>CeilingGate</h1>
+        <p className="lede everyday">
+          You send a claim and a public receipt. We compare every line.
+          If the claim stays at or under the receipt, it is a <strong>GRANT</strong>.
+          If any line is over, it is a <strong>REFUSE</strong> — in plain English.
+        </p>
       </header>
 
-      <div className="orig-lock" role="note">
-        <strong>Forensic board</strong> — ResidualGates line ledger (claimed vs on-receipt),
-        not a chat panel.
-      </div>
-      <div className="stack-strip" aria-label="Required stack">
-        <span className={"chip-stack" + (hasConvex ? " on" : "")}>
-          Convex {hasConvex ? "live" : "demo"}
-        </span>
-        <span className="chip-stack on">Firecrawl scrape</span>
-        <span className="chip-stack on">
-          AgentMail · <code>ceilinggate-claims@agentmail.to</code>
-        </span>
-        <span className="chip-stack muted-chip">
-          ResidualGates · self-check {selfCheckOk ? "ok" : "fail"}
-        </span>
-      </div>
-
-      <div className="lean">
-        How it works: claim email → Firecrawl public receipt → line-by-line
-        GRANT/REFUSE. Live board on{" "}
-        <code>quirky-rhinoceros-204.convex.site</code>
-        {hasConvex ? " · Convex connected" : " · sample receipts until Convex URL"}
-        .
-      </div>
-
-      <section className="panel forge-panel" id="live-child-gates">
-        <h2>Live child gates</h2>
-        <p className="muted small">
-          Click Demo GRANT/REFUSE or edit inputs to try the live gates.
-        </p>
-        <TipJarHonestyPanel />
-        <LineDeltaKitPanel />
+      <section className="try-now" aria-label="Try it">
+        <p className="try-label">Try it in two taps</p>
+        <div className="oneclick">
+          <button type="button" className="grant-btn" onClick={demoGrant}>Show a GRANT</button>
+          <button type="button" className="refuse-btn" onClick={demoRefuse}>Show a REFUSE</button>
+        </div>
+        <button type="button" className="sig-btn" onClick={demoBoth}>Show both</button>
       </section>
-      <AppForgePanel />
 
+      <ol className="steps">
+        <li>Email a claim plus a public receipt link to <code>ceilinggate-claims@agentmail.to</code></li>
+        <li>We read the receipt page (Firecrawl).</li>
+        <li>Each line is checked: claimed ≤ amount on the receipt.</li>
+      </ol>
 
       <div className="board-grid">
+        <section className="panel verdict-panel">
+          <h2>Result</h2>
+          {!selected ? (
+            <p className="muted empty">Tap <strong>Show a GRANT</strong> or <strong>Show a REFUSE</strong> above.</p>
+          ) : (
+            <VerdictCard selected={selected} plain={plain} />
+          )}
+        </section>
+
         <section className="panel">
-          <h2>Claims inbox <span className="muted small">({SHIP_FIXTURES.length} samples)</span></h2>
-          <p className="muted small">
-            Sample expense claims with matching receipts. One click runs the gate.
-          </p>
+          <h2>Inbox</h2>
+          {hasConvex && liveRows && liveRows.length > 0 && (
+            <>
+              <p className="muted small">Live mail</p>
+              <div className="list">
+                {liveRows.map((row) => {
+                  const c = row.claim;
+                  const d = row.decision;
+                  const status = d?.status === "grant" || d?.status === "refuse" ? d.status : "wait";
+                  return (
+                    <button
+                      key={c._id}
+                      type="button"
+                      className={"row docket" + (status === "grant" ? " edge-grant" : "") + (status === "refuse" ? " edge-refuse" : "")}
+                      onClick={() => {
+                        const interior = c.interior ?? [];
+                        const claimed = c.claimed ?? [];
+                        const decision =
+                          d?.status === "grant" || d?.status === "refuse"
+                            ? { status: d.status as "grant" | "refuse", mask: d.mask ?? 0, failedIndices: d.failedIndices ?? [] }
+                            : gateB(interior, claimed);
+                        const mapped: LocalDecision = {
+                          id: c._id,
+                          caseId: c._id,
+                          label: c.label ?? "live",
+                          claimed,
+                          interior,
+                          decision,
+                          source: "convex",
+                          receiptUrl: c.sourceUrl ?? "",
+                          lineItems: LINE_ITEMS,
+                          subject: c.subject ?? "(no subject)",
+                          from: c.from ?? "",
+                          aiLine: c.aiLine,
+                        };
+                        setResults((prev) => [mapped, ...prev.filter((r) => r.id !== mapped.id)]);
+                        setSelectedId(mapped.id);
+                      }}
+                    >
+                      <span className="subj">{c.subject ?? "(no subject)"}</span>
+                      <span className="meta">{c.from ?? "inbound"}</span>
+                      <StatusPill status={status} />
+                    </button>
+                  );
+                })}
+              </div>
+            </>
+          )}
+          <p className="muted small">Samples</p>
           <div className="list">
             {SHIP_FIXTURES.map((f) => {
               const expect = gateB(f.interior, f.claimed);
@@ -253,181 +225,86 @@ export default function App() {
                 <button
                   key={f.id}
                   type="button"
-                  className={
-                    "row docket" +
-                    (active ? " on" : "") +
-                    (expect.status === "grant" ? " edge-grant" : " edge-refuse")
-                  }
+                  className={"row docket" + (active ? " on" : "") + (expect.status === "grant" ? " edge-grant" : " edge-refuse")}
                   onClick={() => runOne(f)}
                 >
                   <span className="subj">{f.email.subject}</span>
-                  <span className="meta">
-                    from {f.email.from} ·{" "}
-                    {isPublicUrl(f.email.receiptUrl)
-                      ? "public receipt URL"
-                      : "receipt on file"}
-                  </span>
+                  <span className="meta">{f.email.from}</span>
                   <StatusPill status={expect.status} />
                 </button>
               );
             })}
           </div>
         </section>
-
-        <section className="panel verdict-panel">
-          <h2>Result</h2>
-          {!selected ? (
-            <p className="muted">
-              Hit <strong>Try GRANT then REFUSE</strong>, or Demo GRANT / Demo REFUSE.
-            </p>
-          ) : (
-            <div
-              className={
-                selected.decision.status === "grant"
-                  ? "card grant big"
-                  : "card refuse big"
-              }
-            >
-              <p className="eyebrow">{selected.caseId}</p>
-              <h3>
-                {selected.decision.status === "grant"
-                  ? "GRANT — claim is under the receipt"
-                  : "REFUSE — some lines are over the receipt"}
-              </h3>
-              <div className="badge stamp">
-                {selected.decision.status === "grant" ? "GRANT" : "REFUSE"}
-              </div>
-              <div className="mask-row">
-                <span className="mask-chip" title="ResidualGates refuse bitmask — math depth, not AI yes/no">
-                  mask {selected.decision.mask}
-                  {selected.decision.status === "refuse"
-                    ? ` · bits ${selected.decision.failedIndices.join(",")}`
-                    : " · clear"}
-                </span>
-              </div>
-
-              {plain.length > 0 ? (
-                <ul className="plain-fail">
-                  {plain.map((line) => (
-                    <li key={line}>{line}</li>
-                  ))}
-                </ul>
-              ) : (
-                <p className="ok-line">
-                  Every line is at or under the scraped receipt totals.
-                </p>
-              )}
-
-              <p className="ledger-cap muted small">
-                Always shown: Line · Claimed · On receipt · Status (ResidualGates)
-              </p>
-              <table className="ledger">
-                <thead>
-                  <tr>
-                    <th>Line</th>
-                    <th>Claimed</th>
-                    <th>On receipt</th>
-                    <th>Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {selected.lineItems.map((name, i) => {
-                    const c = selected.claimed[i] ?? 0;
-                    const n = selected.interior[i] ?? 0;
-                    const fail = selected.decision.failedIndices.includes(i);
-                    return (
-                      <tr key={`${name}-${i}`} className={fail ? "fail" : ""}>
-                        <td>{capitalize(name)}</td>
-                        <td>
-                          <code>{money(c)}</code>
-                        </td>
-                        <td>
-                          <code>{money(n)}</code>
-                        </td>
-                        <td>{fail ? "Over" : "OK"}</td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-
-              <div className="evidence">
-                <h4>What we checked</h4>
-                <p>
-                  <strong>Claim email</strong> {selected.subject}
-                </p>
-                <p>
-                  <strong>Public source</strong>{" "}
-                  <code>{selected.receiptUrl}</code>
-                </p>
-                <p>
-                  <strong>Receipt pull</strong>{" "}
-                  {selected.source === "fixture-scrape"
-                    ? "sample scrape (demo) — live ingress uses Firecrawl"
-                    : "live Firecrawl scrape"}
-                </p>
-                <p>
-                  <strong>Ingress</strong> AgentMail →{" "}
-                  <code>ceilinggate-claims@agentmail.to</code>
-                </p>
-              </div>
-            </div>
-          )}
-        </section>
       </div>
 
-      {results.length > 0 && (
-        <section className="panel">
-          <h2>Checked this session</h2>
-          <div className="list">
-            {results.map((r) => (
-              <button
-                key={r.id}
-                type="button"
-                className="row"
-                onClick={() => setSelectedId(r.id)}
-              >
-                <span className="subj">{r.subject}</span>
-                <span className="meta">
-                  {r.decision.status === "grant"
-                    ? "All lines OK"
-                    : plainFailures(
-                        r.lineItems,
-                        r.claimed,
-                        r.interior,
-                        r.decision.failedIndices,
-                      ).join(" ")}
-                </span>
-                <StatusPill status={r.decision.status} />
-              </button>
-            ))}
-          </div>
-        </section>
-      )}
+      <p className="trust muted small">
+        Convex {hasConvex ? "connected" : "demo"} · Firecrawl · AgentMail · ResidualGates {selfCheckOk ? "ready" : "check failed"}
+      </p>
 
-      <footer className="lean">
-        CeilingGate is a money-claim checker — email in, Firecrawl receipt scrape,
-        clear GRANT or REFUSE. Install via browser Add to Home Screen / Install app.
+      <footer className="foot">
+        <button type="button" className="text-link" onClick={() => setShowForge((v) => !v)}>
+          {showForge ? "Hide workshop" : "Workshop (optional)"}
+        </button>
+        {showForge && (<><TipJarHonestyPanel /><LineDeltaKitPanel /><AppForgePanel /></>)}
+        <PwaInstallShell />
       </footer>
     </div>
   );
 }
 
+function VerdictCard({ selected, plain }: { selected: LocalDecision; plain: string[] }) {
+  const ok = selected.decision.status === "grant";
+  return (
+    <div className={ok ? "card grant big" : "card refuse big"}>
+      <p className="eyebrow">{ok ? "All lines clear" : "Over the receipt"}</p>
+      <h3>{ok ? "GRANT" : "REFUSE"}</h3>
+      {selected.aiLine ? (<p className="ai-line"><strong>In one line.</strong> {selected.aiLine}</p>) : null}
+      {plain.length > 0 ? (
+        <ul className="plain-fail">{plain.map((line) => <li key={line}>{line}</li>)}</ul>
+      ) : (
+        <p className="ok-line">Every line is at or under the receipt.</p>
+      )}
+      <table className="ledger">
+        <thead><tr><th>Line</th><th>Claimed</th><th>On receipt</th><th></th></tr></thead>
+        <tbody>
+          {selected.lineItems.map((name, i) => {
+            const c = selected.claimed[i] ?? 0;
+            const n = selected.interior[i] ?? 0;
+            const fail = selected.decision.failedIndices.includes(i);
+            return (
+              <tr key={`${name}-${i}`} className={fail ? "fail" : ""}>
+                <td>{capitalize(name)}</td>
+                <td>{money(c)}</td>
+                <td>{money(n)}</td>
+                <td>{fail ? "Over" : "OK"}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+      <div className="evidence">
+        <p><strong>Email</strong> {selected.subject}</p>
+        {selected.receiptUrl ? <p><strong>Receipt</strong> {selected.receiptUrl}</p> : null}
+      </div>
+    </div>
+  );
+}
+
+function StatusPill({ status }: { status: "grant" | "refuse" | "wait" }) {
+  if (status === "grant") return <span className="pill grant">GRANT</span>;
+  if (status === "wait") return <span className="pill wait">…</span>;
+  return <span className="pill refuse">REFUSE</span>;
+}
 
 function parseNumList(s: string): number[] {
-  return s
-    .split(/[\s,]+/)
-    .map((x) => x.trim())
-    .filter(Boolean)
-    .map(Number)
-    .filter((n) => Number.isFinite(n));
+  return s.split(/[\s,]+/).map((x) => x.trim()).filter(Boolean).map(Number).filter((n) => Number.isFinite(n));
 }
 
 function TipJarHonestyPanel() {
   const [claimedTip, setClaimedTip] = useState("5.00");
   const [receiptTotal, setReceiptTotal] = useState("42.50");
   const [decision, setDecision] = useState<GateDecision | null>(null);
-
   const run = useCallback(() => {
     const tip = Number(claimedTip);
     const total = Number(receiptTotal);
@@ -435,91 +312,20 @@ function TipJarHonestyPanel() {
       setDecision({ status: "refuse", mask: 1, failedIndices: [0] });
       return;
     }
-    // Narrow claim: tip alone vs receipt total
     setDecision(gateB([total], [tip]));
   }, [claimedTip, receiptTotal]);
-
-  useEffect(() => {
-    run();
-  }, [run]);
-
+  useEffect(() => { run(); }, [run]);
   return (
-    <div className="forge-child" data-testid="tip-jar-honesty-live">
-      <h3 className="forge-sub">Tip Jar Honesty — LIVE</h3>
-      <p className="muted small">
-        Two money fields — claimed tip vs receipt total. Live GRANT/REFUSE with a clear delta.
-      </p>
+    <div className="forge-child">
+      <h3 className="forge-sub">Tip check</h3>
       <div className="forge-row">
-        <label className="forge-label">
-          Claimed tip ($)
-          <input
-            className="forge-input"
-            type="number"
-            step="0.01"
-            value={claimedTip}
-            onChange={(e) => {
-              setClaimedTip(e.target.value);
-            }}
-          />
-        </label>
-        <label className="forge-label">
-          Receipt total ($)
-          <input
-            className="forge-input"
-            type="number"
-            step="0.01"
-            value={receiptTotal}
-            onChange={(e) => setReceiptTotal(e.target.value)}
-          />
-        </label>
-      </div>
-      <div className="actions">
-        <button
-          type="button"
-          className="ghost"
-          onClick={() => {
-            setClaimedTip("5.00");
-            setReceiptTotal("42.50");
-            setDecision(gateB([42.5], [5]));
-          }}
-        >
-          Demo GRANT
-        </button>
-        <button
-          type="button"
-          className="ghost"
-          onClick={() => {
-            setClaimedTip("50.00");
-            setReceiptTotal("42.50");
-            setDecision(gateB([42.5], [50]));
-          }}
-        >
-          Demo REFUSE
-        </button>
-        <button type="button" className="primary" onClick={run}>
-          Run Tip Jar gate
-        </button>
+        <label className="forge-label">Claimed tip<input className="forge-input" type="number" step="0.01" value={claimedTip} onChange={(e) => setClaimedTip(e.target.value)} /></label>
+        <label className="forge-label">Receipt total<input className="forge-input" type="number" step="0.01" value={receiptTotal} onChange={(e) => setReceiptTotal(e.target.value)} /></label>
       </div>
       {decision ? (
-        <div className={"card " + (decision.status === "grant" ? "grant" : "refuse")}>
-          <strong>{decision.status === "grant" ? "GRANT" : "REFUSE"}</strong>
-          <div className="mask-row">
-            <span className="mask-chip">
-              mask {decision.mask}
-              {decision.failedIndices.length
-                ? ` · failed [${decision.failedIndices.join(",")}]`
-                : " · clear"}
-            </span>
-          </div>
-          <p className="muted small">
-            Claimed tip {money(Number(claimedTip))} vs receipt{" "}
-            {money(Number(receiptTotal))} · Δ{" "}
-            {money(Number(claimedTip) - Number(receiptTotal))}
-            {decision.status === "grant"
-              ? " — tip at or under receipt."
-              : " — tip over receipt total."}
-          </p>
-        </div>
+        <p className={decision.status === "grant" ? "ok-line" : "plain-fail"}>
+          {decision.status === "grant" ? "GRANT" : "REFUSE"} — tip {money(Number(claimedTip))} vs receipt {money(Number(receiptTotal))}
+        </p>
       ) : null}
     </div>
   );
@@ -529,324 +335,62 @@ function LineDeltaKitPanel() {
   const [claimedStr, setClaimedStr] = useState("98, 51, 25, 11");
   const [interiorStr, setInteriorStr] = useState("100, 50, 25, 10");
   const [decision, setDecision] = useState<GateDecision | null>(null);
-
-  const run = useCallback(() => {
-    const claimed = parseNumList(claimedStr);
-    const interior = parseNumList(interiorStr);
-    setDecision(gateB(interior, claimed));
-  }, [claimedStr, interiorStr]);
-
-  useEffect(() => {
-    run();
-  }, [run]);
-
-  return (
-    <div className="forge-child" data-testid="line-delta-kit-live">
-      <h3 className="forge-sub">Line Delta Kit — LIVE</h3>
-      <p className="muted small">
-        Paste claimed and on-receipt line amounts, then run the gate for a GRANT/REFUSE with mask and failed indices.
-      </p>
-      <label className="forge-label">
-        Claimed lines (comma-separated)
-        <textarea
-          className="forge-input"
-          rows={2}
-          value={claimedStr}
-          onChange={(e) => setClaimedStr(e.target.value)}
-        />
-      </label>
-      <label className="forge-label">
-        Interior / on-receipt (comma-separated)
-        <textarea
-          className="forge-input"
-          rows={2}
-          value={interiorStr}
-          onChange={(e) => setInteriorStr(e.target.value)}
-        />
-      </label>
-      <div className="actions">
-        <button
-          type="button"
-          className="ghost"
-          onClick={() => {
-            setClaimedStr("98, 49, 25, 9");
-            setInteriorStr("100, 50, 25, 10");
-            setDecision(gateB([100, 50, 25, 10], [98, 49, 25, 9]));
-          }}
-        >
-          Demo GRANT
-        </button>
-        <button
-          type="button"
-          className="ghost"
-          onClick={() => {
-            setClaimedStr("98, 51, 25, 11");
-            setInteriorStr("100, 50, 25, 10");
-            setDecision(gateB([100, 50, 25, 10], [98, 51, 25, 11]));
-          }}
-        >
-          Demo REFUSE
-        </button>
-        <button type="button" className="primary" onClick={run}>
-          Run Line Delta gate
-        </button>
-      </div>
-      {decision ? (
-        <div className={"card " + (decision.status === "grant" ? "grant" : "refuse")}>
-          <strong>{decision.status === "grant" ? "GRANT" : "REFUSE"}</strong>
-          <div className="mask-row">
-            <span className="mask-chip">
-              mask {decision.mask}
-              {decision.failedIndices.length
-                ? ` · failed indices [${decision.failedIndices.join(",")}]`
-                : " · clear"}
-            </span>
-          </div>
-          <table className="delta-table">
-            <thead>
-              <tr>
-                <th>Line</th>
-                <th>Claimed</th>
-                <th>Interior</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              {Array.from({
-                length: Math.max(
-                  parseNumList(claimedStr).length,
-                  parseNumList(interiorStr).length,
-                ),
-              }).map((_, i) => {
-                const c = parseNumList(claimedStr)[i];
-                const n = parseNumList(interiorStr)[i];
-                const ok =
-                  Number.isFinite(c) && Number.isFinite(n) && (c as number) <= (n as number);
-                return (
-                  <tr key={i}>
-                    <td>{i}</td>
-                    <td>{money(c ?? 0)}</td>
-                    <td>{money(n ?? 0)}</td>
-                    <td className={ok ? "ok" : "bad"}>
-                      {ok ? "CLEAR" : `OVER ${money((c ?? 0) - (n ?? 0))}`}
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
-      ) : null}
-    </div>
-  );
-}
-
-function MaskChipLitePanel() {
-  const [claimedStr, setClaimedStr] = useState("98, 51, 25, 11");
-  const [interiorStr, setInteriorStr] = useState("100, 50, 25, 10");
-  const [decision, setDecision] = useState<GateDecision | null>(null);
-
   const run = useCallback(() => {
     setDecision(gateB(parseNumList(interiorStr), parseNumList(claimedStr)));
   }, [claimedStr, interiorStr]);
-
+  useEffect(() => { run(); }, [run]);
   return (
     <div className="forge-child">
-      <h3 className="forge-sub">Mask Chip Lite — LIVE</h3>
-      <p className="muted small">
-        Focus UI: bitmask + failed indices only. Same gateB math. Click Run — no ask.
-      </p>
-      <div className="forge-row">
-        <label className="forge-label">
-          Claimed
-          <input
-            className="forge-input"
-            value={claimedStr}
-            onChange={(e) => setClaimedStr(e.target.value)}
-          />
-        </label>
-        <label className="forge-label">
-          Interior
-          <input
-            className="forge-input"
-            value={interiorStr}
-            onChange={(e) => setInteriorStr(e.target.value)}
-          />
-        </label>
-      </div>
-      <button type="button" className="primary" onClick={run}>
-        Run mask chip
-      </button>
-      {decision ? (
-        <div className={"card " + (decision.status === "grant" ? "grant" : "refuse")}>
-          <strong>{decision.status.toUpperCase()}</strong>
-          <div className="mask-row">
-            <span className="mask-chip">
-              mask {decision.mask}
-              {decision.failedIndices.length
-                ? ` · bits ${decision.failedIndices.join(",")}`
-                : " · clear"}
-            </span>
-          </div>
-        </div>
-      ) : null}
-    </div>
-  );
-}
-
-
-/** Tiny home-screen install shell — always visible; no offline media cache. */
-function PwaInstallShell() {
-  const [deferred, setDeferred] = useState<any>(null);
-  const [done, setDone] = useState(false);
-  const [standalone, setStandalone] = useState(false);
-
-  useEffect(() => {
-    const isStandalone =
-      (window.navigator as any).standalone === true ||
-      window.matchMedia("(display-mode: standalone)").matches;
-    setStandalone(isStandalone);
-    const onBip = (e: Event) => {
-      e.preventDefault();
-      setDeferred(e);
-    };
-    const onInstalled = () => {
-      setDeferred(null);
-      setDone(true);
-    };
-    window.addEventListener("beforeinstallprompt", onBip);
-    window.addEventListener("appinstalled", onInstalled);
-    return () => {
-      window.removeEventListener("beforeinstallprompt", onBip);
-      window.removeEventListener("appinstalled", onInstalled);
-    };
-  }, []);
-
-  if (done || standalone) return null;
-
-  const isIos = /iPad|iPhone|iPod/.test(navigator.userAgent);
-
-  return (
-    <div className="pwa-shell" role="region" aria-label="Install CeilingGate">
-      <strong className="pwa-shell-label">Install · Add to Home Screen</strong>
-      <span className="muted small">
-        Tiny PWA · network-only · no media cache · no release download
-      </span>
-      {deferred ? (
-        <button
-          type="button"
-          className="ghost"
-          onClick={async () => {
-            await deferred.prompt();
-            setDeferred(null);
-          }}
-        >
-          Install app
-        </button>
-      ) : (
-        <span className="muted small">
-          {isIos
-            ? "Safari Share → Add to Home Screen"
-            : "Browser menu → Install app / Add to Home Screen"}
-        </span>
-      )}
+      <h3 className="forge-sub">Paste line amounts</h3>
+      <label className="forge-label">Claimed<input className="forge-input" value={claimedStr} onChange={(e) => setClaimedStr(e.target.value)} /></label>
+      <label className="forge-label">On receipt<input className="forge-input" value={interiorStr} onChange={(e) => setInteriorStr(e.target.value)} /></label>
+      {decision ? <p><StatusPill status={decision.status} /></p> : null}
     </div>
   );
 }
 
 function AppForgePanel() {
   const [title, setTitle] = useState("Receipt Line Check");
-  const [brief, setBrief] = useState(
-    "LIVE micro-app: claimed lines ≤ public receipt totals via gateB. Interactive GRANT/REFUSE. Not a chat assistant.",
-  );
-  const [log, setLog] = useState<string>("");
+  const [brief, setBrief] = useState("Claimed lines vs public receipt.");
+  const [log, setLog] = useState("");
   const spawn = useMutation(api.forge.spawn);
   const live = useQuery(api.forge.list);
-
-  const forge = useCallback(async () => {
-    const slug =
-      title
-        .toLowerCase()
-        .replace(/[^a-z0-9]+/g, "-")
-        .replace(/^-|-$/g, "")
-        .slice(0, 40) || `forge-${Date.now().toString(36)}`;
-    const path = `/forge/${slug}/`;
-    setLog(`Forging ${slug} on Convex…`);
-    try {
-      if (hasConvex) {
-        await spawn({ slug, title, brief, path });
-        setLog(
-          `Spawned ${slug} — recorded in Convex. Open /forge/${slug}/ when ready.`,
-        );
-      } else {
-        setLog(`Local spawn ${slug} (no VITE_CONVEX_URL) — ${brief.slice(0, 60)}…`);
-      }
-    } catch (e) {
-      setLog(String(e));
-    }
-  }, [title, brief, spawn]);
-
   return (
-    <section className="panel forge-panel">
-      <h2>App Forge</h2>
-      <p className="muted small">
-        Build focused claim checkers on the same ResidualGates math. Try Tip Jar, Line Delta,
-        or Mask Chip below, then spawn another micro-app on Convex.
-      </p>
-      <p className="eyebrow">Micro-apps · same stack · live gates</p>
-
-      <p className="muted small">
-        Tip Jar + Line Delta also at <a href="#live-child-gates">#live-child-gates</a>. Mask Chip:
-      </p>
-      <MaskChipLitePanel />
-
-      <h3 className="forge-sub">Spawn next micro-app (live)</h3>
-      <label className="forge-label">
-        Micro-app title
-        <input
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          className="forge-input"
-        />
-      </label>
-      <label className="forge-label">
-        Brief
-        <textarea
-          value={brief}
-          onChange={(e) => setBrief(e.target.value)}
-          className="forge-input"
-          rows={2}
-        />
-      </label>
-      <button type="button" className="primary" onClick={forge}>
-        Spawn second micro-app (live)
-      </button>
-      {log ? <p className="lean forge-log">{log}</p> : null}
-      <h3 className="forge-sub">Spawned apps (live)</h3>
-      <ul className="forge-list">
-        {(live ?? []).map((s) => (
-          <li key={s._id}>
-            <strong>{s.title}</strong>{" "}
-            <a href={`/forge/${s.slug}/`} target="_blank" rel="noreferrer">
-              <code>/forge/{s.slug}/</code>
-            </a>
-            <span className="muted small"> — live gate</span>
-          </li>
-        ))}
-        {!live?.length && (
-          <li className="muted small">
-            Loading spawned apps… live gates at /forge/tip-jar-honesty/ + /forge/line-delta-kit/
-          </li>
-        )}
-      </ul>
-      <p className="muted small">
-        Spawned apps appear under <code>/forge/&lt;slug&gt;/</code> on this site.
-      </p>
-    </section>
+    <div className="forge-child">
+      <h3 className="forge-sub">Spawn a checker</h3>
+      <label className="forge-label">Title<input className="forge-input" value={title} onChange={(e) => setTitle(e.target.value)} /></label>
+      <label className="forge-label">Brief<input className="forge-input" value={brief} onChange={(e) => setBrief(e.target.value)} /></label>
+      <button type="button" className="sig-btn" onClick={async () => {
+        const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 40) || `forge-${Date.now().toString(36)}`;
+        try {
+          if (hasConvex) {
+            await spawn({ slug, title, brief, path: `/forge/${slug}/` });
+            setLog(`Saved ${slug}`);
+          } else setLog("Convex not connected");
+        } catch (e) { setLog(String(e)); }
+      }}>Save</button>
+      {log ? <p className="muted small">{log}</p> : null}
+      <ul className="forge-list">{(live ?? []).map((s) => <li key={s._id}><a href={`/forge/${s.slug}/`}>{s.title}</a></li>)}</ul>
+    </div>
   );
 }
 
-function StatusPill({ status }: { status: "grant" | "refuse" }) {
-  if (status === "grant") return <span className="pill grant">GRANT</span>;
-  return <span className="pill refuse">REFUSE</span>;
+function PwaInstallShell() {
+  const [deferred, setDeferred] = useState<{ prompt: () => Promise<void> } | null>(null);
+  const isIos = typeof navigator !== "undefined" && /iPad|iPhone|iPod/.test(navigator.userAgent);
+  useEffect(() => {
+    const onPrompt = (e: Event) => {
+      e.preventDefault();
+      setDeferred(e as Event & { prompt: () => Promise<void> });
+    };
+    window.addEventListener("beforeinstallprompt", onPrompt);
+    return () => window.removeEventListener("beforeinstallprompt", onPrompt);
+  }, []);
+  return (
+    <p className="muted small pwa-note">
+      {deferred ? (
+        <button type="button" className="text-link" onClick={() => deferred.prompt()}>Install app</button>
+      ) : isIos ? "Safari → Share → Add to Home Screen" : "Add to Home Screen from the browser menu"}
+    </p>
+  );
 }
