@@ -3345,6 +3345,84 @@
         "1m9abdu-1wRkVZOV-BbNWb1-4247-t_z5"
       ],
       "scrapeFixtureText": "INTERIOR: 1, 0, 0\nFORENSIC Eve Batch16: inventor declaration blank signature; oath=0"
+    },
+    {
+      "id": "uspto-notices-2026-registry",
+      "caseId": "CG-EVE-B17-01",
+      "label": "REFUSE \u2014 Patent notices-2026 registry FR cites vs table-export-only (no EPR/fee-cart)",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "fr_cites_present",
+        "epr_fee_cart",
+        "paid"
+      ],
+      "email": {
+        "subject": "[FORENSIC] Patent related notices-2026 registry \u2014 Eve B17",
+        "from": "eve-fuel@monstersink.example",
+        "body": "CLAIMED: 1, 1, 1\nINTERIOR: 1, 0, 0\nfileId 1ToxZSPlVhKGiN_VPuYj64Kd80FNxztbc\nFR cites vs table-export-only; no EPR/fee-cart. Fee\u2260prize. Notice/program not money bar.",
+        "receiptUrl": "https://www.uspto.gov/patents/laws/patent-related-notices/patent-related-notices-2026"
+      },
+      "claimed": [
+        1,
+        1,
+        1
+      ],
+      "interior": [
+        1,
+        0,
+        0
+      ],
+      "expect": {
+        "status": "refuse",
+        "mask": 6,
+        "failedIndices": [
+          1,
+          2
+        ]
+      },
+      "driveFileIds": [
+        "1ToxZSPlVhKGiN_VPuYj64Kd80FNxztbc"
+      ],
+      "scrapeFixtureText": "INTERIOR: 1, 0, 0\nFORENSIC Eve Batch17: notices-2026 registry; FR cites; no EPR/fee-cart"
+    },
+    {
+      "id": "img-2635-pier-announcement",
+      "caseId": "CG-EVE-B17-02",
+      "label": "REFUSE \u2014 IMG_2635 PIER announcement program start vs paid=0",
+      "kind": "forensic-drive",
+      "lineItems": [
+        "program_announced",
+        "fees_paid",
+        "grant"
+      ],
+      "email": {
+        "subject": "[FORENSIC] IMG_2635 PIER announcement \u2014 Eve B17",
+        "from": "eve-fuel@monstersink.example",
+        "body": "CLAIMED: 1, 1, 1\nINTERIOR: 1, 0, 0\nfileId 1z15YBzrlM_QdGz2GZDClZdnnXpWnyCzh\nProgram start vs paid=0. Fee\u2260prize. Full pack unless beats money bar.",
+        "receiptUrl": "https://www.federalregister.gov/documents/2026/04/10/2026-07500"
+      },
+      "claimed": [
+        1,
+        1,
+        1
+      ],
+      "interior": [
+        1,
+        0,
+        0
+      ],
+      "expect": {
+        "status": "refuse",
+        "mask": 6,
+        "failedIndices": [
+          1,
+          2
+        ]
+      },
+      "driveFileIds": [
+        "1z15YBzrlM_QdGz2GZDClZdnnXpWnyCzh"
+      ],
+      "scrapeFixtureText": "INTERIOR: 1, 0, 0\nFORENSIC Eve Batch17: PIER announcement; program\u2260paid"
     }
   ],
   "seedUrls": [
