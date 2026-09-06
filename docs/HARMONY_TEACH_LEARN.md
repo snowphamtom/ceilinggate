@@ -89,5 +89,7 @@ Evidence: live `#` stack-tags · `docs/ORIGINALITY.md` · `/forge/url-receipt-ga
 | SHOW-OFF: **CBR ~5M + noise filler**, ≥30fps, yuv420p | CRF-only on static SPA (bitrate collapses) |
 | `bin/encode-show-off.sh` default MODE=cbr | Listing encode with `-crf 20` alone |
 
-Evidence: `streamer/SHOW_OFF_ENCODE.md` · `bin/encode-show-off.sh`
+| Capture: `echo $DISPLAY` / list `/tmp/.X11-unix` first | Assume `DISPLAY=:6` (HQ used `:7.0`) |
+
+Evidence: `streamer/SHOW_OFF_ENCODE.md` · `bin/encode-show-off.sh` · `bin/capture-box-desktop.sh`
 

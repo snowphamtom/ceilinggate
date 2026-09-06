@@ -27,13 +27,20 @@ Show-off listing encodes need **CBR ≈ 5 Mbps** plus a **tiny noise filler** so
   /workspace/ceilinggate-demo/out/YOUR-RAW.mp4 \
   /workspace/ceilinggate-demo/out/CeilingGate-Forge-gates-clip.mp4
 ```
+
+`capture-box-desktop.sh` prints `echo $DISPLAY`, lists `/tmp/.X11-unix`, and if `DISPLAY` is unset picks the **newest** socket (override with `export DISPLAY=:N`).
 Optional: `BITRATE=6M FPS=60 encode-show-off.sh …`  
 Fails closed if fps&lt;30, not h264/yuv420p, or CBR output bitrate collapsed (&lt;3M).
 
 ## B — Capture box desktop/browser (X11)
-Box display is typically `DISPLAY=:6` at **1280×800**.
+Geometry **1280×800**. **DISPLAY is not fixed** (HQ used `:7.0` when `:6` was wrong).
 
 ```bash
+# ALWAYS check first — do not assume :6
+echo $DISPLAY
+ls /tmp/.X11-unix    # X6 X7 … → :6 :7
+export DISPLAY=:7    # example — use whatever echo printed / newest socket
+
 /workspace/ceilinggate-demo/bin/capture-box-desktop.sh 50 \
   /workspace/ceilinggate-demo/out/raw-forge-capture.mkv
 /workspace/ceilinggate-demo/bin/encode-show-off.sh \
