@@ -11,7 +11,7 @@
 | Health | https://quirky-rhinoceros-204.convex.site/health → `{"ok":true,"app":"CeilingGate"}` |
 | Public GH | https://github.com/snowphamtom/ceilinggate |
 | Inbox | ceilinggate-claims@agentmail.to |
-| Tip | `dc97988` + cascading shortlist (incl. sub-spec-clean-1004-feecart) |
+| Tip | `8aaa264` |
 | Demo cut | `/workspace/ceilinggate-demo/out/CeilingGate-AllGas-demo.mp4` (~1:25) + release `allgas-demo-20260905` |
 | Shots | `01-hero` … `04-inbox` CLOSED (recrop done) |
 
@@ -20,6 +20,9 @@ Cash tiers only: **$10,000 / $5,000 / $1,500** (= $16,500 pool).
 Page “$25k” = cash + Codex credits — not extra cash.  
 **Not** a prize: USPTO Track One ~$2,100 / live small-entity ~$1,806 (fixture `cip-track-one-2100` only).  
 Winner announced ≠ cash-in-hand. No Square / T&E SKU in this pack.
+
+## Judge smoke
+Run `./scripts/allgas-judge-smoke.sh` (public path). Latest: `/workspace/ceilinggate-demo/JUDGE_SMOKE.txt`.
 
 ## Requirements checklist
 - [x] New app started on/after Aug 25

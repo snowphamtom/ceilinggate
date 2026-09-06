@@ -10,10 +10,14 @@ Lightweight status board. Open on desktop/browser — nothing to install, no pho
 - Demo pack: https://github.com/snowphamtom/ceilinggate/releases/tag/allgas-demo-20260905
 - Claims inbox: `ceilinggate-claims@agentmail.to`
 - Health: `/health` → CeilingGate
-- Tip: `42ab26b` — FREE CREATE judge-smoke tooling
+- Tip: `8aaa264` — win-artifact priority (site/demo/submit/originality)
 
 ## Support tooling
 - `scripts/allgas-judge-smoke.sh` — public judge-path smoke (box + CI-friendly)
+
+## Throughput (real)
+- Path to cash = win All Gas prizes only ($10k/$5k/$1.5k Luma) — not fake metrics, not Square SKU.
+- Artifacts: live SPA + public GH + release demo/shots + SUBMIT_PACK + originality HARD LOCK.
 
 ## Verified
 - Demo signature / GRANT / REFUSE / ship-set samples: click-through PASS (MANAGER + Create 6/6)
@@ -30,6 +34,10 @@ Lightweight status board. Open on desktop/browser — nothing to install, no pho
 
 ## Support tooling
 - `scripts/allgas-judge-smoke.sh` — public judge-path smoke (box + CI-friendly)
+
+## Throughput (real)
+- Path to cash = win All Gas prizes only ($10k/$5k/$1.5k Luma) — not fake metrics, not Square SKU.
+- Artifacts: live SPA + public GH + release demo/shots + SUBMIT_PACK + originality HARD LOCK.
 
 ## Verified
 - Demo signature / GRANT / REFUSE / ship-set samples: click-through PASS
