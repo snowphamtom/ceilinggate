@@ -1,7 +1,7 @@
-# Lesson card — cdadcbe
+# Lesson card — 14e8106
 
 1. What changed
-decodeMask names the four expense bits.
+docs: SuperGrok Heavy master admin pass (peer to MANAGER)
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
