@@ -12,6 +12,9 @@ Lightweight status board. Open on desktop/browser — nothing to install, no pho
 - Health: `/health` → CeilingGate
 - Tip: `b0467bd` — public-URL polish (undistorted \$1004 fee lines)
 
+## Support tooling
+- `scripts/allgas-judge-smoke.sh` — public judge-path smoke (box + CI-friendly)
+
 ## Verified
 - Demo signature / GRANT / REFUSE / ship-set samples: click-through PASS (MANAGER + Create 6/6)
 - ResidualGates demo gate: PASS (GRANT + REFUSE mask 10)
@@ -23,6 +26,9 @@ Lightweight status board. Open on desktop/browser — nothing to install, no pho
 ## In flight
 - Silent demo refreshed on release (~68s, Demo signature click visible)
 - Captioned reburn of new ~68s silent (Demo signature on-screen) — then vibeapps submit
+
+## Support tooling
+- `scripts/allgas-judge-smoke.sh` — public judge-path smoke (box + CI-friendly)
 
 ## Verified
 - Demo signature / GRANT / REFUSE / ship-set samples: click-through PASS

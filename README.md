@@ -111,3 +111,6 @@ No Square shop edits, no COHOCF mythos products, no MAGPIE SKU, no “AI buddy�
 | Claims inbox (optional) | `ceilinggate-claims@agentmail.to` |
 
 Click **Demo GRANT** / **Demo REFUSE** — full ResidualGates ledger works in the browser. No keys, no chat login, no Square.
+
+## All Gas support tooling
+- Judge smoke (public path): `./scripts/allgas-judge-smoke.sh` — health, SPA, Demo GRANT/REFUSE/signature strings, fixtures, webhook liveness.
