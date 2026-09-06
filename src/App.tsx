@@ -477,8 +477,7 @@ function AppForgePanel() {
       )}
       <p className="muted small">
         Box scaffold: <code>npm run forge -- --slug …</code> →{" "}
-        <code>/workspace/forged-apps/</code>. First live child:{" "}
-        <code>tip-jar-honesty</code>.
+        <code>/workspace/forged-apps/</code>. Children: <code>tip-jar-honesty</code>, <code>line-delta-kit</code>.
       </p>
     </section>
   );

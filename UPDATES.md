@@ -10,7 +10,7 @@ Lightweight status board. Open on desktop/browser — nothing to install, no pho
 - Demo pack: https://github.com/snowphamtom/ceilinggate/releases/tag/allgas-demo-20260905
 - Claims inbox: `ceilinggate-claims@agentmail.to`
 - Health: `/health` → CeilingGate
-- Tip: `3fef60d` — App Forge live on SPA + tip-jar-honesty
+- Tip: `line-delta-kit` spawned — App Forge children tip-jar-honesty + line-delta-kit
 
 ## Support tooling
 - `scripts/allgas-judge-smoke.sh` — public judge-path smoke (box + CI-friendly)
@@ -29,6 +29,7 @@ Lightweight status board. Open on desktop/browser — nothing to install, no pho
 
 ## In flight
 - **App Forge LIVE** — tip `b411d6a`; panel on quirky-rhinoceros-204.convex.site; child `tip-jar-honesty`; docs/APP_FORGE.md
+- **App Forge LIVE** — tip `b411d6a`; panel on quirky-rhinoceros-204.convex.site; child `tip-jar-honesty + line-delta-kit`; docs/APP_FORGE.md
 - Silent demo refreshed on release (~68s, Demo signature click visible)
 - Captioned reburn of new ~68s silent (Demo signature on-screen) — then vibeapps submit
 
@@ -47,6 +48,7 @@ Lightweight status board. Open on desktop/browser — nothing to install, no pho
 
 ## In flight
 - **App Forge LIVE** — tip `b411d6a`; panel on quirky-rhinoceros-204.convex.site; child `tip-jar-honesty`; docs/APP_FORGE.md
+- **App Forge LIVE** — tip `b411d6a`; panel on quirky-rhinoceros-204.convex.site; child `tip-jar-honesty + line-delta-kit`; docs/APP_FORGE.md
 - Demo signature re-record (compete button on-screen) → refresh release video + captions
 - vibeapps.dev submit when video+shots green
 - Deadline: Tue Sep 22, 2026 · 12:00 PM PT

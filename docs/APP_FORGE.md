@@ -15,7 +15,7 @@ Same required artifacts: Convex + Firecrawl + AgentMail + ResidualGates honesty 
 Every spawned app inherits STANDING_ACCESS / FREE CREATE fences (OFF PHONE, no sockpuppets, no Square commercial, silent to Taylor via MANAGER).
 
 ## First child
-`tip-jar-honesty` — ResidualGates stub (`npm run demo:gate` in that folder).
+`tip-jar-honesty` + `line-delta-kit` — ResidualGates stubs (`npm run demo:gate` in that folder).
 
 ## Originality
 Forensic/create factory — **not** AgentMail chat-demo rebrand, not inbox yes/no.
