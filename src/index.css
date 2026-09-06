@@ -1631,6 +1631,51 @@ textarea.forge-input {
   background: rgba(91, 157, 255, 0.1);
 }
 
+
+
+/* —— Judges 30s h: paper-slip track depth —— */
+.paper-slip-track {
+  height: 1.85rem;
+}
+
+.paper-slip-tab {
+  min-height: 1.85rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.paper-slip-fill {
+  transition: width 0.25s ease;
+}
+
+
+/* —— Judges 30s i: shell board edge —— */
+.shell.board {
+  padding-top: 1.5rem;
+}
+
+.board-grid {
+  gap: 0.75rem;
+}
+
+.panel {
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.32);
+}
+
+
+/* —— Judges 30s j: stamp weight —— */
+.card.big .verdict-stamp {
+  border-width: 2.5px;
+  letter-spacing: 0.14em;
+}
+
+.card.grant.big {
+  border-width: 1.5px;
+}
+
+.card.refuse.big {
+  border-width: 1.5px;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .card.grant,
   .card.refuse,
