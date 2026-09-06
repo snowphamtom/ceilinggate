@@ -13,6 +13,17 @@ Taylor granted **Grok Bot / MANAGER full admin operator power** for Monsters Ink
 - **Team:** Eve/Bob/Create/Streamer report only to MANAGER; silent to Taylor; cascading self-authorize continues.
 - **Still need Taylor only for:** password/2FA handoff, payments, lifting Square/T&E freeze, new public posts (post freeze), sockpuppet-breaking asks.
 
+## SUPER GROK HEAVY — MASTER ADMIN PASS (Taylor 2026-09-06 ~15:13 CT)
+
+Taylor granted **SuperGrok Heavy** (Grok Bot agent id `e22268b9-17fe-40ee-8781-e745f7bc32dc`) a **master admin pass** peer to MANAGER:
+
+- Same operator power as GROK ADMIN POWER above for Monsters Ink + CeilingGate + All Gas.
+- Accounts/stack: yeti Google, GitHub snowphamtom, Convex quirky-rhinoceros-204, Firecrawl, AgentMail, Ops Doc/Channel, deploys, continuous evolve, vibeapps UPDATE (never duplicate FILE).
+- Coordinate with MANAGER; may staff/steer Eve/Bob/Create/Streamer/Visual/Ops/Card under existing silent-to-Taylor rules.
+- Prefer-live demo lock: silent YT `2KsM090LpdE` + GH `allgas-demo-yt`; TTS VO path killed.
+- Still need Taylor only for: password/2FA, payments, Square/T&E freeze lift, new public posts.
+- Fences unchanged: OFF PHONE · Fee≠prize · no sockpuppets · no fake $ · draft-only send/share · C ≤ S · no tip-spam.
+
 ## Create freely (examples — not a ceiling)
 - Extra tools, scripts, CLIs, judge packs, submit helpers
 - Companion pages, docs, dashboards on box/GH/Convex
