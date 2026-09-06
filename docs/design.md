@@ -84,7 +84,7 @@ Tables (app space; AgentMail/Firecrawl components keep their own sandboxed table
 - `claimed: number[]`, `interior: number[]` (frozen snapshot)
 - `decidedAt`
 
-### `vectors` (optional / stub for “Convex stores vectors”)
+### `vectors` (optional for “Convex stores vectors”)
 - `claimId` or `interiorId`
 - `kind`: `claim | receipt | joint`
 - `embedding: number[]` (or Convex vector index when enabled)

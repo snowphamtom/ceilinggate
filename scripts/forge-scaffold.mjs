@@ -188,10 +188,18 @@ const html = `<!DOCTYPE html>
 
 fs.writeFileSync(path.join(root, "src/index.html"), html);
 
-// Stage under CeilingGate public/forge for live convex.site (NO COSTUME — never App stub.txt)
+// Stage under CeilingGate public/forge for live convex.site (NO COSTUME)
 const pubRoot = path.join(path.dirname(new URL(import.meta.url).pathname), "..", "public", "forge", slug);
 fs.mkdirSync(pubRoot, { recursive: true });
 fs.writeFileSync(path.join(pubRoot, "index.html"), html);
+
+// HARD RULE: kill costume files if anything ever dropped them
+for (const bad of ["App stub.txt", "stub.txt", "App.stub.txt", "residual-gates.stub.txt"]) {
+  for (const dir of [path.join(root, "src"), root, pubRoot]) {
+    const fp = path.join(dir, bad);
+    if (fs.existsSync(fp)) fs.unlinkSync(fp);
+  }
+}
 
 const livePath = `/forge/${slug}/`;
 const meta = {

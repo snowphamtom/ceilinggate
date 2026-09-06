@@ -728,7 +728,7 @@ function PwaInstallShell() {
 function AppForgePanel() {
   const [title, setTitle] = useState("Receipt Line Check");
   const [brief, setBrief] = useState(
-    "LIVE micro-app: claimed lines ≤ public receipt totals via ResidualGates. Not a chat assistant.",
+    "LIVE micro-app: claimed lines ≤ public receipt totals via gateB. Interactive GRANT/REFUSE. Not a chat assistant.",
   );
   const [log, setLog] = useState<string>("");
   const spawn = useMutation(api.forge.spawn);
