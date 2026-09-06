@@ -36,7 +36,7 @@ Lightweight status board. Open on desktop/browser — nothing to install, no pho
 - Deadline: Tue Sep 22, 2026 · 12:00 PM PT
 
 ## Ops locks
-- **SCOPE:** All Gas hackathon entry (CeilingGate) only — cascading GO does not widen past competition
+- **SCOPE:** All Gas competition + free create anything needed (not CeilingGate-only); OFF PHONE + no sockpuppets still hold
 - **STANDING ACCESS (cascading):** every expansion self-authorizes the next step — no ask to continue (see STANDING_ACCESS.md)
 - **OFF PHONE LOCK:** all teammate creative/build on box + GH/Convex only; phone tasks canceled
 - Past Drive/mail data frozen (new objects only)
