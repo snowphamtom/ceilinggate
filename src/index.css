@@ -2439,3 +2439,228 @@ h1 {
     margin: 0 0 0.55rem;
   }
 }
+
+/* —— Evolve 2026-09-07 PM: Drive residual caliper ——
+   Presentation only. Instrument caliper + Drive docket vs generic admin.
+   No App.tsx wires. Prefer-live YT untouched. Gates stay LIVE. */
+
+@keyframes residual-scan {
+  0% { transform: translateY(-120%); opacity: 0; }
+  18% { opacity: 0.85; }
+  82% { opacity: 0.55; }
+  100% { transform: translateY(220%); opacity: 0; }
+}
+
+/* Close the instrument frame — bottom L/R brackets */
+.shell.board {
+  background-image:
+    linear-gradient(180deg, rgba(14, 22, 40, 0.28), rgba(7, 11, 20, 0.55)),
+    linear-gradient(rgba(212, 162, 76, 0.55), rgba(212, 162, 76, 0.55)),
+    linear-gradient(rgba(212, 162, 76, 0.55), rgba(212, 162, 76, 0.55)),
+    linear-gradient(rgba(212, 162, 76, 0.55), rgba(212, 162, 76, 0.55)),
+    linear-gradient(rgba(212, 162, 76, 0.55), rgba(212, 162, 76, 0.55));
+  background-size:
+    auto,
+    18px 2px, 2px 18px,
+    18px 2px, 2px 18px;
+  background-position:
+    0 0,
+    left 10px bottom 10px, left 10px bottom 10px,
+    right 10px bottom 10px, right 10px bottom 10px;
+  background-repeat: no-repeat;
+}
+
+/* Empty verdict: moving residual scan bar (caliper sweep) */
+.verdict-panel .empty {
+  position: relative;
+  overflow: hidden;
+}
+
+.verdict-panel .empty::after {
+  content: "";
+  position: absolute;
+  left: 6%;
+  right: 6%;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(91, 157, 255, 0.15),
+    rgba(212, 162, 76, 0.85),
+    rgba(91, 157, 255, 0.15),
+    transparent
+  );
+  box-shadow: 0 0 18px rgba(212, 162, 76, 0.35);
+  animation: residual-scan 3.6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* Status chips = engraved caliper plates, not SaaS pills */
+.status-chip {
+  border-radius: 2px !important;
+  font-family: var(--mono) !important;
+  font-size: 0.68rem !important;
+  letter-spacing: 0.1em !important;
+  padding: 0.22rem 0.45rem !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.35) !important;
+}
+
+.status-chip.clear {
+  background:
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 3px,
+      rgba(61, 222, 149, 0.12) 3px,
+      rgba(61, 222, 149, 0.12) 4px
+    ),
+    rgba(12, 40, 28, 0.92) !important;
+  border: 1px solid rgba(61, 222, 149, 0.55) !important;
+  color: #7dffc0 !important;
+}
+
+.status-chip.over {
+  background:
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 3px,
+      rgba(255, 138, 138, 0.14) 3px,
+      rgba(255, 138, 138, 0.14) 4px
+    ),
+    rgba(48, 16, 18, 0.95) !important;
+  border: 1px solid rgba(255, 138, 138, 0.6) !important;
+  color: #ffb4b4 !important;
+}
+
+/* Ledger = residual measurement plate */
+.ledger {
+  border: 1px solid rgba(58, 84, 120, 0.7) !important;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: inset 0 0 0 1px rgba(7, 11, 20, 0.55);
+}
+
+.ledger thead th {
+  background: rgba(10, 18, 32, 0.95) !important;
+  border-bottom: 1px solid rgba(212, 162, 76, 0.28) !important;
+  font-size: 0.68rem !important;
+  letter-spacing: 0.16em !important;
+}
+
+.ledger tr:not(.fail) td:first-child {
+  box-shadow: inset 3px 0 0 rgba(61, 222, 149, 0.45);
+}
+
+.ledger tr.fail td:first-child {
+  box-shadow: inset 3px 0 0 rgba(255, 138, 138, 0.7);
+}
+
+/* Inbox = Drive docket drawer (not generic list card) */
+.board-grid > .panel:not(.verdict-panel) {
+  position: relative;
+  border-color: rgba(212, 162, 76, 0.32) !important;
+  background:
+    linear-gradient(180deg, rgba(22, 30, 44, 0.55), rgba(10, 14, 24, 0.92)),
+    var(--panel);
+}
+
+.board-grid > .panel:not(.verdict-panel)::before {
+  content: "DRIVE DOCKET";
+  position: absolute;
+  top: -0.55rem;
+  right: 0.85rem;
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: rgba(212, 162, 76, 0.9);
+  padding: 0.12rem 0.4rem;
+  border: 1px solid rgba(212, 162, 76, 0.4);
+  border-radius: 2px 2px 0 0;
+  background: #0a1220;
+  z-index: 2;
+}
+
+.board-grid > .panel:not(.verdict-panel) > h2 {
+  color: #f0e6d0 !important;
+}
+
+/* Steps = evidence protocol plates */
+.steps {
+  border: 1px solid rgba(58, 84, 120, 0.55);
+  border-radius: 8px;
+  padding: 0.85rem 1rem 0.85rem 1.1rem;
+  background:
+    linear-gradient(90deg, rgba(212, 162, 76, 0.08), transparent 12%),
+    rgba(8, 12, 22, 0.55);
+  box-shadow: inset 3px 0 0 rgba(212, 162, 76, 0.45);
+}
+
+.steps li::marker {
+  color: var(--amber);
+  font-family: var(--mono);
+  font-weight: 700;
+}
+
+/* Paper slips = receipt ceiling calipers */
+.paper-slip {
+  border-radius: 4px !important;
+  border: 1px solid rgba(58, 84, 120, 0.5) !important;
+  background: rgba(7, 11, 20, 0.72) !important;
+}
+
+.paper-slip-name {
+  font-family: var(--mono) !important;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.68rem;
+}
+
+.paper-slip-ceiling {
+  border-color: rgba(212, 162, 76, 0.75) !important;
+  box-shadow: 0 0 8px rgba(212, 162, 76, 0.25);
+}
+
+.paper-slip-tab:not(.empty) {
+  font-family: var(--mono) !important;
+  border-radius: 2px !important;
+  letter-spacing: 0.04em;
+}
+
+/* Stamp plate denser — physical ink dock */
+.card.big .verdict-stamp {
+  letter-spacing: 0.12em;
+  text-shadow:
+    0 0 24px currentColor,
+    0 2px 0 rgba(0, 0, 0, 0.45);
+}
+
+.card.grant.big {
+  box-shadow:
+    inset 0 0 0 1px rgba(61, 222, 149, 0.35),
+    0 0 40px rgba(31, 157, 99, 0.18),
+    var(--shadow);
+}
+
+.card.refuse.big {
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 138, 138, 0.35),
+    0 0 40px rgba(224, 69, 69, 0.16),
+    var(--shadow);
+}
+
+.try-now {
+  border: 1px solid rgba(212, 162, 76, 0.28);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 12px 32px rgba(0, 0, 0, 0.35);
+}
+
+.try-label::before {
+  content: "∥ ";
+  color: var(--amber);
+  opacity: 0.85;
+}
