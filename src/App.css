@@ -1,5 +1,5 @@
 /* CeilingGate App.css — neutralized stub.
-   Live styles live in index.css (dark forensic board).
-   App.tsx and main.tsx already import index.css.
-   Do NOT @import index.css here; do NOT add light-shell rules.
-   Kept so accidental imports cannot revive the light 720px shell. */
+   Live FUI fleet chrome lives in index.css (light white/#f7f9fc board).
+   App.tsx / main.tsx import index.css + first-screen.css.
+   Do NOT @import index.css here; do NOT revive the old 720px light shell.
+   Create owns App.tsx markup hooks (#fui-fleet, #dendrite-hero, .fui-panel, .fui-rail). */

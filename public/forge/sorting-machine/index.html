@@ -6,18 +6,19 @@
   <title>Sorting Machine — C ≤ S</title>
   <style>
     :root {
-      color-scheme: dark;
-      --void: #050910;
-      --panel: #0a1220;
-      --line: #243552;
-      --amber: #e0b35a;
-      --ink: #eef3fb;
-      --mute: #8fa3bf;
-      --grant: #1f9d63;
-      --grant-glow: rgba(31, 157, 99, 0.55);
-      --refuse: #e04545;
-      --refuse-glow: rgba(224, 69, 69, 0.5);
-      --blue: #3d7dff;
+      color-scheme: light;
+      --bg: #f7f9fc;
+      --panel: #ffffff;
+      --line: rgba(15, 30, 60, 0.12);
+      --ink: #0b1220;
+      --mute: #5b6b82;
+      --cyan: #00c2ff;
+      --blue: #3d6bff;
+      --violet: #7a3dff;
+      --grant: #00a86b;
+      --grant-glow: rgba(0, 168, 107, 0.28);
+      --refuse: #e11d48;
+      --refuse-glow: rgba(225, 29, 72, 0.22);
       --font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
       --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
     }
@@ -25,116 +26,129 @@
     body {
       margin: 0; min-height: 100vh; color: var(--ink); font-family: var(--font);
       background:
-        radial-gradient(1000px 480px at 8% -8%, rgba(61,125,255,0.18), transparent 55%),
-        radial-gradient(800px 420px at 100% 0%, rgba(224,179,90,0.08), transparent 45%),
-        var(--void);
+        radial-gradient(900px 480px at 12% -8%, rgba(0, 194, 255, 0.12), transparent 55%),
+        radial-gradient(800px 420px at 100% 0%, rgba(122, 61, 255, 0.1), transparent 50%),
+        var(--bg);
       padding: 1.25rem 1.1rem 2.5rem;
     }
     .shell { max-width: 46rem; margin: 0 auto; }
     .kicker {
       display: inline-flex; align-items: center; gap: 0.45rem;
       font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.16em;
-      text-transform: uppercase; color: var(--amber); font-weight: 700;
+      text-transform: uppercase; color: var(--cyan); font-weight: 700;
       margin-bottom: 0.55rem;
     }
     .kicker::before {
-      content: ""; width: 0.28rem; height: 0.95rem; background: var(--amber);
-      box-shadow: 0 0 12px rgba(224,179,90,0.7);
+      content: "//"; color: var(--violet); letter-spacing: 0;
     }
     h1 {
       margin: 0 0 0.4rem; font-size: clamp(1.8rem, 5vw, 2.35rem);
-      letter-spacing: -0.03em; font-weight: 800;
+      letter-spacing: -0.03em; font-weight: 800; color: var(--ink);
     }
     .lede {
       margin: 0 0 1.1rem; color: var(--mute); line-height: 1.5; font-size: 0.98rem;
     }
-    .lede strong { color: #cfe0ff; }
+    .lede strong { color: var(--ink); }
     .stages {
       display: flex; flex-wrap: wrap; gap: 0.45rem; margin: 0 0 1.15rem;
       font-family: var(--mono); font-size: 0.72rem;
     }
     .stages span {
       padding: 0.35rem 0.65rem; border-radius: 999px; border: 1px solid var(--line);
-      color: var(--mute); background: rgba(10,18,32,0.8);
+      color: var(--mute); background: #fff;
     }
     .stages span.on {
-      color: #6ee7a8; border-color: rgba(31,157,99,0.65);
-      background: rgba(31,157,99,0.16); font-weight: 700;
-      box-shadow: 0 0 18px rgba(31,157,99,0.25);
+      color: var(--grant); border-color: rgba(0, 168, 107, 0.45);
+      background: rgba(0, 168, 107, 0.1); font-weight: 700;
+      box-shadow: 0 0 14px var(--grant-glow);
     }
     .panel {
       border: 1px solid var(--line); border-radius: 16px; padding: 1rem 1rem 1.1rem;
-      background: linear-gradient(180deg, rgba(18,28,48,0.95), rgba(8,14,26,0.98));
-      box-shadow: 0 0 0 1px rgba(61,125,255,0.08), 0 18px 50px rgba(0,0,0,0.35);
+      background: var(--panel);
+      box-shadow: 0 10px 32px rgba(15, 30, 60, 0.08);
+      position: relative; overflow: hidden;
+    }
+    .panel::before {
+      content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--cyan), var(--violet));
     }
     label {
       display: block; margin: 0.7rem 0 0; font-size: 0.72rem; letter-spacing: 0.08em;
-      text-transform: uppercase; color: var(--amber); font-weight: 700;
+      text-transform: uppercase; color: var(--cyan); font-weight: 700;
+      font-family: var(--mono);
     }
+    label::before { content: "// "; opacity: 0.65; }
     input {
       display: block; width: 100%; margin-top: 0.35rem; padding: 0.75rem 0.8rem;
-      border-radius: 10px; border: 1px solid var(--line); background: #070d18;
+      border-radius: 10px; border: 1px solid var(--line); background: #fff;
       color: var(--ink); font-family: var(--mono); font-size: 0.95rem;
     }
-    input:focus { outline: 2px solid rgba(61,125,255,0.45); border-color: #3d7dff; }
+    input:focus { outline: 2px solid rgba(0, 194, 255, 0.45); border-color: var(--cyan); }
     .row { display: flex; flex-wrap: wrap; gap: 0.55rem; margin-top: 1rem; }
     button {
       appearance: none; cursor: pointer; font-family: inherit; font-weight: 800;
       letter-spacing: 0.04em; border-radius: 12px; padding: 0.78rem 1.05rem; border: 0;
     }
     button.primary {
-      background: linear-gradient(180deg, #5a96ff, #2a62e8);
-      color: #fff; box-shadow: 0 0 28px rgba(61,125,255,0.4);
+      background: linear-gradient(180deg, #5a8cff, var(--blue));
+      color: #fff; box-shadow: 0 4px 14px rgba(61, 107, 255, 0.28);
     }
     button.ghost {
-      background: transparent; color: var(--ink);
-      border: 1px solid #5b7194;
+      background: #fff; color: var(--ink);
+      border: 1px solid rgba(15, 30, 60, 0.22);
     }
     button.grantish {
-      background: linear-gradient(180deg, #2db57a, #178a55); color: #04140c;
-      box-shadow: 0 0 24px var(--grant-glow);
+      background: linear-gradient(180deg, #12c47a, var(--grant)); color: #fff;
+      box-shadow: 0 6px 18px var(--grant-glow);
+      border: 1px solid rgba(0, 168, 107, 0.35);
     }
     button.refuseish {
-      background: linear-gradient(180deg, #f06666, #c23232); color: #fff;
-      box-shadow: 0 0 24px var(--refuse-glow);
+      background: linear-gradient(180deg, #f0436a, var(--refuse)); color: #fff;
+      box-shadow: 0 6px 18px var(--refuse-glow);
+      border: 1px solid rgba(225, 29, 72, 0.35);
     }
     #out { margin-top: 1.15rem; min-height: 4rem; }
     .await {
-      border: 1.5px dashed #3a4f73; border-radius: 14px; padding: 1.6rem 1rem;
-      text-align: center; color: var(--amber); font-family: var(--mono);
-      letter-spacing: 0.12em; font-weight: 700;
+      border: 1.5px dashed rgba(15, 30, 60, 0.2); border-radius: 14px; padding: 1.6rem 1rem;
+      text-align: center; color: var(--cyan); font-family: var(--mono);
+      letter-spacing: 0.12em; font-weight: 700; background: #fff;
     }
     .await small { display: block; margin-top: 0.45rem; color: var(--mute);
       letter-spacing: 0; font-weight: 500; text-transform: none; }
     .card {
       border-radius: 16px; padding: 1.15rem 1.05rem 1.2rem; border: 2px solid var(--line);
-      background: rgba(8,14,26,0.95);
+      background: #fff;
     }
     .card.grant {
       border-color: var(--grant);
-      box-shadow: 0 0 48px var(--grant-glow), inset 0 0 40px rgba(31,157,99,0.08);
+      box-shadow: 0 0 36px var(--grant-glow), inset 0 0 40px rgba(0, 168, 107, 0.04);
+      background: linear-gradient(165deg, rgba(0, 168, 107, 0.06), #fff);
     }
     .card.refuse {
       border-color: var(--refuse);
-      box-shadow: 0 0 48px var(--refuse-glow), inset 0 0 40px rgba(224,69,69,0.08);
+      box-shadow: 0 0 36px var(--refuse-glow), inset 0 0 40px rgba(225, 29, 72, 0.04);
+      background: linear-gradient(165deg, rgba(225, 29, 72, 0.05), #fff);
     }
     .stamp-wrap { margin: 0.15rem 0 0.85rem; }
     .eyebrow {
       font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.14em;
-      text-transform: uppercase; color: var(--amber); font-weight: 700; margin-bottom: 0.4rem;
+      text-transform: uppercase; color: var(--cyan); font-weight: 700; margin-bottom: 0.4rem;
     }
+    .eyebrow::before { content: "// "; opacity: 0.7; }
     .stamp {
       display: inline-block; padding: 0.55rem 1.15rem; border-radius: 10px;
       font-size: clamp(1.6rem, 6vw, 2.2rem); font-weight: 900; letter-spacing: 0.14em;
       line-height: 1; border: 2px solid currentColor;
     }
     .card.grant .stamp {
-      color: #04140c; background: linear-gradient(180deg, #3dd68c, #1f9d63);
-      box-shadow: 0 0 36px var(--grant-glow);
+      color: #fff; background: linear-gradient(180deg, #12c47a, var(--grant));
+      border-color: var(--grant);
+      box-shadow: 0 0 28px var(--grant-glow);
     }
     .card.refuse .stamp {
-      color: #fff; background: linear-gradient(180deg, #ff6b6b, #e04545);
-      box-shadow: 0 0 36px var(--refuse-glow);
+      color: #fff; background: linear-gradient(180deg, #f0436a, var(--refuse));
+      border-color: var(--refuse);
+      box-shadow: 0 0 28px var(--refuse-glow);
     }
     .meta { color: var(--mute); font-family: var(--mono); font-size: 0.82rem; margin-bottom: 0.85rem; }
     .bars { display: grid; gap: 0.55rem; margin: 0.85rem 0 1rem; }
@@ -143,21 +157,21 @@
       font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.06em;
     }
     .bar-track {
-      position: relative; height: 1.15rem; border-radius: 6px; background: #101a2c;
-      border: 1px solid #1e2d48; overflow: visible;
+      position: relative; height: 1.15rem; border-radius: 6px; background: #f0f4fa;
+      border: 1px solid var(--line); overflow: visible;
     }
     .bar-fill {
       height: 100%; border-radius: 5px; width: var(--w, 50%);
-      background: linear-gradient(90deg, #1f9d63, #3dd68c);
-      box-shadow: 0 0 14px rgba(61,214,140,0.35);
+      background: linear-gradient(90deg, var(--grant), #12c47a);
+      box-shadow: 0 0 10px rgba(0, 168, 107, 0.25);
     }
     .bar-row.fail .bar-fill {
-      background: linear-gradient(90deg, #c23232, #ff6b6b);
-      box-shadow: 0 0 14px rgba(224,69,69,0.4);
+      background: linear-gradient(90deg, var(--refuse), #f0436a);
+      box-shadow: 0 0 10px rgba(225, 29, 72, 0.3);
     }
     .bar-edge {
       position: absolute; top: -3px; bottom: -3px; left: var(--edge, 70%);
-      border-left: 1.5px dashed var(--amber); opacity: 0.9;
+      border-left: 1.5px dashed var(--violet); opacity: 0.9;
     }
     .chip {
       display: inline-block; min-width: 4.2rem; text-align: center;
@@ -165,38 +179,40 @@
       border: 1px solid transparent;
     }
     .chip.ok {
-      color: #6ee7a8; background: rgba(31,157,99,0.16); border-color: rgba(31,157,99,0.45);
+      color: var(--grant); background: rgba(0, 168, 107, 0.1); border-color: rgba(0, 168, 107, 0.4);
+      box-shadow: 0 0 10px rgba(0, 168, 107, 0.12);
     }
     .chip.bad {
-      color: #fecaca; background: rgba(224,69,69,0.2); border-color: rgba(224,69,69,0.55);
+      color: var(--refuse); background: rgba(225, 29, 72, 0.1); border-color: rgba(225, 29, 72, 0.45);
+      box-shadow: 0 0 10px rgba(225, 29, 72, 0.14);
     }
     .over-tab {
       position: absolute; left: calc(var(--edge, 70%) + 4px); top: 50%; transform: translateY(-50%);
-      background: #e04545; color: #fff; font-size: 0.65rem; font-weight: 800;
+      background: var(--refuse); color: #fff; font-size: 0.65rem; font-weight: 800;
       padding: 0.12rem 0.35rem; border-radius: 4px; box-shadow: 0 0 12px var(--refuse-glow);
     }
     table {
       width: 100%; border-collapse: collapse; font-family: var(--mono); font-size: 0.84rem;
-      border: 1px solid var(--line); border-radius: 10px; overflow: hidden;
+      border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: #fff;
     }
     th, td { text-align: left; padding: 0.5rem 0.55rem; border-bottom: 1px solid var(--line); }
     th {
       font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase;
-      background: #152038; color: #c5d4e8;
+      background: #f4f7fb; color: var(--mute);
     }
-    tr.fail td { color: #fecaca; background: rgba(224,69,69,0.12); }
+    tr.fail td { color: #be123c; background: rgba(225, 29, 72, 0.08); }
     .admit {
       margin-top: 0.85rem; padding: 0.65rem 0.75rem; border-radius: 10px;
       font-size: 0.82rem; line-height: 1.4;
     }
     .card.grant .admit {
-      background: rgba(31,157,99,0.14); border: 1px solid rgba(31,157,99,0.4); color: #b7f7d4;
+      background: rgba(0, 168, 107, 0.08); border: 1px solid rgba(0, 168, 107, 0.35); color: var(--grant);
     }
     .card.refuse .admit {
-      background: rgba(224,69,69,0.14); border: 1px solid rgba(224,69,69,0.4); color: #fecaca;
+      background: rgba(225, 29, 72, 0.08); border: 1px solid rgba(225, 29, 72, 0.35); color: var(--refuse);
     }
     .back { margin-top: 1.25rem; }
-    .back a { color: #9ec5ff; font-weight: 600; text-decoration: none; }
+    .back a { color: var(--blue); font-weight: 600; text-decoration: none; }
     .back a:hover { text-decoration: underline; }
     .legend { margin: 0.35rem 0 0.8rem; color: var(--mute); font-size: 0.78rem; }
   </style>
