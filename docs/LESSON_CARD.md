@@ -1,4 +1,4 @@
-# Lesson card — 490f76f
+# Lesson card — 42c6337
 
 1. What changed
 visual: fortress residual-ledger instrument plate CSS
