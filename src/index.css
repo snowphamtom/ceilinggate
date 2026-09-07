@@ -1716,6 +1716,25 @@ textarea.forge-input {
   font-size: 0.9rem;
 }
 
+
+
+/* —— Standing polish m: first-paint board denser —— */
+.shell {
+  padding-bottom: 3.5rem;
+}
+
+.try-now .oneclick {
+  margin-top: 0.15rem;
+}
+
+.board-grid > .panel {
+  border-color: #2a3f5c;
+}
+
+.verdict-panel > h2::after {
+  background: rgba(7, 11, 20, 0.65);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .card.grant,
   .card.refuse,
