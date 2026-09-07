@@ -1,7 +1,7 @@
-# Lesson card — 264998f
+# Lesson card — 67bda64
 
 1. What changed
-fix: restore spa-css skip for self-styled forge pages
+feat(ui): FUI fleet light chrome on main board
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
