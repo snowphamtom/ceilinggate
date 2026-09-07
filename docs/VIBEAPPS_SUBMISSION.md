@@ -1,6 +1,6 @@
 # CeilingGate — Vibe Apps UPDATE pack (DELTA)
 
-**Listing:** https://vibeapps.dev/s/ceilinggate · **HOLD FILE — UPDATE only**  
+**Listing:** https://vibeapps.dev/s/ceilinggate-1 · **HOLD FILE — UPDATE only**  
 **prefer-live:** silent YouTube + allgas-demo-yt GH (Taylor VO quality hold aborted NEW upload).  
 **SHOW3:** on GH — not primary prefer.
 
