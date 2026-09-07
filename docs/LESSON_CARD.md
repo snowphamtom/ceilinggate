@@ -1,7 +1,7 @@
-# Lesson card — 7e8f4a7
+# Lesson card — cba6206
 
 1. What changed
-ui: first screen is two buttons and a stamp — workshop stays in App.tsx unused on home
+ui: first screen is two buttons — prize, sorting, and Forge off the fold
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
