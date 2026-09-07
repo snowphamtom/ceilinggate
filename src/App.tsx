@@ -107,8 +107,8 @@ export default function App() {
           Under or equal is a <strong>GRANT</strong>. Over is a <strong>REFUSE</strong>.
         </p>
         <p className="stakes-line">
-          Stakes: claimed line vs public receipt — ResidualGates{" "}
-          <strong>GRANT</strong>/<strong>REFUSE</strong> with a line ledger. Never chat yes/no.
+          Sorting machine · one law <strong>C ≤ S</strong> (claimed ≤ source) componentwise —
+          buckets <strong>GRANT</strong> / <strong>REFUSE</strong>. Never chat yes/no.
         </p>
         <ul className="stack-tags" aria-label="Stack">
           <li>Convex</li>
@@ -130,10 +130,12 @@ export default function App() {
         </div>
       </section>
 
-      <ol className="steps">
-        <li>Email the claim and a public receipt link to <code>ceilinggate-claims@agentmail.to</code></li>
-        <li>Firecrawl reads the receipt page.</li>
-        <li>Each line must stay at or under the receipt. OpenAI writes one sentence after the numbers (does not decide GRANT/REFUSE).</li>
+      <ol className="steps" id="sorting-line" aria-label="Sorting machine line">
+        <li><strong>Intake</strong> — claim + public receipt to <code>ceilinggate-claims@agentmail.to</code></li>
+        <li><strong>Filter</strong> — real object only (kill vibes / costumes)</li>
+        <li><strong>Evidence</strong> — Firecrawl scrape → line ledger (not chat)</li>
+        <li><strong>Verdict</strong> — ResidualGates <strong>C ≤ S</strong>; OpenAI narrates after numbers (does not decide)</li>
+        <li><strong>Store</strong> — bucket <strong>GRANT</strong> or <strong>REFUSE</strong> on the live board</li>
       </ol>
 
       <section className="panel prize-honesty" id="prize-honesty" aria-label="Prize honesty">
@@ -263,6 +265,7 @@ export default function App() {
         <DualOracleDisagreePanel />
         <FaultTaxonomyPanel />
         <ChatShrugTrapPanel />
+        <SortingMachinePanel />
       </section>
 
       <section className="panel forge-panel" id="forge-open-live" aria-label="Open live Forge apps">
@@ -331,6 +334,15 @@ export default function App() {
               <td>
                 <a href="/forge/chat-shrug-trap/" target="_blank" rel="noreferrer">
                   /forge/chat-shrug-trap/
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <td>Sorting Machine</td>
+              <td>C ≤ S pipeline → GRANT/REFUSE bucket</td>
+              <td>
+                <a href="/forge/sorting-machine/" target="_blank" rel="noreferrer">
+                  /forge/sorting-machine/
                 </a>
               </td>
             </tr>
@@ -406,7 +418,7 @@ function VerdictCard({ selected }: { selected: LocalDecision; plain: string[] })
         <p className="paper-slip-legend">Dashed edge is the receipt. A tab past it is the overclaim.</p>
       </div>
       <table className="ledger">
-        <thead><tr><th>LINE</th><th>CLAIMED</th><th>ON RECEIPT</th><th>STATUS</th></tr></thead>
+        <thead><tr><th>LINE</th><th>CLAIMED (C)</th><th>SOURCE (S)</th><th>C≤S</th></tr></thead>
         <tbody>
           {selected.lineItems.map((name, i) => {
             const fail = decision.failedIndices.includes(i);
@@ -437,7 +449,7 @@ function VerdictCard({ selected }: { selected: LocalDecision; plain: string[] })
                     }}
                   />
                 </td>
-                <td><span className={"status-chip " + (fail ? "over" : "clear")}>{fail ? "OVER" : "CLEAR"}</span></td>
+                <td><span className={"status-chip " + (fail ? "over" : "clear")}>{fail ? "C > S" : "C ≤ S"}</span></td>
               </tr>
             );
           })}
@@ -505,9 +517,9 @@ function GateLedgerTable({
         <thead>
           <tr>
             <th>LINE</th>
-            <th>CLAIMED</th>
-            <th>ON RECEIPT</th>
-            <th>STATUS</th>
+            <th>CLAIMED (C)</th>
+            <th>SOURCE (S)</th>
+            <th>C≤S</th>
           </tr>
         </thead>
         <tbody>
@@ -516,7 +528,7 @@ function GateLedgerTable({
               <td>{row.line}</td>
               <td>{money(row.claimed)}</td>
               <td>{money(row.interior)}</td>
-              <td className={row.over ? "bad" : "ok"}><span className={"status-chip " + (row.over ? "over" : "clear")}>{row.over ? "OVER" : "CLEAR"}</span></td>
+              <td className={row.over ? "bad" : "ok"}><span className={"status-chip " + (row.over ? "over" : "clear")}>{row.over ? "C > S" : "C ≤ S"}</span></td>
             </tr>
           ))}
         </tbody>
@@ -857,9 +869,9 @@ function LineDeltaKitPanel() {
             <thead>
               <tr>
                 <th>LINE</th>
-                <th>CLAIMED</th>
-                <th>ON RECEIPT</th>
-                <th>STATUS</th>
+                <th>CLAIMED (C)</th>
+                <th>SOURCE (S)</th>
+                <th>C≤S</th>
               </tr>
             </thead>
             <tbody>
@@ -1138,6 +1150,155 @@ function FaultTaxonomyPanel() {
                 Number.isFinite(claimed[i]) &&
                 Number.isFinite(interior[i]) &&
                 (claimed[i] as number) > (interior[i] as number),
+            }))}
+          />
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
+
+
+function SortingMachinePanel() {
+  const [claimedStr, setClaimedStr] = useState("");
+  const [sourceStr, setSourceStr] = useState("");
+  const [decision, setDecision] = useState<GateDecision | null>(null);
+  const [stage, setStage] = useState<0 | 1 | 2 | 3 | 4 | 5>(0);
+
+  useEffect(() => {
+    setDecision(null);
+    setStage(0);
+    const onPageShow = (e: PageTransitionEvent) => {
+      if (e.persisted) {
+        setDecision(null);
+        setStage(0);
+      }
+    };
+    window.addEventListener("pageshow", onPageShow);
+    return () => window.removeEventListener("pageshow", onPageShow);
+  }, []);
+
+  const claimed = parseNumList(claimedStr);
+  const source = parseNumList(sourceStr);
+
+  const run = useCallback(() => {
+    const c = parseNumList(claimedStr);
+    const s = parseNumList(sourceStr);
+    setStage(3);
+    const d = gateB(s, c);
+    setDecision(d);
+    setStage(5);
+  }, [claimedStr, sourceStr]);
+
+  const loadGrant = () => {
+    setClaimedStr("98, 49, 25, 9");
+    setSourceStr("100, 50, 25, 10");
+    setStage(1);
+    setDecision(null);
+  };
+  const loadRefuse = () => {
+    setClaimedStr("90, 60, 20, 10");
+    setSourceStr("100, 50, 25, 10");
+    setStage(1);
+    setDecision(null);
+  };
+
+  const stages = ["Intake", "Filter", "Evidence", "Verdict", "Store"] as const;
+
+  return (
+    <div className="forge-child" id="sorting-machine-live" data-testid="sorting-machine-live">
+      <h3 className="forge-sub">Sorting machine — LIVE</h3>
+      <p className="muted small">
+        One law: <strong>C ≤ S</strong> (claimed ≤ source) on every line. Output is a bucket —{" "}
+        <strong>GRANT</strong> or <strong>REFUSE</strong> — never a chat shrug.
+      </p>
+      <ol className="pass-bar muted small" aria-label="Sort stages">
+        {stages.map((name, i) => (
+          <li key={name}>
+            <strong className={stage > i ? "ok" : undefined}>
+              {i + 1}. {name}
+            </strong>
+            {stage > i ? " ✓" : ""}
+          </li>
+        ))}
+      </ol>
+      <label className="forge-label">
+        Claimed (C)
+        <input
+          className="forge-input"
+          value={claimedStr}
+          onChange={(e) => {
+            setClaimedStr(e.target.value);
+            setStage(1);
+            setDecision(null);
+          }}
+          placeholder="90, 60, 20, 10"
+        />
+      </label>
+      <label className="forge-label">
+        Source / on-receipt (S)
+        <input
+          className="forge-input"
+          value={sourceStr}
+          onChange={(e) => {
+            setSourceStr(e.target.value);
+            setStage(2);
+            setDecision(null);
+          }}
+          placeholder="100, 50, 25, 10"
+        />
+      </label>
+      <div className="row">
+        <button type="button" className="ghost" onClick={loadGrant}>
+          Load GRANT sort
+        </button>
+        <button type="button" className="ghost" onClick={loadRefuse}>
+          Load REFUSE sort (C&gt;S on a line)
+        </button>
+        <button
+          type="button"
+          className="ghost"
+          onClick={() => {
+            setClaimedStr("");
+            setSourceStr("");
+            setDecision(null);
+            setStage(0);
+          }}
+        >
+          Reset
+        </button>
+        <button type="button" className="primary" onClick={run}>
+          Sort C ≤ S
+        </button>
+      </div>
+      {decision ? (
+        <div className={"card " + (decision.status === "grant" ? "grant" : "refuse")}>
+          <p className="eyebrow">Bucket</p>
+          <h3>
+            <span className="verdict-stamp">
+              {decision.status === "grant" && decision.mask === 0 ? "GRANT" : "REFUSE"}
+            </span>
+          </h3>
+          <div className="mask-row">
+            <span className="mask-chip">
+              mask {decision.mask}
+              {decision.mask === 0
+                ? " · all lines C ≤ S"
+                : ` · fail lines [${decision.failedIndices.join(",")}]`}
+            </span>
+          </div>
+          <GateLedgerTable
+            lines={Array.from({
+              length: Math.max(claimed.length, source.length),
+            }).map((_, i) => ({
+              line: String(i),
+              claimed: claimed[i] ?? 0,
+              interior: source[i] ?? 0,
+              over:
+                Number.isFinite(claimed[i]) &&
+                Number.isFinite(source[i]) &&
+                (claimed[i] as number) > (source[i] as number),
             }))}
           />
         </div>
@@ -1686,9 +1847,9 @@ function UrlReceiptGatePanel() {
             <thead>
               <tr>
                 <th>LINE</th>
-                <th>CLAIMED</th>
-                <th>ON RECEIPT</th>
-                <th>STATUS</th>
+                <th>CLAIMED (C)</th>
+                <th>SOURCE (S)</th>
+                <th>C≤S</th>
               </tr>
             </thead>
             <tbody>

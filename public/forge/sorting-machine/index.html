@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sorting Machine — C ≤ S</title>
+  <style>
+    :root { color-scheme: dark; font-family: system-ui, sans-serif; }
+    body { margin: 0; background: #0b1220; color: #e8eef7; padding: 1.25rem; max-width: 40rem; }
+    h1 { font-size: 1.35rem; margin: 0 0 0.35rem; }
+    .lede { color: #a8bdd8; font-size: 0.92rem; margin: 0 0 1rem; }
+    label { display: block; margin: 0.55rem 0; font-size: 0.85rem; color: #a8bdd8; }
+    input { display: block; width: 100%; box-sizing: border-box; margin-top: 0.25rem;
+      padding: 0.55rem 0.65rem; border-radius: 8px; border: 1px solid #2a3a55;
+      background: #121a2b; color: #e8eef7; font: inherit; }
+    .row { display:flex; flex-wrap:wrap; gap:0.5rem; margin-top:0.75rem; }
+    button { padding: 0.55rem 0.9rem; border-radius: 8px; border: 1px solid #2a6df4;
+      background: #1a3a7a; color: #fff; font-weight: 600; cursor: pointer; }
+    button.ghost { background: transparent; border-color: #94a3b8; }
+    .card { margin-top: 1rem; padding: 1rem; border-radius: 10px; border: 1px solid #2a3a55; }
+    .card.grant { border-color: #1f9d63; background: rgba(31,157,99,0.12); }
+    .card.refuse { border-color: #d64545; background: rgba(214,69,69,0.12); }
+    table { width:100%; border-collapse: collapse; margin-top:0.75rem; font-size:0.88rem; }
+    th, td { text-align:left; padding:0.35rem 0.4rem; border-bottom:1px solid #2a3a55; font-family: ui-monospace, monospace; }
+    tr.fail td { color:#fca5a5; }
+    .stages { display:flex; flex-wrap:wrap; gap:0.4rem; margin:0.75rem 0; font-size:0.8rem; color:#a8bdd8; }
+    .stages span.on { color:#6ee7a8; font-weight:700; }
+    a { color: #9ec5ff; }
+  </style>
+</head>
+<body>
+  <h1>Sorting machine</h1>
+  <p class="lede">One law: <strong>C ≤ S</strong> (claimed ≤ source) componentwise. Bucket GRANT or REFUSE — never chat yes/no. Starts empty.</p>
+  <div class="stages" id="stages">
+    <span>1 Intake</span><span>2 Filter</span><span>3 Evidence</span><span>4 Verdict</span><span>5 Store</span>
+  </div>
+  <label>Claimed (C)<input id="claimed" value="" placeholder="90, 60, 20, 10" /></label>
+  <label>Source (S)<input id="source" value="" placeholder="100, 50, 25, 10" /></label>
+  <div class="row">
+    <button type="button" class="ghost" id="loadG">Load GRANT</button>
+    <button type="button" class="ghost" id="loadR">Load REFUSE</button>
+    <button type="button" class="ghost" id="reset">Reset</button>
+    <button type="button" id="run">Sort C ≤ S</button>
+  </div>
+  <div id="out"></div>
+  <p><a href="/">← CeilingGate board</a></p>
+  <script>
+    function parseList(s) {
+      return s.split(/[\s,]+/).map(x => x.trim()).filter(Boolean).map(Number).filter(n => Number.isFinite(n));
+    }
+    function enclosed(S, C) {
+      if (S.length !== C.length) return false;
+      for (let i = 0; i < S.length; i++) if (!(C[i] <= S[i])) return false;
+      return true;
+    }
+    function breaches(S, C, idx) {
+      if (!S.length || !C.length) return [];
+      const rest = breaches(S.slice(1), C.slice(1), idx + 1);
+      return S[0] < C[0] ? [idx, ...rest] : rest;
+    }
+    function maskOf(failed) { return failed.reduce((a,i) => a | (1 << i), 0); }
+    function gateB(S, C) {
+      if (enclosed(S, C)) return { status: "grant", mask: 0, failed: [] };
+      const failed = breaches(S, C, 0);
+      const m = maskOf(failed);
+      return { status: "refuse", mask: m === 0 ? 1 : m, failed };
+    }
+    const cEl = document.getElementById("claimed");
+    const sEl = document.getElementById("source");
+    const out = document.getElementById("out");
+    const stageEls = [...document.querySelectorAll("#stages span")];
+    function mark(n) {
+      stageEls.forEach((el, i) => el.classList.toggle("on", i < n));
+    }
+    document.getElementById("loadG").onclick = () => {
+      cEl.value = "98, 49, 25, 9"; sEl.value = "100, 50, 25, 10"; mark(1); out.innerHTML = "";
+    };
+    document.getElementById("loadR").onclick = () => {
+      cEl.value = "90, 60, 20, 10"; sEl.value = "100, 50, 25, 10"; mark(1); out.innerHTML = "";
+    };
+    document.getElementById("reset").onclick = () => {
+      cEl.value = ""; sEl.value = ""; mark(0); out.innerHTML = "";
+    };
+    document.getElementById("run").onclick = () => {
+      const C = parseList(cEl.value);
+      const S = parseList(sEl.value);
+      mark(4);
+      const d = gateB(S, C);
+      mark(5);
+      const n = Math.max(C.length, S.length);
+      let rows = "";
+      for (let i = 0; i < n; i++) {
+        const c = C[i] ?? 0, s = S[i] ?? 0;
+        const over = Number.isFinite(C[i]) && Number.isFinite(S[i]) && C[i] > S[i];
+        rows += `<tr class="${over ? "fail" : ""}"><td>${i}</td><td>${c}</td><td>${s}</td><td>${over ? "C > S" : "C ≤ S"}</td></tr>`;
+      }
+      const bucket = d.status === "grant" && d.mask === 0 ? "GRANT" : "REFUSE";
+      out.innerHTML = `<div class="card ${d.status}"><strong>Bucket ${bucket}</strong>
+        <div>mask ${d.mask}${d.mask === 0 ? " · all lines C ≤ S" : " · fail [" + d.failed.join(",") + "]"}</div>
+        <table><thead><tr><th>LINE</th><th>C</th><th>S</th><th>C≤S</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+    };
+  </script>
+</body>
+</html>
