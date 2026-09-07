@@ -1,7 +1,7 @@
-# Lesson card — cba6206
+# Lesson card — 490f76f
 
 1. What changed
-ui: first screen is two buttons — prize, sorting, and Forge off the fold
+visual: fortress residual-ledger instrument plate CSS
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
