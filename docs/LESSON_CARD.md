@@ -1,7 +1,7 @@
-# Lesson card — 2d5878b
+# Lesson card — 9bbcbaf
 
 1. What changed
-revert: restore dark forensic stamps (drop FUI fleet chrome)
+docs: WIN FOCUS — setup prompt + working app URL on UPDATE pack
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
