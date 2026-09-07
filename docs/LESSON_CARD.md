@@ -1,7 +1,7 @@
-# Lesson card — a21dc2d
+# Lesson card — 047b0a7
 
 1. What changed
-forge: sorting machine LIVE — C≤S line + GRANT/REFUSE buckets
+visual: polish Create sort structure — C≤S chips, #sorting-line, forge page
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
