@@ -1,7 +1,7 @@
-# Lesson card — 5f01952
+# Lesson card — 059506d
 
 1. What changed
-visual: standing-n — REFUSE fail-row + overclaim slip glow
+visual: standing-o/p — GRANT slip glow + denser steps
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
