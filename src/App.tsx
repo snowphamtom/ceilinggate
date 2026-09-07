@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useAction, useQuery } from "convex/react";
 import { api } from "../convex/_generated/api";
 import demo from "./data/demo.json";
@@ -1184,25 +1184,78 @@ function FaultTaxonomyPanel() {
 }
 
 
-
 function SortingMachinePanel() {
   const [claimedStr, setClaimedStr] = useState("");
   const [sourceStr, setSourceStr] = useState("");
   const [decision, setDecision] = useState<GateDecision | null>(null);
   const [stage, setStage] = useState<0 | 1 | 2 | 3 | 4 | 5>(0);
+  const [klaus, setKlaus] = useState(0); // 0..5 MAP→EXECUTED
+  const [driveBucket, setDriveBucket] = useState<string | null>(null);
+  const [continuous, setContinuous] = useState(false);
+  const timerRef = useRef<number | null>(null);
+
+  const klausStages = ["MAP", "PROPOSE", "PLATES", "HOLDS", "EXECUTED"] as const;
+  const stages = ["Intake", "Filter", "Evidence", "Verdict", "Store"] as const;
 
   useEffect(() => {
     setDecision(null);
     setStage(0);
+    setKlaus(0);
+    setDriveBucket(null);
     const onPageShow = (e: PageTransitionEvent) => {
       if (e.persisted) {
         setDecision(null);
         setStage(0);
+        setKlaus(0);
+        setDriveBucket(null);
+        setContinuous(false);
       }
     };
     window.addEventListener("pageshow", onPageShow);
     return () => window.removeEventListener("pageshow", onPageShow);
   }, []);
+
+  useEffect(() => {
+    if (!continuous) {
+      if (timerRef.current) {
+        window.clearInterval(timerRef.current);
+        timerRef.current = null;
+      }
+      return;
+    }
+    let tick = 0;
+    const fixtures = [
+      { c: "98, 49, 25, 9", s: "100, 50, 25, 10", bucket: "KEEP→GRANT" },
+      { c: "90, 60, 20, 10", s: "100, 50, 25, 10", bucket: "WATCH→REFUSE" },
+      { c: "40, 20, 10", s: "40, 20, 10", bucket: "HOLD→GRANT" },
+    ] as const;
+    timerRef.current = window.setInterval(() => {
+      const f = fixtures[tick % fixtures.length];
+      setClaimedStr(f.c);
+      setSourceStr(f.s);
+      setDriveBucket(f.bucket);
+      setStage(1);
+      setKlaus(1);
+      window.setTimeout(() => {
+        setStage(2);
+        setKlaus(2);
+      }, 280);
+      window.setTimeout(() => {
+        setStage(3);
+        setKlaus(3);
+        const d = gateB(parseNumList(f.s), parseNumList(f.c));
+        setDecision(d);
+      }, 560);
+      window.setTimeout(() => {
+        setStage(5);
+        setKlaus(5);
+      }, 820);
+      tick += 1;
+    }, 2400);
+    return () => {
+      if (timerRef.current) window.clearInterval(timerRef.current);
+    };
+  }, [continuous]);
 
   const claimed = parseNumList(claimedStr);
   const source = parseNumList(sourceStr);
@@ -1211,33 +1264,69 @@ function SortingMachinePanel() {
     const c = parseNumList(claimedStr);
     const s = parseNumList(sourceStr);
     setStage(3);
+    setKlaus(Math.max(klaus, 3));
     const d = gateB(s, c);
     setDecision(d);
     setStage(5);
-  }, [claimedStr, sourceStr]);
+    setKlaus(5);
+  }, [claimedStr, sourceStr, klaus]);
 
   const loadGrant = () => {
+    setContinuous(false);
     setClaimedStr("98, 49, 25, 9");
     setSourceStr("100, 50, 25, 10");
+    setDriveBucket("KEEP→GRANT");
     setStage(1);
+    setKlaus(1);
     setDecision(null);
   };
   const loadRefuse = () => {
+    setContinuous(false);
     setClaimedStr("90, 60, 20, 10");
     setSourceStr("100, 50, 25, 10");
+    setDriveBucket("WATCH→REFUSE");
     setStage(1);
+    setKlaus(1);
+    setDecision(null);
+  };
+  const loadDriveKeep = () => {
+    setContinuous(false);
+    // Drive KEEP heuristic → comfortable C≤S
+    setClaimedStr("12, 8, 4, 2");
+    setSourceStr("20, 10, 5, 3");
+    setDriveBucket("DRIVE KEEP");
+    setStage(1);
+    setKlaus(2);
+    setDecision(null);
+  };
+  const loadDriveNoise = () => {
+    setContinuous(false);
+    // Drive NOISE/IGNORE → clear overage
+    setClaimedStr("50, 30");
+    setSourceStr("10, 5");
+    setDriveBucket("DRIVE NOISE→REFUSE");
+    setStage(1);
+    setKlaus(2);
     setDecision(null);
   };
 
-  const stages = ["Intake", "Filter", "Evidence", "Verdict", "Store"] as const;
-
   return (
     <div className="forge-child" id="sorting-machine-live" data-testid="sorting-machine-live">
-      <h3 className="forge-sub">Sorting machine — LIVE</h3>
+      <h3 className="forge-sub">Sorting machine — LIVE · continuous</h3>
       <p className="muted small">
         One law: <strong>C ≤ S</strong> (claimed ≤ source) on every line. Output is a bucket —{" "}
-        <strong>GRANT</strong> or <strong>REFUSE</strong> — never a chat shrug.
+        <strong>GRANT</strong> or <strong>REFUSE</strong> — never a chat shrug. Klaus stages + Drive sort wired in.
       </p>
+      <ol className="pass-bar muted small klaus-bar" aria-label="Klaus Drive stages">
+        {klausStages.map((name, i) => (
+          <li key={name}>
+            <strong className={klaus > i ? "ok" : undefined}>
+              {i + 1}. {name}
+            </strong>
+            {klaus > i ? " ✓" : ""}
+          </li>
+        ))}
+      </ol>
       <ol className="pass-bar muted small" aria-label="Sort stages">
         {stages.map((name, i) => (
           <li key={name}>
@@ -1248,14 +1337,21 @@ function SortingMachinePanel() {
           </li>
         ))}
       </ol>
+      {driveBucket ? (
+        <p className="muted small drive-bucket-chip">
+          Drive lane: <strong>{driveBucket}</strong>
+        </p>
+      ) : null}
       <label className="forge-label">
         Claimed (C)
         <input
           className="forge-input"
           value={claimedStr}
           onChange={(e) => {
+            setContinuous(false);
             setClaimedStr(e.target.value);
             setStage(1);
+            setKlaus(1);
             setDecision(null);
           }}
           placeholder="90, 60, 20, 10"
@@ -1267,8 +1363,10 @@ function SortingMachinePanel() {
           className="forge-input"
           value={sourceStr}
           onChange={(e) => {
+            setContinuous(false);
             setSourceStr(e.target.value);
             setStage(2);
+            setKlaus(2);
             setDecision(null);
           }}
           placeholder="100, 50, 25, 10"
@@ -1281,14 +1379,30 @@ function SortingMachinePanel() {
         <button type="button" className="ghost" onClick={loadRefuse}>
           Load REFUSE sort (C&gt;S on a line)
         </button>
+        <button type="button" className="ghost" onClick={loadDriveKeep}>
+          Drive KEEP
+        </button>
+        <button type="button" className="ghost" onClick={loadDriveNoise}>
+          Drive NOISE
+        </button>
+        <button
+          type="button"
+          className={continuous ? "primary" : "ghost"}
+          onClick={() => setContinuous((v) => !v)}
+        >
+          {continuous ? "Stop continuous" : "Continuous sort"}
+        </button>
         <button
           type="button"
           className="ghost"
           onClick={() => {
+            setContinuous(false);
             setClaimedStr("");
             setSourceStr("");
             setDecision(null);
             setStage(0);
+            setKlaus(0);
+            setDriveBucket(null);
           }}
         >
           Reset
@@ -1312,6 +1426,7 @@ function SortingMachinePanel() {
                 ? " · all lines C ≤ S"
                 : ` · fail lines [${decision.failedIndices.join(",")}]`}
             </span>
+            {driveBucket ? <span className="mask-chip">{driveBucket}</span> : null}
           </div>
           <GateLedgerTable
             lines={Array.from({

@@ -57,6 +57,10 @@
       padding: 0.35rem 0.65rem; border-radius: 999px; border: 1px solid var(--line);
       color: var(--mute); background: rgba(10,18,32,0.8);
     }
+    #klaus span.on {
+      color: #7ad4ff; border-color: rgba(61,200,255,0.65);
+      background: rgba(61,125,255,0.16); font-weight: 700;
+    }
     .stages span.on {
       color: #6ee7a8; border-color: rgba(31,157,99,0.65);
       background: rgba(31,157,99,0.16); font-weight: 700;
@@ -206,14 +210,30 @@
     <div class="kicker">Expense check · sorting machine</div>
     <h1>Sorting machine</h1>
     <p class="lede">One law: <strong>C ≤ S</strong> (claimed ≤ source) componentwise. Bucket <strong>GRANT</strong> or <strong>REFUSE</strong> — never chat yes/no. Starts empty.</p>
-    <div class="stages" id="stages">
-      <span>1 Intake</span><span>2 Filter</span><span>3 Evidence</span><span>4 Verdict</span><span>5 Store</span>
+        <div class="stages" id="klaus" aria-label="Klaus stages">
+      <span data-k="0">1 MAP</span>
+      <span data-k="1">2 PROPOSE</span>
+      <span data-k="2">3 PLATES</span>
+      <span data-k="3">4 HOLDS</span>
+      <span data-k="4">5 EXECUTED</span>
     </div>
+    <div class="stages" id="stages">
+      <span>1 Intake</span>
+      <span>2 Filter</span>
+      <span>3 Evidence</span>
+      <span>4 Verdict</span>
+      <span>5 Store</span>
+    </div>
+    <p class="lede" id="driveChip" style="display:none;margin-top:-0.5rem"></p>
+
     <div class="panel">
       <label>Claimed (C)<input id="claimed" value="" placeholder="98, 49, 25, 9" autocomplete="off" /></label>
       <label>Source (S)<input id="source" value="" placeholder="100, 50, 25, 10" autocomplete="off" /></label>
       <div class="row">
         <button type="button" class="grantish" id="loadG">Load GRANT</button>
+        <button type="button" class="ghost" id="loadKeep">Drive KEEP</button>
+        <button type="button" class="ghost" id="loadNoise">Drive NOISE</button>
+        <button type="button" class="ghost" id="cont">Continuous</button>
         <button type="button" class="refuseish" id="loadR">Load REFUSE</button>
         <button type="button" class="ghost" id="reset">Reset</button>
         <button type="button" class="primary" id="run">Sort C ≤ S</button>
@@ -248,6 +268,17 @@
     const sEl = document.getElementById("source");
     const out = document.getElementById("out");
     const stageEls = [...document.querySelectorAll("#stages span")];
+    const klausEls = [...document.querySelectorAll("#klaus span")];
+    const driveChip = document.getElementById("driveChip");
+    function markKlaus(n) {
+      klausEls.forEach((el, i) => el.classList.toggle("on", i < n));
+    }
+    function setDrive(label) {
+      if (!driveChip) return;
+      if (!label) { driveChip.style.display = "none"; driveChip.textContent = ""; return; }
+      driveChip.style.display = "block";
+      driveChip.innerHTML = "Drive lane: <strong>" + label + "</strong>";
+    }
     function mark(n) {
       stageEls.forEach((el, i) => el.classList.toggle("on", i < n));
     }
@@ -304,6 +335,49 @@
         <div class="admit">${admit}</div>
       </div>`;
     };
+  
+    document.getElementById("loadKeep").onclick = () => {
+      stopCont();
+      claimed.value = "12, 8, 4, 2";
+      source.value = "20, 10, 5, 3";
+      setDrive("DRIVE KEEP");
+      mark(1); markKlaus(2); awaiting();
+    };
+    document.getElementById("loadNoise").onclick = () => {
+      stopCont();
+      claimed.value = "50, 30";
+      source.value = "10, 5";
+      setDrive("DRIVE NOISE→REFUSE");
+      mark(1); markKlaus(2); awaiting();
+    };
+    let contTimer = null;
+    function stopCont() {
+      if (contTimer) { clearInterval(contTimer); contTimer = null; }
+      const b = document.getElementById("cont");
+      if (b) b.textContent = "Continuous";
+    }
+    document.getElementById("cont").onclick = () => {
+      if (contTimer) { stopCont(); return; }
+      document.getElementById("cont").textContent = "Stop continuous";
+      const fixtures = [
+        { c: "98, 49, 25, 9", s: "100, 50, 25, 10", d: "KEEP→GRANT" },
+        { c: "90, 60, 20, 10", s: "100, 50, 25, 10", d: "WATCH→REFUSE" },
+        { c: "40, 20, 10", s: "40, 20, 10", d: "HOLD→GRANT" },
+      ];
+      let tick = 0;
+      const pulse = () => {
+        const f = fixtures[tick % fixtures.length];
+        claimed.value = f.c; source.value = f.s; setDrive(f.d);
+        mark(1); markKlaus(1);
+        setTimeout(() => { mark(2); markKlaus(2); }, 280);
+        setTimeout(() => { mark(3); markKlaus(3); document.getElementById("run").click(); }, 560);
+        setTimeout(() => { markKlaus(5); }, 900);
+        tick++;
+      };
+      pulse();
+      contTimer = setInterval(pulse, 2400);
+    };
+
   </script>
 </body>
 </html>
