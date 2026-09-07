@@ -1,7 +1,7 @@
-# Lesson card — cb2316f
+# Lesson card — b7c8407
 
 1. What changed
-visual: forge sorting-machine stamped GRANT/REFUSE buckets (style restore)
+fix: surface sorting machine on first-paint + forge SPA-CSS inject glue
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
