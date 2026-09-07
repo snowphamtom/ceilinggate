@@ -1,7 +1,7 @@
-# Lesson card — 047b0a7
+# Lesson card — afe4445
 
 1. What changed
-visual: polish Create sort structure — C≤S chips, #sorting-line, forge page
+style: stamp-grade forge sorting-machine (no Google Fonts)
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
