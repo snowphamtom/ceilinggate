@@ -1,8 +1,11 @@
-/* Judge first paint: two buttons + ledger. Extra rooms stay in the DOM. */
+/* Judge first paint. Extra rooms stay in the DOM for /forge/* routes. */
 .stakes-line,
 .originality-line,
 .prize-honesty,
 .mask-row,
+.sort-first,
+#sorting-machine-first,
+#sorting-line,
 #live-child-gates,
 #forge-open-live {
   display: none !important;
