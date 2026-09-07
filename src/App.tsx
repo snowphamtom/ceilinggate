@@ -123,7 +123,7 @@ export default function App() {
       </header>
 
       <section className="try-now" aria-label="Try it">
-        <p className="try-label">Try it</p>
+        <p className="try-label">Try it · C ≤ S → GRANT / REFUSE</p>
         <div className="oneclick">
           <button type="button" className="grant-btn" onClick={() => { const f = pickByExpect("grant"); if (f) runOne(f); }}>Demo GRANT</button>
           <button type="button" className="refuse-btn" onClick={() => { const f = pickByExpect("refuse"); if (f) runOne(f); }}>Demo REFUSE</button>

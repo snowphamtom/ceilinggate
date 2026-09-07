@@ -1986,3 +1986,84 @@ body::before {
     transform: none;
   }
 }
+
+/* —— WIN FOCUS: dark C≤S stamps — help judges click Demo GRANT/REFUSE —— */
+.try-now .oneclick {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.try-now .grant-btn,
+.try-now .refuse-btn {
+  flex: 1 1 11rem;
+  min-height: 3.5rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.45), 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+.try-now .grant-btn {
+  background: linear-gradient(180deg, rgba(31, 157, 99, 0.28), rgba(12, 28, 22, 0.95));
+  border: 2px solid #3dde95;
+  color: #c8f7de;
+  text-shadow: 0 0 12px rgba(61, 222, 149, 0.35);
+}
+
+.try-now .grant-btn:hover,
+.try-now .grant-btn:focus-visible {
+  filter: brightness(1.08);
+  box-shadow: 0 0 0 2px rgba(61, 222, 149, 0.35), 0 0 28px rgba(61, 222, 149, 0.25);
+}
+
+.try-now .refuse-btn {
+  background: linear-gradient(180deg, rgba(224, 69, 69, 0.26), rgba(28, 12, 16, 0.95));
+  border: 2px solid #ff8a8a;
+  color: #ffd0d0;
+  text-shadow: 0 0 12px rgba(255, 138, 138, 0.3);
+}
+
+.try-now .refuse-btn:hover,
+.try-now .refuse-btn:focus-visible {
+  filter: brightness(1.08);
+  box-shadow: 0 0 0 2px rgba(255, 138, 138, 0.35), 0 0 28px rgba(224, 69, 69, 0.28);
+}
+
+.card.big .verdict-stamp {
+  background: rgba(6, 10, 18, 0.92);
+  border-width: 3px;
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.6),
+    0 0 32px currentColor;
+}
+
+.card.grant.big .verdict-stamp {
+  color: #3dde95;
+  border-color: #3dde95;
+}
+
+.card.refuse.big .verdict-stamp {
+  color: #ff8a8a;
+  border-color: #ff8a8a;
+}
+
+.verdict-panel .card.big {
+  scroll-margin-top: 1rem;
+}
+
+/* Soft pulse once stamp lands — dark board only */
+.card.grant.big .verdict-stamp,
+.card.refuse.big .verdict-stamp {
+  animation: stampLand 0.55s ease-out 1;
+}
+
+@keyframes stampLand {
+  0% {
+    transform: rotate(-2deg) scale(0.92);
+    opacity: 0.55;
+  }
+  100% {
+    transform: rotate(-2deg) scale(1);
+    opacity: 1;
+  }
+}
