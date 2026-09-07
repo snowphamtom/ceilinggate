@@ -1,7 +1,7 @@
-# Lesson card — 67bda64
+# Lesson card — 7ef8c15
 
 1. What changed
-feat(ui): FUI fleet light chrome on main board
+visual: style Create data-fui-section // labels on light FUI
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
