@@ -1735,6 +1735,21 @@ textarea.forge-input {
   background: rgba(7, 11, 20, 0.65);
 }
 
+
+
+/* —— Standing polish n: refuse fail-row glow —— */
+.ledger tr.fail td {
+  background: rgba(224, 69, 69, 0.16);
+}
+
+.card.refuse.big .plain-fail {
+  box-shadow: inset 3px 0 0 var(--refuse);
+}
+
+.paper-slip-fill.over {
+  box-shadow: inset 0 0 12px rgba(255, 100, 100, 0.25);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .card.grant,
   .card.refuse,
