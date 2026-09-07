@@ -128,7 +128,7 @@ export default function App() {
           <button type="button" className="grant-btn" onClick={() => {
             const f = pickByExpect("grant");
             if (f) runOne(f);
-            queue.requestAnimationFrame(() => {
+            window.requestAnimationFrame(() => {
               document.getElementById("verdict-live")?.scrollIntoView({ behavior: "smooth", block: "nearest" });
             });
           }}>Demo GRANT</button>
