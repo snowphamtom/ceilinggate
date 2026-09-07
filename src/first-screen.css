@@ -10,3 +10,11 @@
 #forge-open-live {
   display: none !important;
 }
+
+/* Keep first paint on dark forensic void — no light FUI / fui-fleet */
+.shell.board,
+.try-now,
+.panel.verdict-panel {
+  background-color: #070b14;
+}
+
