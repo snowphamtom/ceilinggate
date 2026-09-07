@@ -1,4 +1,4 @@
-import { readdirSync, readFileSync } from "fs";
+import { readdirSync, readFileSync, writeFileSync } from "fs";
 import { join, relative } from "path";
 import { spawnSync } from "child_process";
 import { randomUUID } from "crypto";
@@ -52,8 +52,55 @@ function collect(dir, base = dir) {
   return out;
 }
 
+
+function injectSpaCssIntoForge(distDir = "./dist") {
+  const assets = join(distDir, "assets");
+  let cssName = "";
+  try {
+    cssName = readdirSync(assets).find((f) => f.endsWith(".css")) || "";
+  } catch {
+    return;
+  }
+  if (!cssName) return;
+  const href = `/assets/${cssName}`;
+  const forgeRoot = join(distDir, "forge");
+  const htmlFiles = [];
+  function walk(dir) {
+    for (const ent of readdirSync(dir, { withFileTypes: true })) {
+      const full = join(dir, ent.name);
+      if (ent.isDirectory()) walk(full);
+      else if (ent.name.endsWith(".html")) htmlFiles.push(full);
+    }
+  }
+  try {
+    walk(forgeRoot);
+  } catch {
+    return;
+  }
+  const tag = `<link rel="stylesheet" href="${href}" data-spa-css="1" />`;
+  for (const file of htmlFiles) {
+    let html = readFileSync(file, "utf8");
+    // Self-styled forge demos (stamps/ledger) — do not inject SPA CSS (it flattens them)
+    if (html.includes('data-forge-self-style="1"')) {
+      console.log("spa-css skip", relative(distDir, file));
+      continue;
+    }
+    if (html.includes('data-spa-css="1"')) {
+      html = html.replace(/<link rel="stylesheet" href="\/assets\/[^"]+" data-spa-css="1" \/>/, tag);
+    } else if (html.includes("</head>")) {
+      html = html.replace("</head>", `  ${tag}\n</head>`);
+    } else {
+      continue;
+    }
+    // keep Visual chrome; shared SPA CSS is additive
+    writeFileSync(file, html);
+    console.log("spa-css", relative(distDir, file), "→", href);
+  }
+}
+
 async function main() {
   loadEnv();
+  injectSpaCssIntoForge("./dist");
   const files = collect("./dist");
   const deploymentId = randomUUID();
   console.log("uploading", files.length, "files", deploymentId);
