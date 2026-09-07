@@ -1,7 +1,7 @@
-# Lesson card — 9c8d538
+# Lesson card — a21dc2d
 
 1. What changed
-visual: SORTING MACHINE — ledger/GRANT/REFUSE clarity over decoration
+forge: sorting machine LIVE — C≤S line + GRANT/REFUSE buckets
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
