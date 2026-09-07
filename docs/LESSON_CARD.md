@@ -1,7 +1,7 @@
-# Lesson card — 246e4b8
+# Lesson card — 7e8f4a7
 
 1. What changed
-fix: window.requestAnimationFrame in Demo GRANT/REFUSE scroll
+ui: first screen is two buttons and a stamp — workshop stays in App.tsx unused on home
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
