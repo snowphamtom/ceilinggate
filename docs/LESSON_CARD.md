@@ -1,7 +1,7 @@
-# Lesson card — 42c6337
+# Lesson card — a7845d4
 
 1. What changed
-visual: fortress residual-ledger instrument plate CSS
+visual: Drive residual caliper CSS (scan sweep + docket)
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
