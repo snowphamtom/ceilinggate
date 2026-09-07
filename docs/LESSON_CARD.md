@@ -1,7 +1,7 @@
-# Lesson card — 3e41a28
+# Lesson card — f2a04e6
 
 1. What changed
-fix: mount sorting machine on first-paint (was hidden under live-child-gates)
+fix: inject SPA CSS hash into self-styled forge pages (Visual ACK)
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
