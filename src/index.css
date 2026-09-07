@@ -3078,3 +3078,22 @@ h1 {
 #sorting-machine-live .pass-bar strong.ok { color: var(--grant); }
 .panel.sort-first { border-color: rgba(122, 61, 255, 0.22); }
 .cash-table, .never-table { color: var(--ink); }
+
+/* data-fui-section // labels from Create markup */
+[data-fui-section]::before {
+  content: attr(data-fui-section);
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  margin: 0 0 0.45rem;
+}
+.fui-panel[data-fui-section] > .try-label::before,
+.fui-panel[data-fui-section] > .eyebrow::before {
+  /* avoid double // when attr label present */
+  content: none;
+}
+
