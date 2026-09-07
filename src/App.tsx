@@ -125,8 +125,20 @@ export default function App() {
       <section className="try-now" aria-label="Try it">
         <p className="try-label">Try it · C ≤ S → GRANT / REFUSE</p>
         <div className="oneclick">
-          <button type="button" className="grant-btn" onClick={() => { const f = pickByExpect("grant"); if (f) runOne(f); }}>Demo GRANT</button>
-          <button type="button" className="refuse-btn" onClick={() => { const f = pickByExpect("refuse"); if (f) runOne(f); }}>Demo REFUSE</button>
+          <button type="button" className="grant-btn" onClick={() => {
+            const f = pickByExpect("grant");
+            if (f) runOne(f);
+            queue.requestAnimationFrame(() => {
+              document.getElementById("verdict-live")?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+            });
+          }}>Demo GRANT</button>
+          <button type="button" className="refuse-btn" onClick={() => {
+            const f = pickByExpect("refuse");
+            if (f) runOne(f);
+            window.requestAnimationFrame(() => {
+              document.getElementById("verdict-live")?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+            });
+          }}>Demo REFUSE</button>
         </div>
       </section>
 
@@ -188,7 +200,7 @@ export default function App() {
       </section>
 
       <div className="board-grid">
-        <section className="panel verdict-panel">
+        <section className="panel verdict-panel" id="verdict-live">
           <h2>Result</h2>
           {!selected ? (
             <p className="muted empty">Tap Demo GRANT or Demo REFUSE above.</p>
