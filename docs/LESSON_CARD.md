@@ -1,7 +1,7 @@
-# Lesson card — f87e38c
+# Lesson card — 170e82a
 
 1. What changed
-ui: COMPLETE SCRATCH — SPA is Sorting Machine only
+ui: LOOM FLIP — continuous GATHER→SORT (not organize-in-place)
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
