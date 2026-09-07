@@ -1,7 +1,7 @@
-# Lesson card — 059506d
+# Lesson card — 9c8d538
 
 1. What changed
-visual: standing-o/p — GRANT slip glow + denser steps
+visual: SORTING MACHINE — ledger/GRANT/REFUSE clarity over decoration
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
