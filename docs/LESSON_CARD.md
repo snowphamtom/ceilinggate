@@ -1,7 +1,7 @@
-# Lesson card — 4f54c6a
+# Lesson card — 13a9b41
 
 1. What changed
-visual: standing-l — denser ADMIT/REFUSE conjunctive lines
+docs: CARD LOCK — vibeapps slug ceilinggate-1
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
