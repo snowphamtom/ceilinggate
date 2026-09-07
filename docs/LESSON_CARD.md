@@ -1,7 +1,7 @@
-# Lesson card — 7910069
+# Lesson card — 58012fa
 
 1. What changed
-fix: harden site publish race so /assets cannot 404
+ui: absorb LENS optic package into GATHER→SORT chrome
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
