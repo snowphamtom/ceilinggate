@@ -1,7 +1,7 @@
-# Lesson card — 9b8e37c
+# Lesson card — 59de881
 
 1. What changed
-ui: continuous Sorting Machine — Klaus stages + Drive sort live
+ui: LOOM continuous Sorting Machine — Klaus + Drive live face
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
