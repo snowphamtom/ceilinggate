@@ -12,6 +12,7 @@ type Props = {
   onClaimEdit: (idx: number, value: string) => void;
   onSourceEdit: (idx: number, value: string) => void;
   fails: string[];
+  showAwait?: boolean;
 };
 
 function money(n: number) {
@@ -33,6 +34,7 @@ export function DemoGate({
   onClaimEdit,
   onSourceEdit,
   fails,
+  showAwait = false,
 }: Props) {
   const ok = decision.status === "grant" && decision.mask === 0;
   return (
@@ -105,6 +107,14 @@ export function DemoGate({
           })}
         </tbody>
       </table>
+      {showAwait ? (
+        <div className="sm-verdict await" aria-live="polite">
+          <div>
+            <strong>AWAITING RESIDUAL SCAN</strong>
+            <p style={{margin:"0.35rem 0 0",color:"#8fa3bf",fontSize:"0.78rem"}}>Tap Demo GRANT / REFUSE — or edit C / S</p>
+          </div>
+        </div>
+      ) : (
       <div className={"sm-verdict " + (ok ? "grant" : "refuse")}>
         <div className="sm-verdict-stamp">{ok ? "GRANT" : "REFUSE"}</div>
         {fails.length ? (
@@ -123,6 +133,7 @@ export function DemoGate({
             : " · all clear"}
         </p>
       </div>
+      )}
     </section>
   );
 }

@@ -216,6 +216,7 @@ export default function App() {
           onClaimEdit={onClaimEdit}
           onSourceEdit={onSourceEdit}
           fails={fails}
+          showAwait={decision == null}
         />
 
         <CascadeLane />
