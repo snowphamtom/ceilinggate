@@ -1,7 +1,7 @@
-# Lesson card — 42c6337
+# Lesson card — f3a01ce
 
 1. What changed
-visual: fortress residual-ledger instrument plate CSS
+fix: restore App.tsx after cba6206 stub wipe
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
