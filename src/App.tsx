@@ -138,6 +138,20 @@ export default function App() {
         <li><strong>Store</strong> — bucket <strong>GRANT</strong> or <strong>REFUSE</strong> on the live board</li>
       </ol>
 
+      <section className="panel sort-first" id="sorting-machine-first" aria-label="Sorting machine">
+        <p className="eyebrow">Sorting machine</p>
+        <h2>C ≤ S</h2>
+        <p className="muted small">
+          One law: claimed ≤ source on every line → bucket <strong>GRANT</strong> or{" "}
+          <strong>REFUSE</strong>.{" "}
+          <a href="/forge/sorting-machine/" target="_blank" rel="noreferrer">
+            Open styled forge page
+          </a>
+          .
+        </p>
+        <SortingMachinePanel />
+      </section>
+
       <section className="panel prize-honesty" id="prize-honesty" aria-label="Prize honesty">
         <p className="eyebrow">Judge cash honesty</p>
         <h2>All Gas cash (Luma)</h2>
@@ -265,7 +279,6 @@ export default function App() {
         <DualOracleDisagreePanel />
         <FaultTaxonomyPanel />
         <ChatShrugTrapPanel />
-        <SortingMachinePanel />
       </section>
 
       <section className="panel forge-panel" id="forge-open-live" aria-label="Open live Forge apps">
