@@ -1,7 +1,7 @@
-# Lesson card — 9bbcbaf
+# Lesson card — acadf27
 
 1. What changed
-docs: WIN FOCUS — setup prompt + working app URL on UPDATE pack
+polish: dark C≤S Demo GRANT/REFUSE stamps for judge clicks
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
