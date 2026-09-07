@@ -1,9 +1,9 @@
 const PIPE_STAGES = [
-  { id: "intake", label: "Intake", hint: "AgentMail / claim" },
-  { id: "filter", label: "Filter", hint: "real object only" },
+  { id: "gather", label: "Gather", hint: "mail · web · drive" },
+  { id: "triage", label: "Triage", hint: "real objects only" },
   { id: "evidence", label: "Evidence", hint: "Firecrawl ledger" },
-  { id: "verdict", label: "Verdict", hint: "C ≤ S gates" },
-  { id: "store", label: "Store", hint: "GRANT / REFUSE" },
+  { id: "sort", label: "Sort", hint: "C ≤ S gates" },
+  { id: "bucket", label: "Bucket", hint: "GRANT / REFUSE" },
 ] as const;
 
 type Props = {
@@ -11,10 +11,10 @@ type Props = {
   hasDecision: boolean;
 };
 
-/** Continuous organizing stages: intake → filter → evidence → verdict → store */
+/** Continuous GATHER→SORT machine — not organize-in-place */
 export function SortingMachineStages({ activePipe, hasDecision }: Props) {
   return (
-    <section className="sm-pipeline" aria-label="Sorting machine stages">
+    <section className="sm-pipeline" aria-label="Gather to sort stages">
       <div className="sm-pipe-track">
         {PIPE_STAGES.map((s, i) => {
           const lit = i === activePipe || hasDecision;
@@ -42,8 +42,9 @@ export function SortingMachineStages({ activePipe, hasDecision }: Props) {
         })}
       </div>
       <p className="sm-law">
-        Law <span className="sm-law-chip">C ≤ S</span> componentwise · leftover on
-        one line cannot cover a hole on another
+        Machine law: <span className="sm-law-chip">GATHER → SORT</span> then{" "}
+        <span className="sm-law-chip">C ≤ S</span> — never organize-in-place, never
+        chat shrug
       </p>
     </section>
   );

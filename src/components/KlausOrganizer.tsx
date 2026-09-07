@@ -4,7 +4,7 @@ const KLAUS_ORDER = ["mara", "cole", "rina", "vince", "execute"] as const;
 
 type Props = { lane: OrganizerLane };
 
-/** Klaus ring live organizer: Mara / Cole / Rina / Vince / Execute */
+/** Klaus gather→sort feed: Mara / Cole / Rina / Vince / Execute — not organize-in-place */
 export function KlausOrganizer({ lane }: Props) {
   const byId = new Map(lane.stages.map((s) => [s.id, s]));
   const stages = KLAUS_ORDER.map((id) => {
@@ -18,10 +18,10 @@ export function KlausOrganizer({ lane }: Props) {
   });
 
   return (
-    <section className="sm-panel" aria-label="Klaus organizer lane">
+    <section className="sm-panel" aria-label="Klaus gather to sort feed">
       <div className="sm-panel-head">
-        <h2>Organizer lane</h2>
-        <span className="sm-chip">Klaus · fleet-gerbil-682</span>
+        <h2>Gather → sort feed</h2>
+        <span className="sm-chip">Klaus feed · Evidence</span>
       </div>
       <ol className="sm-klaus">
         {stages.map((s) => (

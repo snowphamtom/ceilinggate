@@ -1,16 +1,69 @@
 {
   "stampLabel": "2026-09-07 ~14:42 CT",
-  "law": "Gather from every domain → sort → return to MANAGER",
-  "buckets": ["KEEP", "WATCH", "NOISE", "HOLD"],
+  "law": "Continuous GATHER \u2192 SORT \u2014 not organize-in-place \u00b7 return buckets to MANAGER",
+  "buckets": [
+    "KEEP",
+    "WATCH",
+    "NOISE",
+    "HOLD"
+  ],
   "tier1": [
-    { "id": "nix", "handle": "NIX", "bot": "Eve", "mission": "Gather: NEW mail, AgentMail, rival deltas", "status": "ACTIVE" },
-    { "id": "loom", "handle": "LOOM", "bot": "Create", "mission": "Gather+ship: live UI + forge continuous sorter", "status": "ACTIVE" },
-    { "id": "lens", "handle": "LENS", "bot": "Visual", "mission": "Gather: visual/UI forensic leaps", "status": "ACTIVE" },
-    { "id": "gavel", "handle": "GAVEL", "bot": "Bob", "mission": "Sort board: holds, packs, gates", "status": "ACTIVE" },
-    { "id": "pulse", "handle": "PULSE", "bot": "Ops", "mission": "Gather: CI/deploy health", "status": "ACTIVE" },
-    { "id": "card", "handle": "CARD", "bot": "Card", "mission": "Gather: vibeapps card deltas", "status": "ACTIVE" },
-    { "id": "reel", "handle": "REEL", "bot": "Streamer", "mission": "Gather: silent demo / YT prefer-live", "status": "ACTIVE" },
-    { "id": "heavy", "handle": "HEAVY", "bot": "SuperGrok Heavy", "mission": "Evidence Convex + scratch SPA", "status": "ACTIVE" }
+    {
+      "id": "nix",
+      "handle": "NIX",
+      "bot": "Eve",
+      "mission": "Gather: NEW mail, AgentMail, rival deltas",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "loom",
+      "handle": "LOOM",
+      "bot": "Create",
+      "mission": "Ship: continuous GATHER\u2192SORT machine on quirky (not organize-in-place)",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "lens",
+      "handle": "LENS",
+      "bot": "Visual",
+      "mission": "Gather: visual/UI forensic leaps",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "gavel",
+      "handle": "GAVEL",
+      "bot": "Bob",
+      "mission": "Sort board: holds, packs, gates",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "pulse",
+      "handle": "PULSE",
+      "bot": "Ops",
+      "mission": "Gather: CI/deploy health",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "card",
+      "handle": "CARD",
+      "bot": "Card",
+      "mission": "Gather: vibeapps card deltas",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "reel",
+      "handle": "REEL",
+      "bot": "Streamer",
+      "mission": "Gather: silent demo / YT prefer-live",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "heavy",
+      "handle": "HEAVY",
+      "bot": "SuperGrok Heavy",
+      "mission": "Evidence Convex + scratch SPA",
+      "status": "ACTIVE"
+    }
   ],
   "tier2": [
     {
@@ -20,7 +73,11 @@
       "domain": "web/Firecrawl",
       "mission": "Gather web receipts + rival page deltas via Firecrawl under NIX",
       "status": "ACTIVE",
-      "stack": ["Firecrawl", "AgentMail receipts", "C≤S line ledger"]
+      "stack": [
+        "Firecrawl",
+        "AgentMail receipts",
+        "C\u2264S line ledger"
+      ]
     }
   ],
   "nixPulse": {
@@ -28,6 +85,6 @@
     "canonicalCard": "ceilinggate-1",
     "canonicalVibes": 1,
     "legacySlugVibes": 2,
-    "note": "NEW AgentMail fuel 0 · dual listing WATCH"
+    "note": "NEW AgentMail fuel 0 \u00b7 dual listing WATCH"
   }
 }

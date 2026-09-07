@@ -1,6 +1,6 @@
 /**
- * CeilingGate — COMPLETE SCRATCH Sorting Machine SPA (2026-09-07).
- * Brand-new face only. NOT wired into old forge/main costume board.
+ * CeilingGate — continuous GATHER→SORT machine (LOOM FLIP 2026-09-07).
+ * NOT organize-in-place. NOT old forge/main costume board.
  * Evidence processRing = fleet-gerbil-682 ONLY — never quirky / never avid-gnu.
  */
 import { useCallback, useEffect, useState } from "react";
@@ -96,13 +96,26 @@ export default function SortingMachine() {
     setRunCount(1);
   }, []);
 
+  // Continuous GATHER→SORT: advance pipe + alternate live sorts
   useEffect(() => {
-    const t = window.setInterval(() => {
+    let tick = 0;
+    const id = window.setInterval(() => {
       setNow(Date.now());
       setPulse((p) => p + 1);
       setActivePipe((p) => (p + 1) % 5);
+      tick += 1;
+      if (tick % 5 === 0) {
+        const refuse = tick % 10 === 0;
+        const f = refuse ? REFUSE_FIXTURE : GRANT_FIXTURE;
+        const next = rowsFromFixture(f);
+        setRows(next);
+        setSubject(f.email.subject);
+        setDecision(decisionFromRows(next));
+        setBucketFocus(refuse ? "WATCH" : "KEEP");
+        setRunCount((n) => n + 1);
+      }
     }, 2200);
-    return () => window.clearInterval(t);
+    return () => window.clearInterval(id);
   }, []);
 
   const runSort = useCallback((nextRows: LineRow[], subj: string) => {
@@ -175,17 +188,18 @@ export default function SortingMachine() {
     <div className="sm-shell sm-scratch" data-testid="ceilinggate-sorting-machine">
       <header className="sm-hero">
         <div className="sm-hero-top">
-          <p className="sm-eyebrow">CeilingGate · Sorting Machine</p>
+          <p className="sm-eyebrow">CeilingGate · GATHER → SORT</p>
           <span className="sm-live-pill" title="Continuous sync">
             <span className="sm-pulse-dot" data-pulse={pulse % 2} />
             LIVE · {lane.source === "convex" ? "Evidence" : "snap"} · {syncAgo}
           </span>
         </div>
-        <h1>Sorting Machine</h1>
+        <h1>Continuous gather → sort</h1>
         <p className="sm-lede">
-          Brand-new continuous sorter — not the old forge board. One law:{" "}
+          Mission flip: gather from every domain, then sort —{" "}
+          <strong>not</strong> organize-in-place. Gate law:{" "}
           <strong>C ≤ S</strong> on every line → <strong>GRANT</strong> or{" "}
-          <strong>REFUSE</strong>. Klaus stages + Drive buckets live.
+          <strong>REFUSE</strong>. CASCADE + Klaus feed + Drive buckets.
         </p>
         <p className="sm-sync-stamp">
           process:getLive · <code>{lane.stampLabel}</code>
@@ -271,7 +285,7 @@ export default function SortingMachine() {
       </div>
 
       <footer className="sm-foot">
-        <span>CASCADE · NIX/DRIFT Firecrawl · Klaus organizer · C≤S Demo</span>
+        <span>GATHER→SORT · CASCADE · NIX/DRIFT · Klaus feed · C≤S</span>
         <span>Evidence: fleet-gerbil-682 · Site: quirky-rhinoceros-204</span>
         <a
           href="https://github.com/snowphamtom/ceilinggate"
