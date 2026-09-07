@@ -1,7 +1,7 @@
-# Lesson card — 46b8d0e
+# Lesson card — f87e38c
 
 1. What changed
-ui: LENS forensic optic densify on root Sorting Machine
+ui: COMPLETE SCRATCH — SPA is Sorting Machine only
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
