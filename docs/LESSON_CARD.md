@@ -1,7 +1,7 @@
-# Lesson card — acadf27
+# Lesson card — 1867646
 
 1. What changed
-polish: dark C≤S Demo GRANT/REFUSE stamps for judge clicks
+ui: hide sorting-machine and prize workshop from first paint — two buttons + ledger only
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
