@@ -1750,6 +1750,26 @@ textarea.forge-input {
   box-shadow: inset 0 0 12px rgba(255, 100, 100, 0.25);
 }
 
+
+
+/* —— Standing polish o/p: grant clear-row + steps denser —— */
+.ledger tr:not(.fail) td {
+  transition: background 0.2s ease;
+}
+
+.card.grant.big .paper-slip-fill:not(.over) {
+  box-shadow: inset 0 0 10px rgba(61, 222, 149, 0.2);
+}
+
+.steps {
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
+.steps li {
+  margin: 0.32rem 0;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .card.grant,
   .card.refuse,
