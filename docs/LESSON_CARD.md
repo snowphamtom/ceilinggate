@@ -1,7 +1,7 @@
-# Lesson card — 59de881
+# Lesson card — 46b8d0e
 
 1. What changed
-ui: LOOM continuous Sorting Machine — Klaus + Drive live face
+ui: LENS forensic optic densify on root Sorting Machine
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
