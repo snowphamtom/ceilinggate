@@ -1,7 +1,7 @@
-# Lesson card — 7ef8c15
+# Lesson card — 2d5878b
 
 1. What changed
-visual: style Create data-fui-section // labels on light FUI
+revert: restore dark forensic stamps (drop FUI fleet chrome)
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
