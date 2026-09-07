@@ -97,7 +97,8 @@ export default defineSchema({
     deploymentId: v.string(),
   })
     .index("by_deployment_path", ["deploymentId", "path"])
-    .index("by_deployment", ["deploymentId"]),
+    .index("by_deployment", ["deploymentId"])
+    .index("by_path", ["path"]),
 
   forgedApps: defineTable({
     slug: v.string(),

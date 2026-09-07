@@ -78,7 +78,10 @@ async function serveAsset(ctx: any, path: string) {
     asset = await ctx.runQuery(api.site.getAsset, { path: "/index.html" });
   }
   if (!asset?.url) {
-    return new Response("Not found", { status: 404 });
+    return new Response("Not found", {
+      status: 404,
+      headers: { "cache-control": "no-store" },
+    });
   }
   const res = await fetch(asset.url);
   const body = await res.arrayBuffer();

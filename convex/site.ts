@@ -6,6 +6,13 @@ export const generateUploadUrl = mutation({
   handler: async (ctx) => await ctx.storage.generateUploadUrl(),
 });
 
+function isCompleteSite(paths: Set<string>) {
+  const hasIndex = paths.has("/index.html");
+  const hasJs = [...paths].some((p) => p.startsWith("/assets/") && p.endsWith(".js"));
+  const hasCss = [...paths].some((p) => p.startsWith("/assets/") && p.endsWith(".css"));
+  return hasIndex && hasJs && hasCss;
+}
+
 export const publish = mutation({
   args: {
     deploymentId: v.string(),
@@ -26,6 +33,20 @@ export const publish = mutation({
         deploymentId: args.deploymentId,
       });
     }
+    const existingRows = await ctx.db
+      .query("siteAssets")
+      .withIndex("by_deployment", (q) => q.eq("deploymentId", args.deploymentId))
+      .collect();
+    const paths = new Set(existingRows.map((r) => r.path));
+    if (!isCompleteSite(paths)) {
+      // Do not flip siteMeta — overlapping/partial publishes must not brick /assets.
+      return {
+        ok: false as const,
+        skippedMeta: true as const,
+        count: args.files.length,
+        reason: "incomplete-site-set",
+      };
+    }
     const existing = await ctx.db
       .query("siteMeta")
       .withIndex("by_key", (q) => q.eq("key", "current"))
@@ -42,7 +63,7 @@ export const publish = mutation({
         updatedAt: Date.now(),
       });
     }
-    return { ok: true as const, count: args.files.length };
+    return { ok: true as const, count: args.files.length, skippedMeta: false as const };
   },
 });
 
@@ -60,19 +81,32 @@ export const currentDeployment = query({
 export const getAsset = query({
   args: { path: v.string() },
   handler: async (ctx, args) => {
+    const path = args.path.startsWith("/") ? args.path : `/${args.path}`;
     const meta = await ctx.db
       .query("siteMeta")
       .withIndex("by_key", (q) => q.eq("key", "current"))
       .unique();
-    if (!meta) return null;
-    const path = args.path.startsWith("/") ? args.path : `/${args.path}`;
-    const asset = await ctx.db
-      .query("siteAssets")
-      .withIndex("by_deployment_path", (q) =>
-        q.eq("deploymentId", meta.deploymentId).eq("path", path),
-      )
-      .order("desc")
-      .first();
+    let asset = null as null | {
+      contentType: string;
+      storageId: any;
+    };
+    if (meta) {
+      asset = await ctx.db
+        .query("siteAssets")
+        .withIndex("by_deployment_path", (q) =>
+          q.eq("deploymentId", meta.deploymentId).eq("path", path),
+        )
+        .order("desc")
+        .first();
+    }
+    // Race fallback: newest row for this path if current deployment missed it.
+    if (!asset) {
+      asset = await ctx.db
+        .query("siteAssets")
+        .withIndex("by_path", (q) => q.eq("path", path))
+        .order("desc")
+        .first();
+    }
     if (!asset) return null;
     const url = await ctx.storage.getUrl(asset.storageId);
     return { contentType: asset.contentType, url };

@@ -127,10 +127,11 @@ async function main() {
   // publish in chunks
   for (let i = 0; i < published.length; i += 40) {
     const chunk = published.slice(i, i + 40);
-    console.log(
-      "publish",
-      convexRun("site:publish", { deploymentId, files: chunk }),
-    );
+    const pub = convexRun("site:publish", { deploymentId, files: chunk });
+    console.log("publish", pub);
+    if (pub && pub.ok === false) {
+      throw new Error(`site:publish refused meta flip: ${JSON.stringify(pub)}`);
+    }
   }
   console.log("LIVE https://quirky-rhinoceros-204.convex.site/");
 }
