@@ -80,7 +80,17 @@ function injectSpaCssIntoForge(distDir = "./dist") {
   const tag = `<link rel="stylesheet" href="${href}" data-spa-css="1" />`;
   for (const file of htmlFiles) {
     let html = readFileSync(file, "utf8");
-    // Visual ACK: shared SPA CSS hash OK alongside data-forge-self-style inline chrome
+    // Prefer A: self-styled forge owns chrome — never inject SPA CSS (flattens stamps)
+    if (html.includes('data-forge-self-style="1"')) {
+      const cleaned = html.replace(/\s*<link rel="stylesheet" href="\/assets\/[^"]+" data-spa-css="1" \/>\s*/g, "\n");
+      if (cleaned !== html) {
+        writeFileSync(file, cleaned);
+        console.log("spa-css skip+strip", relative(distDir, file));
+      } else {
+        console.log("spa-css skip", relative(distDir, file));
+      }
+      continue;
+    }
     if (html.includes('data-spa-css="1"')) {
       html = html.replace(/<link rel="stylesheet" href="\/assets\/[^"]+" data-spa-css="1" \/>/, tag);
     } else if (html.includes("</head>")) {
