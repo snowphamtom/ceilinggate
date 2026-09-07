@@ -1,7 +1,7 @@
-# Lesson card — b7c8407
+# Lesson card — 3e41a28
 
 1. What changed
-fix: surface sorting machine on first-paint + forge SPA-CSS inject glue
+fix: mount sorting machine on first-paint (was hidden under live-child-gates)
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
