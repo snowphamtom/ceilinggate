@@ -1,7 +1,7 @@
-# Lesson card — 170e82a
+# Lesson card — 7910069
 
 1. What changed
-ui: LOOM FLIP — continuous GATHER→SORT (not organize-in-place)
+fix: harden site publish race so /assets cannot 404
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
