@@ -1,7 +1,7 @@
-# Lesson card — 1867646
+# Lesson card — d33a89e
 
 1. What changed
-ui: hide sorting-machine and prize workshop from first paint — two buttons + ledger only
+polish: Demo GRANT/REFUSE scrolls to live verdict stamp
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
