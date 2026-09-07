@@ -1,7 +1,7 @@
-# Lesson card — 58012fa
+# Lesson card — a1bc580
 
 1. What changed
-ui: absorb LENS optic package into GATHER→SORT chrome
+ui: rival WATCH beat — receipt-line C≤S vs page-promise
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
