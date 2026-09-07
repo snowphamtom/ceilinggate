@@ -4,69 +4,230 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Sorting Machine — C ≤ S</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;700&family=IBM+Plex+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
   <style>
-    :root { color-scheme: dark; --void:#070b14; --amber:#d4a24c; --grant:#1f9d63; --refuse:#e04545;
-      font-family: "IBM Plex Sans", system-ui, sans-serif; }
-    body { margin: 0; min-height: 100vh; background:
-      radial-gradient(900px 400px at 10% -10%, rgba(91,157,255,0.12), transparent 50%), var(--void);
-      color: #eef3fb; padding: 1.35rem; max-width: 44rem; }
-    h1 { font-size: 1.55rem; margin: 0 0 0.35rem; letter-spacing: -0.02em; }
-    h1::before { content: "SORT · "; color: var(--amber); font-family: "IBM Plex Mono", monospace;
-      font-size: 0.72rem; letter-spacing: 0.14em; vertical-align: middle; }
-    .lede { color: #a8bdd8; font-size: 0.95rem; margin: 0 0 1rem; line-height: 1.45; }
-    label { display: block; margin: 0.55rem 0; font-size: 0.78rem; letter-spacing: 0.06em;
-      text-transform: uppercase; color: var(--amber); font-weight: 600; }
-    input { display: block; width: 100%; box-sizing: border-box; margin-top: 0.3rem;
-      padding: 0.6rem 0.7rem; border-radius: 8px; border: 1px solid #2a3a55;
-      background: #0a1220; color: #e8eef7; font-family: "IBM Plex Mono", monospace; font-size: 0.9rem; }
-    .row { display:flex; flex-wrap:wrap; gap:0.5rem; margin-top:0.85rem; }
-    button { padding: 0.6rem 0.95rem; border-radius: 8px; border: 0;
-      background: linear-gradient(#4a8dff,#2a6df4); color: #fff; font-weight: 700;
-      letter-spacing: 0.04em; cursor: pointer; font-family: inherit; }
-    button.ghost { background: transparent; border: 1px solid #94a3b8; color: #e8eef7; font-weight: 600; }
-    .card { margin-top: 1rem; padding: 1.05rem; border-radius: 12px; border: 2px solid #2a3a55; }
-    .card.grant { border-color: var(--grant); box-shadow: 0 0 36px rgba(31,157,99,0.35); background: rgba(31,157,99,0.1); }
-    .card.refuse { border-color: var(--refuse); box-shadow: 0 0 36px rgba(224,69,69,0.35); background: rgba(224,69,69,0.1); }
-    .card h2 { margin: 0; font-size: 1.5rem; letter-spacing: 0.12em; }
-    table { width:100%; border-collapse: collapse; margin-top:0.75rem; font-size:0.88rem;
-      border: 1px solid #243552; border-radius: 8px; overflow: hidden; }
-    th, td { text-align:left; padding:0.45rem 0.5rem; border-bottom:1px solid #243552;
-      font-family: "IBM Plex Mono", monospace; }
-    th { font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; background: #152038; color: #c5d4e8; }
-    tr.fail td { color:#fca5a5; background: rgba(224,69,69,0.14); }
-    .stages { display:flex; flex-wrap:wrap; gap:0.45rem; margin:0.85rem 0; font-size:0.78rem;
-      font-family: "IBM Plex Mono", monospace; color:#8fa3bf; }
-    .stages span { padding: 0.2rem 0.45rem; border: 1px solid #2a3a55; border-radius: 999px; }
-    .stages span.on { color:#6ee7a8; font-weight:700; border-color: rgba(31,157,99,0.55);
-      background: rgba(31,157,99,0.12); }
-    a { color: #9ec5ff; }
+    :root {
+      color-scheme: dark;
+      --void: #050910;
+      --panel: #0a1220;
+      --line: #243552;
+      --amber: #e0b35a;
+      --ink: #eef3fb;
+      --mute: #8fa3bf;
+      --grant: #1f9d63;
+      --grant-glow: rgba(31, 157, 99, 0.55);
+      --refuse: #e04545;
+      --refuse-glow: rgba(224, 69, 69, 0.5);
+      --blue: #3d7dff;
+      --font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh; color: var(--ink); font-family: var(--font);
+      background:
+        radial-gradient(1000px 480px at 8% -8%, rgba(61,125,255,0.18), transparent 55%),
+        radial-gradient(800px 420px at 100% 0%, rgba(224,179,90,0.08), transparent 45%),
+        var(--void);
+      padding: 1.25rem 1.1rem 2.5rem;
+    }
+    .shell { max-width: 46rem; margin: 0 auto; }
+    .kicker {
+      display: inline-flex; align-items: center; gap: 0.45rem;
+      font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--amber); font-weight: 700;
+      margin-bottom: 0.55rem;
+    }
+    .kicker::before {
+      content: ""; width: 0.28rem; height: 0.95rem; background: var(--amber);
+      box-shadow: 0 0 12px rgba(224,179,90,0.7);
+    }
+    h1 {
+      margin: 0 0 0.4rem; font-size: clamp(1.8rem, 5vw, 2.35rem);
+      letter-spacing: -0.03em; font-weight: 800;
+    }
+    .lede {
+      margin: 0 0 1.1rem; color: var(--mute); line-height: 1.5; font-size: 0.98rem;
+    }
+    .lede strong { color: #cfe0ff; }
+    .stages {
+      display: flex; flex-wrap: wrap; gap: 0.45rem; margin: 0 0 1.15rem;
+      font-family: var(--mono); font-size: 0.72rem;
+    }
+    .stages span {
+      padding: 0.35rem 0.65rem; border-radius: 999px; border: 1px solid var(--line);
+      color: var(--mute); background: rgba(10,18,32,0.8);
+    }
+    .stages span.on {
+      color: #6ee7a8; border-color: rgba(31,157,99,0.65);
+      background: rgba(31,157,99,0.16); font-weight: 700;
+      box-shadow: 0 0 18px rgba(31,157,99,0.25);
+    }
+    .panel {
+      border: 1px solid var(--line); border-radius: 16px; padding: 1rem 1rem 1.1rem;
+      background: linear-gradient(180deg, rgba(18,28,48,0.95), rgba(8,14,26,0.98));
+      box-shadow: 0 0 0 1px rgba(61,125,255,0.08), 0 18px 50px rgba(0,0,0,0.35);
+    }
+    label {
+      display: block; margin: 0.7rem 0 0; font-size: 0.72rem; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--amber); font-weight: 700;
+    }
+    input {
+      display: block; width: 100%; margin-top: 0.35rem; padding: 0.75rem 0.8rem;
+      border-radius: 10px; border: 1px solid var(--line); background: #070d18;
+      color: var(--ink); font-family: var(--mono); font-size: 0.95rem;
+    }
+    input:focus { outline: 2px solid rgba(61,125,255,0.45); border-color: #3d7dff; }
+    .row { display: flex; flex-wrap: wrap; gap: 0.55rem; margin-top: 1rem; }
+    button {
+      appearance: none; cursor: pointer; font-family: inherit; font-weight: 800;
+      letter-spacing: 0.04em; border-radius: 12px; padding: 0.78rem 1.05rem; border: 0;
+    }
+    button.primary {
+      background: linear-gradient(180deg, #5a96ff, #2a62e8);
+      color: #fff; box-shadow: 0 0 28px rgba(61,125,255,0.4);
+    }
+    button.ghost {
+      background: transparent; color: var(--ink);
+      border: 1px solid #5b7194;
+    }
+    button.grantish {
+      background: linear-gradient(180deg, #2db57a, #178a55); color: #04140c;
+      box-shadow: 0 0 24px var(--grant-glow);
+    }
+    button.refuseish {
+      background: linear-gradient(180deg, #f06666, #c23232); color: #fff;
+      box-shadow: 0 0 24px var(--refuse-glow);
+    }
+    #out { margin-top: 1.15rem; min-height: 4rem; }
+    .await {
+      border: 1.5px dashed #3a4f73; border-radius: 14px; padding: 1.6rem 1rem;
+      text-align: center; color: var(--amber); font-family: var(--mono);
+      letter-spacing: 0.12em; font-weight: 700;
+    }
+    .await small { display: block; margin-top: 0.45rem; color: var(--mute);
+      letter-spacing: 0; font-weight: 500; text-transform: none; }
+    .card {
+      border-radius: 16px; padding: 1.15rem 1.05rem 1.2rem; border: 2px solid var(--line);
+      background: rgba(8,14,26,0.95);
+    }
+    .card.grant {
+      border-color: var(--grant);
+      box-shadow: 0 0 48px var(--grant-glow), inset 0 0 40px rgba(31,157,99,0.08);
+    }
+    .card.refuse {
+      border-color: var(--refuse);
+      box-shadow: 0 0 48px var(--refuse-glow), inset 0 0 40px rgba(224,69,69,0.08);
+    }
+    .stamp-wrap { margin: 0.15rem 0 0.85rem; }
+    .eyebrow {
+      font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--amber); font-weight: 700; margin-bottom: 0.4rem;
+    }
+    .stamp {
+      display: inline-block; padding: 0.55rem 1.15rem; border-radius: 10px;
+      font-size: clamp(1.6rem, 6vw, 2.2rem); font-weight: 900; letter-spacing: 0.14em;
+      line-height: 1; border: 2px solid currentColor;
+    }
+    .card.grant .stamp {
+      color: #04140c; background: linear-gradient(180deg, #3dd68c, #1f9d63);
+      box-shadow: 0 0 36px var(--grant-glow);
+    }
+    .card.refuse .stamp {
+      color: #fff; background: linear-gradient(180deg, #ff6b6b, #e04545);
+      box-shadow: 0 0 36px var(--refuse-glow);
+    }
+    .meta { color: var(--mute); font-family: var(--mono); font-size: 0.82rem; margin-bottom: 0.85rem; }
+    .bars { display: grid; gap: 0.55rem; margin: 0.85rem 0 1rem; }
+    .bar-row {
+      display: grid; grid-template-columns: 4.5rem 1fr auto; gap: 0.55rem; align-items: center;
+      font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.06em;
+    }
+    .bar-track {
+      position: relative; height: 1.15rem; border-radius: 6px; background: #101a2c;
+      border: 1px solid #1e2d48; overflow: visible;
+    }
+    .bar-fill {
+      height: 100%; border-radius: 5px; width: var(--w, 50%);
+      background: linear-gradient(90deg, #1f9d63, #3dd68c);
+      box-shadow: 0 0 14px rgba(61,214,140,0.35);
+    }
+    .bar-row.fail .bar-fill {
+      background: linear-gradient(90deg, #c23232, #ff6b6b);
+      box-shadow: 0 0 14px rgba(224,69,69,0.4);
+    }
+    .bar-edge {
+      position: absolute; top: -3px; bottom: -3px; left: var(--edge, 70%);
+      border-left: 1.5px dashed var(--amber); opacity: 0.9;
+    }
+    .chip {
+      display: inline-block; min-width: 4.2rem; text-align: center;
+      padding: 0.28rem 0.45rem; border-radius: 7px; font-weight: 800;
+      border: 1px solid transparent;
+    }
+    .chip.ok {
+      color: #6ee7a8; background: rgba(31,157,99,0.16); border-color: rgba(31,157,99,0.45);
+    }
+    .chip.bad {
+      color: #fecaca; background: rgba(224,69,69,0.2); border-color: rgba(224,69,69,0.55);
+    }
+    .over-tab {
+      position: absolute; left: calc(var(--edge, 70%) + 4px); top: 50%; transform: translateY(-50%);
+      background: #e04545; color: #fff; font-size: 0.65rem; font-weight: 800;
+      padding: 0.12rem 0.35rem; border-radius: 4px; box-shadow: 0 0 12px var(--refuse-glow);
+    }
+    table {
+      width: 100%; border-collapse: collapse; font-family: var(--mono); font-size: 0.84rem;
+      border: 1px solid var(--line); border-radius: 10px; overflow: hidden;
+    }
+    th, td { text-align: left; padding: 0.5rem 0.55rem; border-bottom: 1px solid var(--line); }
+    th {
+      font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase;
+      background: #152038; color: #c5d4e8;
+    }
+    tr.fail td { color: #fecaca; background: rgba(224,69,69,0.12); }
+    .admit {
+      margin-top: 0.85rem; padding: 0.65rem 0.75rem; border-radius: 10px;
+      font-size: 0.82rem; line-height: 1.4;
+    }
+    .card.grant .admit {
+      background: rgba(31,157,99,0.14); border: 1px solid rgba(31,157,99,0.4); color: #b7f7d4;
+    }
+    .card.refuse .admit {
+      background: rgba(224,69,69,0.14); border: 1px solid rgba(224,69,69,0.4); color: #fecaca;
+    }
+    .back { margin-top: 1.25rem; }
+    .back a { color: #9ec5ff; font-weight: 600; text-decoration: none; }
+    .back a:hover { text-decoration: underline; }
+    .legend { margin: 0.35rem 0 0.8rem; color: var(--mute); font-size: 0.78rem; }
   </style>
 </head>
 <body>
-  <h1>Sorting machine</h1>
-  <p class="lede">One law: <strong>C ≤ S</strong> (claimed ≤ source) componentwise. Bucket GRANT or REFUSE — never chat yes/no. Starts empty.</p>
-  <div class="stages" id="stages">
-    <span>1 Intake</span><span>2 Filter</span><span>3 Evidence</span><span>4 Verdict</span><span>5 Store</span>
+  <div class="shell">
+    <div class="kicker">Expense check · sorting machine</div>
+    <h1>Sorting machine</h1>
+    <p class="lede">One law: <strong>C ≤ S</strong> (claimed ≤ source) componentwise. Bucket <strong>GRANT</strong> or <strong>REFUSE</strong> — never chat yes/no. Starts empty.</p>
+    <div class="stages" id="stages">
+      <span>1 Intake</span><span>2 Filter</span><span>3 Evidence</span><span>4 Verdict</span><span>5 Store</span>
+    </div>
+    <div class="panel">
+      <label>Claimed (C)<input id="claimed" value="" placeholder="98, 49, 25, 9" autocomplete="off" /></label>
+      <label>Source (S)<input id="source" value="" placeholder="100, 50, 25, 10" autocomplete="off" /></label>
+      <div class="row">
+        <button type="button" class="grantish" id="loadG">Load GRANT</button>
+        <button type="button" class="refuseish" id="loadR">Load REFUSE</button>
+        <button type="button" class="ghost" id="reset">Reset</button>
+        <button type="button" class="primary" id="run">Sort C ≤ S</button>
+      </div>
+    </div>
+    <div id="out"><div class="await">AWAITING LEDGER<small>Load a fixture or enter C / S, then Sort</small></div></div>
+    <p class="back"><a href="/">← CeilingGate board</a></p>
   </div>
-  <label>Claimed (C)<input id="claimed" value="" placeholder="90, 60, 20, 10" /></label>
-  <label>Source (S)<input id="source" value="" placeholder="100, 50, 25, 10" /></label>
-  <div class="row">
-    <button type="button" class="ghost" id="loadG">Load GRANT</button>
-    <button type="button" class="ghost" id="loadR">Load REFUSE</button>
-    <button type="button" class="ghost" id="reset">Reset</button>
-    <button type="button" id="run">Sort C ≤ S</button>
-  </div>
-  <div id="out"></div>
-  <p><a href="/">← CeilingGate board</a></p>
   <script>
     function parseList(s) {
       return s.split(/[\s,]+/).map(x => x.trim()).filter(Boolean).map(Number).filter(n => Number.isFinite(n));
     }
     function enclosed(S, C) {
-      if (S.length !== C.length) return false;
+      if (S.length !== C.length || !S.length) return false;
       for (let i = 0; i < S.length; i++) if (!(C[i] <= S[i])) return false;
       return true;
     }
@@ -75,13 +236,14 @@
       const rest = breaches(S.slice(1), C.slice(1), idx + 1);
       return S[0] < C[0] ? [idx, ...rest] : rest;
     }
-    function maskOf(failed) { return failed.reduce((a,i) => a | (1 << i), 0); }
+    function maskOf(failed) { return failed.reduce((a, i) => a | (1 << i), 0); }
     function gateB(S, C) {
       if (enclosed(S, C)) return { status: "grant", mask: 0, failed: [] };
       const failed = breaches(S, C, 0);
       const m = maskOf(failed);
       return { status: "refuse", mask: m === 0 ? 1 : m, failed };
     }
+    const labels = ["FUEL", "LODGING", "MEALS", "MISC"];
     const cEl = document.getElementById("claimed");
     const sEl = document.getElementById("source");
     const out = document.getElementById("out");
@@ -89,32 +251,58 @@
     function mark(n) {
       stageEls.forEach((el, i) => el.classList.toggle("on", i < n));
     }
+    function awaiting() {
+      out.innerHTML = `<div class="await">AWAITING LEDGER<small>Load a fixture or enter C / S, then Sort</small></div>`;
+    }
     document.getElementById("loadG").onclick = () => {
-      cEl.value = "98, 49, 25, 9"; sEl.value = "100, 50, 25, 10"; mark(1); out.innerHTML = "";
+      cEl.value = "98, 49, 25, 9"; sEl.value = "100, 50, 25, 10"; mark(1); awaiting();
     };
     document.getElementById("loadR").onclick = () => {
-      cEl.value = "90, 60, 20, 10"; sEl.value = "100, 50, 25, 10"; mark(1); out.innerHTML = "";
+      cEl.value = "90, 60, 20, 10"; sEl.value = "100, 50, 25, 10"; mark(1); awaiting();
     };
     document.getElementById("reset").onclick = () => {
-      cEl.value = ""; sEl.value = ""; mark(0); out.innerHTML = "";
+      cEl.value = ""; sEl.value = ""; mark(0); awaiting();
     };
     document.getElementById("run").onclick = () => {
       const C = parseList(cEl.value);
       const S = parseList(sEl.value);
+      if (!C.length || !S.length) { awaiting(); return; }
       mark(4);
       const d = gateB(S, C);
       mark(5);
       const n = Math.max(C.length, S.length);
+      const maxS = Math.max(...S, 1);
+      let bars = "";
       let rows = "";
       for (let i = 0; i < n; i++) {
         const c = C[i] ?? 0, s = S[i] ?? 0;
         const over = Number.isFinite(C[i]) && Number.isFinite(S[i]) && C[i] > S[i];
-        rows += `<tr class="${over ? "fail" : ""}"><td>${i}</td><td>${c}</td><td>${s}</td><td>${over ? "C > S" : "C ≤ S"}</td></tr>`;
+        const name = labels[i] || ("L" + i);
+        const w = Math.min(100, (Math.max(c, s) / (maxS * 1.15)) * 100);
+        const edge = Math.min(98, (s / (maxS * 1.15)) * 100);
+        const fillW = Math.min(100, (c / (maxS * 1.15)) * 100);
+        bars += `<div class="bar-row ${over ? "fail" : ""}"><div>${name}</div>
+          <div class="bar-track" style="--edge:${edge}%"><div class="bar-fill" style="width:${fillW}%"></div>
+          <div class="bar-edge"></div>${over ? `<span class="over-tab">+$${Math.round(c - s)}</span>` : ""}</div>
+          <span class="chip ${over ? "bad" : "ok"}">${over ? "C > S" : "C ≤ S"}</span></div>`;
+        rows += `<tr class="${over ? "fail" : ""}"><td>${name}</td><td>${c}</td><td>${s}</td>
+          <td><span class="chip ${over ? "bad" : "ok"}">${over ? "OVER" : "CLEAR"}</span></td></tr>`;
       }
       const bucket = d.status === "grant" && d.mask === 0 ? "GRANT" : "REFUSE";
-      out.innerHTML = `<div class="card ${d.status}"><strong>Bucket ${bucket}</strong>
-        <div>mask ${d.mask}${d.mask === 0 ? " · all lines C ≤ S" : " · fail [" + d.failed.join(",") + "]"}</div>
-        <table><thead><tr><th>LINE</th><th>C</th><th>S</th><th>C≤S</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+      const eye = bucket === "GRANT" ? "ALL LINES CLEAR" : "OVER THE RECEIPT";
+      const admit = bucket === "GRANT"
+        ? "ADMIT: every line claimed ≤ on-receipt (componentwise) — no total-only offset."
+        : "Surplus on one line cannot cover a deficit on another — REFUSE while any line is over.";
+      out.innerHTML = `<div class="card ${d.status}">
+        <div class="stamp-wrap"><div class="eyebrow">${eye}</div>
+          <div class="stamp">${bucket}</div></div>
+        <div class="meta">mask ${d.mask}${d.mask === 0 ? " · all lines C ≤ S" : " · fail [" + d.failed.join(",") + "]"}</div>
+        <p class="legend"><strong>RECEIPT</strong> Dashed edge is the receipt. A tab past it is the overclaim.</p>
+        <div class="bars">${bars}</div>
+        <table><thead><tr><th>LINE</th><th>CLAIMED (C)</th><th>SOURCE (S)</th><th>C≤S</th></tr></thead>
+        <tbody>${rows}</tbody></table>
+        <div class="admit">${admit}</div>
+      </div>`;
     };
   </script>
 </body>
