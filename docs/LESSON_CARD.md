@@ -1,7 +1,7 @@
-# Lesson card — f2a04e6
+# Lesson card — 264998f
 
 1. What changed
-fix: inject SPA CSS hash into self-styled forge pages (Visual ACK)
+fix: restore spa-css skip for self-styled forge pages
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
