@@ -1,7 +1,7 @@
-# Lesson card — d85d390
+# Lesson card — 5f01952
 
 1. What changed
-visual: standing-m — denser first-paint board chrome
+visual: standing-n — REFUSE fail-row + overclaim slip glow
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
