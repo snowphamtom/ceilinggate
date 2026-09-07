@@ -1,7 +1,7 @@
-# Lesson card — a7845d4
+# Lesson card — f3a01ce
 
 1. What changed
-visual: Drive residual caliper CSS (scan sweep + docket)
+fix: restore App.tsx after cba6206 stub wipe
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
