@@ -1,7 +1,7 @@
-# Lesson card — 13a9b41
+# Lesson card — d85d390
 
 1. What changed
-docs: CARD LOCK — vibeapps slug ceilinggate-1
+visual: standing-m — denser first-paint board chrome
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
