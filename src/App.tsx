@@ -98,8 +98,8 @@ export default function App() {
     : [];
 
   return (
-    <div className="shell board" id="fui-fleet">
-      <header className="hero" id="dendrite-hero">
+    <div className="shell board">
+      <header className="hero">
         <p className="eyebrow">Expense check</p>
         <h1>CeilingGate</h1>
         <p className="lede everyday">
@@ -122,69 +122,7 @@ export default function App() {
         </p>
       </header>
 
-      <div className="fui-core" aria-hidden="true" data-testid="fui-core">
-        <svg viewBox="0 0 420 168" xmlns="http://www.w3.org/2000/svg" role="presentation">
-          <defs>
-            <linearGradient id="fuiGrad" x1="0%" y1="50%" x2="100%" y2="50%">
-              <stop offset="0%" stopColor="#00c2ff" />
-              <stop offset="55%" stopColor="#3d6bff" />
-              <stop offset="100%" stopColor="#7a3dff" />
-            </linearGradient>
-            <radialGradient id="fuiGlow" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stopColor="#00c2ff" stopOpacity="0.22" />
-              <stop offset="100%" stopColor="#7a3dff" stopOpacity="0" />
-            </radialGradient>
-          </defs>
-          <ellipse cx="210" cy="84" rx="118" ry="62" fill="url(#fuiGlow)" />
-          <ellipse cx="210" cy="84" rx="108" ry="56" fill="none" stroke="url(#fuiGrad)" strokeWidth="0.6" opacity="0.35" />
-          <ellipse cx="210" cy="84" rx="88" ry="46" fill="none" stroke="url(#fuiGrad)" strokeWidth="0.5" opacity="0.25" />
-          <g className="fui-spin" fill="url(#fuiGrad)">
-            <circle cx="288" cy="84" r="1.65" />
-            <circle cx="277.5" cy="104" r="1.65" opacity="0.96" />
-            <circle cx="249" cy="118.6" r="1.65" opacity="0.86" />
-            <circle cx="210" cy="124" r="1.65" opacity="0.73" />
-            <circle cx="171" cy="118.6" r="1.65" opacity="0.59" />
-            <circle cx="142.5" cy="104" r="1.65" opacity="0.49" />
-            <circle cx="132" cy="84" r="1.65" opacity="0.45" />
-            <circle cx="142.5" cy="64" r="1.65" opacity="0.49" />
-            <circle cx="171" cy="49.4" r="1.65" opacity="0.59" />
-            <circle cx="210" cy="44" r="1.65" opacity="0.72" />
-            <circle cx="249" cy="49.4" r="1.65" opacity="0.86" />
-            <circle cx="277.5" cy="64" r="1.65" opacity="0.96" />
-          </g>
-          <g fill="none" stroke="url(#fuiGrad)" strokeWidth="1.1" strokeLinecap="round" opacity="0.85">
-            <path d="M132 70 C110 52, 88 44, 62 38" />
-            <path d="M132 70 C118 58, 102 50, 86 42" />
-            <path d="M120 78 C96 74, 74 68, 52 58" />
-            <path d="M288 98 C310 116, 332 124, 358 130" />
-            <path d="M288 98 C302 110, 318 118, 334 126" />
-            <path d="M300 90 C324 94, 346 100, 368 110" />
-          </g>
-          <g fill="url(#fuiGrad)">
-            <circle cx="62" cy="38" r="1.6" opacity="0.9" />
-            <circle cx="86" cy="42" r="1.3" opacity="0.75" />
-            <circle cx="52" cy="58" r="1.4" opacity="0.8" />
-            <circle cx="358" cy="130" r="1.6" opacity="0.9" />
-            <circle cx="334" cy="126" r="1.3" opacity="0.75" />
-            <circle cx="368" cy="110" r="1.4" opacity="0.8" />
-          </g>
-          <text
-            x="210"
-            y="88"
-            textAnchor="middle"
-            fontFamily="ui-monospace, monospace"
-            fontSize="11"
-            fontWeight="700"
-            fill="#0b1220"
-            opacity="0.55"
-          >
-            C ≤ S
-          </text>
-        </svg>
-      </div>
-
-      <section className="try-now fui-panel" aria-label="Try it" data-fui-section="// TRY">
-        <p className="fui-section-label" aria-hidden="true">// TRY</p>
+      <section className="try-now" aria-label="Try it">
         <p className="try-label">Try it</p>
         <div className="oneclick">
           <button type="button" className="grant-btn" onClick={() => { const f = pickByExpect("grant"); if (f) runOne(f); }}>Demo GRANT</button>
@@ -200,8 +138,7 @@ export default function App() {
         <li><strong>Store</strong> — bucket <strong>GRANT</strong> or <strong>REFUSE</strong> on the live board</li>
       </ol>
 
-      <section className="panel sort-first fui-panel" id="sorting-machine-first" aria-label="Sorting machine" data-fui-section="// SORT">
-        <p className="fui-section-label" aria-hidden="true">// SORT</p>
+      <section className="panel sort-first" id="sorting-machine-first" aria-label="Sorting machine">
         <p className="eyebrow">Sorting machine</p>
         <h2>C ≤ S</h2>
         <p className="muted small">
@@ -215,7 +152,7 @@ export default function App() {
         <SortingMachinePanel />
       </section>
 
-      <section className="panel prize-honesty fui-panel" id="prize-honesty" aria-label="Prize honesty">
+      <section className="panel prize-honesty" id="prize-honesty" aria-label="Prize honesty">
         <p className="eyebrow">Judge cash honesty</p>
         <h2>All Gas cash (Luma)</h2>
         <table className="cash-table">
@@ -251,7 +188,7 @@ export default function App() {
       </section>
 
       <div className="board-grid">
-        <section className="panel verdict-panel fui-panel" data-fui-section="// RESULT">
+        <section className="panel verdict-panel">
           <h2>Result</h2>
           {!selected ? (
             <p className="muted empty">Tap Demo GRANT or Demo REFUSE above.</p>
@@ -260,7 +197,7 @@ export default function App() {
           )}
         </section>
 
-        <section className="panel fui-panel" data-fui-section="// INBOX">
+        <section className="panel">
           <h2>Inbox</h2>
           {hasConvex && liveRows && liveRows.length > 0 && (
             <div className="list">
@@ -1289,7 +1226,7 @@ function SortingMachinePanel() {
         One law: <strong>C ≤ S</strong> (claimed ≤ source) on every line. Output is a bucket —{" "}
         <strong>GRANT</strong> or <strong>REFUSE</strong> — never a chat shrug.
       </p>
-      <ol className="pass-bar muted small fui-rail" aria-label="Sort stages">
+      <ol className="pass-bar muted small" aria-label="Sort stages">
         {stages.map((name, i) => (
           <li key={name}>
             <strong className={stage > i ? "ok" : undefined}>

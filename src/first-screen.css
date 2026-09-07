@@ -1,5 +1,4 @@
-/* Judge first paint: two buttons + ledger. Extra rooms stay in the DOM.
-   First-paint must stay light FUI (no dark bleed). */
+/* Judge first paint: two buttons + ledger. Extra rooms stay in the DOM. */
 .stakes-line,
 .originality-line,
 .prize-honesty,
@@ -7,12 +6,4 @@
 #live-child-gates,
 #forge-open-live {
   display: none !important;
-}
-
-/* Reinforce light field if cascade order shifts */
-html,
-body,
-#root {
-  background-color: #f7f9fc;
-  color: #0b1220;
 }
