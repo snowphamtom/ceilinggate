@@ -1,7 +1,7 @@
-# Lesson card — afe4445
+# Lesson card — cb2316f
 
 1. What changed
-style: stamp-grade forge sorting-machine (no Google Fonts)
+visual: forge sorting-machine stamped GRANT/REFUSE buckets (style restore)
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
