@@ -1,7 +1,7 @@
-# Lesson card — f3a01ce
+# Lesson card — 9b8e37c
 
 1. What changed
-fix: restore App.tsx after cba6206 stub wipe
+ui: continuous Sorting Machine — Klaus stages + Drive sort live
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
