@@ -1,7 +1,7 @@
-# Lesson card — d33a89e
+# Lesson card — 246e4b8
 
 1. What changed
-polish: Demo GRANT/REFUSE scrolls to live verdict stamp
+fix: window.requestAnimationFrame in Demo GRANT/REFUSE scroll
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
