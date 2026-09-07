@@ -1,7 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { ConvexProvider, ConvexReactClient } from "convex/react";
-import JudgeBoard from "./JudgeBoard";
+import App from "./App";
 import "./index.css";
 
 const url = import.meta.env.VITE_CONVEX_URL as string | undefined;
@@ -12,14 +12,14 @@ if (url) {
   root.render(
     <StrictMode>
       <ConvexProvider client={client}>
-        <JudgeBoard />
+        <App />
       </ConvexProvider>
     </StrictMode>,
   );
 } else {
   root.render(
     <StrictMode>
-      <JudgeBoard />
+      <App />
     </StrictMode>,
   );
 }

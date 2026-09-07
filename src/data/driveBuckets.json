@@ -1,0 +1,100 @@
+{
+  "report": "DATA_TEST_SORT",
+  "measured_at_ct": "2026-09-06 21:26 CT",
+  "counts": {
+    "KEEP": 279,
+    "WATCH": 753,
+    "NOISE": 118,
+    "HOLD": 1825
+  },
+  "samples": {
+    "KEEP": [
+      {
+        "title": "CeilingGate-Forge-gates-clip-SHOW3.mp4",
+        "why": "patent/commercial/canonical signal",
+        "mimeKind": "other"
+      },
+      {
+        "title": "CeilingGate-Forge-gates-clip-YT.mp4",
+        "why": "patent/commercial/canonical signal",
+        "mimeKind": "other"
+      },
+      {
+        "title": "CeilingGate-Forge-gates-clip-HQ.mp4",
+        "why": "patent/commercial/canonical signal",
+        "mimeKind": "other"
+      },
+      {
+        "title": "CeilingGate-Forge-gates-clip-HQ.mp4",
+        "why": "patent/commercial/canonical signal",
+        "mimeKind": "other"
+      }
+    ],
+    "WATCH": [
+      {
+        "title": "Copy of ResidualGatesMathlib.lean",
+        "why": "magpie/export dump or likely dupe",
+        "mimeKind": "other"
+      },
+      {
+        "title": "MAGPIE_outreach_email_2026-09-02.docx",
+        "why": "magpie/export dump or likely dupe",
+        "mimeKind": "other"
+      },
+      {
+        "title": "MAGPIE_industry_one_pager_2026-09-02.docx",
+        "why": "magpie/export dump or likely dupe",
+        "mimeKind": "other"
+      },
+      {
+        "title": "MAGPIE_RESIDUAL_INTEGRATED_2026-08-18",
+        "why": "magpie/export dump or likely dupe",
+        "mimeKind": "other"
+      }
+    ],
+    "NOISE": [
+      {
+        "title": "Mirrored Truth \u2014 Plate 081: The Clearing of the Aether",
+        "why": "mirror/ZzzZ/art/school/book-dupe pattern",
+        "mimeKind": "other"
+      },
+      {
+        "title": "Rotating_Mirror_Shadow_Ledger_2026-09-01",
+        "why": "mirror/ZzzZ/art/school/book-dupe pattern",
+        "mimeKind": "other"
+      },
+      {
+        "title": "MIRRORED_TRUTH_PERFECTED_COMPLETE_HYBRID_MASTER_ARCHIVE.pdf",
+        "why": "mirror/ZzzZ/art/school/book-dupe pattern",
+        "mimeKind": "other"
+      },
+      {
+        "title": "MIRRORED_TRUTH_VOLUME_III_DERIVED_FROM_DRIVE.pdf",
+        "why": "mirror/ZzzZ/art/school/book-dupe pattern",
+        "mimeKind": "other"
+      }
+    ],
+    "HOLD": [
+      {
+        "title": "Picture book .pdf",
+        "why": "huge archive / uncertain package",
+        "mimeKind": "other"
+      },
+      {
+        "title": "Blank Layout.pages",
+        "why": "huge archive / uncertain package",
+        "mimeKind": "other"
+      },
+      {
+        "title": "ZENITH_EMPIRICAL_PROTOCOL_CARVED_IVORY_COMPLETE_EDITION.pdf",
+        "why": "huge archive / uncertain package",
+        "mimeKind": "other"
+      },
+      {
+        "title": "Saved Photos 2.pdf",
+        "why": "huge archive / uncertain package",
+        "mimeKind": "other"
+      }
+    ]
+  }
+}

@@ -1,5 +1,1 @@
-/* CeilingGate App.css — neutralized stub.
-   Live styles live in index.css (dark forensic board).
-   App.tsx and main.tsx already import index.css.
-   Do NOT @import index.css here; do NOT add light-shell rules.
-   Kept so accidental imports cannot revive the light 720px shell. */
+/* Face styles live in sorting-machine.css — imported by App.tsx */

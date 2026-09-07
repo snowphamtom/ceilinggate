@@ -3,21 +3,27 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Sorting Machine — C ≤ S</title>
+  <title>Sorting Machine — C ≤ S · continuous</title>
   <style>
     :root {
       color-scheme: dark;
       --void: #050910;
       --panel: #0a1220;
+      --panel-2: #0d1828;
       --line: #243552;
+      --line-bright: #3a5478;
       --amber: #e0b35a;
+      --amber-dim: rgba(224,179,90,0.45);
       --ink: #eef3fb;
       --mute: #8fa3bf;
       --grant: #1f9d63;
-      --grant-glow: rgba(31, 157, 99, 0.55);
+      --grant-bright: #3dd68c;
+      --grant-glow: rgba(31,157,99,0.55);
       --refuse: #e04545;
-      --refuse-glow: rgba(224, 69, 69, 0.5);
+      --refuse-bright: #ff6b6b;
+      --refuse-glow: rgba(224,69,69,0.5);
       --blue: #3d7dff;
+      --cyan: #7ad4ff;
       --font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
       --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
     }
@@ -25,221 +31,398 @@
     body {
       margin: 0; min-height: 100vh; color: var(--ink); font-family: var(--font);
       background:
-        radial-gradient(1000px 480px at 8% -8%, rgba(61,125,255,0.18), transparent 55%),
-        radial-gradient(800px 420px at 100% 0%, rgba(224,179,90,0.08), transparent 45%),
+        radial-gradient(1100px 520px at 6% -10%, rgba(61,125,255,0.16), transparent 55%),
+        radial-gradient(900px 460px at 100% 0%, rgba(224,179,90,0.07), transparent 48%),
+        repeating-linear-gradient(0deg, transparent, transparent 47px, rgba(61,125,255,0.025) 47px, rgba(61,125,255,0.025) 48px),
         var(--void);
-      padding: 1.25rem 1.1rem 2.5rem;
+      padding: 1.1rem 1rem 2.75rem;
     }
-    .shell { max-width: 46rem; margin: 0 auto; }
+    .shell {
+      position: relative;
+      max-width: 52rem; margin: 0 auto;
+      padding: 1.15rem 1.1rem 1.35rem;
+      border: 2px solid rgba(58,84,120,0.72);
+      border-radius: 10px;
+      background:
+        linear-gradient(180deg, rgba(14,22,40,0.55), rgba(7,11,20,0.82)),
+        var(--panel);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.045),
+        inset 0 0 0 1px rgba(7,11,20,0.85),
+        0 0 0 1px rgba(212,162,76,0.12),
+        0 26px 70px rgba(0,0,0,0.42);
+    }
+    /* Instrument corner brackets */
+    .shell::before, .shell::after,
+    .shell .br-bl, .shell .br-br {
+      content: ""; position: absolute; width: 16px; height: 16px;
+      pointer-events: none; z-index: 2;
+      border: 2px solid rgba(212,162,76,0.55);
+    }
+    .shell::before { top: 8px; left: 8px; border-right: none; border-bottom: none; }
+    .shell::after { top: 8px; right: 8px; border-left: none; border-bottom: none; }
+    .shell .br-bl { bottom: 8px; left: 8px; border-right: none; border-top: none; }
+    .shell .br-br { bottom: 8px; right: 8px; border-left: none; border-top: none; }
+
+    .mast {
+      display: flex; flex-wrap: wrap; align-items: flex-start;
+      justify-content: space-between; gap: 0.65rem 1rem;
+      margin-bottom: 0.85rem; padding-bottom: 0.75rem;
+      border-bottom: 1px solid rgba(58,84,120,0.55);
+    }
     .kicker {
       display: inline-flex; align-items: center; gap: 0.45rem;
-      font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.16em;
+      font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.16em;
       text-transform: uppercase; color: var(--amber); font-weight: 700;
-      margin-bottom: 0.55rem;
+      margin-bottom: 0.35rem;
     }
     .kicker::before {
-      content: ""; width: 0.28rem; height: 0.95rem; background: var(--amber);
+      content: ""; width: 0.28rem; height: 0.9rem; background: var(--amber);
       box-shadow: 0 0 12px rgba(224,179,90,0.7);
     }
     h1 {
-      margin: 0 0 0.4rem; font-size: clamp(1.8rem, 5vw, 2.35rem);
+      margin: 0; font-size: clamp(1.55rem, 4.5vw, 2.05rem);
       letter-spacing: -0.03em; font-weight: 800;
+      text-shadow: 0 0 36px rgba(91,157,255,0.16);
+    }
+    .plate-tag {
+      font-family: var(--mono); font-size: 0.6rem; font-weight: 700;
+      letter-spacing: 0.14em; color: rgba(212,162,76,0.9);
+      padding: 0.28rem 0.5rem; border: 1px solid rgba(212,162,76,0.4);
+      border-radius: 3px; background: rgba(7,11,20,0.72);
+      white-space: nowrap; align-self: center;
     }
     .lede {
-      margin: 0 0 1.1rem; color: var(--mute); line-height: 1.5; font-size: 0.98rem;
+      margin: 0.35rem 0 0; color: var(--mute); line-height: 1.5; font-size: 0.92rem;
+      max-width: 38rem; border-left: 2px solid rgba(91,157,255,0.28); padding-left: 0.7rem;
     }
     .lede strong { color: #cfe0ff; }
+
+    /* Process docks */
+    .docks {
+      display: grid; gap: 0.55rem; margin: 0.95rem 0 1rem;
+    }
+    .dock {
+      position: relative;
+      border: 1px solid rgba(58,84,120,0.6);
+      border-radius: 6px;
+      padding: 0.55rem 0.65rem 0.6rem;
+      background:
+        linear-gradient(90deg, rgba(212,162,76,0.07), transparent 14%),
+        rgba(8,14,26,0.88);
+      box-shadow: inset 3px 0 0 rgba(212,162,76,0.42);
+    }
+    .dock.klaus { box-shadow: inset 3px 0 0 rgba(122,212,255,0.55); }
+    .dock-label {
+      font-family: var(--mono); font-size: 0.58rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: rgba(212,162,76,0.88); margin-bottom: 0.4rem;
+    }
+    .dock.klaus .dock-label { color: rgba(122,212,255,0.9); }
     .stages {
-      display: flex; flex-wrap: wrap; gap: 0.45rem; margin: 0 0 1.15rem;
-      font-family: var(--mono); font-size: 0.72rem;
+      display: flex; flex-wrap: wrap; gap: 0.35rem;
+      font-family: var(--mono); font-size: 0.68rem;
     }
     .stages span {
-      padding: 0.35rem 0.65rem; border-radius: 999px; border: 1px solid var(--line);
-      color: var(--mute); background: rgba(10,18,32,0.8);
-    }
-    #klaus span.on {
-      color: #7ad4ff; border-color: rgba(61,200,255,0.65);
-      background: rgba(61,125,255,0.16); font-weight: 700;
+      padding: 0.32rem 0.55rem; border-radius: 2px;
+      border: 1px solid var(--line); color: var(--mute);
+      background: rgba(10,18,32,0.85);
+      letter-spacing: 0.06em;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
     }
     .stages span.on {
       color: #6ee7a8; border-color: rgba(31,157,99,0.65);
       background: rgba(31,157,99,0.16); font-weight: 700;
-      box-shadow: 0 0 18px rgba(31,157,99,0.25);
+      box-shadow: 0 0 14px rgba(31,157,99,0.22), inset 0 1px 0 rgba(255,255,255,0.05);
     }
+    #klaus span.on {
+      color: #9ae4ff; border-color: rgba(61,200,255,0.65);
+      background: rgba(61,125,255,0.18); font-weight: 700;
+      box-shadow: 0 0 14px rgba(61,200,255,0.2);
+    }
+    .drive-chip {
+      display: none; margin: 0 0 0.85rem;
+      font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.06em;
+      color: #cfe0ff; padding: 0.4rem 0.65rem; border-radius: 4px;
+      border: 1px solid rgba(212,162,76,0.4);
+      background: rgba(18,28,44,0.9);
+      box-shadow: inset 3px 0 0 var(--amber);
+    }
+    .drive-chip strong { color: var(--amber); }
+    .drive-chip.live {
+      border-color: rgba(61,200,255,0.45);
+      box-shadow: inset 3px 0 0 var(--cyan), 0 0 18px rgba(61,200,255,0.12);
+    }
+
     .panel {
-      border: 1px solid var(--line); border-radius: 16px; padding: 1rem 1rem 1.1rem;
-      background: linear-gradient(180deg, rgba(18,28,48,0.95), rgba(8,14,26,0.98));
-      box-shadow: 0 0 0 1px rgba(61,125,255,0.08), 0 18px 50px rgba(0,0,0,0.35);
+      position: relative;
+      border: 1px solid rgba(58,84,120,0.7); border-radius: 8px;
+      padding: 0.95rem 0.95rem 1.05rem;
+      background:
+        linear-gradient(180deg, rgba(18,28,48,0.95), rgba(8,14,26,0.98));
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.04),
+        0 0 0 1px rgba(61,125,255,0.06),
+        0 14px 40px rgba(0,0,0,0.32);
+    }
+    .panel::before {
+      content: "INTAKE DOCK";
+      position: absolute; top: -0.5rem; right: 0.75rem;
+      font-family: var(--mono); font-size: 0.56rem; font-weight: 700;
+      letter-spacing: 0.14em; color: rgba(212,162,76,0.9);
+      padding: 0.1rem 0.38rem; border: 1px solid rgba(212,162,76,0.4);
+      border-radius: 2px 2px 0 0; background: #0a1220;
     }
     label {
-      display: block; margin: 0.7rem 0 0; font-size: 0.72rem; letter-spacing: 0.08em;
+      display: block; margin: 0.65rem 0 0;
+      font-size: 0.68rem; letter-spacing: 0.1em;
       text-transform: uppercase; color: var(--amber); font-weight: 700;
+      font-family: var(--mono);
     }
+    label:first-of-type { margin-top: 0.15rem; }
     input {
-      display: block; width: 100%; margin-top: 0.35rem; padding: 0.75rem 0.8rem;
-      border-radius: 10px; border: 1px solid var(--line); background: #070d18;
-      color: var(--ink); font-family: var(--mono); font-size: 0.95rem;
+      display: block; width: 100%; margin-top: 0.32rem;
+      padding: 0.72rem 0.78rem; border-radius: 6px;
+      border: 1px solid var(--line); background: #070d18;
+      color: var(--ink); font-family: var(--mono); font-size: 0.92rem;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
     }
-    input:focus { outline: 2px solid rgba(61,125,255,0.45); border-color: #3d7dff; }
-    .row { display: flex; flex-wrap: wrap; gap: 0.55rem; margin-top: 1rem; }
+    input:focus {
+      outline: 2px solid rgba(61,125,255,0.4); border-color: #3d7dff;
+    }
+    .row {
+      display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 0.95rem;
+    }
     button {
-      appearance: none; cursor: pointer; font-family: inherit; font-weight: 800;
-      letter-spacing: 0.04em; border-radius: 12px; padding: 0.78rem 1.05rem; border: 0;
+      appearance: none; cursor: pointer; font-family: var(--mono);
+      font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase;
+      border-radius: 6px; padding: 0.7rem 0.9rem; border: 0; font-size: 0.72rem;
     }
     button.primary {
       background: linear-gradient(180deg, #5a96ff, #2a62e8);
-      color: #fff; box-shadow: 0 0 28px rgba(61,125,255,0.4);
+      color: #fff; box-shadow: 0 0 24px rgba(61,125,255,0.35);
     }
     button.ghost {
-      background: transparent; color: var(--ink);
+      background: rgba(10,18,32,0.9); color: var(--ink);
       border: 1px solid #5b7194;
     }
+    button.ghost.on {
+      border-color: rgba(61,200,255,0.7); color: #9ae4ff;
+      box-shadow: 0 0 16px rgba(61,200,255,0.2);
+      background: rgba(61,125,255,0.14);
+    }
     button.grantish {
-      background: linear-gradient(180deg, #2db57a, #178a55); color: #04140c;
-      box-shadow: 0 0 24px var(--grant-glow);
+      background: linear-gradient(180deg, rgba(31,157,99,0.32), rgba(12,28,22,0.95));
+      color: #c8f7de; border: 2px solid #3dde95;
+      box-shadow: 0 0 20px rgba(61,222,149,0.22);
     }
     button.refuseish {
-      background: linear-gradient(180deg, #f06666, #c23232); color: #fff;
-      box-shadow: 0 0 24px var(--refuse-glow);
+      background: linear-gradient(180deg, rgba(224,69,69,0.28), rgba(28,12,16,0.95));
+      color: #ffd0d0; border: 2px solid #ff8a8a;
+      box-shadow: 0 0 20px rgba(224,69,69,0.22);
     }
-    #out { margin-top: 1.15rem; min-height: 4rem; }
+    button:hover { filter: brightness(1.06); }
+    button:active { transform: translateY(1px); }
+
+    #out { margin-top: 1.05rem; min-height: 5.5rem; }
     .await {
-      border: 1.5px dashed #3a4f73; border-radius: 14px; padding: 1.6rem 1rem;
-      text-align: center; color: var(--amber); font-family: var(--mono);
-      letter-spacing: 0.12em; font-weight: 700;
+      position: relative; overflow: hidden;
+      border: 1.5px dashed rgba(91,157,255,0.4); border-radius: 8px;
+      padding: 2rem 1rem; text-align: center;
+      color: #8eb0d8; font-family: var(--mono);
+      letter-spacing: 0.14em; font-weight: 700; font-size: 0.78rem;
+      background:
+        repeating-linear-gradient(90deg, transparent, transparent 23px, rgba(91,157,255,0.04) 23px, rgba(91,157,255,0.04) 24px),
+        repeating-linear-gradient(0deg, transparent, transparent 23px, rgba(91,157,255,0.04) 23px, rgba(91,157,255,0.04) 24px),
+        rgba(7,11,20,0.88);
+      box-shadow: inset 0 0 28px rgba(91,157,255,0.06);
     }
-    .await small { display: block; margin-top: 0.45rem; color: var(--mute);
-      letter-spacing: 0; font-weight: 500; text-transform: none; }
+    .await small {
+      display: block; margin-top: 0.5rem; color: var(--mute);
+      letter-spacing: 0; font-weight: 500; text-transform: none; font-size: 0.78rem;
+    }
+    .await::after {
+      content: ""; position: absolute; left: 8%; right: 8%; height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(91,157,255,0.15), rgba(212,162,76,0.85), rgba(91,157,255,0.15), transparent);
+      box-shadow: 0 0 18px rgba(212,162,76,0.35);
+      animation: residual-scan 3.6s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes residual-scan {
+      0% { transform: translateY(-140%); opacity: 0; }
+      18% { opacity: 0.85; }
+      82% { opacity: 0.55; }
+      100% { transform: translateY(260%); opacity: 0; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .await::after { animation: none; opacity: 0.4; top: 50%; }
+    }
+
     .card {
-      border-radius: 16px; padding: 1.15rem 1.05rem 1.2rem; border: 2px solid var(--line);
-      background: rgba(8,14,26,0.95);
+      border-radius: 8px; padding: 1.1rem 1rem 1.15rem;
+      border: 2px solid var(--line); background: rgba(8,14,26,0.96);
     }
     .card.grant {
-      border-color: var(--grant);
-      box-shadow: 0 0 48px var(--grant-glow), inset 0 0 40px rgba(31,157,99,0.08);
+      border-color: var(--grant-bright);
+      box-shadow: inset 0 0 0 1px rgba(61,222,149,0.28), 0 0 44px rgba(31,157,99,0.2);
     }
     .card.refuse {
-      border-color: var(--refuse);
-      box-shadow: 0 0 48px var(--refuse-glow), inset 0 0 40px rgba(224,69,69,0.08);
+      border-color: var(--refuse-bright);
+      box-shadow: inset 0 0 0 1px rgba(255,138,138,0.28), 0 0 44px rgba(224,69,69,0.18);
     }
-    .stamp-wrap { margin: 0.15rem 0 0.85rem; }
+    .stamp-wrap { margin: 0.1rem 0 0.8rem; }
     .eyebrow {
-      font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.14em;
-      text-transform: uppercase; color: var(--amber); font-weight: 700; margin-bottom: 0.4rem;
+      font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.16em;
+      text-transform: uppercase; color: #f0e6d0; font-weight: 700;
+      margin-bottom: 0.45rem; border-left: 3px solid var(--amber); padding-left: 0.45rem;
     }
     .stamp {
-      display: inline-block; padding: 0.55rem 1.15rem; border-radius: 10px;
-      font-size: clamp(1.6rem, 6vw, 2.2rem); font-weight: 900; letter-spacing: 0.14em;
-      line-height: 1; border: 2px solid currentColor;
+      display: inline-block; padding: 0.55rem 1.2rem; border-radius: 4px;
+      font-size: clamp(1.7rem, 6vw, 2.35rem); font-weight: 900;
+      letter-spacing: 0.14em; line-height: 1;
+      border: 3px solid currentColor;
+      background: rgba(6,10,18,0.92);
+      text-shadow: 0 0 24px currentColor, 0 2px 0 rgba(0,0,0,0.45);
+      box-shadow: 0 0 0 1px rgba(0,0,0,0.6), 0 0 32px currentColor;
     }
-    .card.grant .stamp {
-      color: #04140c; background: linear-gradient(180deg, #3dd68c, #1f9d63);
-      box-shadow: 0 0 36px var(--grant-glow);
+    .card.grant .stamp { color: #3dde95; border-color: #3dde95; }
+    .card.refuse .stamp { color: #ff8a8a; border-color: #ff8a8a; }
+    .meta {
+      color: var(--mute); font-family: var(--mono); font-size: 0.78rem;
+      margin-bottom: 0.75rem; display: flex; flex-wrap: wrap; gap: 0.35rem;
     }
-    .card.refuse .stamp {
-      color: #fff; background: linear-gradient(180deg, #ff6b6b, #e04545);
-      box-shadow: 0 0 36px var(--refuse-glow);
+    .mask-chip {
+      display: inline-block; padding: 0.18rem 0.45rem; border-radius: 2px;
+      border: 1px solid rgba(91,157,255,0.4); background: rgba(12,20,36,0.9);
+      color: #c5d4e8; font-size: 0.68rem; letter-spacing: 0.06em;
     }
-    .meta { color: var(--mute); font-family: var(--mono); font-size: 0.82rem; margin-bottom: 0.85rem; }
-    .bars { display: grid; gap: 0.55rem; margin: 0.85rem 0 1rem; }
+    .legend {
+      margin: 0.2rem 0 0.75rem; color: var(--mute); font-size: 0.76rem;
+      font-family: var(--mono); letter-spacing: 0.02em;
+    }
+    .legend strong { color: var(--amber); letter-spacing: 0.08em; }
+
+    .bars { display: grid; gap: 0.5rem; margin: 0.7rem 0 1rem; }
     .bar-row {
-      display: grid; grid-template-columns: 4.5rem 1fr auto; gap: 0.55rem; align-items: center;
-      font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.06em;
+      display: grid; grid-template-columns: 5rem 1fr auto; gap: 0.5rem; align-items: center;
+      font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.06em;
     }
     .bar-track {
-      position: relative; height: 1.15rem; border-radius: 6px; background: #101a2c;
-      border: 1px solid #1e2d48; overflow: visible;
+      position: relative; height: 1.2rem; border-radius: 3px;
+      background: #101a2c; border: 1px solid #1e2d48; overflow: visible;
+      box-shadow: inset 0 0 0 1px rgba(7,11,20,0.5);
     }
     .bar-fill {
-      height: 100%; border-radius: 5px; width: var(--w, 50%);
+      height: 100%; border-radius: 2px; width: var(--w, 50%);
       background: linear-gradient(90deg, #1f9d63, #3dd68c);
-      box-shadow: 0 0 14px rgba(61,214,140,0.35);
+      box-shadow: 0 0 12px rgba(61,214,140,0.3);
     }
     .bar-row.fail .bar-fill {
       background: linear-gradient(90deg, #c23232, #ff6b6b);
-      box-shadow: 0 0 14px rgba(224,69,69,0.4);
+      box-shadow: 0 0 12px rgba(224,69,69,0.35);
     }
     .bar-edge {
       position: absolute; top: -3px; bottom: -3px; left: var(--edge, 70%);
-      border-left: 1.5px dashed var(--amber); opacity: 0.9;
+      border-left: 1.5px dashed var(--amber); opacity: 0.95;
+    }
+    .over-tab {
+      position: absolute; left: calc(var(--edge, 70%) + 4px); top: 50%;
+      transform: translateY(-50%);
+      background: #e04545; color: #fff; font-size: 0.62rem; font-weight: 800;
+      padding: 0.1rem 0.32rem; border-radius: 2px;
+      box-shadow: 0 0 12px var(--refuse-glow); letter-spacing: 0.04em;
     }
     .chip {
       display: inline-block; min-width: 4.2rem; text-align: center;
-      padding: 0.28rem 0.45rem; border-radius: 7px; font-weight: 800;
-      border: 1px solid transparent;
+      padding: 0.22rem 0.42rem; border-radius: 2px; font-weight: 800;
+      border: 1px solid transparent; letter-spacing: 0.1em; font-size: 0.66rem;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), inset 0 -1px 0 rgba(0,0,0,0.35);
     }
     .chip.ok {
-      color: #6ee7a8; background: rgba(31,157,99,0.16); border-color: rgba(31,157,99,0.45);
+      color: #7dffc0;
+      background: repeating-linear-gradient(90deg, transparent, transparent 3px, rgba(61,222,149,0.12) 3px, rgba(61,222,149,0.12) 4px), rgba(12,40,28,0.92);
+      border-color: rgba(61,222,149,0.55);
     }
     .chip.bad {
-      color: #fecaca; background: rgba(224,69,69,0.2); border-color: rgba(224,69,69,0.55);
+      color: #ffb4b4;
+      background: repeating-linear-gradient(90deg, transparent, transparent 3px, rgba(255,138,138,0.14) 3px, rgba(255,138,138,0.14) 4px), rgba(48,16,18,0.95);
+      border-color: rgba(255,138,138,0.6);
     }
-    .over-tab {
-      position: absolute; left: calc(var(--edge, 70%) + 4px); top: 50%; transform: translateY(-50%);
-      background: #e04545; color: #fff; font-size: 0.65rem; font-weight: 800;
-      padding: 0.12rem 0.35rem; border-radius: 4px; box-shadow: 0 0 12px var(--refuse-glow);
-    }
+
     table {
-      width: 100%; border-collapse: collapse; font-family: var(--mono); font-size: 0.84rem;
-      border: 1px solid var(--line); border-radius: 10px; overflow: hidden;
+      width: 100%; border-collapse: collapse; font-family: var(--mono); font-size: 0.8rem;
+      border: 1px solid rgba(58,84,120,0.7); border-radius: 6px; overflow: hidden;
+      box-shadow: inset 0 0 0 1px rgba(7,11,20,0.55);
     }
-    th, td { text-align: left; padding: 0.5rem 0.55rem; border-bottom: 1px solid var(--line); }
+    th, td { text-align: left; padding: 0.48rem 0.55rem; border-bottom: 1px solid var(--line); }
     th {
-      font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase;
-      background: #152038; color: #c5d4e8;
+      font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase;
+      background: rgba(10,18,32,0.95); color: #c5d4e8;
+      border-bottom: 1px solid rgba(212,162,76,0.28);
     }
-    tr.fail td { color: #fecaca; background: rgba(224,69,69,0.12); }
+    tr:not(.fail) td:first-child { box-shadow: inset 3px 0 0 rgba(61,222,149,0.45); }
+    tr.fail td {
+      color: #fecaca; background: rgba(224,69,69,0.1);
+    }
+    tr.fail td:first-child { box-shadow: inset 3px 0 0 rgba(255,138,138,0.7); }
     .admit {
-      margin-top: 0.85rem; padding: 0.65rem 0.75rem; border-radius: 10px;
-      font-size: 0.82rem; line-height: 1.4;
+      margin-top: 0.8rem; padding: 0.65rem 0.75rem; border-radius: 6px;
+      font-size: 0.8rem; line-height: 1.45; font-family: var(--mono);
     }
     .card.grant .admit {
-      background: rgba(31,157,99,0.14); border: 1px solid rgba(31,157,99,0.4); color: #b7f7d4;
+      background: rgba(31,157,99,0.12); border: 1px solid rgba(31,157,99,0.4); color: #b7f7d4;
     }
     .card.refuse .admit {
-      background: rgba(224,69,69,0.14); border: 1px solid rgba(224,69,69,0.4); color: #fecaca;
+      background: rgba(224,69,69,0.12); border: 1px solid rgba(224,69,69,0.4); color: #fecaca;
     }
-    .back { margin-top: 1.25rem; }
-    .back a { color: #9ec5ff; font-weight: 600; text-decoration: none; }
+    .back { margin-top: 1.15rem; }
+    .back a { color: #9ec5ff; font-weight: 600; text-decoration: none; font-size: 0.9rem; }
     .back a:hover { text-decoration: underline; }
-    .legend { margin: 0.35rem 0 0.8rem; color: var(--mute); font-size: 0.78rem; }
   </style>
 </head>
 <body>
   <div class="shell">
-    <div class="kicker">Expense check · sorting machine</div>
-    <h1>Sorting machine</h1>
-    <p class="lede">One law: <strong>C ≤ S</strong> (claimed ≤ source) componentwise. Bucket <strong>GRANT</strong> or <strong>REFUSE</strong> — never chat yes/no. Starts empty.</p>
+    <span class="br-bl" aria-hidden="true"></span>
+    <span class="br-br" aria-hidden="true"></span>
+    <div class="mast">
+      <div>
+        <div class="kicker">Expense check · continuous sort</div>
+        <h1>Sorting machine</h1>
+        <p class="lede">One law: <strong>C ≤ S</strong> (claimed ≤ source) componentwise. Bucket <strong>GRANT</strong> or <strong>REFUSE</strong> — never chat yes/no. Continuous dock cycles fixtures.</p>
+      </div>
+      <div class="plate-tag">RESIDUAL LEDGER · C ≤ S</div>
+    </div>
+
+    <div class="docks">
+      <div class="dock klaus">
+        <div class="dock-label">Klaus Drive · process</div>
         <div class="stages" id="klaus" aria-label="Klaus stages">
-      <span data-k="0">1 MAP</span>
-      <span data-k="1">2 PROPOSE</span>
-      <span data-k="2">3 PLATES</span>
-      <span data-k="3">4 HOLDS</span>
-      <span data-k="4">5 EXECUTED</span>
+          <span>1 MAP</span><span>2 PROPOSE</span><span>3 PLATES</span><span>4 HOLDS</span><span>5 EXECUTED</span>
+        </div>
+      </div>
+      <div class="dock">
+        <div class="dock-label">Sort stages · forensic</div>
+        <div class="stages" id="stages" aria-label="Sort stages">
+          <span>1 Intake</span><span>2 Filter</span><span>3 Evidence</span><span>4 Verdict</span><span>5 Store</span>
+        </div>
+      </div>
     </div>
-    <div class="stages" id="stages">
-      <span>1 Intake</span>
-      <span>2 Filter</span>
-      <span>3 Evidence</span>
-      <span>4 Verdict</span>
-      <span>5 Store</span>
-    </div>
-    <p class="lede" id="driveChip" style="display:none;margin-top:-0.5rem"></p>
+    <p class="drive-chip" id="driveChip"></p>
 
     <div class="panel">
       <label>Claimed (C)<input id="claimed" value="" placeholder="98, 49, 25, 9" autocomplete="off" /></label>
-      <label>Source (S)<input id="source" value="" placeholder="100, 50, 25, 10" autocomplete="off" /></label>
+      <label>Source / on-receipt (S)<input id="source" value="" placeholder="100, 50, 25, 10" autocomplete="off" /></label>
       <div class="row">
         <button type="button" class="grantish" id="loadG">Load GRANT</button>
+        <button type="button" class="refuseish" id="loadR">Load REFUSE</button>
         <button type="button" class="ghost" id="loadKeep">Drive KEEP</button>
         <button type="button" class="ghost" id="loadNoise">Drive NOISE</button>
         <button type="button" class="ghost" id="cont">Continuous</button>
-        <button type="button" class="refuseish" id="loadR">Load REFUSE</button>
         <button type="button" class="ghost" id="reset">Reset</button>
         <button type="button" class="primary" id="run">Sort C ≤ S</button>
       </div>
     </div>
-    <div id="out"><div class="await">AWAITING LEDGER<small>Load a fixture or enter C / S, then Sort</small></div></div>
+    <div id="out"><div class="await">AWAITING RESIDUAL SCAN<small>Load a fixture or enter C / S, then Sort — or run Continuous</small></div></div>
     <p class="back"><a href="/">← CeilingGate board</a></p>
   </div>
   <script>
@@ -270,37 +453,41 @@
     const stageEls = [...document.querySelectorAll("#stages span")];
     const klausEls = [...document.querySelectorAll("#klaus span")];
     const driveChip = document.getElementById("driveChip");
+    const contBtn = document.getElementById("cont");
+    let continuous = false;
+    let timer = null;
+    let tick = 0;
+
     function markKlaus(n) {
       klausEls.forEach((el, i) => el.classList.toggle("on", i < n));
-    }
-    function setDrive(label) {
-      if (!driveChip) return;
-      if (!label) { driveChip.style.display = "none"; driveChip.textContent = ""; return; }
-      driveChip.style.display = "block";
-      driveChip.innerHTML = "Drive lane: <strong>" + label + "</strong>";
     }
     function mark(n) {
       stageEls.forEach((el, i) => el.classList.toggle("on", i < n));
     }
-    function awaiting() {
-      out.innerHTML = `<div class="await">AWAITING LEDGER<small>Load a fixture or enter C / S, then Sort</small></div>`;
+    function setDrive(label, live) {
+      if (!label) {
+        driveChip.style.display = "none";
+        driveChip.textContent = "";
+        driveChip.classList.remove("live");
+        return;
+      }
+      driveChip.style.display = "block";
+      driveChip.classList.toggle("live", !!live);
+      driveChip.innerHTML = "Drive lane: <strong>" + label + "</strong>";
     }
-    document.getElementById("loadG").onclick = () => {
-      cEl.value = "98, 49, 25, 9"; sEl.value = "100, 50, 25, 10"; mark(1); awaiting();
-    };
-    document.getElementById("loadR").onclick = () => {
-      cEl.value = "90, 60, 20, 10"; sEl.value = "100, 50, 25, 10"; mark(1); awaiting();
-    };
-    document.getElementById("reset").onclick = () => {
-      cEl.value = ""; sEl.value = ""; mark(0); awaiting();
-    };
-    document.getElementById("run").onclick = () => {
-      const C = parseList(cEl.value);
-      const S = parseList(sEl.value);
-      if (!C.length || !S.length) { awaiting(); return; }
-      mark(4);
+    function awaiting() {
+      out.innerHTML = `<div class="await">AWAITING RESIDUAL SCAN<small>Load a fixture or enter C / S, then Sort — or run Continuous</small></div>`;
+    }
+    function stopContinuous() {
+      continuous = false;
+      contBtn.classList.remove("on");
+      contBtn.textContent = "Continuous";
+      if (timer) { clearInterval(timer); timer = null; }
+    }
+    function renderVerdict(C, S, driveLabel) {
+      mark(4); markKlaus(4);
       const d = gateB(S, C);
-      mark(5);
+      mark(5); markKlaus(5);
       const n = Math.max(C.length, S.length);
       const maxS = Math.max(...S, 1);
       let bars = "";
@@ -309,7 +496,6 @@
         const c = C[i] ?? 0, s = S[i] ?? 0;
         const over = Number.isFinite(C[i]) && Number.isFinite(S[i]) && C[i] > S[i];
         const name = labels[i] || ("L" + i);
-        const w = Math.min(100, (Math.max(c, s) / (maxS * 1.15)) * 100);
         const edge = Math.min(98, (s / (maxS * 1.15)) * 100);
         const fillW = Math.min(100, (c / (maxS * 1.15)) * 100);
         bars += `<div class="bar-row ${over ? "fail" : ""}"><div>${name}</div>
@@ -324,60 +510,79 @@
       const admit = bucket === "GRANT"
         ? "ADMIT: every line claimed ≤ on-receipt (componentwise) — no total-only offset."
         : "Surplus on one line cannot cover a deficit on another — REFUSE while any line is over.";
+      const driveMeta = driveLabel
+        ? `<span class="mask-chip">${driveLabel}</span>` : "";
       out.innerHTML = `<div class="card ${d.status}">
         <div class="stamp-wrap"><div class="eyebrow">${eye}</div>
           <div class="stamp">${bucket}</div></div>
-        <div class="meta">mask ${d.mask}${d.mask === 0 ? " · all lines C ≤ S" : " · fail [" + d.failed.join(",") + "]"}</div>
+        <div class="meta">
+          <span class="mask-chip">mask ${d.mask}${d.mask === 0 ? " · all lines C ≤ S" : " · fail [" + d.failed.join(",") + "]"}</span>
+          ${driveMeta}
+        </div>
         <p class="legend"><strong>RECEIPT</strong> Dashed edge is the receipt. A tab past it is the overclaim.</p>
         <div class="bars">${bars}</div>
         <table><thead><tr><th>LINE</th><th>CLAIMED (C)</th><th>SOURCE (S)</th><th>C≤S</th></tr></thead>
         <tbody>${rows}</tbody></table>
         <div class="admit">${admit}</div>
       </div>`;
+    }
+
+    document.getElementById("loadG").onclick = () => {
+      stopContinuous();
+      cEl.value = "98, 49, 25, 9"; sEl.value = "100, 50, 25, 10";
+      mark(1); markKlaus(1); setDrive("KEEP→GRANT"); awaiting();
     };
-  
+    document.getElementById("loadR").onclick = () => {
+      stopContinuous();
+      cEl.value = "90, 60, 20, 10"; sEl.value = "100, 50, 25, 10";
+      mark(1); markKlaus(1); setDrive("WATCH→REFUSE"); awaiting();
+    };
     document.getElementById("loadKeep").onclick = () => {
-      stopCont();
-      claimed.value = "12, 8, 4, 2";
-      source.value = "20, 10, 5, 3";
-      setDrive("DRIVE KEEP");
-      mark(1); markKlaus(2); awaiting();
+      stopContinuous();
+      cEl.value = "12, 8, 4, 2"; sEl.value = "20, 10, 5, 3";
+      mark(1); markKlaus(2); setDrive("DRIVE KEEP"); awaiting();
     };
     document.getElementById("loadNoise").onclick = () => {
-      stopCont();
-      claimed.value = "50, 30";
-      source.value = "10, 5";
-      setDrive("DRIVE NOISE→REFUSE");
-      mark(1); markKlaus(2); awaiting();
+      stopContinuous();
+      cEl.value = "50, 30"; sEl.value = "10, 5";
+      mark(1); markKlaus(2); setDrive("DRIVE NOISE→REFUSE"); awaiting();
     };
-    let contTimer = null;
-    function stopCont() {
-      if (contTimer) { clearInterval(contTimer); contTimer = null; }
-      const b = document.getElementById("cont");
-      if (b) b.textContent = "Continuous";
-    }
-    document.getElementById("cont").onclick = () => {
-      if (contTimer) { stopCont(); return; }
-      document.getElementById("cont").textContent = "Stop continuous";
+    document.getElementById("reset").onclick = () => {
+      stopContinuous();
+      cEl.value = ""; sEl.value = "";
+      mark(0); markKlaus(0); setDrive(null); awaiting();
+    };
+    document.getElementById("run").onclick = () => {
+      const C = parseList(cEl.value);
+      const S = parseList(sEl.value);
+      if (!C.length || !S.length) { awaiting(); return; }
+      renderVerdict(C, S, driveChip.style.display === "none" ? null : driveChip.querySelector("strong")?.textContent);
+    };
+    contBtn.onclick = () => {
+      if (continuous) { stopContinuous(); return; }
+      continuous = true;
+      contBtn.classList.add("on");
+      contBtn.textContent = "Stop continuous";
       const fixtures = [
-        { c: "98, 49, 25, 9", s: "100, 50, 25, 10", d: "KEEP→GRANT" },
-        { c: "90, 60, 20, 10", s: "100, 50, 25, 10", d: "WATCH→REFUSE" },
-        { c: "40, 20, 10", s: "40, 20, 10", d: "HOLD→GRANT" },
+        { c: "98, 49, 25, 9", s: "100, 50, 25, 10", bucket: "KEEP→GRANT" },
+        { c: "90, 60, 20, 10", s: "100, 50, 25, 10", bucket: "WATCH→REFUSE" },
+        { c: "40, 20, 10", s: "40, 20, 10", bucket: "HOLD→GRANT" },
+        { c: "50, 30", s: "10, 5", bucket: "NOISE→REFUSE" },
       ];
-      let tick = 0;
       const pulse = () => {
         const f = fixtures[tick % fixtures.length];
-        claimed.value = f.c; source.value = f.s; setDrive(f.d);
+        cEl.value = f.c; sEl.value = f.s;
+        setDrive(f.bucket, true);
         mark(1); markKlaus(1);
         setTimeout(() => { mark(2); markKlaus(2); }, 280);
-        setTimeout(() => { mark(3); markKlaus(3); document.getElementById("run").click(); }, 560);
-        setTimeout(() => { markKlaus(5); }, 900);
-        tick++;
+        setTimeout(() => {
+          renderVerdict(parseList(f.c), parseList(f.s), f.bucket);
+        }, 560);
+        tick += 1;
       };
       pulse();
-      contTimer = setInterval(pulse, 2400);
+      timer = setInterval(pulse, 2400);
     };
-
   </script>
 </body>
 </html>
