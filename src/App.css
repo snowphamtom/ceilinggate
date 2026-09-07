@@ -1,5 +1,5 @@
-/* CeilingGate App.css — neutralized stub.
-   Live FUI fleet chrome lives in index.css (light white/#f7f9fc board).
-   App.tsx / main.tsx import index.css + first-screen.css.
-   Do NOT @import index.css here; do NOT revive the old 720px light shell.
-   Create owns App.tsx markup hooks (#fui-fleet, #dendrite-hero, .fui-panel, .fui-rail). */
+/* CeilingGate App.css — stub.
+   FUI light leap lives in index.css (cascade-last block).
+   Do NOT @import index.css here.
+   Forge: data-forge-self-style=1 skips SPA CSS inject.
+*/
