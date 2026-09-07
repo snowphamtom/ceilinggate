@@ -1879,6 +1879,90 @@ body::before {
   padding: 0.22rem 0.5rem;
 }
 
+
+
+/* —— Sort structure polish (Create a21dc2d classes) —— */
+#sorting-line {
+  border-color: rgba(212, 162, 76, 0.4);
+  border-style: solid;
+  background:
+    linear-gradient(135deg, rgba(20, 32, 56, 0.9), rgba(8, 14, 26, 0.92));
+}
+
+#sorting-line li {
+  margin: 0.45rem 0;
+}
+
+#sorting-line li strong {
+  color: var(--amber);
+  letter-spacing: 0.04em;
+  font-family: var(--mono);
+  font-size: 0.82em;
+  text-transform: uppercase;
+}
+
+.status-chip {
+  min-width: 4.2rem;
+  white-space: nowrap;
+}
+
+.status-chip.clear {
+  letter-spacing: 0.04em;
+}
+
+.status-chip.over {
+  letter-spacing: 0.04em;
+}
+
+#sorting-machine-live {
+  border-color: rgba(212, 162, 76, 0.5);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 0 28px rgba(212, 162, 76, 0.12),
+    0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+#sorting-machine-live .pass-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.75rem;
+  list-style: none;
+  margin-left: 0;
+  padding-left: 0.75rem;
+}
+
+#sorting-machine-live .pass-bar li {
+  padding-left: 0;
+}
+
+#sorting-machine-live .pass-bar li::before {
+  display: none;
+}
+
+#sorting-machine-live .pass-bar strong.ok {
+  color: #6ee7a8;
+}
+
+#sorting-machine-live .row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin: 0.65rem 0 0.35rem;
+  background: transparent;
+  border: 0;
+  padding: 0;
+}
+
+#sorting-machine-live .row .primary {
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 700;
+}
+
+.ledger thead th {
+  white-space: nowrap;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .card.grant,
   .card.refuse,

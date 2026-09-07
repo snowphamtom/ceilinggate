@@ -4,27 +4,44 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Sorting Machine — C ≤ S</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;700&family=IBM+Plex+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
   <style>
-    :root { color-scheme: dark; font-family: system-ui, sans-serif; }
-    body { margin: 0; background: #0b1220; color: #e8eef7; padding: 1.25rem; max-width: 40rem; }
-    h1 { font-size: 1.35rem; margin: 0 0 0.35rem; }
-    .lede { color: #a8bdd8; font-size: 0.92rem; margin: 0 0 1rem; }
-    label { display: block; margin: 0.55rem 0; font-size: 0.85rem; color: #a8bdd8; }
-    input { display: block; width: 100%; box-sizing: border-box; margin-top: 0.25rem;
-      padding: 0.55rem 0.65rem; border-radius: 8px; border: 1px solid #2a3a55;
-      background: #121a2b; color: #e8eef7; font: inherit; }
-    .row { display:flex; flex-wrap:wrap; gap:0.5rem; margin-top:0.75rem; }
-    button { padding: 0.55rem 0.9rem; border-radius: 8px; border: 1px solid #2a6df4;
-      background: #1a3a7a; color: #fff; font-weight: 600; cursor: pointer; }
-    button.ghost { background: transparent; border-color: #94a3b8; }
-    .card { margin-top: 1rem; padding: 1rem; border-radius: 10px; border: 1px solid #2a3a55; }
-    .card.grant { border-color: #1f9d63; background: rgba(31,157,99,0.12); }
-    .card.refuse { border-color: #d64545; background: rgba(214,69,69,0.12); }
-    table { width:100%; border-collapse: collapse; margin-top:0.75rem; font-size:0.88rem; }
-    th, td { text-align:left; padding:0.35rem 0.4rem; border-bottom:1px solid #2a3a55; font-family: ui-monospace, monospace; }
-    tr.fail td { color:#fca5a5; }
-    .stages { display:flex; flex-wrap:wrap; gap:0.4rem; margin:0.75rem 0; font-size:0.8rem; color:#a8bdd8; }
-    .stages span.on { color:#6ee7a8; font-weight:700; }
+    :root { color-scheme: dark; --void:#070b14; --amber:#d4a24c; --grant:#1f9d63; --refuse:#e04545;
+      font-family: "IBM Plex Sans", system-ui, sans-serif; }
+    body { margin: 0; min-height: 100vh; background:
+      radial-gradient(900px 400px at 10% -10%, rgba(91,157,255,0.12), transparent 50%), var(--void);
+      color: #eef3fb; padding: 1.35rem; max-width: 44rem; }
+    h1 { font-size: 1.55rem; margin: 0 0 0.35rem; letter-spacing: -0.02em; }
+    h1::before { content: "SORT · "; color: var(--amber); font-family: "IBM Plex Mono", monospace;
+      font-size: 0.72rem; letter-spacing: 0.14em; vertical-align: middle; }
+    .lede { color: #a8bdd8; font-size: 0.95rem; margin: 0 0 1rem; line-height: 1.45; }
+    label { display: block; margin: 0.55rem 0; font-size: 0.78rem; letter-spacing: 0.06em;
+      text-transform: uppercase; color: var(--amber); font-weight: 600; }
+    input { display: block; width: 100%; box-sizing: border-box; margin-top: 0.3rem;
+      padding: 0.6rem 0.7rem; border-radius: 8px; border: 1px solid #2a3a55;
+      background: #0a1220; color: #e8eef7; font-family: "IBM Plex Mono", monospace; font-size: 0.9rem; }
+    .row { display:flex; flex-wrap:wrap; gap:0.5rem; margin-top:0.85rem; }
+    button { padding: 0.6rem 0.95rem; border-radius: 8px; border: 0;
+      background: linear-gradient(#4a8dff,#2a6df4); color: #fff; font-weight: 700;
+      letter-spacing: 0.04em; cursor: pointer; font-family: inherit; }
+    button.ghost { background: transparent; border: 1px solid #94a3b8; color: #e8eef7; font-weight: 600; }
+    .card { margin-top: 1rem; padding: 1.05rem; border-radius: 12px; border: 2px solid #2a3a55; }
+    .card.grant { border-color: var(--grant); box-shadow: 0 0 36px rgba(31,157,99,0.35); background: rgba(31,157,99,0.1); }
+    .card.refuse { border-color: var(--refuse); box-shadow: 0 0 36px rgba(224,69,69,0.35); background: rgba(224,69,69,0.1); }
+    .card h2 { margin: 0; font-size: 1.5rem; letter-spacing: 0.12em; }
+    table { width:100%; border-collapse: collapse; margin-top:0.75rem; font-size:0.88rem;
+      border: 1px solid #243552; border-radius: 8px; overflow: hidden; }
+    th, td { text-align:left; padding:0.45rem 0.5rem; border-bottom:1px solid #243552;
+      font-family: "IBM Plex Mono", monospace; }
+    th { font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; background: #152038; color: #c5d4e8; }
+    tr.fail td { color:#fca5a5; background: rgba(224,69,69,0.14); }
+    .stages { display:flex; flex-wrap:wrap; gap:0.45rem; margin:0.85rem 0; font-size:0.78rem;
+      font-family: "IBM Plex Mono", monospace; color:#8fa3bf; }
+    .stages span { padding: 0.2rem 0.45rem; border: 1px solid #2a3a55; border-radius: 999px; }
+    .stages span.on { color:#6ee7a8; font-weight:700; border-color: rgba(31,157,99,0.55);
+      background: rgba(31,157,99,0.12); }
     a { color: #9ec5ff; }
   </style>
 </head>
