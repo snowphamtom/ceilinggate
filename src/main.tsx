@@ -1,8 +1,8 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { ConvexProvider, ConvexReactClient } from "convex/react";
-import App from "./App";
-import "./index.css";
+import SortingMachine from "./SortingMachine";
+import "./sorting-machine.css";
 
 const url = import.meta.env.VITE_CONVEX_URL as string | undefined;
 const root = createRoot(document.getElementById("root")!);
@@ -12,14 +12,14 @@ if (url) {
   root.render(
     <StrictMode>
       <ConvexProvider client={client}>
-        <App />
+        <SortingMachine />
       </ConvexProvider>
     </StrictMode>,
   );
 } else {
   root.render(
     <StrictMode>
-      <App />
+      <SortingMachine />
     </StrictMode>,
   );
 }

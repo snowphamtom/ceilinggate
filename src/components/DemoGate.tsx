@@ -40,7 +40,7 @@ export function DemoGate({
   return (
     <section className="sm-panel sm-claim" aria-label="Live claim lane">
       <div className="sm-panel-head">
-        <h2>Live claim lane</h2>
+        <h2>C ≤ S gate</h2>
         <span className={"sm-chip " + (ok ? "grant" : "refuse")}>
           {ok ? "GRANT" : "REFUSE"}
         </span>
@@ -62,9 +62,9 @@ export function DemoGate({
           <tr>
             <th>LINE</th>
             <th>CLAIMED (C)</th>
-            <th>SOURCE (S)</th>
+            <th>ON RECEIPT (S)</th>
             <th>Δ</th>
-            <th></th>
+            <th>STATUS</th>
           </tr>
         </thead>
         <tbody>
