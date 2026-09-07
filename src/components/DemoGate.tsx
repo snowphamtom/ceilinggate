@@ -40,12 +40,15 @@ export function DemoGate({
   return (
     <section className="sm-panel sm-claim" aria-label="Live claim lane">
       <div className="sm-panel-head">
-        <h2>C ≤ S gate</h2>
+        <h2>Receipt-line C ≤ S</h2>
         <span className={"sm-chip " + (ok ? "grant" : "refuse")}>
           {ok ? "GRANT" : "REFUSE"}
         </span>
       </div>
       <p className="sm-subj">{subject}</p>
+      <p className="sm-rival-hint">
+        Line ledger — CLAIMED vs ON RECEIPT — not a page promise.
+      </p>
       <div className="sm-demo-row">
         <button type="button" className="sm-btn grant" onClick={onDemoGrant}>
           Demo GRANT

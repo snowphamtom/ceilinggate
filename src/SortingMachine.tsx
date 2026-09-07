@@ -194,12 +194,21 @@ export default function SortingMachine() {
             LIVE · {lane.source === "convex" ? "Evidence" : "snap"} · {syncAgo}
           </span>
         </div>
-        <h1>Continuous gather → sort</h1>
+        <h1>Receipt-line gather → sort</h1>
         <p className="sm-lede">
-          Mission flip: gather from every domain, then sort —{" "}
-          <strong>not</strong> organize-in-place. Gate law:{" "}
-          <strong>C ≤ S</strong> on every line → <strong>GRANT</strong> or{" "}
-          <strong>REFUSE</strong>. CASCADE + Klaus feed + Drive buckets.
+          Differentiator vs page-promise rivals: every{" "}
+          <strong>receipt line</strong> is gated <strong>C ≤ S</strong>{" "}
+          (claimed ≤ on-receipt) → <strong>GRANT</strong> or{" "}
+          <strong>REFUSE</strong>. Continuous gather → sort — not
+          organize-in-place, not a chat shrug, not a whole-page promise.
+        </p>
+        <p className="sm-rival-beat" role="note">
+          <span className="sm-rival-label">vs WATCH rivals</span>
+          <span>
+            <code>get-it-in-writing</code> page-promise ≠ line residuals ·{" "}
+            <code>might</code> ≠ spend gates — we sort{" "}
+            <strong>receipt lines</strong> continuously.
+          </span>
         </p>
         <p className="sm-sync-stamp">
           process:getLive · <code>{lane.stampLabel}</code>

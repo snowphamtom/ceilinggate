@@ -2,7 +2,7 @@ const PIPE_STAGES = [
   { id: "gather", label: "Gather", hint: "mail · web · drive" },
   { id: "triage", label: "Triage", hint: "real objects only" },
   { id: "evidence", label: "Evidence", hint: "Firecrawl ledger" },
-  { id: "sort", label: "Sort", hint: "C ≤ S gates" },
+  { id: "sort", label: "Sort", hint: "receipt-line C ≤ S" },
   { id: "bucket", label: "Bucket", hint: "GRANT / REFUSE" },
 ] as const;
 
@@ -42,9 +42,9 @@ export function SortingMachineStages({ activePipe, hasDecision }: Props) {
         })}
       </div>
       <p className="sm-law">
-        Machine law: <span className="sm-law-chip">GATHER → SORT</span> then{" "}
-        <span className="sm-law-chip">C ≤ S</span> — never organize-in-place, never
-        chat shrug
+        Machine law: <span className="sm-law-chip">GATHER → SORT</span> ·{" "}
+        <span className="sm-law-chip">receipt-line C ≤ S</span> — beats page-promise,
+        not organize-in-place
       </p>
     </section>
   );
