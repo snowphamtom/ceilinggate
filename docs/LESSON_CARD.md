@@ -1,7 +1,7 @@
-# Lesson card — 7c6994c
+# Lesson card — 8099d4b
 
 1. What changed
-docs: WIN POLISH D — hackathon.md Observatorium + lean KEEP + O-ID + REFUSE→GRANT judge path
+fix: retarget allgas-judge-smoke to WIN POLISH GR-21 face (drop Demo signature)
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
