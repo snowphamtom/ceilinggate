@@ -1,7 +1,7 @@
-# Lesson card — 3963ca7
+# Lesson card — 125b027
 
 1. What changed
-ui: ban GR-21/Hash/plasma — plain Check ID on Claim Check face
+ui: Live-for uptime + receipt/ledger desk chrome on Claim Check
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
