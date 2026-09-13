@@ -9,15 +9,17 @@ Not a chat app. Not a developer SDK. Not the AgentMail sample inbox assistant.
 | | |
 |---|---|
 | Live | https://quirky-rhinoceros-204.convex.site/ |
+| Demo video | https://quirky-rhinoceros-204.convex.site/watch.html |
+| Playlist | https://quirky-rhinoceros-204.convex.site/hls/master.m3u8 |
 | Health | https://quirky-rhinoceros-204.convex.site/health |
 | Build log | [hackathon.md](./hackathon.md) |
 | CI | [convex-deploy](https://github.com/snowphamtom/ceilinggate/actions/workflows/convex-deploy.yml) |
-| Demo (~1 min) | [release allgas-demo-20260905](https://github.com/snowphamtom/ceilinggate/releases/tag/allgas-demo-20260905) |
+| Demo files | [release allgas-demo-20260905](https://github.com/snowphamtom/ceilinggate/releases/tag/allgas-demo-20260905) |
 | Listing | https://vibeapps.dev/s/ceilinggate |
 | Inbox | ceilinggate-claims@agentmail.to |
 | Share | https://x.com/magpie_inventor/status/2096419465973944560 |
 
-Open the live app. Click **Demo GRANT**, then **Demo REFUSE**. Read the ledger. No login.
+Open the live app. Click **Demo GRANT**, then **Demo REFUSE**. Read the ledger. No login. Video plays on `/watch.html` from the GitHub release mp4s.
 
 ## What each sponsor does
 
@@ -26,9 +28,9 @@ Open the live app. Click **Demo GRANT**, then **Demo REFUSE**. Read the ledger. 
 - **AgentMail** — claim ingress at `ceilinggate-claims@agentmail.to`.
 - **OpenAI** — one sentence after the numbers. It does not pick GRANT or REFUSE.
 
-## 2026-09-06
+## 2026-09-13
 
-CI deploy is green. The site judges hit is the same tree GitHub Actions ships. Product rule unchanged: claimed ≤ receipt, or REFUSE names the dollar overage.
+CI deploy is green. `/watch.html` and `/hls/master.m3u8` are on the live site. Product rule unchanged: claimed ≤ receipt, or REFUSE names the dollar overage.
 
 ## Run locally
 
