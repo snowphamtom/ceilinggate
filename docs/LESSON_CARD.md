@@ -1,7 +1,7 @@
-# Lesson card — 86743b6
+# Lesson card — e287739
 
 1. What changed
-Watch page uses same ABR attach rules.
+Serve /watch.html and /hls/* from siteAssets.
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
