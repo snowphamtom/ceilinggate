@@ -9,18 +9,62 @@
       main { max-width: 880px; margin: 24px auto; padding: 0 16px; }
       h1 { font-size: 1.15rem; font-weight: 600; }
       p { color: #9aa8c2; font-size: 0.92rem; }
-      video { width: 100%; background: #000; border-radius: 8px; }
-      a { color: #8ec5ff; }
+      .frame { position: relative; aspect-ratio: 16 / 9; background: #000; border-radius: 8px; overflow: hidden; }
+      video { width: 100%; height: 100%; object-fit: contain; background: #000; }
+      a, button { color: #8ec5ff; }
+      .cuts { display: flex; gap: 0.5rem; margin: 0.75rem 0; }
+      .cuts button {
+        background: #0e1628; border: 1px solid #243552; color: #e8eefc;
+        border-radius: 999px; padding: 0.35rem 0.8rem; cursor: pointer;
+      }
+      .cuts button.on { border-color: #1f9d63; color: #9be7c0; }
     </style>
   </head>
   <body>
     <main>
       <h1>CeilingGate demo</h1>
       <p>Receipt-line gather → sort. Claimed ≤ receipt → GRANT. One line over → REFUSE names the dollars.</p>
-      <video controls playsinline preload="metadata" poster="https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-20260905/02-grant.png">
-        <source src="https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-20260905/CeilingGate-AllGas-demo.mp4" type="video/mp4" />
-      </video>
+      <div class="frame">
+        <video id="reel" controls playsinline preload="none" poster="https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-20260905/02-grant.png"></video>
+      </div>
+      <div class="cuts">
+        <button type="button" id="cut60" class="on">60s (fast)</button>
+        <button type="button" id="cutFull">Full ~1:08</button>
+      </div>
       <p><a href="/">Back to app</a> · <a href="https://github.com/snowphamtom/ceilinggate/releases/tag/allgas-demo-20260905">Release pack</a></p>
     </main>
+    <script>
+      const SRC60 = "https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-20260905/CeilingGate-AllGas-demo-60s.mp4";
+      const SRCFULL = "https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-20260905/CeilingGate-AllGas-demo.mp4";
+      const v = document.getElementById("reel");
+      const b60 = document.getElementById("cut60");
+      const bFull = document.getElementById("cutFull");
+      function use(src, btn) {
+        const t = v.currentTime || 0;
+        const playing = !v.paused && v.src;
+        v.src = src;
+        v.load();
+        const onMeta = () => {
+          if (t > 0.25) v.currentTime = Math.min(t, v.duration || t);
+          if (playing) v.play().catch(() => {});
+          v.removeEventListener("loadedmetadata", onMeta);
+        };
+        v.addEventListener("loadedmetadata", onMeta);
+        b60.classList.toggle("on", btn === b60);
+        bFull.classList.toggle("on", btn === bFull);
+      }
+      b60.onclick = () => use(SRC60, b60);
+      bFull.onclick = () => use(SRCFULL, bFull);
+      const boot = () => use(SRC60, b60);
+      if ("IntersectionObserver" in window) {
+        const io = new IntersectionObserver((ents) => {
+          if (ents.some((e) => e.isIntersecting)) { boot(); io.disconnect(); }
+        }, { threshold: 0.2 });
+        io.observe(v);
+      } else {
+        boot();
+      }
+      v.addEventListener("play", () => { if (!v.src) boot(); }, { once: true });
+    </script>
   </body>
 </html>
