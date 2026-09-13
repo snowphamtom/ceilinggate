@@ -107,7 +107,14 @@ function injectSpaCssIntoForge(distDir = "./dist") {
 async function main() {
   loadEnv();
   injectSpaCssIntoForge("./dist");
-  const files = collect("./dist");
+  let files = collect("./dist");
+  // Prefer-live YT + progressive mp4 via /watch.html; skip fragile HLS rung segments
+  // so site:publish always gets a complete index+js+css set without ENOENT races.
+  files = files.filter((f) => {
+    if (f.path === "/hls/master.m3u8") return true;
+    if (f.path.startsWith("/hls/")) return false;
+    return true;
+  });
   const deploymentId = randomUUID();
   console.log("uploading", files.length, "files", deploymentId);
   const published = [];
@@ -124,14 +131,25 @@ async function main() {
     published.push({ path: f.path, storageId, contentType: f.contentType });
     console.log("ok", f.path);
   }
-  // publish in chunks
+  // Critical paths first so early chunks can complete index+js+css;
+  // only the FINAL chunk must flip meta (isCompleteSite scans whole deploymentId).
+  published.sort((a, b) => {
+    const rank = (p) =>
+      p === "/index.html" ? 0 :
+      p.startsWith("/assets/") && p.endsWith(".js") ? 1 :
+      p.startsWith("/assets/") && p.endsWith(".css") ? 2 :
+      p.startsWith("/hls/") ? 9 : 5;
+    return rank(a.path) - rank(b.path);
+  });
+  let finalPub = null;
   for (let i = 0; i < published.length; i += 40) {
     const chunk = published.slice(i, i + 40);
     const pub = convexRun("site:publish", { deploymentId, files: chunk });
     console.log("publish", pub);
-    if (pub && pub.ok === false) {
-      throw new Error(`site:publish refused meta flip: ${JSON.stringify(pub)}`);
-    }
+    finalPub = pub;
+  }
+  if (finalPub && finalPub.ok === false) {
+    throw new Error(`site:publish refused meta flip: ${JSON.stringify(finalPub)}`);
   }
   console.log("LIVE https://quirky-rhinoceros-204.convex.site/");
 }
