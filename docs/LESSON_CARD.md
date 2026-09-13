@@ -1,7 +1,7 @@
-# Lesson card — 0a1f5cf
+# Lesson card — b975a8b
 
 1. What changed
-I changed docs/TWO_HOST.md + README + .env.example VITE_PUBLIC_SITE_URL because .cloud 404s on static routes looked like a broken deploy in firewall crawl (route /watch.html status 200 .site / 404 .cloud).
+I changed firewallCrawl action + schema + outer script + OBSERVATORIUM.md because /judge.html and bare /watch failed in firewall crawl (route /judge.html status 404; route /watch status 404) and cloud forge was unavailable — two-host law documented, KEEP now expects judge+watch 200.
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
