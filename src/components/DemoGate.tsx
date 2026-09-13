@@ -1,7 +1,9 @@
+import { useEffect, useState } from "react";
 import type { GateDecision } from "../lib/residualGates";
 import { residualCommitment } from "../lib/gr21Residual";
 import type { LastResidual } from "../lib/gr21Live";
 import { composeOneLine } from "../lib/oneLine";
+import { ResidualCaliper } from "./ResidualCaliper";
 
 export type LineRow = { name: string; claimed: number; source: number };
 
@@ -12,12 +14,13 @@ type Props = {
   onDemoGrant: () => void;
   onDemoRefuse: () => void;
   onResort: () => void;
+  onOneBreath?: () => void;
   onClaimEdit: (idx: number, value: string) => void;
   onSourceEdit: (idx: number, value: string) => void;
   fails: string[];
   showAwait?: boolean;
-  /** Live Evidence gr21:getLastResidual — prefer over local FNV fuel */
   liveResidual?: LastResidual | null;
+  breathBusy?: boolean;
 };
 
 function money(n: number) {
@@ -28,7 +31,7 @@ function cap(s: string) {
   return s.length ? s[0].toUpperCase() + s.slice(1) : s;
 }
 
-/** ONE live C≤S Demo GRANT/REFUSE lane — GR-21 residual commitment on stamps */
+/** ONE live C≤S Demo GRANT/REFUSE lane — GR-21 residual slam + projector */
 export function DemoGate({
   rows,
   decision,
@@ -36,11 +39,13 @@ export function DemoGate({
   onDemoGrant,
   onDemoRefuse,
   onResort,
+  onOneBreath,
   onClaimEdit,
   onSourceEdit,
   fails,
   showAwait = false,
   liveResidual = null,
+  breathBusy = false,
 }: Props) {
   const ok = decision.status === "grant" && decision.mask === 0;
   const local = residualCommitment(
@@ -48,11 +53,8 @@ export function DemoGate({
     rows.map((r) => r.source),
     subject || "ceilinggate-gr21",
   );
-  // Align with Evidence getLastResidual (sha256) when live; local FNV = offline fuel only
-  const commitHex =
-    liveResidual?.residualCommitment ?? local.commit;
-  const historicHex =
-    liveResidual?.historicAnchor ?? local.commit;
+  const commitHex = liveResidual?.residualCommitment ?? local.commit;
+  const historicHex = liveResidual?.historicAnchor ?? local.commit;
   const commitShort = commitHex.slice(0, 12);
   const variance = liveResidual?.variance ?? local.variance;
   const projector =
@@ -70,6 +72,32 @@ export function DemoGate({
     lineItems: rows.map((r) => r.name),
   });
 
+  const [slamKey, setSlamKey] = useState(0);
+  const [hashReveal, setHashReveal] = useState(false);
+  const [typed, setTyped] = useState("");
+
+  useEffect(() => {
+    if (showAwait) {
+      setTyped("");
+      setHashReveal(false);
+      return;
+    }
+    setSlamKey((k) => k + 1);
+    setHashReveal(false);
+    const t0 = window.setTimeout(() => setHashReveal(true), 220);
+    setTyped("");
+    let i = 0;
+    const id = window.setInterval(() => {
+      i += 1;
+      setTyped(oneLine.slice(0, i));
+      if (i >= oneLine.length) window.clearInterval(id);
+    }, 18);
+    return () => {
+      window.clearTimeout(t0);
+      window.clearInterval(id);
+    };
+  }, [showAwait, oneLine, decision.mask, decision.status]);
+
   return (
     <section className="sm-panel sm-claim" aria-label="Live claim lane">
       <div className="sm-panel-head">
@@ -79,15 +107,22 @@ export function DemoGate({
         </span>
       </div>
       <p className="sm-subj">{subject}</p>
-      <p className="sm-rival-hint">
-        LINE · CLAIMED · ON RECEIPT · STATUS
-      </p>
+      <p className="sm-rival-hint">LINE · CLAIMED · ON RECEIPT · STATUS</p>
       <p className="sm-demo-path">
-        One path: tap <strong>1 · Demo REFUSE</strong> (see overage + GR-21),
-        then <strong>2 · Demo GRANT</strong> (clear stamp). No other clicks
-        needed.
+        One breath: <strong>REFUSE</strong> (overage named) →{" "}
+        <strong>GRANT</strong> (clear). OpenAI one-line types after the numbers.
       </p>
       <div className="sm-demo-row">
+        {onOneBreath ? (
+          <button
+            type="button"
+            className="sm-btn breath"
+            onClick={onOneBreath}
+            disabled={breathBusy}
+          >
+            {breathBusy ? "Breathing…" : "One breath · REFUSE→GRANT"}
+          </button>
+        ) : null}
         <button type="button" className="sm-btn refuse" onClick={onDemoRefuse}>
           1 · Demo REFUSE
         </button>
@@ -98,6 +133,9 @@ export function DemoGate({
           Re-sort C ≤ S
         </button>
       </div>
+
+      <ResidualCaliper rows={rows} failedIndices={decision.failedIndices} />
+
       <table className="sm-ledger" aria-label="Line ledger">
         <thead>
           <tr>
@@ -148,24 +186,34 @@ export function DemoGate({
           })}
         </tbody>
       </table>
+
       {showAwait ? (
         <div className="sm-verdict await" aria-live="polite">
           <div>
             <strong>AWAITING RESIDUAL SCAN</strong>
             <p className="sm-await-hint">
-              GR-21 projector idle — tap Demo GRANT / REFUSE or edit C / S
+              GR-21 projector idle — one breath or tap Demo REFUSE / GRANT
             </p>
           </div>
         </div>
       ) : (
-        <div className={"sm-verdict " + (ok ? "grant" : "refuse")}>
-          <div className="sm-verdict-stamp">{ok ? "GRANT" : "REFUSE"}</div>
+        <div
+          key={slamKey}
+          className={"sm-verdict sm-slam " + (ok ? "grant" : "refuse")}
+          data-testid="verdict-slam"
+        >
+          <div className="sm-verdict-stamp sm-stamp-slam">
+            {ok ? "GRANT" : "REFUSE"}
+          </div>
           <div
-            className="sm-gr21-stamp sm-gr21-readable"
+            className={
+              "sm-gr21-stamp sm-gr21-readable" +
+              (hashReveal ? " is-revealed" : " is-sealed")
+            }
             title={`commit=${commitHex}\nhistoric=${historicHex}`}
             data-testid="gr21-residual-stamp"
           >
-            <span className="sm-gr21-kicker">GR-21 residual</span>
+            <span className="sm-gr21-kicker">GR-21 residual · hash reveal</span>
             <span
               className={
                 "sm-gr21-proj " + (projector === "CLEAR" ? "clear" : "over")
@@ -173,7 +221,9 @@ export function DemoGate({
             >
               C≤S {projector}
             </span>
-            <code className="sm-gr21-hash">{commitShort}</code>
+            <code className="sm-gr21-hash">
+              {hashReveal ? commitShort : "············"}
+            </code>
             <span className="sm-gr21-meta">
               σ² {variance.toExponential(2)}
               {projector === "CLEAR" ? " · residual 0" : ""}
@@ -181,9 +231,12 @@ export function DemoGate({
               {liveLabel}
             </span>
           </div>
-          <p className="sm-oneline" data-testid="openai-oneline">
-            <span className="sm-oneline-label">OpenAI one-line</span>
-            {oneLine}
+          <p className="sm-oneline sm-oneline-type" data-testid="openai-oneline">
+            <span className="sm-oneline-label">OpenAI one-line · after numbers</span>
+            <span className="sm-oneline-text">{typed}</span>
+            <span className="sm-caret" aria-hidden>
+              ▍
+            </span>
           </p>
           {fails.length ? (
             <ul>

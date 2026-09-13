@@ -69,6 +69,12 @@ export default function SortingMachine() {
   const [activePipe, setActivePipe] = useState(0);
   const [pulse, setPulse] = useState(0);
   const [subject, setSubject] = useState(GRANT_FIXTURE.email.subject);
+  const [pathLit, setPathLit] = useState({
+    firecrawl: false,
+    agentmail: false,
+    openai: false,
+  });
+  const [breathBusy, setBreathBusy] = useState(false);
 
   useEffect(() => {
     const boot = rowsFromFixture(GRANT_FIXTURE);
@@ -101,11 +107,27 @@ export default function SortingMachine() {
 
   const demoGrant = useCallback(() => {
     runSort(rowsFromFixture(GRANT_FIXTURE), GRANT_FIXTURE.email.subject);
+    // Demo fixture S numbers = receipt scrape stand-in; oneLine after numbers
+    setPathLit((p) => ({ ...p, firecrawl: true, openai: true }));
   }, [runSort]);
 
   const demoRefuse = useCallback(() => {
     runSort(rowsFromFixture(REFUSE_FIXTURE), REFUSE_FIXTURE.email.subject);
+    setPathLit((p) => ({ ...p, firecrawl: true, openai: true }));
   }, [runSort]);
+
+  const oneBreath = useCallback(() => {
+    if (breathBusy) return;
+    setBreathBusy(true);
+    setPathLit((p) => ({ ...p, firecrawl: true }));
+    runSort(rowsFromFixture(REFUSE_FIXTURE), REFUSE_FIXTURE.email.subject);
+    setPathLit((p) => ({ ...p, firecrawl: true, openai: true }));
+    window.setTimeout(() => {
+      runSort(rowsFromFixture(GRANT_FIXTURE), GRANT_FIXTURE.email.subject);
+      setPathLit((p) => ({ ...p, firecrawl: true, openai: true }));
+      setBreathBusy(false);
+    }, 1400);
+  }, [breathBusy, runSort]);
 
   const onClaimEdit = (idx: number, value: string) => {
     const n = Number(value);
@@ -137,6 +159,11 @@ export default function SortingMachine() {
 
   const d = decision ?? decisionFromRows(rows);
   const fails = plainFails(rows, d);
+  const agentmailLit =
+    pathLit.agentmail ||
+    Boolean(lastResidual) ||
+    (lane.vince?.pending?.length ?? 0) > 0 ||
+    (lane.cole?.proposeRows ?? 0) > 0;
 
   return (
     <div className="sm-shell sm-scratch sm-lean" data-testid="ceilinggate-sorting-machine">
@@ -148,18 +175,23 @@ export default function SortingMachine() {
             LIVE · C ≤ S
           </span>
         </div>
-        <h1>Email a receipt → GRANT or REFUSE</h1>
+        <h1>Not a chat that guesses.</h1>
+        <p className="sm-aha">A machine that sorts money claims.</p>
         <p className="sm-lede">
-          Money sorter for expense claims. Email a claim + public receipt URL.
-          Each line: claimed ≤ on-receipt → <strong>GRANT</strong>. Over by
-          dollars → <strong>REFUSE</strong>. Not a chat shrug. Not a page
-          promise.
+          Email a claim + public receipt URL. Each line: claimed ≤ on-receipt →{" "}
+          <strong>GRANT</strong>. Over by dollars → <strong>REFUSE</strong>.
         </p>
         <p className="sm-law">
           Law: numbers first · leftover on one line cannot cover a hole on
           another · <span className="sm-law-chip">C ≤ S</span> per line.
         </p>
-        <SponsorChips />
+        <SponsorChips
+          lit={{
+            firecrawl: pathLit.firecrawl,
+            agentmail: agentmailLit,
+            openai: pathLit.openai && decision != null,
+          }}
+        />
       </header>
 
       <SortingMachineStages
@@ -175,6 +207,8 @@ export default function SortingMachine() {
           subject={subject}
           onDemoGrant={demoGrant}
           onDemoRefuse={demoRefuse}
+          onOneBreath={oneBreath}
+          breathBusy={breathBusy}
           onResort={() => {
             setDecision(decisionFromRows(rows));
             setActivePipe(4);
