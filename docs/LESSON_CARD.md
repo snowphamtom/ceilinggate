@@ -1,7 +1,7 @@
-# Lesson card — 219bb62
+# Lesson card — 9ac2eb6
 
 1. What changed
-docs: live Y0 lens for HUD glow 69b6923
+wire: Claim Check HUD prefer-live → allgas-demo-yt2 HLS+MP4
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
