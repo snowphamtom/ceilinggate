@@ -1,7 +1,7 @@
-# Lesson card — eb8e36f
+# Lesson card — fe53f85
 
 1. What changed
-ui: plain English face copy — no mythic flavor
+ui: Claim Check product name on quirky face
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
