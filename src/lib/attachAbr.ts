@@ -1,5 +1,6 @@
 /** Adaptive bitrate attach for the judge demo.
- * Prefers same-origin HLS (/hls/master.m3u8). Else progressive rungs.
+ * Segment HLS (/hls/*.m3u8 with stream.m3u8 children) when present.
+ * /hls/master.m3u8 may list release mp4 rungs — that is progressive, not hls.js.
  */
 
 export const HLS_MASTER = "/hls/master.m3u8";
@@ -20,24 +21,27 @@ function net(): Net {
 
 export function pickProgressive(): { url: string; label: string } {
   const n = net();
-  if (n.saveData) return { url: RUNG_LOW, label: "save-data · 60s" };
+  if (n.saveData) return { url: RUNG_LOW, label: "save-data \u00b7 60s" };
   if (typeof n.downlink === "number" && n.downlink > 0 && n.downlink < 0.25) {
-    return { url: RUNG_LOW, label: `low · ${n.downlink}Mb/s` };
+    return { url: RUNG_LOW, label: `low \u00b7 ${n.downlink}Mb/s` };
   }
   if (n.effectiveType === "slow-2g" || n.effectiveType === "2g") {
     return { url: RUNG_LOW, label: n.effectiveType };
   }
-  return { url: RUNG_HIGH, label: n.downlink ? `high · ${n.downlink}Mb/s` : "high" };
+  return { url: RUNG_HIGH, label: n.downlink ? `high \u00b7 ${n.downlink}Mb/s` : "high" };
 }
 
-async function hlsExists(): Promise<boolean> {
+async function masterKind(): Promise<"segments" | "mp4-rungs" | "none"> {
   try {
     const r = await fetch(HLS_MASTER, { method: "GET", cache: "no-store" });
-    if (!r.ok) return false;
+    if (!r.ok) return "none";
     const t = await r.text();
-    return t.includes("#EXTM3U");
+    if (!t.includes("#EXTM3U")) return "none";
+    if (t.includes("stream.m3u8") || t.includes(".m4s")) return "segments";
+    if (t.includes(".mp4")) return "mp4-rungs";
+    return "none";
   } catch {
-    return false;
+    return "none";
   }
 }
 
@@ -73,12 +77,12 @@ export async function attachAbr(
   el: HTMLVideoElement,
   onLabel?: (s: string) => void,
 ): Promise<AbrHandle> {
-  const useHls = await hlsExists();
+  const kind = await masterKind();
   const nativeHls = el.canPlayType("application/vnd.apple.mpegurl");
 
-  if (useHls && nativeHls) {
+  if (kind === "segments" && nativeHls) {
     el.src = HLS_MASTER;
-    onLabel?.("HLS native · ABR");
+    onLabel?.("HLS native \u00b7 ABR");
     return {
       mode: "hls",
       label: "HLS native",
@@ -89,7 +93,7 @@ export async function attachAbr(
     };
   }
 
-  if (useHls) {
+  if (kind === "segments") {
     try {
       await loadHlsScript();
       const Hls = (window as Window & { Hls?: { isSupported: () => boolean } & (new (c?: object) => HlsLike) }).Hls;
@@ -106,7 +110,7 @@ export async function attachAbr(
           const lv = hls.levels[hls.currentLevel];
           onLabel?.(
             lv
-              ? `HLS ABR · ${lv.height ?? "?"}p · ${Math.round((lv.bitrate ?? 0) / 1000)}kb/s`
+              ? `HLS ABR \u00b7 ${lv.height ?? "?"}p \u00b7 ${Math.round((lv.bitrate ?? 0) / 1000)}kb/s`
               : "HLS ABR",
           );
         };
@@ -122,7 +126,7 @@ export async function attachAbr(
 
   const pick = pickProgressive();
   el.src = pick.url;
-  onLabel?.(pick.label + " · progressive");
+  onLabel?.(pick.label + (kind === "mp4-rungs" ? " \u00b7 master rungs" : " \u00b7 progressive"));
   return {
     mode: "progressive",
     label: pick.label,
