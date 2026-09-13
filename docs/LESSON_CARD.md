@@ -1,7 +1,7 @@
-# Lesson card — e287739
+# Lesson card — dfd6f25
 
 1. What changed
-Serve /watch.html and /hls/* from siteAssets.
+Serve /hls/master.m3u8 as release-rung playlist (200).
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
