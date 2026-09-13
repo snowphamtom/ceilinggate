@@ -183,7 +183,8 @@ export default function SortingMachine() {
         </p>
         <p className="sm-law">
           Law: numbers first · leftover on one line cannot cover a hole on
-          another · <span className="sm-law-chip">C ≤ S</span> per line.
+          another · <span className="sm-law-chip">C ≤ S</span> · hybrid seal{" "}
+          <span className="sm-law-chip">S_H</span>.
         </p>
         <SponsorChips
           lit={{

@@ -1648,3 +1648,82 @@ body {
   margin: 0 0 0.35rem;
   font-size: 0.78rem;
 }
+
+/* ABSORB: S_H hybrid seal + Pythonista elemental slam (dark forensic) */
+.sm-seal {
+  margin: 0.25rem 0 0.45rem;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.02em;
+  color: #9eb6d4;
+  line-height: 1.35;
+}
+.sm-seal strong { color: #e8eef8; }
+
+/* FIRE slam — REFUSE */
+.sm-verdict.refuse .sm-stamp-slam.el-fire,
+.sm-stamp-slam.el-fire {
+  color: #ffb08a;
+  text-shadow:
+    0 0 12px rgba(255, 64, 20, 0.35),
+    0 0 28px rgba(180, 30, 0, 0.25);
+  border-color: rgba(255, 90, 40, 0.55);
+  background:
+    radial-gradient(ellipse at 50% 120%, rgba(255, 60, 10, 0.22), transparent 60%),
+    #0a0606;
+  box-shadow:
+    0 0 0 1px rgba(255, 80, 30, 0.25),
+    0 12px 32px rgba(80, 10, 0, 0.55),
+    inset 0 -8px 24px rgba(255, 40, 0, 0.08);
+}
+.sm-verdict.refuse.sm-slam::after {
+  content: "";
+  position: absolute;
+  inset: auto 8% -6px;
+  height: 10px;
+  background: radial-gradient(ellipse, rgba(255, 70, 20, 0.35), transparent 70%);
+  pointer-events: none;
+  opacity: 0.7;
+}
+.sm-verdict.refuse { position: relative; }
+
+/* ICE + LIGHTNING — GRANT */
+.sm-stamp-slam.el-ice {
+  color: #c8f0ff;
+  text-shadow:
+    0 0 10px rgba(140, 220, 255, 0.35),
+    0 0 2px rgba(200, 240, 255, 0.8);
+  border-color: rgba(120, 200, 255, 0.5);
+  background:
+    linear-gradient(180deg, rgba(30, 60, 90, 0.35), rgba(5, 12, 22, 0.95)),
+    #050a12;
+  box-shadow:
+    0 0 0 1px rgba(160, 220, 255, 0.2),
+    0 0 22px rgba(100, 180, 255, 0.12),
+    inset 0 1px 0 rgba(200, 240, 255, 0.15);
+}
+.sm-stamp-slam.el-lightning {
+  animation: smStampSlam 0.42s cubic-bezier(0.15, 1.6, 0.3, 1) both,
+    smLightningFlash 0.55s ease-out 0.05s both;
+}
+@keyframes smLightningFlash {
+  0% { filter: brightness(1.8) saturate(0.4); }
+  40% { filter: brightness(1.15); }
+  100% { filter: none; }
+}
+
+/* PLASMA — GR-21 hash reveal */
+.sm-gr21-readable.el-plasma.is-revealed {
+  border-color: rgba(200, 80, 255, 0.45);
+  box-shadow:
+    0 0 0 1px rgba(180, 60, 255, 0.2),
+    0 0 28px rgba(160, 40, 220, 0.18),
+    inset 0 0 20px rgba(120, 20, 180, 0.08);
+}
+.sm-gr21-readable.el-plasma.is-revealed .sm-gr21-hash {
+  color: #f0c8ff;
+  text-shadow: 0 0 12px rgba(220, 100, 255, 0.45);
+}
+.sm-gr21-readable.el-plasma.is-revealed .sm-gr21-kicker {
+  color: #d9a8ff;
+}

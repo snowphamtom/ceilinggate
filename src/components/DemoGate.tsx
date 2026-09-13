@@ -101,13 +101,15 @@ export function DemoGate({
   return (
     <section className="sm-panel sm-claim" aria-label="Live claim lane">
       <div className="sm-panel-head">
-        <h2>Receipt-line C ≤ S</h2>
+        <h2>Receipt-line C ≤ S · S_H</h2>
         <span className={"sm-chip " + (ok ? "grant" : "refuse")}>
           {ok ? "GRANT" : "REFUSE"}
         </span>
       </div>
       <p className="sm-subj">{subject}</p>
-      <p className="sm-rival-hint">LINE · CLAIMED · ON RECEIPT · STATUS</p>
+      <p className="sm-rival-hint">
+        LINE · C claimed · S on receipt · STATUS · hybrid seal S_H
+      </p>
       <p className="sm-demo-path">
         One breath: <strong>REFUSE</strong> (overage named) →{" "}
         <strong>GRANT</strong> (clear). OpenAI one-line types after the numbers.
@@ -149,18 +151,41 @@ export function DemoGate({
           className={"sm-verdict sm-slam " + (ok ? "grant" : "refuse")}
           data-testid="verdict-slam"
         >
-          <div className="sm-verdict-stamp sm-stamp-slam">
+          <div
+            className={
+              "sm-verdict-stamp sm-stamp-slam" +
+              (ok ? " el-ice el-lightning" : " el-fire")
+            }
+            data-element={ok ? "ICE+LIGHTNING" : "FIRE"}
+          >
             {ok ? "GRANT" : "REFUSE"}
           </div>
+          <p className="sm-seal" data-testid="hybrid-seal">
+            {ok ? (
+              <>
+                Hybrid seal <strong>S_H = 1</strong> · solvency (C ≤ S) ∧ residual
+                validity · commit
+              </>
+            ) : (
+              <>
+                Hybrid seal <strong>S_H = 0</strong> · refusal purity · ledger
+                unmutated · overage named
+              </>
+            )}
+          </p>
           <div
             className={
               "sm-gr21-stamp sm-gr21-readable" +
-              (hashReveal ? " is-revealed" : " is-sealed")
+              (hashReveal ? " is-revealed el-plasma" : " is-sealed")
             }
+            data-element={hashReveal ? "PLASMA" : "SEALED"}
             title={`commit=${commitHex}\nhistoric=${historicHex}`}
             data-testid="gr21-residual-stamp"
           >
-            <span className="sm-gr21-kicker">GR-21 residual · hash reveal</span>
+            <span className="sm-gr21-kicker">
+              GR-21 residual · hash-chained audit
+              {hashReveal ? " · PLASMA reveal" : ""}
+            </span>
             <span
               className={
                 "sm-gr21-proj " + (projector === "CLEAR" ? "clear" : "over")
