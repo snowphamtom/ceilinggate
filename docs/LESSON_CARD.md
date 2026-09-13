@@ -1,7 +1,7 @@
-# Lesson card — a1bc580
+# Lesson card — 4521bdb
 
 1. What changed
-ui: rival WATCH beat — receipt-line C≤S vs page-promise
+Ship demo reel on live site so judges see the video without Clerk/YouTube.
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
