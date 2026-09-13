@@ -1,4 +1,6 @@
 /** Judge demo plate — GitHub release mp4 on the live site. Not YouTube. Not Drive. */
+import "./DemoReel.css";
+
 const DEMO_SRC =
   "https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-20260905/CeilingGate-AllGas-demo.mp4";
 const DEMO_60 =
