@@ -31,7 +31,7 @@ function cap(s: string) {
   return s.length ? s[0].toUpperCase() + s.slice(1) : s;
 }
 
-/** ONE live C≤S Demo GRANT/REFUSE lane — GR-21 residual slam + projector */
+/** Live C ≤ S Demo GRANT/REFUSE lane — GR-21 evidence stamp + projector */
 export function DemoGate({
   rows,
   decision,
@@ -63,7 +63,7 @@ export function DemoGate({
         ? "CLEAR"
         : "OVER"
       : local.projector;
-  const liveLabel = liveResidual ? "fleet-gerbil · getLastResidual" : "local fuel";
+  const liveLabel = liveResidual ? "Live residual" : "Local";
   const oneLine = composeOneLine({
     status: ok ? "grant" : "refuse",
     claimed: rows.map((r) => r.claimed),
@@ -101,18 +101,18 @@ export function DemoGate({
   return (
     <section className="sm-panel sm-claim" aria-label="Live claim lane">
       <div className="sm-panel-head">
-        <h2>Receipt-line C ≤ S · S_H</h2>
+        <h2>Claim Gate</h2>
         <span className={"sm-chip " + (ok ? "grant" : "refuse")}>
           {ok ? "GRANT" : "REFUSE"}
         </span>
       </div>
       <p className="sm-subj">{subject}</p>
       <p className="sm-rival-hint">
-        LINE · C claimed · S on receipt · STATUS · hybrid seal S_H
+        Line · Claimed (C) · On receipt (S) · Status · S_H
       </p>
       <p className="sm-demo-path">
-        One breath: <strong>REFUSE</strong> (overage named) →{" "}
-        <strong>GRANT</strong> (clear). OpenAI one-line types after the numbers.
+        Demo cycle: <strong>REFUSE</strong> (overage named) →{" "}
+        <strong>GRANT</strong> (clear). Summary line follows the numbers.
       </p>
       <div className="sm-demo-row">
         {onOneBreath ? (
@@ -122,14 +122,14 @@ export function DemoGate({
             onClick={onOneBreath}
             disabled={breathBusy}
           >
-            {breathBusy ? "Breathing…" : "One breath · REFUSE→GRANT"}
+            {breathBusy ? "Running…" : "Demo cycle · REFUSE → GRANT"}
           </button>
         ) : null}
         <button type="button" className="sm-btn refuse" onClick={onDemoRefuse}>
-          1 · Demo REFUSE
+          Demo REFUSE
         </button>
         <button type="button" className="sm-btn grant" onClick={onDemoGrant}>
-          2 · Demo GRANT
+          Demo GRANT
         </button>
         <button type="button" className="sm-btn ghost" onClick={onResort}>
           Re-sort C ≤ S
@@ -139,9 +139,9 @@ export function DemoGate({
       {showAwait ? (
         <div className="sm-verdict await" aria-live="polite">
           <div>
-            <strong>AWAITING RESIDUAL SCAN</strong>
+            <strong>Awaiting residual</strong>
             <p className="sm-await-hint">
-              GR-21 projector idle — one breath or tap Demo REFUSE / GRANT
+              GR-21 idle — run Demo cycle or Demo REFUSE / GRANT
             </p>
           </div>
         </div>
@@ -163,13 +163,11 @@ export function DemoGate({
           <p className="sm-seal" data-testid="hybrid-seal">
             {ok ? (
               <>
-                Hybrid seal <strong>S_H = 1</strong> · solvency (C ≤ S) ∧ residual
-                validity · commit
+                <strong>S_H = 1</strong> · C ≤ S · residual valid · commit
               </>
             ) : (
               <>
-                Hybrid seal <strong>S_H = 0</strong> · refusal purity · ledger
-                unmutated · overage named
+                <strong>S_H = 0</strong> · REFUSE · ledger unchanged · overage named
               </>
             )}
           </p>
@@ -183,8 +181,8 @@ export function DemoGate({
             data-testid="gr21-residual-stamp"
           >
             <span className="sm-gr21-kicker">
-              GR-21 residual · hash-chained audit
-              {hashReveal ? " · PLASMA reveal" : ""}
+              GR-21 evidence stamp
+              {hashReveal ? " · hash" : ""}
             </span>
             <span
               className={
@@ -205,7 +203,7 @@ export function DemoGate({
           </div>
           <ResidualCaliper rows={rows} failedIndices={decision.failedIndices} />
           <p className="sm-oneline sm-oneline-type" data-testid="openai-oneline">
-            <span className="sm-oneline-label">OpenAI one-line · after numbers</span>
+            <span className="sm-oneline-label">Summary line</span>
             <span className="sm-oneline-text">{typed}</span>
             <span className="sm-caret" aria-hidden>
               ▍
@@ -218,7 +216,7 @@ export function DemoGate({
               ))}
             </ul>
           ) : (
-            <p>Every line clears C ≤ S. Mask 0.</p>
+            <p>Every line clears C ≤ S.</p>
           )}
           <p className="sm-mask">
             mask {decision.mask}

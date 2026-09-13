@@ -1,8 +1,8 @@
 const PIPE_STAGES = [
-  { id: "gather", label: "Gather", hint: "mail · web · drive" },
-  { id: "triage", label: "Triage", hint: "real objects only" },
-  { id: "evidence", label: "Evidence", hint: "GR-21 residual commit" },
-  { id: "sort", label: "Sort", hint: "C≤S projector" },
+  { id: "gather", label: "Gather", hint: "Mail · web · files" },
+  { id: "triage", label: "Triage", hint: "Claims only" },
+  { id: "evidence", label: "Evidence", hint: "GR-21 commit" },
+  { id: "sort", label: "Sort", hint: "C ≤ S projector" },
   { id: "bucket", label: "Bucket", hint: "GRANT / REFUSE" },
 ] as const;
 
@@ -42,8 +42,8 @@ export function SortingMachineStages({ activePipe, hasDecision }: Props) {
         })}
       </div>
       <p className="sm-law">
-        Law: <span className="sm-law-chip">GATHER → SORT</span> ·{" "}
-        <span className="sm-law-chip">C ≤ S</span> per receipt line → GRANT/REFUSE
+        <span className="sm-law-chip">Gather → Sort</span> ·{" "}
+        <span className="sm-law-chip">C ≤ S</span> per receipt line → GRANT / REFUSE
       </p>
     </section>
   );

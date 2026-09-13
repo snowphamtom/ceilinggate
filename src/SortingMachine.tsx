@@ -1,7 +1,7 @@
 /**
- * CeilingGate — lean judge Sorting Machine (SENATE EDICT strip).
- * KEEP: hero + stages + prefer-live demo + C≤S Demo + GR-21 + lean intake + lean Klaus.
- * STRIP: Cascade roster, Drive buckets, forge costume, internal vibes chips.
+ * CeilingGate — Sorting Machine face.
+ * KEEP: hero + stages + DemoReel + C≤S Demo + GR-21 + intake + Klaus.
+ * STRIP: Cascade roster, Drive buckets, forge costume.
  */
 import { useCallback, useEffect, useState } from "react";
 import demo from "./data/demo.json";
@@ -175,16 +175,12 @@ export default function SortingMachine() {
             LIVE · C ≤ S
           </span>
         </div>
-        <h1>Not a chat that guesses.</h1>
-        <p className="sm-aha">A machine that sorts money claims.</p>
+        <h1>Sort money claims against receipt lines.</h1>
         <p className="sm-lede">
-          Email a claim + public receipt URL. Each line: claimed ≤ on-receipt →{" "}
-          <strong>GRANT</strong>. Over by dollars → <strong>REFUSE</strong>.
-        </p>
-        <p className="sm-law">
-          Law: numbers first · leftover on one line cannot cover a hole on
-          another · <span className="sm-law-chip">C ≤ S</span> · hybrid seal{" "}
-          <span className="sm-law-chip">S_H</span>.
+          Email a claim with a public receipt URL. Each line: Claimed ≤ On
+          receipt → <strong>GRANT</strong>. Over by dollars →{" "}
+          <strong>REFUSE</strong>. <span className="sm-law-chip">C ≤ S</span>{" "}
+          · <span className="sm-law-chip">S_H</span>
         </p>
         <SponsorChips
           lit={{
@@ -231,7 +227,7 @@ export default function SortingMachine() {
       </div>
 
       <footer className="sm-foot">
-        <span>Receipt-line C ≤ S · GR-21 residual · prefer-live demo</span>
+        <span>C ≤ S · GR-21 · Sorting Machine</span>
         <a
           href="https://github.com/snowphamtom/ceilinggate"
           target="_blank"

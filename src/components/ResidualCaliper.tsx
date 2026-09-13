@@ -5,7 +5,7 @@ type Props = {
   failedIndices: number[];
 };
 
-/** Live C vs S caliper — residual projector viz (SHOW OFF) */
+/** Live Claimed vs On receipt caliper — residual projector */
 export function ResidualCaliper({ rows, failedIndices }: Props) {
   const max = Math.max(
     1,
@@ -16,7 +16,7 @@ export function ResidualCaliper({ rows, failedIndices }: Props) {
       <div className="sm-caliper-head">
         <span>Residual projector</span>
         <span className="sm-caliper-legend">
-          <i className="c" /> C claimed · <i className="s" /> S on receipt
+          <i className="c" /> Claimed (C) · <i className="s" /> On receipt (S)
         </span>
       </div>
       <ul>
@@ -33,7 +33,7 @@ export function ResidualCaliper({ rows, failedIndices }: Props) {
                 <span
                   className="sm-caliper-mark"
                   style={{ left: `${sPct}%` }}
-                  title="receipt ceiling"
+                  title="On receipt ceiling"
                 />
               </div>
               <span className={"sm-caliper-delta " + (fail ? "over" : "clear")}>

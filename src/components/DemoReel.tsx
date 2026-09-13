@@ -1,4 +1,4 @@
-/** ONE prefer-live demo reel for judges — YT + allgas-demo-yt file. No ABR jargon. */
+/** Demo reel — YouTube + demo file. */
 const YT_ID = "2KsMO90LpdE";
 const YT_URL = `https://www.youtube.com/watch?v=${YT_ID}`;
 const YT_EMBED = `https://www.youtube.com/embed/${YT_ID}`;
@@ -7,15 +7,15 @@ const GH_YT =
 
 export function DemoReel() {
   return (
-    <section className="sm-panel sm-demo-reel" aria-label="Prefer-live demo">
+    <section className="sm-panel sm-demo-reel" aria-label="Demo">
       <div className="sm-panel-head">
         <h2>Demo</h2>
-        <span className="sm-chip">prefer-live</span>
+        <span className="sm-chip">YouTube</span>
       </div>
       <div className="sm-demo-frame">
         <iframe
           className="sm-demo-video"
-          title="CeilingGate prefer-live demo"
+          title="CeilingGate demo"
           src={YT_EMBED}
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
@@ -24,14 +24,14 @@ export function DemoReel() {
       </div>
       <p className="sm-demo-links">
         <a href={YT_URL} target="_blank" rel="noreferrer">
-          YouTube silent
+          YouTube
         </a>
         <span>·</span>
         <a href={GH_YT} target="_blank" rel="noreferrer">
-          allgas-demo-yt file
+          Download MP4
         </a>
         <span>·</span>
-        <a href="/watch.html">watch · HLS</a>
+        <a href="/watch.html">Watch (HLS)</a>
       </p>
     </section>
   );

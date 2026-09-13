@@ -2,14 +2,14 @@ import type { OrganizerLane } from "../lib/evidenceLive";
 
 type Props = { lane: OrganizerLane };
 
-/** Optional lean Klaus strip — counts + up to 2 holds. Not a second product. */
+/** Klaus strip — counts + up to 2 holds. */
 export function KlausOrganizer({ lane }: Props) {
   const holds = lane.vince.pending.slice(0, 2);
   return (
     <section className="sm-panel sm-klaus-lean" aria-label="Klaus strip">
       <div className="sm-panel-head">
         <h2>Klaus</h2>
-        <span className="sm-chip">lean</span>
+        <span className="sm-chip">Organizer</span>
       </div>
       <div className="sm-klaus-counts">
         <div>

@@ -1,16 +1,16 @@
 import { AGENTMAIL_INBOX_EMAIL } from "../config/agentmail";
 
-/** Lean AgentMail intake — one clear CTA for judges */
+/** AgentMail intake — claim email CTA */
 export function LiveFeeds() {
   return (
     <section className="sm-panel sm-intake" aria-label="AgentMail intake">
       <div className="sm-panel-head">
-        <h2>Email a claim</h2>
+        <h2>Email a Claim</h2>
         <span className="sm-chip">AgentMail</span>
       </div>
       <p className="sm-muted">
-        Send a money claim + public receipt URL. Firecrawl reads the page; each
-        line is gated C ≤ S → GRANT/REFUSE.
+        Send a money claim with a public receipt URL. Firecrawl reads the page;
+        each line is gated Claimed ≤ On receipt (C ≤ S) → GRANT or REFUSE.
       </p>
       <p className="sm-inbox">
         <a href={`mailto:${AGENTMAIL_INBOX_EMAIL}?subject=claim`}>

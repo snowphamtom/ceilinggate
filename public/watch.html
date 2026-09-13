@@ -28,13 +28,13 @@
   </head>
   <body>
     <main>
-      <h1>CeilingGate demo</h1>
+      <h1>CeilingGate Demo</h1>
       <div class="meta">
-        <span class="chip" id="lab">prefer-live · YouTube</span>
-        <span class="chip">174s · silent cut</span>
-        <span class="chip">allgas-demo-yt</span>
+        <span class="chip" id="lab">YouTube</span>
+        <span class="chip">174s · silent</span>
+        <span class="chip">Demo file</span>
       </div>
-      <p>Primary: YouTube prefer-live embed. On-site: HLS ABR from GH allgas-demo-hls high-BW (~5Mbps v0), not thin on-origin CRF; else progressive allgas-demo-yt.</p>
+      <p>Primary: YouTube embed. On-site: HLS from GitHub release (~5 Mbps), with progressive MP4 fallback.</p>
       <div class="frame" id="yt-frame">
         <iframe
           id="yt"
@@ -48,12 +48,12 @@
       <p style="margin-top:0.85rem">
         <a href="/">Back to app</a>
         · <a href="https://www.youtube.com/watch?v=2KsMO90LpdE">YouTube</a>
-        · <a href="https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-hls/master.m3u8">HLS master (GH high-BW)</a>
-        · <a id="prog-link" href="https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-yt/CeilingGate-Forge-gates-clip-YT.mp4">Progressive mp4</a>
+        · <a href="https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-hls/master.m3u8">HLS master</a>
+        · <a id="prog-link" href="https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-yt/CeilingGate-Forge-gates-clip-YT.mp4">Download MP4</a>
       </p>
 
       <section class="sec">
-        <h2>On-site player (HLS · progressive fallback)</h2>
+        <h2>On-site Player</h2>
         <p class="chip" id="prog-lab">idle</p>
         <div class="frame" style="margin-top:0.5rem">
           <video
@@ -101,7 +101,7 @@
 
       function useProgressive(why) {
         v.src = PROG;
-        lab.textContent = "progressive · allgas-demo-yt" + (why ? " · " + why : "");
+        lab.textContent = "Progressive MP4" + (why ? " · " + why : "");
       }
 
       async function attachOnSite() {
@@ -119,7 +119,7 @@
         }
         if (v.canPlayType("application/vnd.apple.mpegurl")) {
           v.src = MASTER;
-          lab.textContent = "HLS native · ABR · allgas-demo-hls";
+          lab.textContent = "HLS native";
           return;
         }
         try {
@@ -136,12 +136,12 @@
             var tag = function () {
               var lv = hls.levels[hls.currentLevel];
               lab.textContent = lv
-                ? "HLS ABR · " + (lv.height || "?") + "p · allgas-demo-hls"
-                : "HLS ABR · allgas-demo-hls";
+                ? "HLS · " + (lv.height || "?") + "p"
+                : "HLS";
             };
             hls.on(window.Hls.Events.LEVEL_SWITCHED, tag);
             hls.on(window.Hls.Events.MANIFEST_PARSED, tag);
-            lab.textContent = "HLS ABR · allgas-demo-hls";
+            lab.textContent = "HLS";
             return;
           }
         } catch (e) {}
