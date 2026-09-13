@@ -1,7 +1,7 @@
-# Lesson card — d1d68a7
+# Lesson card — ff087fe
 
 1. What changed
-ui: Y0 densify + clearer Claim Check CTAs (masterpiece kept)
+ui: calm inviting palette + disclosure IA (Y0 held)
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
