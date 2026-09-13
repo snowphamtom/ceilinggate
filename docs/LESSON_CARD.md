@@ -1,7 +1,7 @@
-# Lesson card — b0a1ab8
+# Lesson card — 11f2ebb
 
 1. What changed
-fix: prefer-live YT 2KsMO90LpdE + allgas-demo-yt on watch/hls
+ui: PERFECT+STRIP root — money sorter only
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
