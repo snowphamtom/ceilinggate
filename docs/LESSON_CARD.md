@@ -1,7 +1,7 @@
-# Lesson card — dfd6f25
+# Lesson card — 55034e2
 
 1. What changed
-Serve /hls/master.m3u8 as release-rung playlist (200).
+Only treat segment HLS as HLS; mp4 rungs stay progressive.
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
