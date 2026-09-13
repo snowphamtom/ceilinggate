@@ -3,7 +3,7 @@
 set -euo pipefail
 SITE="${SITE:-https://quirky-rhinoceros-204.convex.site}"
 GH="${GH:-https://github.com/snowphamtom/ceilinggate}"
-REL="${REL:-https://github.com/snowphamtom/ceilinggate/releases/tag/allgas-demo-20260905}"
+REL="${REL:-https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-yt/CeilingGate-Forge-gates-clip-YT.mp4}"
 fail=0
 pass() { echo "PASS  $*"; }
 bad()  { echo "FAIL  $*"; fail=1; }
@@ -16,7 +16,8 @@ if [[ "$code" == "200" ]]; then pass "SPA index"; else bad "SPA index ($code)"; 
 js=$(grep -oE '/assets/index-[^"]+\.js' /tmp/cg-i.html | head -1 || true)
 if [[ -n "$js" ]]; then
   curl -sS -o /tmp/cg.js "$SITE$js"
-  for s in "Demo GRANT" "Demo REFUSE" "Demo signature" "claimed" "mask "; do
+  # WIN POLISH lean face — GR-21 stamps (not legacy Demo signature)
+  for s in "1 · Demo REFUSE" "2 · Demo GRANT" "GR-21" "Email a receipt" "OpenAI one-line" "mask "; do
     if grep -q "$s" /tmp/cg.js; then pass "bundle has $s"; else bad "bundle missing $s"; fi
   done
 else bad "no js asset in index"; fi
