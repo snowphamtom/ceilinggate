@@ -175,7 +175,7 @@ export default function SortingMachine() {
             LIVE · C ≤ S
           </span>
         </div>
-        <h1>Sort money claims against receipt lines.</h1>
+        <h1>Check money claims against receipt lines.</h1>
         <p className="sm-lede">
           Email a claim with a public receipt URL. Each line: Claimed ≤ On
           receipt → <strong>GRANT</strong>. Over by dollars →{" "}
@@ -191,7 +191,7 @@ export default function SortingMachine() {
         />
       </header>
 
-      {/* First breath Y0: GRANT+hash+caliper before pipeline */}
+      {/* Y0 proof: GRANT + S_H + hash + caliper before pipeline */}
       <div className="sm-proof-fold" data-testid="proof-above-fold">
         <DemoGate
           rows={rows}

@@ -5,16 +5,16 @@ type Props = {
   failedIndices: number[];
 };
 
-/** Live Claimed vs On receipt caliper — residual projector */
+/** Claimed vs On receipt bar chart. */
 export function ResidualCaliper({ rows, failedIndices }: Props) {
   const max = Math.max(
     1,
     ...rows.flatMap((r) => [r.claimed, r.source]),
   );
   return (
-    <div className="sm-caliper" data-testid="residual-caliper" aria-label="C vs S projector">
+    <div className="sm-caliper" data-testid="residual-caliper" aria-label="Claimed vs On receipt">
       <div className="sm-caliper-head">
-        <span>Residual projector</span>
+        <span>Claimed vs On receipt</span>
         <span className="sm-caliper-legend">
           <i className="c" /> Claimed (C) · <i className="s" /> On receipt (S)
         </span>
@@ -33,7 +33,7 @@ export function ResidualCaliper({ rows, failedIndices }: Props) {
                 <span
                   className="sm-caliper-mark"
                   style={{ left: `${sPct}%` }}
-                  title="On receipt ceiling"
+                  title="On receipt amount"
                 />
               </div>
               <span className={"sm-caliper-delta " + (fail ? "over" : "clear")}>

@@ -31,7 +31,7 @@ function cap(s: string) {
   return s.length ? s[0].toUpperCase() + s.slice(1) : s;
 }
 
-/** Live C ≤ S Demo GRANT/REFUSE lane — GR-21 evidence stamp + projector */
+/** Live C ≤ S Demo GRANT/REFUSE lane with GR-21 hash. */
 export function DemoGate({
   rows,
   decision,
@@ -63,7 +63,7 @@ export function DemoGate({
         ? "CLEAR"
         : "OVER"
       : local.projector;
-  const liveLabel = liveResidual ? "Live residual" : "Local";
+  const liveLabel = liveResidual ? "Live check" : "Local check";
   const oneLine = composeOneLine({
     status: ok ? "grant" : "refuse",
     claimed: rows.map((r) => r.claimed),
@@ -101,7 +101,7 @@ export function DemoGate({
   return (
     <section className="sm-panel sm-claim" aria-label="Live claim lane">
       <div className="sm-panel-head">
-        <h2>Claim Gate</h2>
+        <h2>Claim Check</h2>
         <span className={"sm-chip " + (ok ? "grant" : "refuse")}>
           {ok ? "GRANT" : "REFUSE"}
         </span>
@@ -111,8 +111,9 @@ export function DemoGate({
         Line · Claimed (C) · On receipt (S) · Status · S_H
       </p>
       <p className="sm-demo-path">
-        Demo cycle: <strong>REFUSE</strong> (overage named) →{" "}
-        <strong>GRANT</strong> (clear). Summary line follows the numbers.
+        Try a <strong>REFUSE</strong> example (amount over receipt), then a{" "}
+        <strong>GRANT</strong> example (under or equal). A short summary follows
+        the numbers.
       </p>
       <div className="sm-demo-row">
         {onOneBreath ? (
@@ -122,7 +123,7 @@ export function DemoGate({
             onClick={onOneBreath}
             disabled={breathBusy}
           >
-            {breathBusy ? "Running…" : "Demo cycle · REFUSE → GRANT"}
+            {breathBusy ? "Running…" : "Show REFUSE then GRANT"}
           </button>
         ) : null}
         <button type="button" className="sm-btn refuse" onClick={onDemoRefuse}>
@@ -139,9 +140,9 @@ export function DemoGate({
       {showAwait ? (
         <div className="sm-verdict await" aria-live="polite">
           <div>
-            <strong>Awaiting residual</strong>
+            <strong>Waiting for a result</strong>
             <p className="sm-await-hint">
-              GR-21 idle — run Demo cycle or Demo REFUSE / GRANT
+              Press Demo REFUSE or Demo GRANT to run the check
             </p>
           </div>
         </div>
@@ -163,11 +164,11 @@ export function DemoGate({
           <p className="sm-seal" data-testid="hybrid-seal">
             {ok ? (
               <>
-                <strong>S_H = 1</strong> · C ≤ S · residual valid · commit
+                <strong>S_H = 1</strong> · C ≤ S · commit OK
               </>
             ) : (
               <>
-                <strong>S_H = 0</strong> · REFUSE · ledger unchanged · overage named
+                <strong>S_H = 0</strong> · REFUSE · over amount shown
               </>
             )}
           </p>
@@ -180,10 +181,7 @@ export function DemoGate({
             title={`commit=${commitHex}\nhistoric=${historicHex}`}
             data-testid="gr21-residual-stamp"
           >
-            <span className="sm-gr21-kicker">
-              GR-21 evidence stamp
-              {hashReveal ? " · hash" : ""}
-            </span>
+            <span className="sm-gr21-kicker">GR-21 hash</span>
             <span
               className={
                 "sm-gr21-proj " + (projector === "CLEAR" ? "clear" : "over")
@@ -196,7 +194,7 @@ export function DemoGate({
             </code>
             <span className="sm-gr21-meta">
               σ² {variance.toExponential(2)}
-              {projector === "CLEAR" ? " · residual 0" : ""}
+              {projector === "CLEAR" ? " · balanced" : ""}
               {" · "}
               {liveLabel}
             </span>
@@ -216,13 +214,13 @@ export function DemoGate({
               ))}
             </ul>
           ) : (
-            <p>Every line clears C ≤ S.</p>
+            <p>Every line passes C ≤ S.</p>
           )}
           <p className="sm-mask">
             mask {decision.mask}
             {decision.failedIndices.length
               ? ` · fail [${decision.failedIndices.join(",")}]`
-              : " · all clear"}
+              : " · all lines OK"}
           </p>
         </div>
       )}

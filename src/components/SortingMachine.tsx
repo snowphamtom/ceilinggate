@@ -1,9 +1,9 @@
 const PIPE_STAGES = [
   { id: "gather", label: "Gather", hint: "Mail · web · files" },
   { id: "triage", label: "Triage", hint: "Claims only" },
-  { id: "evidence", label: "Evidence", hint: "GR-21 commit" },
-  { id: "sort", label: "Sort", hint: "C ≤ S projector" },
-  { id: "bucket", label: "Bucket", hint: "GRANT / REFUSE" },
+  { id: "evidence", label: "Evidence", hint: "GR-21 hash" },
+  { id: "sort", label: "Sort", hint: "C ≤ S check" },
+  { id: "bucket", label: "Result", hint: "GRANT / REFUSE" },
 ] as const;
 
 type Props = {
@@ -11,10 +11,10 @@ type Props = {
   hasDecision: boolean;
 };
 
-/** Continuous GATHER→SORT machine — not organize-in-place */
+/** Pipeline stages: gather through result. */
 export function SortingMachineStages({ activePipe, hasDecision }: Props) {
   return (
-    <section className="sm-pipeline" aria-label="Gather to sort stages">
+    <section className="sm-pipeline" aria-label="Pipeline stages">
       <div className="sm-pipe-track">
         {PIPE_STAGES.map((s, i) => {
           const lit = i === activePipe || hasDecision;
