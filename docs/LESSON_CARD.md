@@ -1,7 +1,7 @@
-# Lesson card — ca9e46a
+# Lesson card — 3ea9a5b
 
 1. What changed
-docs+site: full compliance sweep — ceilinggate-1 paths, REFUSE→GRANT judge pack, drop stale 20260905 poster
+ui: SHOW OFF 10/10 — residual caliper + stamp slam/hash reveal, one-breath REFUSE→GRANT, sponsor trinity lights, hero aha
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
