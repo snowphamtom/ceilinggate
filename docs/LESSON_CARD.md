@@ -1,7 +1,7 @@
-# Lesson card — 21d871b
+# Lesson card — d9f212f
 
 1. What changed
-I changed public/hls to real 720/480 fMP4 segments (stream.m3u8 children) because the mp4-rung fake master failed as ABR in firewall crawl / video quality.
+fix: /watch MASTER prefers GH allgas-demo-hls high-BW
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
