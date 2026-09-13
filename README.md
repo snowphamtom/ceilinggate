@@ -15,11 +15,11 @@ Not a chat app. Not a developer SDK. Not the AgentMail sample inbox assistant.
 | Build log | [hackathon.md](./hackathon.md) |
 | CI | [convex-deploy](https://github.com/snowphamtom/ceilinggate/actions/workflows/convex-deploy.yml) |
 | Demo files | [release allgas-demo-yt](https://github.com/snowphamtom/ceilinggate/releases/tag/allgas-demo-yt) · [YouTube 2KsMO90LpdE](https://www.youtube.com/watch?v=2KsMO90LpdE) |
-| Listing | https://vibeapps.dev/s/ceilinggate |
+| Listing | https://vibeapps.dev/s/ceilinggate-1 |
 | Inbox | ceilinggate-claims@agentmail.to |
 | Share | https://x.com/magpie_inventor/status/2096419465973944560 |
 
-Open the live app. Click **Demo GRANT**, then **Demo REFUSE**. Read the ledger. No login. Video: YouTube prefer-live `2KsMO90LpdE` on `/watch.html`, progressive `allgas-demo-yt` mp4 fallback.
+Open the live app. Click **1 · Demo REFUSE**, then **2 · Demo GRANT**. Proof is above the fold. No login. Video: YouTube prefer-live `2KsMO90LpdE` (letter **O**) on `/watch.html`, progressive `allgas-demo-yt` mp4 fallback.
 
 ## What each sponsor does
 

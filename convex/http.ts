@@ -12,9 +12,6 @@ const http = httpRouter();
 
 const RELEASE =
   "https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-yt";
-const POSTER =
-  "https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-20260905/02-grant.png";
-
 const HLS_MASTER_FALLBACK = `#EXTM3U
 #EXT-X-VERSION:7
 #EXT-X-INDEPENDENT-SEGMENTS
@@ -42,16 +39,16 @@ video{width:100%;height:100%}
 <body>
 <main>
 <h1>CeilingGate</h1>
-<p class="tag">Email a public receipt. Get GRANT or the line that is over.</p>
-<div class="frame"><video controls playsinline poster="${POSTER}" src="${RELEASE}/CeilingGate-Forge-gates-clip-YT.mp4"></video></div>
+<p class="tag">Sorting Machine · email a receipt → C ≤ S → GRANT/REFUSE. Listing: vibeapps.dev/s/ceilinggate-1</p>
+<div class="frame"><video controls playsinline src="${RELEASE}/CeilingGate-Forge-gates-clip-YT.mp4"></video></div>
 <ul>
 <li><a href="/">Live app</a></li>
-<li><a href="/watch.html">Demo player</a></li>
+<li><a href="/watch.html">Demo player</a> · <a href="https://www.youtube.com/watch?v=2KsMO90LpdE">YT 2KsMO90LpdE</a></li>
 <li><a href="/hls/master.m3u8">HLS playlist</a></li>
 <li><a href="https://github.com/snowphamtom/ceilinggate">Repo</a></li>
 <li>Inbox: ceilinggate-claims@agentmail.to</li>
 </ul>
-<p class="tag">Demo GRANT then Demo REFUSE. Firecrawl reads the receipt. OpenAI writes one sentence after the numbers. It does not decide.</p>
+<p class="tag">1 · Demo REFUSE then 2 · Demo GRANT (above the fold). Firecrawl scrapes. OpenAI one-line after numbers — does not decide. Prefer-live YT 2KsMO90LpdE.</p>
 </main>
 </body>
 </html>`;

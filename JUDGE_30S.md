@@ -1,19 +1,16 @@
 # 30-second judge path
 
 Live: https://quirky-rhinoceros-204.convex.site/
-Video: https://quirky-rhinoceros-204.convex.site/watch.html
+Video: https://quirky-rhinoceros-204.convex.site/watch.html (prefer-live YT `2KsMO90LpdE` · letter **O**)
 
-**CeilingGate**
-The receipt is the ceiling.
+**CeilingGate** — continuous Sorting Machine. Email a receipt → GRANT or REFUSE.
 
-0. Optional: open `/watch.html` — 60s demo from the GitHub release.
-1. On the live app click **Demo GRANT** — every line at or under the receipt.
-2. Change lodging to **51**. Surplus on fuel cannot cover it. The stamp becomes **REFUSE** and names the dollar.
-3. Click **Demo REFUSE** — lodging and misc over, written in dollars.
-4. Optional: email a public receipt URL to `ceilinggate-claims@agentmail.to`.
-5. Firecrawl reads the page. No readable page — wait. Do not guess.
-6. OpenAI writes one sentence after the numbers. It does not decide.
+1. Open the live app — proof is above the fold (Demo REFUSE/GRANT + ledger).
+2. Click **1 · Demo REFUSE** — overages named in dollars · GR-21 stamp · OpenAI one-line.
+3. Click **2 · Demo GRANT** — every line C ≤ S · residual CLEAR.
+4. Optional: `/watch.html` — 174s silent prefer-live cut (YT + allgas-demo-yt mp4).
+5. Optional live path: email claim + public receipt URL to `ceilinggate-claims@agentmail.to`. Firecrawl scrapes; OpenAI writes one sentence after the numbers (does not decide).
 
-A leftover on one line cannot pay a hole on another.
+Sponsor chips on the hero: Firecrawl scrape · AgentMail inbox · OpenAI one-line.
 
-No login. No keys. Repo: https://github.com/snowphamtom/ceilinggate
+No login. No keys. Listing: https://vibeapps.dev/s/ceilinggate-1 · Repo: https://github.com/snowphamtom/ceilinggate

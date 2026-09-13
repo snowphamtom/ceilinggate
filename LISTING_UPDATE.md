@@ -1,11 +1,12 @@
-# VibeApps listing — paste this
+# VibeApps listing — paste / UPDATE only (HOLD FILE)
 
-https://vibeapps.dev/s/ceilinggate
+Canonical card: https://vibeapps.dev/s/ceilinggate-1  
+(Do **not** FILE a duplicate. Legacy `/s/ceilinggate` is WATCH only.)
 
 Title: CeilingGate
 
 Tagline:
-Email a public receipt. Get GRANT or the line that is over.
+CeilingGate — continuous Sorting Machine for money claims. GATHER → SORT (C ≤ S) → GRANT/REFUSE.
 
 Live:
 https://quirky-rhinoceros-204.convex.site/
@@ -13,20 +14,20 @@ https://quirky-rhinoceros-204.convex.site/
 Repo:
 https://github.com/snowphamtom/ceilinggate
 
-Demo / video URL (use this if the form wants YouTube-or-any-url):
+Demo / video (prefer-live — letter **O** not zero):
+https://www.youtube.com/watch?v=2KsMO90LpdE
+
+On-site player:
 https://quirky-rhinoceros-204.convex.site/watch.html
 
-Same bytes on GitHub:
-https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-20260905/CeilingGate-AllGas-demo.mp4
+Progressive mp4 (same cut):
+https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-yt/CeilingGate-Forge-gates-clip-YT.mp4
 
-GRANT shot:
-https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-20260905/02-grant.png
+Tags: convex, AllGasHackathon, OpenAI, AgentMail, Firecrawl
 
 Body:
-Tap Demo GRANT, then Demo REFUSE. Every line is checked against the receipt. One line over refuses the whole claim, named in dollars. OpenAI writes one sentence after the numbers. It does not decide.
+Open the live Sorting Machine. Click 1 · Demo REFUSE, then 2 · Demo GRANT. Each claimed line is gated C ≤ S against the receipt. Over = REFUSE with the dollar overage. Clear = GRANT. GR-21 residual stamps the projector. OpenAI writes one sentence after the numbers — it does not decide.
 
-Email a public receipt URL to ceilinggate-claims@agentmail.to.
+Email a claim + public receipt URL to ceilinggate-claims@agentmail.to. Firecrawl scrapes the page.
 
-Video is the GitHub release mp4 played on the live site. Not a YouTube channel. Not a livestream.
-
-Do not mention MAGPIE. Do not mention ResidualGates on the card.
+Do not mention MAGPIE. Do not put ResidualGates on the card title.

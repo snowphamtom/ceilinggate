@@ -7,7 +7,7 @@
 - Repo: https://github.com/snowphamtom/ceilinggate
 - CI: green (`convex-deploy` runs 35, 37, 38)
 - Inbox: ceilinggate-claims@agentmail.to
-- Demo: https://github.com/snowphamtom/ceilinggate/releases/tag/allgas-demo-20260905
+- Demo: https://github.com/snowphamtom/ceilinggate/releases/tag/allgas-demo-yt
 
 ## Closed today
 
