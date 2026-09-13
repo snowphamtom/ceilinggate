@@ -138,4 +138,20 @@ export default defineSchema({
     createdAt: v.number(),
     learned: v.optional(v.array(v.string())),
   }).index("by_createdAt", ["createdAt"]),
+
+  /** Legion tribute — Observatorium ledger rows */
+  grokLedger: defineTable({
+    legion: v.string(),
+    province: v.string(),
+    action: v.string(),
+    timestamp: v.number(),
+  }).index("by_timestamp", ["timestamp"]),
+
+  /** Imperator learnings after crawl / edict cycles */
+  imperatorLearnings: defineTable({
+    timestamp: v.number(),
+    crawl: v.string(),
+    grokMoves: v.string(),
+    nextEdict: v.string(),
+  }).index("by_timestamp", ["timestamp"]),
 });

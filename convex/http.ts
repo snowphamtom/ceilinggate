@@ -104,7 +104,7 @@ http.route({
     const rows = await ctx.runQuery(api.claims.listDecisions, { limit: 12 });
     return new Response(
       JSON.stringify({
-        decisions: rows.map((row) => ({
+        decisions: rows.map((row: any) => ({
           claim: {
             _id: row.claim._id,
             subject: row.claim.subject,
@@ -139,7 +139,10 @@ http.route({
 function contentTypeFor(path: string, stored: string) {
   if (path.endsWith(".m3u8")) return "application/vnd.apple.mpegurl";
   if (path.endsWith(".m4s")) return "video/iso.segment";
+  if (path.endsWith(".ts")) return "video/mp2t";
   if (path.endsWith(".mp4")) return "video/mp4";
+  if (path.endsWith(".jpg") || path.endsWith(".jpeg")) return "image/jpeg";
+  if (path.endsWith(".png")) return "image/png";
   return stored || "application/octet-stream";
 }
 
@@ -266,13 +269,22 @@ http.route({
   }),
 });
 
-for (const file of ["favicon.svg", "icons.svg", "manifest.webmanifest", "sw.js", "pwa-192.png", "pwa-512.png"]) {
+for (const file of ["favicon.svg", "icons.svg", "manifest.webmanifest", "sw.js", "pwa-192.png", "pwa-512.png", "demo-poster.jpg"]) {
   http.route({
     path: `/${file}`,
     method: "GET",
     handler: httpAction(async (ctx) => serveAsset(ctx, `/${file}`)),
   });
 }
+
+http.route({
+  pathPrefix: "/demo/",
+  method: "GET",
+  handler: httpAction(async (ctx, req) => {
+    const path = new URL(req.url).pathname;
+    return serveAsset(ctx, path);
+  }),
+});
 
 http.route({
   pathPrefix: "/pwa/",

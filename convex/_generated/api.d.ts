@@ -25,6 +25,7 @@ import type * as opsChannel from "../opsChannel.js";
 import type * as parse from "../parse.js";
 import type * as pipeline from "../pipeline.js";
 import type * as site from "../site.js";
+import type * as vault from "../vault.js";
 
 import type {
   ApiFromModules,
@@ -50,6 +51,7 @@ declare const fullApi: ApiFromModules<{
   parse: typeof parse;
   pipeline: typeof pipeline;
   site: typeof site;
+  vault: typeof vault;
 }>;
 
 /**
