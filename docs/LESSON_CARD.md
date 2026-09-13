@@ -1,7 +1,7 @@
-# Lesson card — 082ac4d
+# Lesson card — eb8e36f
 
 1. What changed
-ui: professional copy pass — consistent Claimed/Receipt/GRANT/REFUSE/C ≤ S
+ui: plain English face copy — no mythic flavor
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
