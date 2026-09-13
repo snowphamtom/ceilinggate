@@ -1,7 +1,7 @@
-# Lesson card — dcbb8a7
+# Lesson card — ffe602d
 
 1. What changed
-ui: first-breath Y0 — GR-21 hash + caliper with GRANT slam (before ledger/oneline scroll)
+ui: hard Y0 — proof (GRANT+S_H+GR-21 hash+caliper) before pipeline; densify first-breath
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
