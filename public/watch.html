@@ -34,7 +34,7 @@
         <span class="chip">174s · silent cut</span>
         <span class="chip">allgas-demo-yt</span>
       </div>
-      <p>Primary: YouTube prefer-live embed. On-site: real HLS 720/480 via hls.js when master has stream.m3u8; else progressive GitHub mp4 (174s prefer-live — not the 67s HQ).</p>
+      <p>Primary: YouTube prefer-live embed. On-site: HLS ABR from GH allgas-demo-hls high-BW (~5Mbps v0), not thin on-origin CRF; else progressive allgas-demo-yt.</p>
       <div class="frame" id="yt-frame">
         <iframe
           id="yt"
@@ -48,7 +48,7 @@
       <p style="margin-top:0.85rem">
         <a href="/">Back to app</a>
         · <a href="https://www.youtube.com/watch?v=2KsMO90LpdE">YouTube</a>
-        · <a href="/hls/master.m3u8">HLS master</a>
+        · <a href="https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-hls/master.m3u8">HLS master (GH high-BW)</a>
         · <a id="prog-link" href="https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-yt/CeilingGate-Forge-gates-clip-YT.mp4">Progressive mp4</a>
       </p>
 
@@ -70,7 +70,7 @@
       const YT_ID = "2KsMO90LpdE";
       const PROG =
         "https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-yt/CeilingGate-Forge-gates-clip-YT.mp4";
-      const MASTER = "/hls/master.m3u8";
+      const MASTER = "https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-hls/master.m3u8";
       const HLS_JS = "https://cdn.jsdelivr.net/npm/hls.js@1.5.20/dist/hls.min.js";
       const v = document.getElementById("reel");
       const lab = document.getElementById("prog-lab");
