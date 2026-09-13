@@ -7,7 +7,7 @@ const GH_YT =
 
 export function DemoReel() {
   return (
-    <section className="sm-panel sm-demo-reel" aria-label="Demo">
+    <section className="sm-panel sm-demo-reel sm-glass" aria-label="Demo">
       <div className="sm-panel-head">
         <h2>Demo</h2>
         <span className="sm-chip">YouTube</span>

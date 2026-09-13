@@ -99,10 +99,11 @@ export function DemoGate({
   }, [showAwait, oneLine, decision.mask, decision.status]);
 
   return (
-    <section className="sm-panel sm-claim" aria-label="Live claim lane">
+    <section className="sm-panel sm-claim sm-glass sm-perforated" aria-label="Live claim lane">
+      <div className="sm-panel-edge" aria-hidden />
       <div className="sm-panel-head">
         <div>
-          <p className="sm-section-label">Evidence · verdict</p>
+          <p className="sm-section-label">Evidence · verdict theater</p>
           <h2>Claim Check</h2>
         </div>
         <span className={"sm-chip " + (ok ? "grant" : "refuse")}>
@@ -152,9 +153,13 @@ export function DemoGate({
       ) : (
         <div
           key={slamKey}
-          className={"sm-verdict sm-slam sm-first-breath " + (ok ? "grant" : "refuse")}
+          className={"sm-verdict sm-slam sm-first-breath sm-proof-theater " + (ok ? "grant" : "refuse")}
           data-testid="verdict-slam"
         >
+          <div className="sm-stamp-stage" aria-hidden>
+            <div className="sm-stamp-echo" />
+            <div className="sm-stamp-glow" />
+          </div>
           <div
             className={
               "sm-verdict-stamp sm-stamp-slam" +
@@ -228,6 +233,7 @@ export function DemoGate({
         </div>
       )}
 
+      <div className="sm-ledger-wrap">
       <p className="sm-section-label sm-ledger-label">Line ledger · claim vs receipt</p>
       <table className="sm-ledger" aria-label="Line ledger">
         <thead>
@@ -279,6 +285,7 @@ export function DemoGate({
           })}
         </tbody>
       </table>
+      </div>
 
     </section>
   );

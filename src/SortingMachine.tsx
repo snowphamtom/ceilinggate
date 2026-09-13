@@ -93,12 +93,13 @@ function LiveForUptime() {
   );
   return (
     <span
-      className="sm-uptime"
+      className="sm-uptime sm-uptime-jewel"
       title={`Live since ${LIVE_SINCE_ISO} (git 9b8e37c)`}
       data-testid="live-for-uptime"
       aria-live="off"
     >
-      <span className="sm-uptime-label">Live for</span>{" "}
+      <span className="sm-uptime-pulse" aria-hidden />
+      <span className="sm-uptime-label">Live for</span>
       <time className="sm-uptime-digits" dateTime={LIVE_SINCE_ISO}>
         {label}
       </time>
@@ -215,10 +216,21 @@ export default function SortingMachine() {
     (lane.cole?.proposeRows ?? 0) > 0;
 
   return (
-    <div className="sm-shell sm-scratch sm-lean" data-testid="ceilinggate-sorting-machine">
-      <header className="sm-hero">
+    <div
+      className="sm-shell sm-scratch sm-masterpiece"
+      data-testid="ceilinggate-sorting-machine"
+    >
+      <div className="sm-atmosphere" aria-hidden>
+        <div className="sm-atm-vignette" />
+        <div className="sm-atm-grid" />
+        <div className="sm-atm-glow sm-atm-glow-a" />
+        <div className="sm-atm-glow sm-atm-glow-b" />
+        <div className="sm-atm-glow sm-atm-glow-c" />
+      </div>
+      <header className="sm-hero sm-enter sm-enter-1">
+        <div className="sm-hero-rail" aria-hidden />
         <div className="sm-hero-top">
-          <p className="sm-eyebrow">Claim Check · evidence desk</p>
+          <p className="sm-eyebrow">Claim Check · forensic evidence desk</p>
           <div className="sm-hero-meta">
             <LiveForUptime />
             <span className="sm-live-pill" title="Live">
@@ -245,7 +257,7 @@ export default function SortingMachine() {
       </header>
 
       {/* Y0 proof: GRANT + S_H + check id + caliper before pipeline */}
-      <div className="sm-proof-fold" data-testid="proof-above-fold">
+      <div className="sm-proof-fold sm-enter sm-enter-2" data-testid="proof-above-fold">
         <DemoGate
           rows={rows}
           decision={d}
@@ -266,12 +278,14 @@ export default function SortingMachine() {
         />
       </div>
 
-      <SortingMachineStages
-        activePipe={activePipe}
-        hasDecision={decision != null}
-      />
+      <div className="sm-enter sm-enter-3">
+        <SortingMachineStages
+          activePipe={activePipe}
+          hasDecision={decision != null}
+        />
+      </div>
 
-      <div className="sm-below-fold sm-grid sm-grid-lean">
+      <div className="sm-below-fold sm-grid sm-grid-lean sm-enter sm-enter-4">
         <DemoReel />
         <div className="sm-side">
           <LiveFeeds />

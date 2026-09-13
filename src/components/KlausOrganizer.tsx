@@ -6,7 +6,7 @@ type Props = { lane: OrganizerLane };
 export function KlausOrganizer({ lane }: Props) {
   const holds = lane.vince.pending.slice(0, 2);
   return (
-    <section className="sm-panel sm-klaus-lean" aria-label="Klaus strip">
+    <section className="sm-panel sm-klaus-lean sm-glass" aria-label="Klaus strip">
       <div className="sm-panel-head">
         <h2>Klaus</h2>
         <span className="sm-chip">Organizer</span>

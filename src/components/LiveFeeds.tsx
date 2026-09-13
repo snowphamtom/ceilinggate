@@ -3,7 +3,7 @@ import { AGENTMAIL_INBOX_EMAIL } from "../config/agentmail";
 /** AgentMail intake — claim email CTA */
 export function LiveFeeds() {
   return (
-    <section className="sm-panel sm-intake" aria-label="AgentMail intake">
+    <section className="sm-panel sm-intake sm-glass" aria-label="AgentMail intake">
       <div className="sm-panel-head">
         <h2>Email a Claim</h2>
         <span className="sm-chip">AgentMail</span>

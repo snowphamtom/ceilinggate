@@ -12,7 +12,7 @@ export function ResidualCaliper({ rows, failedIndices }: Props) {
     ...rows.flatMap((r) => [r.claimed, r.source]),
   );
   return (
-    <div className="sm-caliper" data-testid="residual-caliper" aria-label="Claimed vs On receipt">
+    <div className="sm-caliper sm-caliper-jewel" data-testid="residual-caliper" aria-label="Claimed vs On receipt">
       <div className="sm-caliper-head">
         <span>Claimed vs On receipt</span>
         <span className="sm-caliper-legend">
