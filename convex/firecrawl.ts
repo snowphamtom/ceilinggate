@@ -1,12 +1,17 @@
 import { v } from "convex/values";
 import { action, internalMutation } from "./_generated/server";
 import { internal } from "./_generated/api";
+import {
+  RECEIPT_EXTRACT_PROMPT,
+  RECEIPT_EXTRACT_SCHEMA,
+  interiorFromExtract,
+} from "./parse";
 
 /**
  * Scrape action with layered fallbacks (never invents API keys):
- * 1. FIRECRAWL_API_KEY → Firecrawl API
- * 2. else plain fetch of public URL (best-effort text)
- * 3. else fixture text / INTERIOR line
+ * 1. FIRECRAWL_API_KEY → Firecrawl API (markdown + JSON extract)
+ * 2. else fixture text / INTERIOR line
+ * 3. else withhold judgment
  */
 export const storeScrape = internalMutation({
   args: {
@@ -40,7 +45,9 @@ const FIXTURE_BY_URL: Record<string, string> = {
 };
 
 function parseInterior(text: string): number[] | null {
-  const tagged = text.match(/INTERIOR:\s*([0-9]+(?:\s*,\s*[0-9]+)*)/i);
+  const tagged = text.match(
+    /INTERIOR:\s*([0-9]+(?:\.[0-9]+)?(?:\s*,\s*[0-9]+(?:\.[0-9]+)?)*)/i,
+  );
   if (tagged?.[1]) {
     return tagged[1].split(",").map((s) => Number(s.trim()));
   }
@@ -50,13 +57,23 @@ function parseInterior(text: string): number[] | null {
   return amounts.length ? amounts.slice(0, 8) : null;
 }
 
+function interiorFromPayload(
+  json: unknown,
+  markdown: string,
+): number[] | null {
+  const extracted = interiorFromExtract(json);
+  if (extracted.length) return extracted;
+  return parseInterior(markdown);
+}
+
 async function maybeGate(
   ctx: { runMutation: Function },
   claimId: unknown,
   text: string,
   url: string,
+  json?: unknown,
 ) {
-  const interior = parseInterior(text);
+  const interior = interiorFromPayload(json, text);
   if (!claimId || !interior) return;
   await ctx.runMutation(internal.pipeline.gateWithInterior, {
     claimId,
@@ -88,34 +105,42 @@ export const scrapeUrl = action({
           Authorization: `Bearer ${apiKey}`,
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ url: args.url, formats: ["markdown"] }),
+        body: JSON.stringify({
+          url: args.url,
+          formats: ["markdown", "json"],
+          onlyMainContent: true,
+          jsonOptions: {
+            schema: RECEIPT_EXTRACT_SCHEMA,
+            prompt: RECEIPT_EXTRACT_PROMPT,
+            checkPromptInjection: true,
+          },
+        }),
       });
       if (!res.ok) {
         const errText = await res.text();
         throw new Error(`Firecrawl scrape failed: ${res.status} ${errText}`);
       }
       const data = (await res.json()) as {
-        data?: { markdown?: string };
+        data?: { markdown?: string; json?: unknown };
         markdown?: string;
+        json?: unknown;
       };
       const text = data.data?.markdown ?? data.markdown ?? JSON.stringify(data);
+      const extracted = data.data?.json ?? data.json;
       const scrapeId = await ctx.runMutation(internal.firecrawl.storeScrape, {
         url: args.url,
-        text,
+        text: extracted
+          ? `${text}\n\nEXTRACT:${JSON.stringify(extracted)}`
+          : text,
         source: "firecrawl",
         claimId: args.claimId,
       });
-      await maybeGate(ctx, args.claimId, text, args.url);
+      await maybeGate(ctx, args.claimId, text, args.url, extracted);
       return { scrapeId, source: "firecrawl" as const, text };
     }
 
-    // ORIGINALITY RULE: Firecrawl is mandatory for live judgment when a URL exists.
-    // Plain fetch does NOT unlock the gate. Fixture text only when explicitly passed
-    // (offline Drive-fuel demo) — never invent a judgment from bare fetch.
     if (args.fixtureText || FIXTURE_BY_URL[args.url]) {
-      const text =
-        args.fixtureText ??
-        FIXTURE_BY_URL[args.url]!;
+      const text = args.fixtureText ?? FIXTURE_BY_URL[args.url]!;
       const scrapeId = await ctx.runMutation(internal.firecrawl.storeScrape, {
         url: args.url,
         text,
@@ -131,7 +156,6 @@ export const scrapeUrl = action({
       };
     }
 
-    // Store scrape attempt metadata but do NOT run gate without Firecrawl.
     const blocked = `NO_INTERIOR: FIRECRAWL_API_KEY required to scrape ${args.url}. Judgment withheld.`;
     const scrapeId = await ctx.runMutation(internal.firecrawl.storeScrape, {
       url: args.url,
