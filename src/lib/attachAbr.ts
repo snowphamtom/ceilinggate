@@ -5,9 +5,9 @@
 
 export const HLS_MASTER = "/hls/master.m3u8";
 export const RUNG_LOW =
-  "https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-20260905/CeilingGate-AllGas-demo-60s.mp4";
+  "https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-yt/CeilingGate-Forge-gates-clip-YT.mp4";
 export const RUNG_HIGH =
-  "https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-20260905/CeilingGate-AllGas-demo.mp4";
+  "https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-yt/CeilingGate-Forge-gates-clip-YT.mp4";
 
 const HLS_JS =
   "https://cdn.jsdelivr.net/npm/hls.js@1.5.20/dist/hls.min.js";

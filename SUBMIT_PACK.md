@@ -13,10 +13,10 @@
 | Health | https://quirky-rhinoceros-204.convex.site/health | `{"ok":true,"app":"CeilingGate"}` |
 | Repository | https://github.com/snowphamtom/ceilinggate | public |
 | CI | https://github.com/snowphamtom/ceilinggate/actions/workflows/convex-deploy.yml | convex-deploy |
-| Demo release | https://github.com/snowphamtom/ceilinggate/releases/tag/allgas-demo-20260905 | mp4 + shots |
-| 60s file | https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-20260905/CeilingGate-AllGas-demo-60s.mp4 | 200 |
-| Full file | https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-20260905/CeilingGate-AllGas-demo.mp4 | 200 |
-| GRANT shot | https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-20260905/02-grant.png |  |
+| Demo release | https://github.com/snowphamtom/ceilinggate/releases/tag/allgas-demo-yt | 174s silent YT cut |
+| YouTube prefer-live | https://www.youtube.com/watch?v=2KsMO90LpdE | embed on /watch.html |
+| Progressive mp4 | https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-yt/CeilingGate-Forge-gates-clip-YT.mp4 | 200 · ~104 MB |
+| GRANT shot | https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-20260905/02-grant.png | poster |
 | Listing | https://vibeapps.dev/s/ceilinggate | needs Clerk UPDATE |
 | Inbox | ceilinggate-claims@agentmail.to |  |
 

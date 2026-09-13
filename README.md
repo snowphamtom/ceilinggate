@@ -14,12 +14,12 @@ Not a chat app. Not a developer SDK. Not the AgentMail sample inbox assistant.
 | Health | https://quirky-rhinoceros-204.convex.site/health |
 | Build log | [hackathon.md](./hackathon.md) |
 | CI | [convex-deploy](https://github.com/snowphamtom/ceilinggate/actions/workflows/convex-deploy.yml) |
-| Demo files | [release allgas-demo-20260905](https://github.com/snowphamtom/ceilinggate/releases/tag/allgas-demo-20260905) |
+| Demo files | [release allgas-demo-yt](https://github.com/snowphamtom/ceilinggate/releases/tag/allgas-demo-yt) · [YouTube 2KsMO90LpdE](https://www.youtube.com/watch?v=2KsMO90LpdE) |
 | Listing | https://vibeapps.dev/s/ceilinggate |
 | Inbox | ceilinggate-claims@agentmail.to |
 | Share | https://x.com/magpie_inventor/status/2096419465973944560 |
 
-Open the live app. Click **Demo GRANT**, then **Demo REFUSE**. Read the ledger. No login. Video plays on `/watch.html` from the GitHub release mp4s.
+Open the live app. Click **Demo GRANT**, then **Demo REFUSE**. Read the ledger. No login. Video: YouTube prefer-live `2KsMO90LpdE` on `/watch.html`, progressive `allgas-demo-yt` mp4 fallback.
 
 ## What each sponsor does
 
@@ -30,7 +30,7 @@ Open the live app. Click **Demo GRANT**, then **Demo REFUSE**. Read the ledger. 
 
 ## 2026-09-13
 
-CI deploy is green. `/watch.html` and `/hls/master.m3u8` are on the live site. Product rule unchanged: claimed ≤ receipt, or REFUSE names the dollar overage.
+CI deploy is green. `/watch.html` embeds YouTube `2KsMO90LpdE`; `/hls/master.m3u8` points at `allgas-demo-yt` progressive. Product rule unchanged: claimed ≤ receipt, or REFUSE names the dollar overage.
 
 ## Run locally
 

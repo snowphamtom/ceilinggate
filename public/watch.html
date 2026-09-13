@@ -7,71 +7,104 @@
     <style>
       html, body { margin: 0; background: #070b14; color: #e8eefc; font-family: system-ui, sans-serif; }
       main { max-width: 880px; margin: 24px auto; padding: 0 16px; }
-      h1 { font-size: 1.15rem; font-weight: 600; }
+      h1 { font-size: 1.15rem; font-weight: 600; letter-spacing: 0.02em; }
       p, .chip { color: #9aa8c2; font-size: 0.92rem; }
-      .frame { position: relative; aspect-ratio: 16 / 9; background: #000; border-radius: 8px; overflow: hidden; }
-      video { width: 100%; height: 100%; object-fit: contain; background: #000; }
+      .frame {
+        position: relative; aspect-ratio: 16 / 9; background: #000;
+        border-radius: 8px; overflow: hidden; border: 1px solid #1a2438;
+        box-shadow: 0 0 0 1px #0c1220 inset;
+      }
+      .frame iframe, .frame video { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; background: #000; }
+      .frame video { object-fit: contain; }
       a { color: #8ec5ff; }
+      .meta { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; align-items: baseline; margin: 0.75rem 0 1rem; }
+      .chip {
+        display: inline-block; padding: 0.15rem 0.55rem; border-radius: 999px;
+        border: 1px solid #243044; background: #0c1220; color: #b8c6de; font-size: 0.78rem;
+      }
+      .sec { margin-top: 1.75rem; padding-top: 1rem; border-top: 1px solid #1a2438; }
+      .sec h2 { font-size: 0.95rem; font-weight: 600; margin: 0 0 0.5rem; }
     </style>
   </head>
   <body>
     <main>
       <h1>CeilingGate demo</h1>
-      <p>ABR: HLS when /hls/master.m3u8 is on this origin, else progressive rung by downlink.</p>
-      <p class="chip" id="lab">idle</p>
-      <div class="frame">
-        <video id="reel" controls playsinline preload="none" poster="https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-20260905/02-grant.png"></video>
+      <div class="meta">
+        <span class="chip" id="lab">prefer-live · YouTube</span>
+        <span class="chip">174s · silent cut</span>
+        <span class="chip">allgas-demo-yt</span>
       </div>
-      <p><a href="/">Back to app</a> · <a href="/hls/master.m3u8">HLS master</a></p>
+      <p>Primary: YouTube prefer-live embed. Progressive fallback: GitHub release mp4 (same cut).</p>
+      <div class="frame" id="yt-frame">
+        <iframe
+          id="yt"
+          src="https://www.youtube.com/embed/2KsMO90LpdE?rel=0"
+          title="CeilingGate demo — ResidualGates line ledger"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen
+        ></iframe>
+      </div>
+      <p style="margin-top:0.85rem">
+        <a href="/">Back to app</a>
+        · <a href="https://www.youtube.com/watch?v=2KsMO90LpdE">YouTube</a>
+        · <a href="/hls/master.m3u8">HLS master</a>
+        · <a id="prog-link" href="https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-yt/CeilingGate-Forge-gates-clip-YT.mp4">Progressive mp4</a>
+      </p>
+
+      <section class="sec">
+        <h2>Progressive (same origin playlist / download)</h2>
+        <p class="chip" id="prog-lab">idle</p>
+        <div class="frame" style="margin-top:0.5rem">
+          <video
+            id="reel"
+            controls
+            playsinline
+            preload="none"
+            poster="https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-20260905/02-grant.png"
+          ></video>
+        </div>
+      </section>
     </main>
     <script>
-      const LOW = "https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-20260905/CeilingGate-AllGas-demo-60s.mp4";
-      const HIGH = "https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-20260905/CeilingGate-AllGas-demo.mp4";
+      const YT_ID = "2KsMO90LpdE";
+      const PROG =
+        "https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-yt/CeilingGate-Forge-gates-clip-YT.mp4";
       const MASTER = "/hls/master.m3u8";
       const v = document.getElementById("reel");
-      const lab = document.getElementById("lab");
-      function pick() {
-        const c = navigator.connection || {};
-        if (c.saveData || c.effectiveType === "2g" || c.effectiveType === "slow-2g") return { url: LOW, label: "low · save" };
-        if (typeof c.downlink === "number" && c.downlink > 0 && c.downlink < 0.25) return { url: LOW, label: "low · " + c.downlink + "Mb/s" };
-        return { url: HIGH, label: "high · progressive" };
-      }
-      async function attach() {
+      const lab = document.getElementById("prog-lab");
+
+      async function attachProgressive() {
         try {
           const r = await fetch(MASTER, { cache: "no-store" });
           const t = r.ok ? await r.text() : "";
-          if (t.includes("#EXTM3U")) {
+          // Fake ABR that lists .mp4 rungs is progressive — do not feed to hls.js.
+          if (t.includes("#EXTM3U") && (t.includes("stream.m3u8") || t.includes(".m4s"))) {
             if (v.canPlayType("application/vnd.apple.mpegurl")) {
-              v.src = MASTER; lab.textContent = "HLS native · ABR"; return;
-            }
-            await new Promise((res, rej) => {
-              const s = document.createElement("script");
-              s.src = "https://cdn.jsdelivr.net/npm/hls.js@1.5.20/dist/hls.min.js";
-              s.onload = res; s.onerror = rej; document.head.appendChild(s);
-            });
-            if (window.Hls && Hls.isSupported()) {
-              const hls = new Hls({ capLevelToPlayerSize: true, startLevel: -1 });
-              hls.loadSource(MASTER);
-              hls.attachMedia(v);
-              lab.textContent = "HLS ABR";
-              hls.on(Hls.Events.LEVEL_SWITCHED, () => {
-                const lv = hls.levels[hls.currentLevel];
-                if (lv) lab.textContent = "HLS ABR · " + (lv.height || "?") + "p";
-              });
+              v.src = MASTER;
+              lab.textContent = "HLS native · ABR";
               return;
             }
           }
         } catch (e) {}
-        const p = pick();
-        v.src = p.url;
-        lab.textContent = p.label;
+        v.src = PROG;
+        lab.textContent = "progressive · allgas-demo-yt";
       }
+
       if ("IntersectionObserver" in window) {
-        const io = new IntersectionObserver((ents) => {
-          if (ents.some((e) => e.isIntersecting)) { attach(); io.disconnect(); }
-        }, { threshold: 0.2 });
+        const io = new IntersectionObserver(
+          (ents) => {
+            if (ents.some((e) => e.isIntersecting)) {
+              attachProgressive();
+              io.disconnect();
+            }
+          },
+          { threshold: 0.15 },
+        );
         io.observe(v);
-      } else attach();
+      } else {
+        attachProgressive();
+      }
     </script>
   </body>
 </html>

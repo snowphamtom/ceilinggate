@@ -11,15 +11,15 @@ const agentmail = new AgentMail(components.agentmail, {
 const http = httpRouter();
 
 const RELEASE =
-  "https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-20260905";
+  "https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-yt";
+const POSTER =
+  "https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-20260905/02-grant.png";
 
 const HLS_MASTER_FALLBACK = `#EXTM3U
 #EXT-X-VERSION:7
 #EXT-X-INDEPENDENT-SEGMENTS
-#EXT-X-STREAM-INF:BANDWIDTH=70000,AVERAGE-BANDWIDTH=65000,RESOLUTION=1280x800,FRAME-RATE=4,CODECS="avc1.640028"
-${RELEASE}/CeilingGate-AllGas-demo-60s.mp4
-#EXT-X-STREAM-INF:BANDWIDTH=90000,AVERAGE-BANDWIDTH=78000,RESOLUTION=1280x800,FRAME-RATE=4,CODECS="avc1.640028"
-${RELEASE}/CeilingGate-AllGas-demo.mp4
+#EXT-X-STREAM-INF:BANDWIDTH=5000000,AVERAGE-BANDWIDTH=4500000,RESOLUTION=1280x800,FRAME-RATE=30,CODECS="avc1.640028"
+${RELEASE}/CeilingGate-Forge-gates-clip-YT.mp4
 `;
 
 const CARD_HTML = `<!doctype html>
@@ -43,7 +43,7 @@ video{width:100%;height:100%}
 <main>
 <h1>CeilingGate</h1>
 <p class="tag">Email a public receipt. Get GRANT or the line that is over.</p>
-<div class="frame"><video controls playsinline poster="${RELEASE}/02-grant.png" src="${RELEASE}/CeilingGate-AllGas-demo-60s.mp4"></video></div>
+<div class="frame"><video controls playsinline poster="${POSTER}" src="${RELEASE}/CeilingGate-Forge-gates-clip-YT.mp4"></video></div>
 <ul>
 <li><a href="/">Live app</a></li>
 <li><a href="/watch.html">Demo player</a></li>
