@@ -1,7 +1,7 @@
-# Lesson card — 0f42b33
+# Lesson card — 86743b6
 
 1. What changed
-ABR demo player: HLS master when present, hls.js, progressive fallback.
+Watch page uses same ABR attach rules.
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
