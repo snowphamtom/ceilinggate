@@ -1181,7 +1181,7 @@ body {
   color: var(--muted, #8fa3bf);
 }
 .sm-sponsor-strip {
-  margin: 0.75rem 0 0;
+  margin: 0.5rem 0 0;
 }
 .sm-sponsor-kicker {
   margin: 0 0 0.35rem;
@@ -1206,7 +1206,7 @@ body {
   min-width: 9.5rem;
   flex: 1 1 9.5rem;
   max-width: 16rem;
-  padding: 0.45rem 0.6rem;
+  padding: 0.35rem 0.5rem;
   border: 1px solid #2a3f5c;
   border-radius: 3px;
   background: #070d16;
@@ -1274,4 +1274,180 @@ body {
   text-transform: uppercase;
   color: #7ad4ff;
   margin-bottom: 0.2rem;
+}
+
+/* LENS WIN POLISH optic — absorb vault/lens-win-polish-2026-09-13/win-polish-deltas.css
+   KEEP-safe: never display:none DemoReel / pipeline / Klaus / side / stamps / C≤S.
+   Raise proof · punch demo · twin GRANT/REFUSE · bigger CLEAR/C≤S. */
+
+/* —— 10s fold: densify hero + pipeline so proof rises —— */
+.sm-shell.sm-lean .sm-hero {
+  padding: 0.55rem 0.7rem 0.55rem;
+  margin-bottom: 0.4rem;
+}
+.sm-shell.sm-lean .sm-hero h1 {
+  font-size: clamp(1.2rem, 2.6vw, 1.55rem);
+  margin: 0;
+}
+.sm-shell.sm-lean .sm-hero .sm-lede {
+  font-size: 0.78rem;
+  line-height: 1.3;
+  margin: 0.12rem 0 0;
+  max-width: 36rem;
+  opacity: 0.88;
+}
+.sm-pipeline,
+.sm-scratch .sm-pipeline {
+  padding: 0.35rem 0.45rem 0.3rem !important;
+  margin-bottom: 0.4rem !important;
+  border-radius: 8px !important;
+}
+.sm-pipe-stage {
+  padding: 0.22rem 0.15rem 0.28rem !important;
+  font-size: 0.72rem;
+}
+.sm-pipe-node {
+  width: 1.35rem;
+  height: 1.35rem;
+}
+.sm-pipeline .sm-law {
+  font-size: 0.85rem;
+  font-weight: 650;
+  letter-spacing: 0.04em;
+}
+.sm-law-chip {
+  font-size: 0.8rem !important;
+  padding: 0.22rem 0.4rem !important;
+  border-width: 1.5px;
+  border-radius: 2px !important;
+  font-weight: 700;
+  color: #f0d48a !important;
+  border-color: rgba(224, 179, 90, 0.65) !important;
+  background: rgba(224, 179, 90, 0.12) !important;
+}
+
+/* —— Demo plate punch (KEEP visible) —— */
+.sm-demo-reel,
+.sm-demo-frame {
+  border: 1px solid rgba(91, 157, 255, 0.4);
+  box-shadow:
+    0 0 0 1px rgba(224, 179, 90, 0.14),
+    0 12px 36px rgba(0, 0, 0, 0.55);
+  border-radius: 8px;
+  background: linear-gradient(180deg, rgba(14, 28, 52, 0.95), rgba(5, 8, 15, 0.98));
+  margin-bottom: 0.4rem;
+  overflow: hidden;
+}
+.sm-demo-video {
+  max-height: 260px;
+  min-height: 180px;
+  width: 100%;
+  object-fit: contain;
+  background: #05080f;
+  display: block;
+}
+.sm-demo-links,
+.sm-demo-play,
+.sm-demo-cut {
+  font-size: 0.7rem;
+  opacity: 0.75;
+  padding: 0.2rem 0.35rem;
+}
+
+/* —— Claim / verdict primary plate —— */
+.sm-panel.sm-claim {
+  border: 1px solid rgba(91, 157, 255, 0.38);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 10px 28px rgba(0, 0, 0, 0.45);
+  padding: 0.7rem 0.8rem 0.75rem;
+}
+.sm-claim .sm-panel-head {
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.35rem;
+}
+
+/* —— Stamp legibility: twin GRANT/REFUSE (class lives on .sm-verdict) —— */
+.sm-verdict-stamp,
+.sm-btn.grant,
+.sm-btn.refuse {
+  border-width: 3px !important;
+  border-radius: 2px !important;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  min-height: 2.6rem;
+  padding: 0.45rem 0.85rem;
+  box-shadow: none; /* kill wash glow */
+  filter: none;
+}
+.sm-btn.grant,
+.sm-verdict.grant .sm-verdict-stamp {
+  color: #3dde95 !important;
+  border-color: #3dde95 !important;
+  background: rgba(31, 157, 99, 0.16) !important;
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.8);
+}
+.sm-btn.refuse,
+.sm-verdict.refuse .sm-verdict-stamp {
+  color: #ff8a8a !important;
+  border-color: #ff6b6b !important;
+  background: rgba(224, 69, 69, 0.16) !important;
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.8);
+}
+.sm-verdict-stamp {
+  font-size: clamp(1.65rem, 4.2vw, 2.35rem) !important;
+  background: rgba(6, 10, 18, 0.94) !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* CLEAR / OVER chips — distance-readable */
+.sm-line-chip.clear,
+.sm-line-chip.over {
+  font-size: 0.78rem !important;
+  font-weight: 750;
+  padding: 0.2rem 0.4rem !important;
+  border-radius: 2px !important;
+  border-width: 1.5px;
+  letter-spacing: 0.06em;
+}
+.sm-line-chip.clear {
+  color: #6ee7a8 !important;
+  border-color: rgba(61, 222, 149, 0.7) !important;
+  background:
+    repeating-linear-gradient(
+      -45deg,
+      rgba(31, 157, 99, 0.14),
+      rgba(31, 157, 99, 0.14) 3px,
+      rgba(6, 10, 18, 0.5) 3px,
+      rgba(6, 10, 18, 0.5) 6px
+    ) !important;
+}
+.sm-line-chip.over {
+  color: #ff8a8a !important;
+  border-color: rgba(255, 107, 107, 0.75) !important;
+  background:
+    repeating-linear-gradient(
+      -45deg,
+      rgba(224, 69, 69, 0.16),
+      rgba(224, 69, 69, 0.16) 3px,
+      rgba(6, 10, 18, 0.5) 3px,
+      rgba(6, 10, 18, 0.5) 6px
+    ) !important;
+}
+
+/* Side demote (KEEP visible) — DemoGate wins the eye */
+.sm-side {
+  opacity: 0.88;
+}
+.sm-side .sm-panel {
+  box-shadow: none;
+  border-color: rgba(36, 53, 82, 0.85);
+}
+.sm-klaus-lean,
+.sm-klaus {
+  font-size: 0.86em;
 }
