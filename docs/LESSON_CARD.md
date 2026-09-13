@@ -1,7 +1,7 @@
-# Lesson card — 4cdc2e0
+# Lesson card — dcbb8a7
 
 1. What changed
-fix: reject thin HLS masters; prefer GH allgas-demo-hls (~5.12M)
+ui: first-breath Y0 — GR-21 hash + caliper with GRANT slam (before ledger/oneline scroll)
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
