@@ -1,7 +1,7 @@
-# Lesson card — f8bc4d1
+# Lesson card — 21d871b
 
 1. What changed
-fix: true HLS ladder on allgas-demo-hls + fresh GRANT poster
+I changed public/hls to real 720/480 fMP4 segments (stream.m3u8 children) because the mp4-rung fake master failed as ABR in firewall crawl / video quality.
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
