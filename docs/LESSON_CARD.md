@@ -1,7 +1,7 @@
-# Lesson card — dd8ae4e
+# Lesson card — a85aca5
 
 1. What changed
-Lock All Gas judge pack: watch.html + listing paste.
+Serve /card.html judge pack from HTTP when Vibe listing stays thin.
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
