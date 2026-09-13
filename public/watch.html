@@ -8,63 +8,70 @@
       html, body { margin: 0; background: #070b14; color: #e8eefc; font-family: system-ui, sans-serif; }
       main { max-width: 880px; margin: 24px auto; padding: 0 16px; }
       h1 { font-size: 1.15rem; font-weight: 600; }
-      p { color: #9aa8c2; font-size: 0.92rem; }
+      p, .chip { color: #9aa8c2; font-size: 0.92rem; }
       .frame { position: relative; aspect-ratio: 16 / 9; background: #000; border-radius: 8px; overflow: hidden; }
       video { width: 100%; height: 100%; object-fit: contain; background: #000; }
-      a, button { color: #8ec5ff; }
-      .cuts { display: flex; gap: 0.5rem; margin: 0.75rem 0; }
-      .cuts button {
-        background: #0e1628; border: 1px solid #243552; color: #e8eefc;
-        border-radius: 999px; padding: 0.35rem 0.8rem; cursor: pointer;
-      }
-      .cuts button.on { border-color: #1f9d63; color: #9be7c0; }
+      a { color: #8ec5ff; }
     </style>
   </head>
   <body>
     <main>
       <h1>CeilingGate demo</h1>
-      <p>Receipt-line gather → sort. Claimed ≤ receipt → GRANT. One line over → REFUSE names the dollars.</p>
+      <p>ABR: HLS when /hls/master.m3u8 is on this origin, else progressive rung by downlink.</p>
+      <p class="chip" id="lab">idle</p>
       <div class="frame">
         <video id="reel" controls playsinline preload="none" poster="https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-20260905/02-grant.png"></video>
       </div>
-      <div class="cuts">
-        <button type="button" id="cut60" class="on">60s (fast)</button>
-        <button type="button" id="cutFull">Full ~1:08</button>
-      </div>
-      <p><a href="/">Back to app</a> · <a href="https://github.com/snowphamtom/ceilinggate/releases/tag/allgas-demo-20260905">Release pack</a></p>
+      <p><a href="/">Back to app</a> · <a href="/hls/master.m3u8">HLS master</a></p>
     </main>
     <script>
-      const SRC60 = "https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-20260905/CeilingGate-AllGas-demo-60s.mp4";
-      const SRCFULL = "https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-20260905/CeilingGate-AllGas-demo.mp4";
+      const LOW = "https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-20260905/CeilingGate-AllGas-demo-60s.mp4";
+      const HIGH = "https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-20260905/CeilingGate-AllGas-demo.mp4";
+      const MASTER = "/hls/master.m3u8";
       const v = document.getElementById("reel");
-      const b60 = document.getElementById("cut60");
-      const bFull = document.getElementById("cutFull");
-      function use(src, btn) {
-        const t = v.currentTime || 0;
-        const playing = !v.paused && v.src;
-        v.src = src;
-        v.load();
-        const onMeta = () => {
-          if (t > 0.25) v.currentTime = Math.min(t, v.duration || t);
-          if (playing) v.play().catch(() => {});
-          v.removeEventListener("loadedmetadata", onMeta);
-        };
-        v.addEventListener("loadedmetadata", onMeta);
-        b60.classList.toggle("on", btn === b60);
-        bFull.classList.toggle("on", btn === bFull);
+      const lab = document.getElementById("lab");
+      function pick() {
+        const c = navigator.connection || {};
+        if (c.saveData || c.effectiveType === "2g" || c.effectiveType === "slow-2g") return { url: LOW, label: "low · save" };
+        if (typeof c.downlink === "number" && c.downlink > 0 && c.downlink < 0.25) return { url: LOW, label: "low · " + c.downlink + "Mb/s" };
+        return { url: HIGH, label: "high · progressive" };
       }
-      b60.onclick = () => use(SRC60, b60);
-      bFull.onclick = () => use(SRCFULL, bFull);
-      const boot = () => use(SRC60, b60);
+      async function attach() {
+        try {
+          const r = await fetch(MASTER, { cache: "no-store" });
+          const t = r.ok ? await r.text() : "";
+          if (t.includes("#EXTM3U")) {
+            if (v.canPlayType("application/vnd.apple.mpegurl")) {
+              v.src = MASTER; lab.textContent = "HLS native · ABR"; return;
+            }
+            await new Promise((res, rej) => {
+              const s = document.createElement("script");
+              s.src = "https://cdn.jsdelivr.net/npm/hls.js@1.5.20/dist/hls.min.js";
+              s.onload = res; s.onerror = rej; document.head.appendChild(s);
+            });
+            if (window.Hls && Hls.isSupported()) {
+              const hls = new Hls({ capLevelToPlayerSize: true, startLevel: -1 });
+              hls.loadSource(MASTER);
+              hls.attachMedia(v);
+              lab.textContent = "HLS ABR";
+              hls.on(Hls.Events.LEVEL_SWITCHED, () => {
+                const lv = hls.levels[hls.currentLevel];
+                if (lv) lab.textContent = "HLS ABR · " + (lv.height || "?") + "p";
+              });
+              return;
+            }
+          }
+        } catch (e) {}
+        const p = pick();
+        v.src = p.url;
+        lab.textContent = p.label;
+      }
       if ("IntersectionObserver" in window) {
         const io = new IntersectionObserver((ents) => {
-          if (ents.some((e) => e.isIntersecting)) { boot(); io.disconnect(); }
+          if (ents.some((e) => e.isIntersecting)) { attach(); io.disconnect(); }
         }, { threshold: 0.2 });
         io.observe(v);
-      } else {
-        boot();
-      }
-      v.addEventListener("play", () => { if (!v.src) boot(); }, { once: true });
+      } else attach();
     </script>
   </body>
 </html>
