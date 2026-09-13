@@ -148,7 +148,7 @@ export function DemoGate({
       ) : (
         <div
           key={slamKey}
-          className={"sm-verdict sm-slam " + (ok ? "grant" : "refuse")}
+          className={"sm-verdict sm-slam sm-first-breath " + (ok ? "grant" : "refuse")}
           data-testid="verdict-slam"
         >
           <div

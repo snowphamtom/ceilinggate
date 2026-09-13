@@ -1803,3 +1803,42 @@ body {
 .sm-shell.sm-lean .sm-sponsors { margin-top: 0.35rem; }
 .sm-shell.sm-lean .sm-sponsors li { padding: 0.25rem 0.4rem; min-width: 7.5rem; }
 .sm-shell.sm-lean .sm-pipeline { padding: 0.22rem 0.3rem !important; margin-bottom: 0.22rem !important; }
+
+/* Hard Y0: proof immediately under hero; pipeline demoted below */
+.sm-shell.sm-lean .sm-proof-fold {
+  order: 0;
+  margin: 0 0 0.35rem;
+}
+.sm-shell.sm-lean .sm-first-breath {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.2rem;
+}
+.sm-shell.sm-lean .sm-first-breath .sm-verdict-stamp {
+  justify-self: start;
+}
+.sm-shell.sm-lean .sm-first-breath .sm-gr21-readable {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25rem 0.55rem;
+}
+.sm-shell.sm-lean .sm-first-breath .sm-gr21-kicker { width: 100%; }
+.sm-shell.sm-lean .sm-first-breath .sm-caliper {
+  max-height: 5.5rem;
+  overflow: hidden;
+}
+/* sponsors compact row (KEEP visible) */
+.sm-shell.sm-lean .sm-sponsors {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  gap: 0.25rem;
+  margin-top: 0.25rem;
+}
+.sm-shell.sm-lean .sm-sponsors li {
+  min-width: 6.5rem;
+  padding: 0.2rem 0.35rem;
+}
+.sm-shell.sm-lean .sm-sponsor-kicker { display: none; }
+.sm-shell.sm-lean .sm-law { font-size: 0.65rem; margin: 0.15rem 0 0; }

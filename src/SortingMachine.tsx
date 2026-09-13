@@ -195,12 +195,7 @@ export default function SortingMachine() {
         />
       </header>
 
-      <SortingMachineStages
-        activePipe={activePipe}
-        hasDecision={decision != null}
-      />
-
-      {/* Fold punch: proof (REFUSE/GRANT + ledger stamp) before video/Klaus */}
+      {/* First breath Y0: GRANT+hash+caliper before pipeline */}
       <div className="sm-proof-fold" data-testid="proof-above-fold">
         <DemoGate
           rows={rows}
@@ -221,6 +216,11 @@ export default function SortingMachine() {
           liveResidual={lastResidual}
         />
       </div>
+
+      <SortingMachineStages
+        activePipe={activePipe}
+        hasDecision={decision != null}
+      />
 
       <div className="sm-below-fold sm-grid sm-grid-lean">
         <DemoReel />
