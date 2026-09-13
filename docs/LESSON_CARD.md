@@ -1,7 +1,7 @@
-# Lesson card — 18db7c8
+# Lesson card — 0a1f5cf
 
 1. What changed
-ui: densify lean KEEP face from LENS strip-deltas rev b
+I changed docs/TWO_HOST.md + README + .env.example VITE_PUBLIC_SITE_URL because .cloud 404s on static routes looked like a broken deploy in firewall crawl (route /watch.html status 200 .site / 404 .cloud).
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
