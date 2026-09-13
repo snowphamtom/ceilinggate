@@ -1,7 +1,7 @@
-# Lesson card — a85aca5
+# Lesson card — ae45a05
 
 1. What changed
-Serve /card.html judge pack from HTTP when Vibe listing stays thin.
+ui: GR-21 residual commitment on Evidence/Verdict stamps
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
