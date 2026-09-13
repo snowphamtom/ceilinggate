@@ -1,7 +1,7 @@
-# Lesson card — d9f212f
+# Lesson card — 4cdc2e0
 
 1. What changed
-fix: /watch MASTER prefers GH allgas-demo-hls high-BW
+fix: reject thin HLS masters; prefer GH allgas-demo-hls (~5.12M)
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
