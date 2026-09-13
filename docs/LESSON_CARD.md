@@ -1,7 +1,7 @@
-# Lesson card — fe53f85
+# Lesson card — 3963ca7
 
 1. What changed
-ui: Claim Check product name on quirky face
+ui: ban GR-21/Hash/plasma — plain Check ID on Claim Check face
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
