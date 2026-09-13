@@ -1,7 +1,7 @@
-# Lesson card — ff087fe
+# Lesson card — 69b6923
 
 1. What changed
-ui: calm inviting palette + disclosure IA (Y0 held)
+ui: HUD glow restyle — violet-navy void + cyan/magenta (Y0 held)
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
