@@ -203,6 +203,7 @@ export function DemoGate({
               {liveLabel}
             </span>
           </div>
+          <ResidualCaliper rows={rows} failedIndices={decision.failedIndices} />
           <p className="sm-oneline sm-oneline-type" data-testid="openai-oneline">
             <span className="sm-oneline-label">OpenAI one-line · after numbers</span>
             <span className="sm-oneline-text">{typed}</span>
@@ -227,8 +228,6 @@ export function DemoGate({
           </p>
         </div>
       )}
-
-      <ResidualCaliper rows={rows} failedIndices={decision.failedIndices} />
 
       <table className="sm-ledger" aria-label="Line ledger">
         <thead>
