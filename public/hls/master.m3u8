@@ -1,9 +1,9 @@
 #EXTM3U
 #EXT-X-VERSION:6
 #EXT-X-INDEPENDENT-SEGMENTS
-#EXT-X-STREAM-INF:BANDWIDTH=5117736,AVERAGE-BANDWIDTH=4615845,RESOLUTION=1280x800,FRAME-RATE=30,CODECS="avc1.640020"
-https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-hls/v0_prog.m3u8
-#EXT-X-STREAM-INF:BANDWIDTH=2770368,AVERAGE-BANDWIDTH=2564916,RESOLUTION=1152x720,FRAME-RATE=30,CODECS="avc1.64001f"
-https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-hls/v1_prog.m3u8
-#EXT-X-STREAM-INF:BANDWIDTH=1002040,AVERAGE-BANDWIDTH=590492,RESOLUTION=768x480,FRAME-RATE=30,CODECS="avc1.64001f"
-https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-hls/v2_prog.m3u8
+#EXT-X-STREAM-INF:BANDWIDTH=5039528,AVERAGE-BANDWIDTH=4540200,RESOLUTION=1280x800,FRAME-RATE=30,CODECS="avc1.640020"
+https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-yt2/v0_prog.m3u8
+#EXT-X-STREAM-INF:BANDWIDTH=2853088,AVERAGE-BANDWIDTH=2519159,RESOLUTION=1152x720,FRAME-RATE=30,CODECS="avc1.64001f"
+https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-yt2/v1_prog.m3u8
+#EXT-X-STREAM-INF:BANDWIDTH=1393080,AVERAGE-BANDWIDTH=1204153,RESOLUTION=768x480,FRAME-RATE=30,CODECS="avc1.64001f"
+https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-yt2/v2_prog.m3u8

@@ -3,7 +3,7 @@ const YT_ID = "2KsMO90LpdE";
 const YT_URL = `https://www.youtube.com/watch?v=${YT_ID}`;
 const YT_EMBED = `https://www.youtube.com/embed/${YT_ID}`;
 const GH_YT =
-  "https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-yt/CeilingGate-Forge-gates-clip-YT.mp4";
+  "https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-yt2/CeilingGate-ClaimCheck-HUD.mp4";
 
 export function DemoReel() {
   return (
