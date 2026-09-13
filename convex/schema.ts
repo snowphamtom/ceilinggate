@@ -145,6 +145,14 @@ export default defineSchema({
     province: v.string(),
     action: v.string(),
     timestamp: v.number(),
+    /** Additive Senate fields (optional — never rename camelCase) */
+    actor: v.optional(v.string()),
+    payload: v.optional(v.any()),
+    status: v.optional(
+      v.union(v.literal("ok"), v.literal("denied"), v.literal("escalated")),
+    ),
+    ip: v.optional(v.string()),
+    latency_ms: v.optional(v.number()),
   }).index("by_timestamp", ["timestamp"]),
 
   /** Imperator learnings after crawl / edict cycles */
@@ -153,5 +161,21 @@ export default defineSchema({
     crawl: v.string(),
     grokMoves: v.string(),
     nextEdict: v.string(),
-  }).index("by_timestamp", ["timestamp"]),
+    source: v.optional(v.id("grokLedger")),
+    pattern: v.optional(v.string()),
+    edict: v.optional(v.string()),
+    confidence: v.optional(v.number()),
+    executed: v.optional(v.boolean()),
+  })
+    .index("by_timestamp", ["timestamp"])
+    .index("by_confidence", ["confidence"]),
+
+  /** Vault access audit — additive Observatorium */
+  vaultAccessLog: defineTable({
+    accessedAt: v.number(),
+    repo: v.string(),
+    path: v.string(),
+    sha: v.optional(v.string()),
+    deployedTo: v.optional(v.string()),
+  }).index("by_accessedAt", ["accessedAt"]),
 });
