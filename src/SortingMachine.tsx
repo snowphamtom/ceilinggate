@@ -11,6 +11,7 @@ import { KlausOrganizer } from "./components/KlausOrganizer";
 import { DemoGate, type LineRow } from "./components/DemoGate";
 import { DemoReel } from "./components/DemoReel";
 import { LiveFeeds } from "./components/LiveFeeds";
+import { SponsorChips } from "./components/SponsorChips";
 import { SortingMachineStages } from "./components/SortingMachine";
 import { useLastResidual } from "./lib/gr21Live";
 import "./sorting-machine.css";
@@ -147,11 +148,18 @@ export default function SortingMachine() {
             LIVE · C ≤ S
           </span>
         </div>
-        <h1>Receipt-line C ≤ S</h1>
+        <h1>Email a receipt → GRANT or REFUSE</h1>
         <p className="sm-lede">
-          Every claimed line vs on-receipt → <strong>GRANT</strong> or{" "}
-          <strong>REFUSE</strong>. Not a chat shrug. Not a page promise.
+          Money sorter for expense claims. Email a claim + public receipt URL.
+          Each line: claimed ≤ on-receipt → <strong>GRANT</strong>. Over by
+          dollars → <strong>REFUSE</strong>. Not a chat shrug. Not a page
+          promise.
         </p>
+        <p className="sm-law">
+          Law: numbers first · leftover on one line cannot cover a hole on
+          another · <span className="sm-law-chip">C ≤ S</span> per line.
+        </p>
+        <SponsorChips />
       </header>
 
       <SortingMachineStages

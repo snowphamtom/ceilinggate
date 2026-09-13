@@ -1,6 +1,7 @@
 import type { GateDecision } from "../lib/residualGates";
 import { residualCommitment } from "../lib/gr21Residual";
 import type { LastResidual } from "../lib/gr21Live";
+import { composeOneLine } from "../lib/oneLine";
 
 export type LineRow = { name: string; claimed: number; source: number };
 
@@ -61,6 +62,13 @@ export function DemoGate({
         : "OVER"
       : local.projector;
   const liveLabel = liveResidual ? "fleet-gerbil · getLastResidual" : "local fuel";
+  const oneLine = composeOneLine({
+    status: ok ? "grant" : "refuse",
+    claimed: rows.map((r) => r.claimed),
+    interior: rows.map((r) => r.source),
+    failedIndices: decision.failedIndices,
+    lineItems: rows.map((r) => r.name),
+  });
 
   return (
     <section className="sm-panel sm-claim" aria-label="Live claim lane">
@@ -74,12 +82,17 @@ export function DemoGate({
       <p className="sm-rival-hint">
         LINE · CLAIMED · ON RECEIPT · STATUS
       </p>
+      <p className="sm-demo-path">
+        One path: tap <strong>1 · Demo REFUSE</strong> (see overage + GR-21),
+        then <strong>2 · Demo GRANT</strong> (clear stamp). No other clicks
+        needed.
+      </p>
       <div className="sm-demo-row">
-        <button type="button" className="sm-btn grant" onClick={onDemoGrant}>
-          Demo GRANT
-        </button>
         <button type="button" className="sm-btn refuse" onClick={onDemoRefuse}>
-          Demo REFUSE
+          1 · Demo REFUSE
+        </button>
+        <button type="button" className="sm-btn grant" onClick={onDemoGrant}>
+          2 · Demo GRANT
         </button>
         <button type="button" className="sm-btn ghost" onClick={onResort}>
           Re-sort C ≤ S
@@ -148,26 +161,30 @@ export function DemoGate({
         <div className={"sm-verdict " + (ok ? "grant" : "refuse")}>
           <div className="sm-verdict-stamp">{ok ? "GRANT" : "REFUSE"}</div>
           <div
-            className="sm-gr21-stamp"
+            className="sm-gr21-stamp sm-gr21-readable"
             title={`commit=${commitHex}\nhistoric=${historicHex}`}
             data-testid="gr21-residual-stamp"
           >
-            <span className="sm-gr21-kicker">
-              GR-21 · {liveLabel}
-            </span>
+            <span className="sm-gr21-kicker">GR-21 residual</span>
             <span
               className={
                 "sm-gr21-proj " + (projector === "CLEAR" ? "clear" : "over")
               }
             >
-              C≤S projector {projector}
+              C≤S {projector}
             </span>
             <code className="sm-gr21-hash">{commitShort}</code>
             <span className="sm-gr21-meta">
-              commit {commitShort} · σ² {variance.toExponential(2)}
+              σ² {variance.toExponential(2)}
               {projector === "CLEAR" ? " · residual 0" : ""}
+              {" · "}
+              {liveLabel}
             </span>
           </div>
+          <p className="sm-oneline" data-testid="openai-oneline">
+            <span className="sm-oneline-label">OpenAI one-line</span>
+            {oneLine}
+          </p>
           {fails.length ? (
             <ul>
               {fails.map((f) => (
@@ -175,10 +192,7 @@ export function DemoGate({
               ))}
             </ul>
           ) : (
-            <p>
-              Every line clears C ≤ S. Mask 0 · residual commitment binds the
-              projector.
-            </p>
+            <p>Every line clears C ≤ S. Mask 0.</p>
           )}
           <p className="sm-mask">
             mask {decision.mask}
