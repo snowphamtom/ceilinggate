@@ -15,7 +15,7 @@ Live root is the continuous **Sorting Machine** (GATHER → SORT), not a chat pr
 | Health | https://quirky-rhinoceros-204.convex.site/health |
 | Repo | https://github.com/snowphamtom/ceilinggate |
 | CI (green deploy) | https://github.com/snowphamtom/ceilinggate/actions/workflows/convex-deploy.yml |
-| Demo prefer-live (YouTube silent) | https://www.youtube.com/watch?v=2KsMO90LpdE |
+| Demo prefer-live (YouTube silent) | https://www.youtube.com/watch?v=2KsMO90LpdE — id `2KsMO90LpdE` (letter **O**, not zero) |
 | Demo prefer-live (GH file) | https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-yt/CeilingGate-Forge-gates-clip-YT.mp4 |
 | Claims inbox | ceilinggate-claims@agentmail.to |
 
@@ -25,10 +25,12 @@ Started 2026-09-05. Submitter: Taylor Heller. Deadline: 2026-09-22 12:00 PM PT.
 ## How to judge it (no login, no keys)
 
 1. Open the live app — root is the **Sorting Machine**.
-2. Click **Demo GRANT**, then **Demo REFUSE**.
+2. Click **1 · Demo REFUSE**, then **2 · Demo GRANT**. Read the GR-21 stamp + OpenAI one-line each time.
 3. Read the ledger: **LINE · CLAIMED (C) · ON RECEIPT (S) · STATUS** → GRANT/REFUSE stamp.
 4. Check Evidence/Verdict **GR-21 residual commitment** (C≤S projector · commit hash · σ²) on the stamp.
 5. Optional live path: email a claim plus a public receipt URL to the inbox. The board updates after Firecrawl reads the page.
+
+Sponsor chips on the hero name real work: Firecrawl scrape · AgentMail inbox · OpenAI one-line (does not decide).
 
 Judges do not need API keys, a Convex dashboard, or an account.
 
@@ -64,6 +66,19 @@ The sample is a chat thread about mail. CeilingGate is a forensic **receipt-line
 - OpenAI `oneLine` post-decision prose
 - CI: `.github/workflows/convex-deploy.yml`
 - Offline check: `npm run demo:gate`
+
+
+## Observatorium (two-host law)
+
+Static fortress + HTTP = `*.convex.site`. Convex client API = `*.convex.cloud`.
+
+**Never** point `VITE_CONVEX_URL` at `.site` — the SPA client dies. Crawl / public site URL stays `https://quirky-rhinoceros-204.convex.site`.
+
+Inner crawl: `npx convex run firewallCrawl:run '{}'`. Outer: `node scripts/firewall-crawl.mjs`. Doc: `docs/OBSERVATORIUM.md`.
+
+## Lean judge face (KEEP)
+
+Root SPA is the money sorter only: hero + 5-stage GATHER→BUCKET · prefer-live YT `2KsMO90LpdE` (letter **O**) · Demo REFUSE then GRANT · GR-21 stamp · lean AgentMail · sponsor chips (Firecrawl / AgentMail / OpenAI). Cascade roster and Drive buckets are stripped from root.
 
 ## Eligibility snapshot
 
