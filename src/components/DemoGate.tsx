@@ -53,7 +53,6 @@ export function DemoGate({
   const historicHex =
     liveResidual?.historicAnchor ?? local.commit;
   const commitShort = commitHex.slice(0, 12);
-  const historicShort = historicHex.slice(0, 12);
   const variance = liveResidual?.variance ?? local.variance;
   const projector =
     liveResidual != null
@@ -73,7 +72,7 @@ export function DemoGate({
       </div>
       <p className="sm-subj">{subject}</p>
       <p className="sm-rival-hint">
-        Line ledger — CLAIMED vs ON RECEIPT — GR-21 C≤S projector (not page promise).
+        LINE · CLAIMED · ON RECEIPT · STATUS
       </p>
       <div className="sm-demo-row">
         <button type="button" className="sm-btn grant" onClick={onDemoGrant}>
@@ -154,7 +153,7 @@ export function DemoGate({
             data-testid="gr21-residual-stamp"
           >
             <span className="sm-gr21-kicker">
-              Evidence · GR-21 residual · {liveLabel}
+              GR-21 · {liveLabel}
             </span>
             <span
               className={
@@ -165,13 +164,8 @@ export function DemoGate({
             </span>
             <code className="sm-gr21-hash">{commitShort}</code>
             <span className="sm-gr21-meta">
-              residualCommitment {commitShort}… · historicAnchor {historicShort}…
-              {" · "}σ² {variance.toExponential(2)}
-              {local.overLines && !liveResidual
-                ? ` · over×${local.overLines}`
-                : liveResidual?.cLeS
-                  ? " · residual 0"
-                  : ""}
+              commit {commitShort} · σ² {variance.toExponential(2)}
+              {projector === "CLEAR" ? " · residual 0" : ""}
             </span>
           </div>
           {fails.length ? (
@@ -191,10 +185,6 @@ export function DemoGate({
             {decision.failedIndices.length
               ? ` · fail [${decision.failedIndices.join(",")}]`
               : " · all clear"}
-            {" · commit "}
-            <code>{commitShort}</code>
-            {" · anchor "}
-            <code>{historicShort}</code>
           </p>
         </div>
       )}

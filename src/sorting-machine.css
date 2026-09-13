@@ -999,3 +999,46 @@ body {
 .sm-mask code {
   color: #7ad4ff;
 }
+
+/* SENATE lean judge face */
+.sm-lean .sm-rival-beat { display: none; }
+.sm-lean .sm-sync-stamp { display: none; }
+.sm-grid-lean {
+  grid-template-columns: 1.4fr 0.9fr;
+  gap: 1rem;
+}
+.sm-side {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.sm-demo-frame {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: #05080f;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--line, #243552);
+}
+.sm-demo-video {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+.sm-demo-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.55rem;
+  margin: 0.65rem 0 0;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--muted, #8fa3bf);
+}
+.sm-demo-links a { color: #7ad4ff; }
+.sm-klaus-lean .sm-klaus-counts {
+  grid-template-columns: repeat(5, 1fr);
+}
+@media (max-width: 900px) {
+  .sm-grid-lean { grid-template-columns: 1fr; }
+}

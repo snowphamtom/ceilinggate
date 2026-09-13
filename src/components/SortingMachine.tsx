@@ -42,9 +42,8 @@ export function SortingMachineStages({ activePipe, hasDecision }: Props) {
         })}
       </div>
       <p className="sm-law">
-        Machine law: <span className="sm-law-chip">GATHER → SORT</span> ·{" "}
-        <span className="sm-law-chip">C≤S projector</span> · GR-21 residual commitment on
-        Evidence/Verdict stamps
+        Law: <span className="sm-law-chip">GATHER → SORT</span> ·{" "}
+        <span className="sm-law-chip">C ≤ S</span> per receipt line → GRANT/REFUSE
       </p>
     </section>
   );

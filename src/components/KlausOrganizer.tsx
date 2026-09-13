@@ -1,40 +1,16 @@
 import type { OrganizerLane } from "../lib/evidenceLive";
 
-const KLAUS_ORDER = ["mara", "cole", "rina", "vince", "execute"] as const;
-
 type Props = { lane: OrganizerLane };
 
-/** Klaus gather→sort feed: Mara / Cole / Rina / Vince / Execute — not organize-in-place */
+/** Optional lean Klaus strip — counts + up to 2 holds. Not a second product. */
 export function KlausOrganizer({ lane }: Props) {
-  const byId = new Map(lane.stages.map((s) => [s.id, s]));
-  const stages = KLAUS_ORDER.map((id) => {
-    const s = byId.get(id);
-    return {
-      id,
-      label: (s?.label ?? id).toUpperCase(),
-      status: s?.status ?? "PENDING",
-      metric: s?.metric ?? "—",
-    };
-  });
-
+  const holds = lane.vince.pending.slice(0, 2);
   return (
-    <section className="sm-panel" aria-label="Klaus gather to sort feed">
+    <section className="sm-panel sm-klaus-lean" aria-label="Klaus strip">
       <div className="sm-panel-head">
-        <h2>Gather → sort feed</h2>
-        <span className="sm-chip">Klaus feed · Evidence</span>
+        <h2>Klaus</h2>
+        <span className="sm-chip">lean</span>
       </div>
-      <ol className="sm-klaus">
-        {stages.map((s) => (
-          <li
-            key={s.id}
-            className={"sm-klaus-stage status-" + s.status.toLowerCase()}
-          >
-            <span className="sm-klaus-name">{s.label}</span>
-            <span className="sm-klaus-metric">{s.metric}</span>
-            <span className="sm-klaus-status">{s.status}</span>
-          </li>
-        ))}
-      </ol>
       <div className="sm-klaus-counts">
         <div>
           <strong>{lane.mara.rootFolders}</strong>
@@ -57,9 +33,9 @@ export function KlausOrganizer({ lane }: Props) {
           <span>moves</span>
         </div>
       </div>
-      {lane.vince.pending.length > 0 ? (
-        <ul className="sm-bucket-samples" aria-label="Pending holds">
-          {lane.vince.pending.map((h) => (
+      {holds.length > 0 ? (
+        <ul className="sm-bucket-samples" aria-label="Holds">
+          {holds.map((h) => (
             <li key={h.id}>
               <strong>
                 {h.kind} · {h.id}
@@ -68,7 +44,9 @@ export function KlausOrganizer({ lane }: Props) {
             </li>
           ))}
         </ul>
-      ) : null}
+      ) : (
+        <p className="sm-muted">No open holds.</p>
+      )}
     </section>
   );
 }

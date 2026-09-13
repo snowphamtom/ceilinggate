@@ -1,25 +1,17 @@
 /**
- * CeilingGate — continuous GATHER→SORT machine (LOOM FLIP 2026-09-07).
- * NOT organize-in-place. NOT old forge/main costume board.
- * Evidence processRing = fleet-gerbil-682 ONLY — never quirky / never avid-gnu.
+ * CeilingGate — lean judge Sorting Machine (SENATE EDICT strip).
+ * KEEP: hero + stages + prefer-live demo + C≤S Demo + GR-21 + lean intake + lean Klaus.
+ * STRIP: Cascade roster, Drive buckets, forge costume, internal vibes chips.
  */
 import { useCallback, useEffect, useState } from "react";
-import { useQuery } from "convex/react";
-import { api } from "../convex/_generated/api";
 import demo from "./data/demo.json";
-import driveBuckets from "./data/driveBuckets.json";
 import { gateB, type GateDecision } from "./lib/residualGates";
-import {
-  formatCt,
-  formatSyncedAgo,
-  useOrganizerLane,
-} from "./lib/evidenceLive";
+import { useOrganizerLane } from "./lib/evidenceLive";
 import { KlausOrganizer } from "./components/KlausOrganizer";
 import { DemoGate, type LineRow } from "./components/DemoGate";
 import { DemoReel } from "./components/DemoReel";
 import { LiveFeeds } from "./components/LiveFeeds";
 import { SortingMachineStages } from "./components/SortingMachine";
-import { CascadeLane } from "./components/CascadeLane";
 import { useLastResidual } from "./lib/gr21Live";
 import "./sorting-machine.css";
 
@@ -32,8 +24,6 @@ const LINE_NAMES = (demo.lineItems as string[]) ?? [
 
 const GRANT_FIXTURE = demo.fixtures.find((f) => f.id === "te-grant")!;
 const REFUSE_FIXTURE = demo.fixtures.find((f) => f.id === "te-refuse")!;
-
-const BUCKET_KEYS = ["KEEP", "WATCH", "NOISE", "HOLD"] as const;
 
 function money(n: number) {
   if (!Number.isFinite(n)) return "—";
@@ -63,19 +53,13 @@ function plainFails(rows: LineRow[], d: GateDecision): string[] {
   return d.failedIndices.map((i) => {
     const r = rows[i];
     if (!r) return `Line ${i + 1} over.`;
-    return `${cap(r.name)} is ${money(r.claimed - r.source)} over the receipt (${money(r.claimed)} claimed vs ${money(r.source)} on source).`;
+    return `${cap(r.name)} is ${money(r.claimed - r.source)} over the receipt (${money(r.claimed)} claimed vs ${money(r.source)} on receipt).`;
   });
 }
 
-const hasConvex = Boolean(import.meta.env.VITE_CONVEX_URL);
-
 export default function SortingMachine() {
-  const { lane, tick, loading } = useOrganizerLane();
+  const { lane } = useOrganizerLane();
   const { live: lastResidual } = useLastResidual();
-  const liveRows = useQuery(
-    api.claims.listDecisions,
-    hasConvex ? { limit: 8 } : "skip",
-  );
 
   const [rows, setRows] = useState<LineRow[]>(() =>
     rowsFromFixture(GRANT_FIXTURE),
@@ -84,10 +68,6 @@ export default function SortingMachine() {
   const [activePipe, setActivePipe] = useState(0);
   const [pulse, setPulse] = useState(0);
   const [subject, setSubject] = useState(GRANT_FIXTURE.email.subject);
-  const [now, setNow] = useState(() => Date.now());
-  const [bucketFocus, setBucketFocus] =
-    useState<(typeof BUCKET_KEYS)[number]>("KEEP");
-  const [runCount, setRunCount] = useState(0);
 
   useEffect(() => {
     const boot = rowsFromFixture(GRANT_FIXTURE);
@@ -95,27 +75,14 @@ export default function SortingMachine() {
     setSubject(GRANT_FIXTURE.email.subject);
     setDecision(decisionFromRows(boot));
     setActivePipe(4);
-    setRunCount(1);
   }, []);
 
+  // Soft pipe pulse only — no auto fixture thrash (judges drive Demo GRANT/REFUSE)
   useEffect(() => {
-    let tick = 0;
     const id = window.setInterval(() => {
-      setNow(Date.now());
       setPulse((p) => p + 1);
       setActivePipe((p) => (p + 1) % 5);
-      tick += 1;
-      if (tick % 5 === 0) {
-        const refuse = tick % 10 === 0;
-        const f = refuse ? REFUSE_FIXTURE : GRANT_FIXTURE;
-        const next = rowsFromFixture(f);
-        setRows(next);
-        setSubject(f.email.subject);
-        setDecision(decisionFromRows(next));
-        setBucketFocus(refuse ? "WATCH" : "KEEP");
-        setRunCount((n) => n + 1);
-      }
-    }, 2200);
+    }, 2800);
     return () => window.clearInterval(id);
   }, []);
 
@@ -127,9 +94,8 @@ export default function SortingMachine() {
     window.setTimeout(() => {
       setActivePipe(3);
       setDecision(d);
-      setRunCount((n) => n + 1);
-      window.setTimeout(() => setActivePipe(4), 320);
-    }, 180);
+      window.setTimeout(() => setActivePipe(4), 280);
+    }, 160);
   }, []);
 
   const demoGrant = useCallback(() => {
@@ -150,7 +116,6 @@ export default function SortingMachine() {
       );
       setDecision(decisionFromRows(next));
       setActivePipe(3);
-      setRunCount((c) => c + 1);
       return next;
     });
   };
@@ -165,7 +130,6 @@ export default function SortingMachine() {
       );
       setDecision(decisionFromRows(next));
       setActivePipe(3);
-      setRunCount((c) => c + 1);
       return next;
     });
   };
@@ -173,70 +137,31 @@ export default function SortingMachine() {
   const d = decision ?? decisionFromRows(rows);
   const fails = plainFails(rows, d);
 
-  const bucketCounts = driveBuckets.counts as Record<
-    (typeof BUCKET_KEYS)[number],
-    number
-  >;
-  const bucketSamples = driveBuckets.samples as Record<
-    (typeof BUCKET_KEYS)[number],
-    { title: string; why: string }[]
-  >;
-
-  const syncAgo = formatSyncedAgo(lane.lastSyncedAt, now);
-  const syncCt = formatCt(lane.lastSyncedAt);
-
   return (
-    <div className="sm-shell sm-scratch" data-testid="ceilinggate-sorting-machine">
+    <div className="sm-shell sm-scratch sm-lean" data-testid="ceilinggate-sorting-machine">
       <header className="sm-hero">
         <div className="sm-hero-top">
-          <p className="sm-eyebrow">CeilingGate · GATHER → SORT</p>
-          <span className="sm-live-pill" title="Continuous sync">
+          <p className="sm-eyebrow">CeilingGate · Sorting Machine</p>
+          <span className="sm-live-pill" title="Live">
             <span className="sm-pulse-dot" data-pulse={pulse % 2} />
-            LIVE · {lane.source === "convex" ? "Evidence" : "snap"} · {syncAgo}
+            LIVE · C ≤ S
           </span>
         </div>
-        <h1>Receipt-line gather → sort</h1>
+        <h1>Receipt-line C ≤ S</h1>
         <p className="sm-lede">
-          Differentiator vs page-promise rivals: every{" "}
-          <strong>receipt line</strong> is gated <strong>C ≤ S</strong>{" "}
-          (claimed ≤ on-receipt) → <strong>GRANT</strong> or{" "}
-          <strong>REFUSE</strong>. Continuous gather → sort — not
-          organize-in-place, not a chat shrug, not a whole-page promise.
-        </p>
-        <p className="sm-rival-beat" role="note">
-          <span className="sm-rival-label">receipt-line beat</span>
-          <span>
-            Not page-promise gaps (<code>get-it-in-writing</code>) · not vague
-            spend (<code>might</code>) · not block/vibes10 shrug — every{" "}
-            <strong>receipt line</strong> is C ≤ S → GRANT/REFUSE.
-          </span>
-        </p>
-        <p className="sm-sync-stamp">
-          process:getLive · <code>{lane.stampLabel}</code>
-          {lane.lastSyncedAt ? (
-            <>
-              {" "}
-              · <span>{syncCt}</span>
-            </>
-          ) : null}
-          {" · "}
-          tick {tick}
-          {loading ? " · connecting…" : ""}
-          {" · "}
-          sorts {runCount}
+          Every claimed line vs on-receipt → <strong>GRANT</strong> or{" "}
+          <strong>REFUSE</strong>. Not a chat shrug. Not a page promise.
         </p>
       </header>
-
-      <DemoReel />
 
       <SortingMachineStages
         activePipe={activePipe}
         hasDecision={decision != null}
       />
 
-      <div className="sm-grid">
-        <KlausOrganizer lane={lane} />
+      <DemoReel />
 
+      <div className="sm-grid sm-grid-lean">
         <DemoGate
           rows={rows}
           decision={d}
@@ -246,7 +171,6 @@ export default function SortingMachine() {
           onResort={() => {
             setDecision(decisionFromRows(rows));
             setActivePipe(4);
-            setRunCount((n) => n + 1);
           }}
           onClaimEdit={onClaimEdit}
           onSourceEdit={onSourceEdit}
@@ -255,51 +179,14 @@ export default function SortingMachine() {
           liveResidual={lastResidual}
         />
 
-        <CascadeLane />
-
-        <section className="sm-panel" aria-label="Drive buckets">
-          <div className="sm-panel-head">
-            <h2>Drive sort buckets</h2>
-            <span className="sm-chip">
-              {driveBuckets.measured_at_ct ?? "snap"}
-            </span>
-          </div>
-          <div className="sm-buckets">
-            {BUCKET_KEYS.map((k) => (
-              <button
-                key={k}
-                type="button"
-                className={
-                  "sm-bucket" + (bucketFocus === k ? " on" : "") + " b-" + k
-                }
-                onClick={() => setBucketFocus(k)}
-              >
-                <span className="sm-bucket-name">{k}</span>
-                <span className="sm-bucket-n">{bucketCounts[k] ?? 0}</span>
-              </button>
-            ))}
-          </div>
-          <ul className="sm-bucket-samples">
-            {(bucketSamples[bucketFocus] ?? []).slice(0, 4).map((s) => (
-              <li key={s.title}>
-                <strong>{s.title}</strong>
-                <span>{s.why}</span>
-              </li>
-            ))}
-          </ul>
-        </section>
-
-        <LiveFeeds
-          hasConvex={hasConvex}
-          liveRows={liveRows as any}
-          lineNames={LINE_NAMES}
-          onLoadClaim={runSort}
-        />
+        <div className="sm-side">
+          <LiveFeeds />
+          <KlausOrganizer lane={lane} />
+        </div>
       </div>
 
       <footer className="sm-foot">
-        <span>GATHER→SORT · CASCADE · NIX/DRIFT · Klaus feed · C≤S</span>
-        <span>Evidence: fleet-gerbil-682 gr21:getLastResidual · Site: quirky</span>
+        <span>Receipt-line C ≤ S · GR-21 residual · prefer-live demo</span>
         <a
           href="https://github.com/snowphamtom/ceilinggate"
           target="_blank"
@@ -307,7 +194,13 @@ export default function SortingMachine() {
         >
           Repo
         </a>
-        <a href="/watch.html">Demo video</a>
+        <a
+          href="https://vibeapps.dev/s/ceilinggate-1"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Listing
+        </a>
       </footer>
     </div>
   );
