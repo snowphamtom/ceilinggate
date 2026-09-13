@@ -22,6 +22,40 @@ ${RELEASE}/CeilingGate-AllGas-demo-60s.mp4
 ${RELEASE}/CeilingGate-AllGas-demo.mp4
 `;
 
+const CARD_HTML = `<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>CeilingGate · All Gas card</title>
+<style>
+body{margin:0;background:#070b14;color:#e8eefc;font-family:system-ui,sans-serif}
+main{max-width:40rem;margin:1.5rem auto;padding:0 1rem}
+h1{font-size:1.2rem}
+.tag{color:#9aa8c2}
+a{color:#8ec5ff}
+ul{line-height:1.7}
+.frame{aspect-ratio:16/9;background:#000;border-radius:8px;overflow:hidden}
+video{width:100%;height:100%}
+</style>
+</head>
+<body>
+<main>
+<h1>CeilingGate</h1>
+<p class="tag">Email a public receipt. Get GRANT or the line that is over.</p>
+<div class="frame"><video controls playsinline poster="${RELEASE}/02-grant.png" src="${RELEASE}/CeilingGate-AllGas-demo-60s.mp4"></video></div>
+<ul>
+<li><a href="/">Live app</a></li>
+<li><a href="/watch.html">Demo player</a></li>
+<li><a href="/hls/master.m3u8">HLS playlist</a></li>
+<li><a href="https://github.com/snowphamtom/ceilinggate">Repo</a></li>
+<li>Inbox: ceilinggate-claims@agentmail.to</li>
+</ul>
+<p class="tag">Demo GRANT then Demo REFUSE. Firecrawl reads the receipt. OpenAI writes one sentence after the numbers. It does not decide.</p>
+</main>
+</body>
+</html>`;
+
 http.route({
   path: "/agentmail/webhook",
   method: "POST",
@@ -37,6 +71,20 @@ http.route({
     new Response(JSON.stringify({ ok: true, app: "CeilingGate" }), {
       status: 200,
       headers: { "content-type": "application/json" },
+    }),
+  ),
+});
+
+http.route({
+  path: "/card.html",
+  method: "GET",
+  handler: httpAction(async () =>
+    new Response(CARD_HTML, {
+      status: 200,
+      headers: {
+        "content-type": "text/html; charset=utf-8",
+        "cache-control": "public, max-age=60",
+      },
     }),
   ),
 });
