@@ -198,6 +198,14 @@ http.route({
   handler: httpAction(async (ctx) => serveAsset(ctx, "/watch.html")),
 });
 
+function maxHlsBandwidth(playlist: string): number {
+  let max = 0;
+  for (const m of playlist.matchAll(/BANDWIDTH=(\d+)/g)) {
+    max = Math.max(max, Number(m[1]));
+  }
+  return max;
+}
+
 http.route({
   path: "/hls/master.m3u8",
   method: "GET",
@@ -206,7 +214,10 @@ http.route({
     if (stored?.url) {
       const res = await fetch(stored.url);
       const text = await res.text();
+      // Thin on-origin CRF masters (e.g. 400k/180k) must not beat GH allgas-demo-hls (~5.12M v0).
+      const highEnough = maxHlsBandwidth(text) >= 1_000_000;
       if (
+        highEnough &&
         text.includes("#EXTM3U") &&
         (text.includes("stream.m3u8") ||
           text.includes("prog.m3u8") ||

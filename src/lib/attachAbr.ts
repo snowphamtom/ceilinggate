@@ -3,7 +3,7 @@
  * Fake masters that only list release .mp4 rungs stay progressive (not hls.js).
  */
 
-export const HLS_MASTER = "/hls/master.m3u8";
+export const HLS_MASTER = "https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-hls/master.m3u8";
 export const RUNG_LOW =
   "https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-yt/CeilingGate-Forge-gates-clip-YT.mp4";
 export const RUNG_HIGH =
