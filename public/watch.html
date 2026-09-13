@@ -34,7 +34,7 @@
         <span class="chip">174s · silent cut</span>
         <span class="chip">allgas-demo-yt</span>
       </div>
-      <p>Primary: YouTube prefer-live embed. On-site: true HLS ABR (allgas-demo-hls) with progressive mp4 fallback.</p>
+      <p>Primary: YouTube prefer-live embed. On-site: real HLS 720/480 via hls.js when master has stream.m3u8; else progressive GitHub mp4 (174s prefer-live — not the 67s HQ).</p>
       <div class="frame" id="yt-frame">
         <iframe
           id="yt"
@@ -61,7 +61,7 @@
             controls
             playsinline
             preload="none"
-            poster="/demo/poster-grant.png"
+            poster="/demo-poster.jpg"
           ></video>
         </div>
       </section>

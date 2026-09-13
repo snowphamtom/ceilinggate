@@ -107,14 +107,7 @@ function injectSpaCssIntoForge(distDir = "./dist") {
 async function main() {
   loadEnv();
   injectSpaCssIntoForge("./dist");
-  let files = collect("./dist");
-  // Prefer-live YT + progressive mp4 via /watch.html; skip fragile HLS rung segments
-  // so site:publish always gets a complete index+js+css set without ENOENT races.
-  files = files.filter((f) => {
-    if (f.path === "/hls/master.m3u8") return true;
-    if (f.path.startsWith("/hls/")) return false;
-    return true;
-  });
+  const files = collect("./dist");
   const deploymentId = randomUUID();
   console.log("uploading", files.length, "files", deploymentId);
   const published = [];
