@@ -1,7 +1,7 @@
-# Lesson card — b975a8b
+# Lesson card — 655aa0f
 
 1. What changed
-I changed firewallCrawl action + schema + outer script + OBSERVATORIUM.md because /judge.html and bare /watch failed in firewall crawl (route /judge.html status 404; route /watch status 404) and cloud forge was unavailable — two-host law documented, KEEP now expects judge+watch 200.
+ui: WIN POLISH A–C — 10s hero, REFUSE→GRANT path, sponsor receipts
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
