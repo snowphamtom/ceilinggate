@@ -1,7 +1,7 @@
-# Lesson card — 69b6923
+# Lesson card — 219bb62
 
 1. What changed
-ui: HUD glow restyle — violet-navy void + cyan/magenta (Y0 held)
+docs: live Y0 lens for HUD glow 69b6923
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
