@@ -1,7 +1,7 @@
-# Lesson card — e81406e
+# Lesson card — dd8ae4e
 
 1. What changed
-Point judges at live /watch.html demo.
+Lock All Gas judge pack: watch.html + listing paste.
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
