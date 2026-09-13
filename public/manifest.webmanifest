@@ -1,6 +1,6 @@
 {
-  "name": "CeilingGate + App Forge",
-  "short_name": "CeilingGate",
+  "name": "Claim Check",
+  "short_name": "Claim Check",
   "description": "All Gas \u2014 forensic spend gate + recursive App Forge. Runs from network; tiny install.",
   "start_url": "/",
   "scope": "/",

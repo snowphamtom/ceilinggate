@@ -1,5 +1,5 @@
 /**
- * CeilingGate — Sorting Machine face.
+ * Claim Check — claim-vs-receipt face.
  * KEEP: hero + stages + DemoReel + C≤S Demo + GR-21 + intake + Klaus.
  * STRIP: Cascade roster, Drive buckets, forge costume.
  */
@@ -169,18 +169,18 @@ export default function SortingMachine() {
     <div className="sm-shell sm-scratch sm-lean" data-testid="ceilinggate-sorting-machine">
       <header className="sm-hero">
         <div className="sm-hero-top">
-          <p className="sm-eyebrow">CeilingGate · Sorting Machine</p>
+          <p className="sm-eyebrow">Claim Check</p>
           <span className="sm-live-pill" title="Live">
             <span className="sm-pulse-dot" data-pulse={pulse % 2} />
             LIVE · C ≤ S
           </span>
         </div>
-        <h1>Check money claims against receipt lines.</h1>
+        <h1>Claim Check</h1>
         <p className="sm-lede">
-          Email a claim with a public receipt URL. Each line: Claimed ≤ On
-          receipt → <strong>GRANT</strong>. Over by dollars →{" "}
-          <strong>REFUSE</strong>. <span className="sm-law-chip">C ≤ S</span>{" "}
-          · <span className="sm-law-chip">S_H</span>
+          Sort each money claim against its receipt. Claimed ≤ On receipt →{" "}
+          <strong>GRANT</strong>. Over by dollars → <strong>REFUSE</strong>.{" "}
+          <span className="sm-law-chip">C ≤ S</span> ·{" "}
+          <span className="sm-law-chip">S_H</span>
         </p>
         <SponsorChips
           lit={{
@@ -227,7 +227,7 @@ export default function SortingMachine() {
       </div>
 
       <footer className="sm-foot">
-        <span>C ≤ S · GR-21 · Sorting Machine</span>
+        <span>C ≤ S · GR-21 · Claim Check</span>
         <a
           href="https://github.com/snowphamtom/ceilinggate"
           target="_blank"

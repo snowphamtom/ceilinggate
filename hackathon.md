@@ -1,17 +1,17 @@
-# CeilingGate
+# Claim Check
 
 Everyday **receipt-line** expense checker for Convex All Gas.
 
-Email a money claim with a public receipt URL. CeilingGate scrapes the receipt, compares **each claimed line** to on-receipt amounts (**C ≤ S**), and returns **GRANT** or **REFUSE**. REFUSE names the overage in dollars (“Lodging is $1 over the receipt”). OpenAI writes one sentence after the numbers — it does not decide.
+Email a money claim with a public receipt URL. Claim Check scrapes the receipt, compares **each claimed line** to on-receipt amounts (**C ≤ S**), and returns **GRANT** or **REFUSE**. REFUSE names the overage in dollars (“Lodging is $1 over the receipt”). OpenAI writes one sentence after the numbers — it does not decide.
 
-Live root is the continuous **Sorting Machine** (GATHER → SORT), not a chat product, not a page-promise checker, not an SDK sample.
+Live root is **Claim Check** (GATHER → SORT claim-vs-receipt), not a chat product, not a page-promise checker, not an SDK sample.
 
 ## Links judges need
 
 | | |
 |---|---|
 | **Listing (canonical)** | https://vibeapps.dev/s/ceilinggate-1 |
-| Live app (Sorting Machine root) | https://quirky-rhinoceros-204.convex.site/ |
+| Live app (Claim Check root) | https://quirky-rhinoceros-204.convex.site/ |
 | Health | https://quirky-rhinoceros-204.convex.site/health |
 | Repo | https://github.com/snowphamtom/ceilinggate |
 | CI (green deploy) | https://github.com/snowphamtom/ceilinggate/actions/workflows/convex-deploy.yml |
@@ -24,7 +24,7 @@ Started 2026-09-05. Submitter: Taylor Heller. Deadline: 2026-09-22 12:00 PM PT.
 
 ## How to judge it (no login, no keys)
 
-1. Open the live app — root is the **Sorting Machine**.
+1. Open the live app — root is **Claim Check**.
 2. Click **1 · Demo REFUSE**, then **2 · Demo GRANT**. Read the GR-21 stamp + OpenAI one-line each time.
 3. Read the ledger: **LINE · CLAIMED (C) · ON RECEIPT (S) · STATUS** → GRANT/REFUSE stamp.
 4. Check Evidence/Verdict **GR-21 residual commitment** (C≤S projector · commit hash · σ²) on the stamp.
@@ -39,7 +39,7 @@ Judges do not need API keys, a Convex dashboard, or an account.
 | Us | Not us |
 |---|---|
 | Every **receipt line** gated **C ≤ S** → GRANT/REFUSE | Whole-page promise / chat shrug |
-| Continuous gather → sort Sorting Machine root | Organize-in-place costume board |
+| Continuous gather → sort Claim Check root | Organize-in-place costume board |
 | GR-21 residual commitment on Evidence/Verdict stamps | Block / vibes10 style page gaps without line residuals |
 
 Rule: numbers first, language second. Leftover on one line cannot cover a hole on another.
@@ -48,18 +48,18 @@ Rule: numbers first, language second. Leftover on one line cannot cover a hole o
 
 | Piece | Work on the live path |
 |---|---|
-| **Convex** | Claims, scrapes, gate decisions, Sorting Machine board on `*.convex.site`. Evidence backend stamps GR-21 residual (`gr21:getLastResidual`). GitHub Actions deploys with `npx convex deploy`. |
+| **Convex** | Claims, scrapes, gate decisions, Claim Check board on `*.convex.site`. Evidence backend stamps GR-21 residual (`gr21:getLastResidual`). GitHub Actions deploys with `npx convex deploy`. |
 | **Firecrawl** | Scrapes the public receipt URL into a line ledger. No URL, no live judgment. |
 | **AgentMail** | Inbox `ceilinggate-claims@agentmail.to` plus webhook into Convex. |
 | **OpenAI** | `oneLine` after the numbers — one sentence only. Does **not** pick GRANT or REFUSE. |
 
 ## Why this is not the sample
 
-The sample is a chat thread about mail. CeilingGate is a forensic **receipt-line** spend ledger. Each line is checked against the scraped receipt. Over = REFUSE with the named overage. At or under = GRANT. The judge UI has no chat panel.
+The sample is a chat thread about mail. Claim Check is a forensic **receipt-line** spend ledger. Each line is checked against the scraped receipt. Over = REFUSE with the named overage. At or under = GRANT. The judge UI has no chat panel.
 
 ## Stack
 
-- Vite + React + TypeScript — Sorting Machine SPA root on Convex static hosting
+- Vite + React + TypeScript — Claim Check SPA root on Convex static hosting
 - Convex schema, queries, mutations, actions, HTTP routes (+ Evidence fleet-gerbil GR-21 anchors)
 - Firecrawl Convex component (`pipeline.scrapeAndGate`)
 - AgentMail component + `/agentmail/webhook`

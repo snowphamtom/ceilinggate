@@ -15,7 +15,7 @@ export function DemoReel() {
       <div className="sm-demo-frame">
         <iframe
           className="sm-demo-video"
-          title="CeilingGate demo"
+          title="Claim Check demo"
           src={YT_EMBED}
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
