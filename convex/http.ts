@@ -10,6 +10,18 @@ const agentmail = new AgentMail(components.agentmail, {
 
 const http = httpRouter();
 
+const RELEASE =
+  "https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-20260905";
+
+const HLS_MASTER_FALLBACK = `#EXTM3U
+#EXT-X-VERSION:7
+#EXT-X-INDEPENDENT-SEGMENTS
+#EXT-X-STREAM-INF:BANDWIDTH=70000,AVERAGE-BANDWIDTH=65000,RESOLUTION=1280x800,FRAME-RATE=4,CODECS="avc1.640028"
+${RELEASE}/CeilingGate-AllGas-demo-60s.mp4
+#EXT-X-STREAM-INF:BANDWIDTH=90000,AVERAGE-BANDWIDTH=78000,RESOLUTION=1280x800,FRAME-RATE=4,CODECS="avc1.640028"
+${RELEASE}/CeilingGate-AllGas-demo.mp4
+`;
+
 http.route({
   path: "/agentmail/webhook",
   method: "POST",
@@ -115,6 +127,36 @@ http.route({
   path: "/watch.html",
   method: "GET",
   handler: httpAction(async (ctx) => serveAsset(ctx, "/watch.html")),
+});
+
+http.route({
+  path: "/hls/master.m3u8",
+  method: "GET",
+  handler: httpAction(async (ctx) => {
+    const stored = await ctx.runQuery(api.site.getAsset, { path: "/hls/master.m3u8" });
+    if (stored?.url) {
+      const res = await fetch(stored.url);
+      const text = await res.text();
+      if (text.includes("#EXTM3U") && text.includes("stream.m3u8")) {
+        return new Response(text, {
+          status: 200,
+          headers: {
+            "content-type": "application/vnd.apple.mpegurl",
+            "cache-control": "public, max-age=60",
+            "access-control-allow-origin": "*",
+          },
+        });
+      }
+    }
+    return new Response(HLS_MASTER_FALLBACK, {
+      status: 200,
+      headers: {
+        "content-type": "application/vnd.apple.mpegurl",
+        "cache-control": "public, max-age=60",
+        "access-control-allow-origin": "*",
+      },
+    });
+  }),
 });
 
 http.route({
