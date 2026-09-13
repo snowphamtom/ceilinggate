@@ -1,7 +1,7 @@
-# Lesson card — 22cc8ef
+# Lesson card — 49ad8e4
 
 1. What changed
-Import demo reel CSS
+Optimize demo player: no eager bytes, 60s first, in-view attach.
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
