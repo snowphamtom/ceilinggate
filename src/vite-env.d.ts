@@ -3,6 +3,7 @@
 interface ImportMetaEnv {
   readonly VITE_CONVEX_URL?: string;
   readonly VITE_EVIDENCE_CONVEX_URL?: string;
+  readonly VITE_PUBLIC_SITE_URL?: string;
 }
 
 interface ImportMeta {

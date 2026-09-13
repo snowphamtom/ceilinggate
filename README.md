@@ -32,6 +32,14 @@ Open the live app. Click **Demo GRANT**, then **Demo REFUSE**. Read the ledger. 
 
 CI deploy is green. `/watch.html` embeds YouTube `2KsMO90LpdE`; `/hls/master.m3u8` points at `allgas-demo-yt` progressive. Product rule unchanged: claimed ≤ receipt, or REFUSE names the dollar overage.
 
+## Two hosts
+
+Static fortress (browser, crawls, `/health`, `/watch.html`): `https://quirky-rhinoceros-204.convex.site`  
+Convex client API (`VITE_CONVEX_URL`): `https://quirky-rhinoceros-204.convex.cloud`  
+Evidence: `https://fleet-gerbil-682.convex.cloud`
+
+Never point `VITE_CONVEX_URL` at `.site`. See [docs/TWO_HOST.md](./docs/TWO_HOST.md).
+
 ## Run locally
 
 ```bash
