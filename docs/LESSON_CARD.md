@@ -1,7 +1,7 @@
-# Lesson card — 55034e2
+# Lesson card — e81406e
 
 1. What changed
-Only treat segment HLS as HLS; mp4 rungs stay progressive.
+Point judges at live /watch.html demo.
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
