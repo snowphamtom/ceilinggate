@@ -1,27 +1,19 @@
-/** Judge demo plate — GitHub release mp4 on the live site. Not YouTube. Not Drive. */
+/** Judge demo plate — ABR when HLS is on-origin, else progressive rungs. */
 import { useCallback, useEffect, useRef, useState } from "react";
+import { attachAbr, type AbrHandle, RUNG_HIGH, RUNG_LOW } from "../lib/attachAbr";
 import "./DemoReel.css";
 
-const DEMO_60 =
-  "https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-20260905/CeilingGate-AllGas-demo-60s.mp4";
-const DEMO_FULL =
-  "https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-20260905/CeilingGate-AllGas-demo.mp4";
 const GRANT_SHOT =
   "https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-20260905/02-grant.png";
-
-type Cut = "60" | "full";
 
 export function DemoReel() {
   const shellRef = useRef<HTMLElement | null>(null);
   const videoRef = useRef<HTMLVideoElement | null>(null);
-  const [cut, setCut] = useState<Cut>("60");
+  const handleRef = useRef<AbrHandle | null>(null);
   const [armed, setArmed] = useState(false);
+  const [label, setLabel] = useState("idle");
 
-  const src = cut === "60" ? DEMO_60 : DEMO_FULL;
-
-  const arm = useCallback(() => {
-    setArmed(true);
-  }, []);
+  const arm = useCallback(() => setArmed(true), []);
 
   useEffect(() => {
     const node = shellRef.current;
@@ -43,21 +35,22 @@ export function DemoReel() {
   useEffect(() => {
     const el = videoRef.current;
     if (!el || !armed) return;
-    if (el.getAttribute("src") !== src) {
-      const keepTime = el.currentTime;
-      const wasPaused = el.paused;
-      el.src = src;
-      el.load();
-      if (keepTime > 0.25) {
-        const onMeta = () => {
-          el.currentTime = Math.min(keepTime, el.duration || keepTime);
-          if (!wasPaused) void el.play().catch(() => undefined);
-          el.removeEventListener("loadedmetadata", onMeta);
-        };
-        el.addEventListener("loadedmetadata", onMeta);
+    let live = true;
+    attachAbr(el, (s) => {
+      if (live) setLabel(s);
+    }).then((h) => {
+      if (!live) {
+        h.destroy();
+        return;
       }
-    }
-  }, [armed, src]);
+      handleRef.current = h;
+    });
+    return () => {
+      live = false;
+      handleRef.current?.destroy();
+      handleRef.current = null;
+    };
+  }, [armed]);
 
   const onPlayClick = () => {
     arm();
@@ -66,14 +59,10 @@ export function DemoReel() {
   };
 
   return (
-    <section
-      ref={shellRef}
-      className="sm-panel sm-demo-reel"
-      aria-label="Judge demo video"
-    >
+    <section ref={shellRef} className="sm-panel sm-demo-reel" aria-label="Judge demo video">
       <div className="sm-panel-head">
         <h2>Demo video</h2>
-        <span className="sm-chip">{cut === "60" ? "60s cut" : "~1:08 full"}</span>
+        <span className="sm-chip">{label}</span>
       </div>
       <div className="sm-demo-frame">
         <video
@@ -94,35 +83,17 @@ export function DemoReel() {
         ) : null}
       </div>
       <p className="sm-demo-links">
-        <button
-          type="button"
-          className={"sm-demo-cut" + (cut === "60" ? " on" : "")}
-          onClick={() => {
-            setCut("60");
-            arm();
-          }}
-        >
-          60s (fast)
-        </button>
-        <button
-          type="button"
-          className={"sm-demo-cut" + (cut === "full" ? " on" : "")}
-          onClick={() => {
-            setCut("full");
-            arm();
-          }}
-        >
-          Full
-        </button>
-        <a href={DEMO_60} target="_blank" rel="noreferrer">
+        <a href={RUNG_LOW} target="_blank" rel="noreferrer">
           60s file
         </a>
         <span>·</span>
-        <a href={DEMO_FULL} target="_blank" rel="noreferrer">
+        <a href={RUNG_HIGH} target="_blank" rel="noreferrer">
           Full file
         </a>
         <span>·</span>
         <a href="/watch.html">/watch.html</a>
+        <span>·</span>
+        <a href="/hls/master.m3u8">HLS master</a>
       </p>
     </section>
   );
