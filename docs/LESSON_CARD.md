@@ -1,7 +1,7 @@
-# Lesson card — 8099d4b
+# Lesson card — 750cc6d
 
 1. What changed
-fix: retarget allgas-judge-smoke to WIN POLISH GR-21 face (drop Demo signature)
+ui: LENS win-polish densify optic (KEEP-safe)
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
