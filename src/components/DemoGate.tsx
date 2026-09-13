@@ -1,4 +1,5 @@
 import type { GateDecision } from "../lib/residualGates";
+import { residualCommitment } from "../lib/gr21Residual";
 
 export type LineRow = { name: string; claimed: number; source: number };
 
@@ -23,7 +24,7 @@ function cap(s: string) {
   return s.length ? s[0].toUpperCase() + s.slice(1) : s;
 }
 
-/** ONE live C≤S Demo GRANT/REFUSE lane — not costumes */
+/** ONE live C≤S Demo GRANT/REFUSE lane — GR-21 residual commitment on stamps */
 export function DemoGate({
   rows,
   decision,
@@ -37,6 +38,11 @@ export function DemoGate({
   showAwait = false,
 }: Props) {
   const ok = decision.status === "grant" && decision.mask === 0;
+  const rc = residualCommitment(
+    rows.map((r) => r.claimed),
+    rows.map((r) => r.source),
+    subject || "ceilinggate-gr21",
+  );
   return (
     <section className="sm-panel sm-claim" aria-label="Live claim lane">
       <div className="sm-panel-head">
@@ -47,7 +53,7 @@ export function DemoGate({
       </div>
       <p className="sm-subj">{subject}</p>
       <p className="sm-rival-hint">
-        Line ledger — CLAIMED vs ON RECEIPT — not a page promise.
+        Line ledger — CLAIMED vs ON RECEIPT — GR-21 C≤S projector (not page promise).
       </p>
       <div className="sm-demo-row">
         <button type="button" className="sm-btn grant" onClick={onDemoGrant}>
@@ -114,28 +120,43 @@ export function DemoGate({
         <div className="sm-verdict await" aria-live="polite">
           <div>
             <strong>AWAITING RESIDUAL SCAN</strong>
-            <p style={{margin:"0.35rem 0 0",color:"#8fa3bf",fontSize:"0.78rem"}}>Tap Demo GRANT / REFUSE — or edit C / S</p>
+            <p className="sm-await-hint">
+              GR-21 projector idle — tap Demo GRANT / REFUSE or edit C / S
+            </p>
           </div>
         </div>
       ) : (
-      <div className={"sm-verdict " + (ok ? "grant" : "refuse")}>
-        <div className="sm-verdict-stamp">{ok ? "GRANT" : "REFUSE"}</div>
-        {fails.length ? (
-          <ul>
-            {fails.map((f) => (
-              <li key={f}>{f}</li>
-            ))}
-          </ul>
-        ) : (
-          <p>Every line clears C ≤ S. Mask 0.</p>
-        )}
-        <p className="sm-mask">
-          mask {decision.mask}
-          {decision.failedIndices.length
-            ? ` · fail [${decision.failedIndices.join(",")}]`
-            : " · all clear"}
-        </p>
-      </div>
+        <div className={"sm-verdict " + (ok ? "grant" : "refuse")}>
+          <div className="sm-verdict-stamp">{ok ? "GRANT" : "REFUSE"}</div>
+          <div className="sm-gr21-stamp" title={rc.commit}>
+            <span className="sm-gr21-kicker">Evidence · GR-21 residual commitment</span>
+            <span className={"sm-gr21-proj " + (rc.projector === "CLEAR" ? "clear" : "over")}>
+              C≤S projector {rc.projector}
+            </span>
+            <code className="sm-gr21-hash">{rc.short}</code>
+            <span className="sm-gr21-meta">
+              σ² {rc.variance.toExponential(2)}
+              {rc.overLines ? ` · over×${rc.overLines}` : " · residual 0"}
+            </span>
+          </div>
+          {fails.length ? (
+            <ul>
+              {fails.map((f) => (
+                <li key={f}>{f}</li>
+              ))}
+            </ul>
+          ) : (
+            <p>Every line clears C ≤ S. Mask 0 · residual commitment binds the projector.</p>
+          )}
+          <p className="sm-mask">
+            mask {decision.mask}
+            {decision.failedIndices.length
+              ? ` · fail [${decision.failedIndices.join(",")}]`
+              : " · all clear"}
+            {" · commit "}
+            <code>{rc.short}</code>
+          </p>
+        </div>
       )}
     </section>
   );
