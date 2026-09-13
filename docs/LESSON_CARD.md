@@ -1,7 +1,7 @@
-# Lesson card — b98c4bc
+# Lesson card — 22cc8ef
 
 1. What changed
-Demo reel styles — video plate on live site.
+Import demo reel CSS
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
