@@ -204,11 +204,11 @@ export default function SortingMachine() {
           organize-in-place, not a chat shrug, not a whole-page promise.
         </p>
         <p className="sm-rival-beat" role="note">
-          <span className="sm-rival-label">vs WATCH rivals</span>
+          <span className="sm-rival-label">receipt-line beat</span>
           <span>
-            <code>get-it-in-writing</code> page-promise ≠ line residuals ·{" "}
-            <code>might</code> ≠ spend gates — we sort{" "}
-            <strong>receipt lines</strong> continuously.
+            Not page-promise gaps (<code>get-it-in-writing</code>) · not vague
+            spend (<code>might</code>) · not block/vibes10 shrug — every{" "}
+            <strong>receipt line</strong> is C ≤ S → GRANT/REFUSE.
           </span>
         </p>
         <p className="sm-sync-stamp">

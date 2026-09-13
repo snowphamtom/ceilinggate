@@ -16,7 +16,7 @@
 - Website: https://quirky-rhinoceros-204.convex.site/
 - GitHub: https://github.com/snowphamtom/ceilinggate
 - Tags: Convex, Firecrawl, AgentMail, AllGasHackathon, OpenAI
-- Video prefer-live: https://www.youtube.com/watch?v=2KsM090LpdE
+- Video prefer-live: https://www.youtube.com/watch?v=2KsMO90LpdE
 - Video file prefer-live: https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-yt/CeilingGate-Forge-gates-clip-YT.mp4
 - SHOW3 (not primary): https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-show/CeilingGate-Forge-gates-clip-SHOW3.mp4
 - Fallback HQ: https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-hq/CeilingGate-Forge-gates-clip-HQ.mp4
@@ -27,7 +27,7 @@ Email a claim + public receipt URL → Firecrawl scrape → GRANT only if every 
 
 Try: https://quirky-rhinoceros-204.convex.site/  
 Repo: https://github.com/snowphamtom/ceilinggate  
-Demo (YouTube silent): https://www.youtube.com/watch?v=2KsM090LpdE  
+Demo (YouTube silent): https://www.youtube.com/watch?v=2KsMO90LpdE  
 Demo (GH YT): https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-yt/CeilingGate-Forge-gates-clip-YT.mp4  
 Ingress: ceilinggate-claims@agentmail.to
 
