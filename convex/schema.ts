@@ -122,4 +122,20 @@ export default defineSchema({
     authed: v.optional(v.boolean()),
     createdAt: v.number(),
   }).index("by_createdAt", ["createdAt"]),
+
+  /** Observatorium — firewall crawl snapshots (EDICTUM SECUNDUS) */
+  firewallCrawlLogs: defineTable({
+    siteUrl: v.string(),
+    results: v.array(
+      v.object({
+        route: v.string(),
+        status: v.number(),
+        ok: v.boolean(),
+        ms: v.optional(v.number()),
+        error: v.optional(v.string()),
+      }),
+    ),
+    createdAt: v.number(),
+    learned: v.optional(v.array(v.string())),
+  }).index("by_createdAt", ["createdAt"]),
 });
