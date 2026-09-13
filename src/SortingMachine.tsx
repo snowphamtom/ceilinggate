@@ -167,9 +167,8 @@ export default function SortingMachine() {
         hasDecision={decision != null}
       />
 
-      <DemoReel />
-
-      <div className="sm-grid sm-grid-lean">
+      {/* Fold punch: proof (REFUSE/GRANT + ledger stamp) before video/Klaus */}
+      <div className="sm-proof-fold" data-testid="proof-above-fold">
         <DemoGate
           rows={rows}
           decision={d}
@@ -186,7 +185,10 @@ export default function SortingMachine() {
           showAwait={decision == null}
           liveResidual={lastResidual}
         />
+      </div>
 
+      <div className="sm-below-fold sm-grid sm-grid-lean">
+        <DemoReel />
         <div className="sm-side">
           <LiveFeeds />
           <KlausOrganizer lane={lane} />
