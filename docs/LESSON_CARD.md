@@ -1,7 +1,7 @@
-# Lesson card — 0f7653d
+# Lesson card — 500d694
 
 1. What changed
-feat: Observatorium additive schema — grokLedger extras, imperatorLearnings+by_confidence, vaultAccessLog
+feat: additive Observatorium schema — grokLedger optional fields, imperatorLearnings by_confidence, vaultAccessLog
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
