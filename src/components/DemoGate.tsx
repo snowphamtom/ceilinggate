@@ -134,59 +134,6 @@ export function DemoGate({
         </button>
       </div>
 
-      <ResidualCaliper rows={rows} failedIndices={decision.failedIndices} />
-
-      <table className="sm-ledger" aria-label="Line ledger">
-        <thead>
-          <tr>
-            <th>LINE</th>
-            <th>CLAIMED (C)</th>
-            <th>ON RECEIPT (S)</th>
-            <th>Δ</th>
-            <th>STATUS</th>
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map((r, i) => {
-            const fail = decision.failedIndices.includes(i);
-            const delta = r.claimed - r.source;
-            return (
-              <tr key={r.name + i} className={fail ? "fail" : "ok"}>
-                <td>{cap(r.name)}</td>
-                <td>
-                  <input
-                    className="sm-cell"
-                    type="number"
-                    step="1"
-                    value={r.claimed}
-                    onChange={(e) => onClaimEdit(i, e.target.value)}
-                    aria-label={`${r.name} claimed`}
-                  />
-                </td>
-                <td>
-                  <input
-                    className="sm-cell"
-                    type="number"
-                    step="1"
-                    value={r.source}
-                    onChange={(e) => onSourceEdit(i, e.target.value)}
-                    aria-label={`${r.name} source`}
-                  />
-                </td>
-                <td className={fail ? "neg" : "pos"}>
-                  {fail ? `+${money(delta)}` : money(Math.max(0, -delta))}
-                </td>
-                <td>
-                  <span className={"sm-line-chip " + (fail ? "over" : "clear")}>
-                    {fail ? "OVER" : "CLEAR"}
-                  </span>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-
       {showAwait ? (
         <div className="sm-verdict await" aria-live="polite">
           <div>
@@ -255,6 +202,60 @@ export function DemoGate({
           </p>
         </div>
       )}
+
+      <ResidualCaliper rows={rows} failedIndices={decision.failedIndices} />
+
+      <table className="sm-ledger" aria-label="Line ledger">
+        <thead>
+          <tr>
+            <th>LINE</th>
+            <th>CLAIMED (C)</th>
+            <th>ON RECEIPT (S)</th>
+            <th>Δ</th>
+            <th>STATUS</th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((r, i) => {
+            const fail = decision.failedIndices.includes(i);
+            const delta = r.claimed - r.source;
+            return (
+              <tr key={r.name + i} className={fail ? "fail" : "ok"}>
+                <td>{cap(r.name)}</td>
+                <td>
+                  <input
+                    className="sm-cell"
+                    type="number"
+                    step="1"
+                    value={r.claimed}
+                    onChange={(e) => onClaimEdit(i, e.target.value)}
+                    aria-label={`${r.name} claimed`}
+                  />
+                </td>
+                <td>
+                  <input
+                    className="sm-cell"
+                    type="number"
+                    step="1"
+                    value={r.source}
+                    onChange={(e) => onSourceEdit(i, e.target.value)}
+                    aria-label={`${r.name} source`}
+                  />
+                </td>
+                <td className={fail ? "neg" : "pos"}>
+                  {fail ? `+${money(delta)}` : money(Math.max(0, -delta))}
+                </td>
+                <td>
+                  <span className={"sm-line-chip " + (fail ? "over" : "clear")}>
+                    {fail ? "OVER" : "CLEAR"}
+                  </span>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+
     </section>
   );
 }

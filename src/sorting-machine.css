@@ -1622,3 +1622,29 @@ body {
 @keyframes smBlink {
   50% { opacity: 0; }
 }
+
+/* SHOW OFF fold: stamp before ledger — densify caliper */
+.sm-shell.sm-lean .sm-proof-fold .sm-caliper {
+  margin: 0.35rem 0 0.45rem;
+  padding: 0.3rem 0.4rem;
+  font-size: 0.68rem;
+}
+.sm-shell.sm-lean .sm-proof-fold .sm-caliper li {
+  grid-template-columns: 3.8rem 1fr 2.8rem;
+  gap: 0.25rem;
+}
+.sm-shell.sm-lean .sm-proof-fold .sm-caliper-track { height: 0.55rem; }
+.sm-shell.sm-lean .sm-proof-fold .sm-verdict.sm-slam {
+  margin-top: 0.35rem;
+  margin-bottom: 0.45rem;
+}
+.sm-shell.sm-lean .sm-proof-fold .sm-verdict-stamp {
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+}
+.sm-shell.sm-lean .sm-proof-fold .sm-ledger {
+  font-size: 0.78rem;
+}
+.sm-shell.sm-lean .sm-proof-fold .sm-demo-path {
+  margin: 0 0 0.35rem;
+  font-size: 0.78rem;
+}
