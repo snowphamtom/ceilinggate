@@ -31,7 +31,7 @@ function cap(s: string) {
   return s.length ? s[0].toUpperCase() + s.slice(1) : s;
 }
 
-/** Live C ≤ S Demo GRANT/REFUSE lane with GR-21 hash. */
+/** Live C ≤ S Demo GRANT/REFUSE lane with Check ID. */
 export function DemoGate({
   rows,
   decision,
@@ -73,18 +73,18 @@ export function DemoGate({
   });
 
   const [slamKey, setSlamKey] = useState(0);
-  const [hashReveal, setHashReveal] = useState(false);
+  const [idReveal, setIdReveal] = useState(false);
   const [typed, setTyped] = useState("");
 
   useEffect(() => {
     if (showAwait) {
       setTyped("");
-      setHashReveal(false);
+      setIdReveal(false);
       return;
     }
     setSlamKey((k) => k + 1);
-    setHashReveal(false);
-    const t0 = window.setTimeout(() => setHashReveal(true), 220);
+    setIdReveal(false);
+    const t0 = window.setTimeout(() => setIdReveal(true), 220);
     setTyped("");
     let i = 0;
     const id = window.setInterval(() => {
@@ -174,25 +174,25 @@ export function DemoGate({
           </p>
           <div
             className={
-              "sm-gr21-stamp sm-gr21-readable" +
-              (hashReveal ? " is-revealed el-plasma" : " is-sealed")
+              "sm-proof-stamp sm-proof-readable" +
+              (idReveal ? " is-revealed el-reveal" : " is-sealed")
             }
-            data-element={hashReveal ? "PLASMA" : "SEALED"}
+            data-element={idReveal ? "REVEAL" : "SEALED"}
             title={`commit=${commitHex}\nhistoric=${historicHex}`}
-            data-testid="gr21-residual-stamp"
+            data-testid="proof-residual-stamp"
           >
-            <span className="sm-gr21-kicker">GR-21 hash</span>
+            <span className="sm-proof-kicker">Check ID</span>
             <span
               className={
-                "sm-gr21-proj " + (projector === "CLEAR" ? "clear" : "over")
+                "sm-proof-proj " + (projector === "CLEAR" ? "clear" : "over")
               }
             >
               C≤S {projector}
             </span>
-            <code className="sm-gr21-hash">
-              {hashReveal ? commitShort : "············"}
+            <code className="sm-proof-id">
+              {idReveal ? commitShort : "············"}
             </code>
-            <span className="sm-gr21-meta">
+            <span className="sm-proof-meta">
               σ² {variance.toExponential(2)}
               {projector === "CLEAR" ? " · balanced" : ""}
               {" · "}

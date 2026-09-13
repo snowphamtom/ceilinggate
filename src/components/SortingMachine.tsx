@@ -1,7 +1,7 @@
 const PIPE_STAGES = [
   { id: "gather", label: "Gather", hint: "Mail · web · files" },
   { id: "triage", label: "Triage", hint: "Claims only" },
-  { id: "evidence", label: "Evidence", hint: "GR-21 hash" },
+  { id: "evidence", label: "Evidence", hint: "Check ID" },
   { id: "sort", label: "Sort", hint: "C ≤ S check" },
   { id: "bucket", label: "Result", hint: "GRANT / REFUSE" },
 ] as const;

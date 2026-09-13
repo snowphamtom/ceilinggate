@@ -6,7 +6,7 @@ Video: https://quirky-rhinoceros-204.convex.site/watch.html (prefer-live YT `2Ks
 **CeilingGate** — continuous Sorting Machine. Email a receipt → GRANT or REFUSE.
 
 1. Open the live app — proof is above the fold (Demo REFUSE/GRANT + ledger).
-2. Click **1 · Demo REFUSE** — overages named in dollars · GR-21 stamp · OpenAI one-line.
+2. Click **1 · Demo REFUSE** — overages named in dollars · Check ID stamp · OpenAI one-line.
 3. Click **2 · Demo GRANT** — every line C ≤ S · residual CLEAR.
 4. Optional: `/watch.html` — 174s silent prefer-live cut (YT + allgas-demo-yt mp4).
 5. Optional live path: email claim + public receipt URL to `ceilinggate-claims@agentmail.to`. Firecrawl scrapes; OpenAI writes one sentence after the numbers (does not decide).

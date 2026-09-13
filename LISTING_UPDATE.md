@@ -26,7 +26,7 @@ https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-yt/Ceil
 Tags: convex, AllGasHackathon, OpenAI, AgentMail, Firecrawl
 
 Body:
-Open the live Sorting Machine. Click 1 · Demo REFUSE, then 2 · Demo GRANT. Each claimed line is gated C ≤ S against the receipt. Over = REFUSE with the dollar overage. Clear = GRANT. GR-21 residual stamps the projector. OpenAI writes one sentence after the numbers — it does not decide.
+Open the live Sorting Machine. Click 1 · Demo REFUSE, then 2 · Demo GRANT. Each claimed line is gated C ≤ S against the receipt. Over = REFUSE with the dollar overage. Clear = GRANT. Residual Check ID stamps the projector. OpenAI writes one sentence after the numbers — it does not decide.
 
 Email a claim + public receipt URL to ceilinggate-claims@agentmail.to. Firecrawl scrapes the page.
 

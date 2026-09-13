@@ -1,6 +1,6 @@
 /**
  * Claim Check — claim-vs-receipt face.
- * KEEP: hero + stages + DemoReel + C≤S Demo + GR-21 + intake + Klaus.
+ * KEEP: hero + stages + DemoReel + C≤S Demo + Check ID + intake + Klaus.
  * STRIP: Cascade roster, Drive buckets, forge costume.
  */
 import { useCallback, useEffect, useState } from "react";
@@ -191,7 +191,7 @@ export default function SortingMachine() {
         />
       </header>
 
-      {/* Y0 proof: GRANT + S_H + hash + caliper before pipeline */}
+      {/* Y0 proof: GRANT + S_H + check id + caliper before pipeline */}
       <div className="sm-proof-fold" data-testid="proof-above-fold">
         <DemoGate
           rows={rows}
@@ -227,7 +227,7 @@ export default function SortingMachine() {
       </div>
 
       <footer className="sm-foot">
-        <span>C ≤ S · GR-21 · Claim Check</span>
+        <span>C ≤ S · Claim Check</span>
         <a
           href="https://github.com/snowphamtom/ceilinggate"
           target="_blank"
