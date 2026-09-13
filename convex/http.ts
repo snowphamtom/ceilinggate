@@ -12,11 +12,18 @@ const http = httpRouter();
 
 const RELEASE =
   "https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-yt";
+const HLS_REL =
+  "https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-hls";
+/** True ABR ladder (YT cut) hosted on GH release — not Convex static. */
 const HLS_MASTER_FALLBACK = `#EXTM3U
-#EXT-X-VERSION:7
+#EXT-X-VERSION:6
 #EXT-X-INDEPENDENT-SEGMENTS
-#EXT-X-STREAM-INF:BANDWIDTH=5000000,AVERAGE-BANDWIDTH=4500000,RESOLUTION=1280x800,FRAME-RATE=30,CODECS="avc1.640028"
-${RELEASE}/CeilingGate-Forge-gates-clip-YT.mp4
+#EXT-X-STREAM-INF:BANDWIDTH=5117736,AVERAGE-BANDWIDTH=4615845,RESOLUTION=1280x800,FRAME-RATE=30,CODECS="avc1.640020"
+${HLS_REL}/v0_prog.m3u8
+#EXT-X-STREAM-INF:BANDWIDTH=2770368,AVERAGE-BANDWIDTH=2564916,RESOLUTION=1152x720,FRAME-RATE=30,CODECS="avc1.64001f"
+${HLS_REL}/v1_prog.m3u8
+#EXT-X-STREAM-INF:BANDWIDTH=1002040,AVERAGE-BANDWIDTH=590492,RESOLUTION=768x480,FRAME-RATE=30,CODECS="avc1.64001f"
+${HLS_REL}/v2_prog.m3u8
 `;
 
 const CARD_HTML = `<!doctype html>
@@ -196,7 +203,12 @@ http.route({
     if (stored?.url) {
       const res = await fetch(stored.url);
       const text = await res.text();
-      if (text.includes("#EXTM3U") && text.includes("stream.m3u8")) {
+      if (
+        text.includes("#EXTM3U") &&
+        (text.includes("stream.m3u8") ||
+          text.includes("prog.m3u8") ||
+          (text.includes("#EXT-X-STREAM-INF") && !text.includes(".mp4")))
+      ) {
         return new Response(text, {
           status: 200,
           headers: {

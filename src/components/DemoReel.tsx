@@ -30,6 +30,8 @@ export function DemoReel() {
         <a href={GH_YT} target="_blank" rel="noreferrer">
           allgas-demo-yt file
         </a>
+        <span>·</span>
+        <a href="/watch.html">watch · HLS</a>
       </p>
     </section>
   );

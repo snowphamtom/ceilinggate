@@ -14,12 +14,12 @@ Not a chat app. Not a developer SDK. Not the AgentMail sample inbox assistant.
 | Health | https://quirky-rhinoceros-204.convex.site/health |
 | Build log | [hackathon.md](./hackathon.md) |
 | CI | [convex-deploy](https://github.com/snowphamtom/ceilinggate/actions/workflows/convex-deploy.yml) |
-| Demo files | [release allgas-demo-yt](https://github.com/snowphamtom/ceilinggate/releases/tag/allgas-demo-yt) · [YouTube 2KsMO90LpdE](https://www.youtube.com/watch?v=2KsMO90LpdE) |
+| Demo files | [prefer-live YT](https://www.youtube.com/watch?v=2KsMO90LpdE) · [allgas-demo-yt](https://github.com/snowphamtom/ceilinggate/releases/tag/allgas-demo-yt) · [HLS ladder](https://github.com/snowphamtom/ceilinggate/releases/tag/allgas-demo-hls) |
 | Listing | https://vibeapps.dev/s/ceilinggate-1 |
 | Inbox | ceilinggate-claims@agentmail.to |
 | Share | https://x.com/magpie_inventor/status/2096419465973944560 |
 
-Open the live app. Click **1 · Demo REFUSE**, then **2 · Demo GRANT**. Proof is above the fold. No login. Video: YouTube prefer-live `2KsMO90LpdE` (letter **O**) on `/watch.html`, progressive `allgas-demo-yt` mp4 fallback.
+Open the live app. Click **1 · Demo REFUSE**, then **2 · Demo GRANT**. Proof is above the fold. No login. Video: YouTube prefer-live `2KsMO90LpdE` (letter **O**) on `/watch.html` + DemoReel; on-site player uses true HLS (`allgas-demo-hls` ladder) with progressive `allgas-demo-yt` mp4 fallback.
 
 ## What each sponsor does
 
@@ -30,7 +30,7 @@ Open the live app. Click **1 · Demo REFUSE**, then **2 · Demo GRANT**. Proof i
 
 ## 2026-09-13
 
-CI deploy is green. `/watch.html` embeds YouTube `2KsMO90LpdE`; `/hls/master.m3u8` points at `allgas-demo-yt` progressive. Product rule unchanged: claimed ≤ receipt, or REFUSE names the dollar overage.
+CI deploy is green. `/watch.html` embeds YouTube `2KsMO90LpdE` (prefer-live); on-site progressive/HLS uses true ABR from release `allgas-demo-hls` (YT cut) with `allgas-demo-yt` mp4 fallback and fresh GRANT poster (not 20260905). Product rule unchanged: claimed ≤ receipt, or REFUSE names the dollar overage.
 
 ## Two hosts
 

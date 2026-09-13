@@ -1,6 +1,6 @@
 /** Adaptive bitrate attach for the judge demo.
- * Segment HLS (/hls/*.m3u8 with stream.m3u8 children) when present.
- * /hls/master.m3u8 may list release mp4 rungs — that is progressive, not hls.js.
+ * Segment HLS (/hls/master → prog.m3u8 / stream.m3u8 · .ts/.m4s) when present.
+ * Fake masters that only list release .mp4 rungs stay progressive (not hls.js).
  */
 
 export const HLS_MASTER = "/hls/master.m3u8";
@@ -37,7 +37,15 @@ async function masterKind(): Promise<"segments" | "mp4-rungs" | "none"> {
     if (!r.ok) return "none";
     const t = await r.text();
     if (!t.includes("#EXTM3U")) return "none";
-    if (t.includes("stream.m3u8") || t.includes(".m4s")) return "segments";
+    if (
+      t.includes("stream.m3u8") ||
+      t.includes("prog.m3u8") ||
+      t.includes(".m4s") ||
+      /\.ts(\?|$|#)/.test(t) ||
+      (t.includes("#EXT-X-STREAM-INF") && !t.includes(".mp4"))
+    ) {
+      return "segments";
+    }
     if (t.includes(".mp4")) return "mp4-rungs";
     return "none";
   } catch {

@@ -34,7 +34,7 @@
         <span class="chip">174s · silent cut</span>
         <span class="chip">allgas-demo-yt</span>
       </div>
-      <p>Primary: YouTube prefer-live embed. Progressive fallback: GitHub release mp4 (same cut).</p>
+      <p>Primary: YouTube prefer-live embed. On-site: true HLS ABR (allgas-demo-hls) with progressive mp4 fallback.</p>
       <div class="frame" id="yt-frame">
         <iframe
           id="yt"
@@ -53,7 +53,7 @@
       </p>
 
       <section class="sec">
-        <h2>Progressive (same origin playlist / download)</h2>
+        <h2>On-site player (HLS · progressive fallback)</h2>
         <p class="chip" id="prog-lab">idle</p>
         <div class="frame" style="margin-top:0.5rem">
           <video
@@ -61,7 +61,7 @@
             controls
             playsinline
             preload="none"
-           
+            poster="/demo/poster-grant.png"
           ></video>
         </div>
       </section>
@@ -71,31 +71,88 @@
       const PROG =
         "https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-yt/CeilingGate-Forge-gates-clip-YT.mp4";
       const MASTER = "/hls/master.m3u8";
+      const HLS_JS = "https://cdn.jsdelivr.net/npm/hls.js@1.5.20/dist/hls.min.js";
       const v = document.getElementById("reel");
       const lab = document.getElementById("prog-lab");
 
-      async function attachProgressive() {
+      function isTrueHls(t) {
+        if (!t || !t.includes("#EXTM3U")) return false;
+        if (t.includes(".mp4") && !t.includes("prog.m3u8") && !t.includes("stream.m3u8")) return false;
+        return (
+          t.includes("stream.m3u8") ||
+          t.includes("prog.m3u8") ||
+          t.includes(".m4s") ||
+          /\.ts(\?|$)/.test(t) ||
+          (t.includes("#EXT-X-STREAM-INF") && !t.includes(".mp4"))
+        );
+      }
+
+      function loadHlsJs() {
+        if (window.Hls) return Promise.resolve();
+        return new Promise(function (resolve, reject) {
+          var s = document.createElement("script");
+          s.src = HLS_JS;
+          s.async = true;
+          s.onload = function () { resolve(); };
+          s.onerror = function () { reject(new Error("hls.js")); };
+          document.head.appendChild(s);
+        });
+      }
+
+      function useProgressive(why) {
+        v.src = PROG;
+        lab.textContent = "progressive · allgas-demo-yt" + (why ? " · " + why : "");
+      }
+
+      async function attachOnSite() {
+        var text = "";
         try {
-          const r = await fetch(MASTER, { cache: "no-store" });
-          const t = r.ok ? await r.text() : "";
-          // Fake ABR that lists .mp4 rungs is progressive — do not feed to hls.js.
-          if (t.includes("#EXTM3U") && (t.includes("stream.m3u8") || t.includes(".m4s"))) {
-            if (v.canPlayType("application/vnd.apple.mpegurl")) {
-              v.src = MASTER;
-              lab.textContent = "HLS native · ABR";
-              return;
-            }
+          var r = await fetch(MASTER, { cache: "no-store" });
+          text = r.ok ? await r.text() : "";
+        } catch (e) {
+          useProgressive("master fetch fail");
+          return;
+        }
+        if (!isTrueHls(text)) {
+          useProgressive("no segment ladder");
+          return;
+        }
+        if (v.canPlayType("application/vnd.apple.mpegurl")) {
+          v.src = MASTER;
+          lab.textContent = "HLS native · ABR · allgas-demo-hls";
+          return;
+        }
+        try {
+          await loadHlsJs();
+          if (window.Hls && window.Hls.isSupported()) {
+            var hls = new window.Hls({
+              capLevelToPlayerSize: true,
+              startLevel: -1,
+              maxBufferLength: 12,
+              maxMaxBufferLength: 24,
+            });
+            hls.loadSource(MASTER);
+            hls.attachMedia(v);
+            var tag = function () {
+              var lv = hls.levels[hls.currentLevel];
+              lab.textContent = lv
+                ? "HLS ABR · " + (lv.height || "?") + "p · allgas-demo-hls"
+                : "HLS ABR · allgas-demo-hls";
+            };
+            hls.on(window.Hls.Events.LEVEL_SWITCHED, tag);
+            hls.on(window.Hls.Events.MANIFEST_PARSED, tag);
+            lab.textContent = "HLS ABR · allgas-demo-hls";
+            return;
           }
         } catch (e) {}
-        v.src = PROG;
-        lab.textContent = "progressive · allgas-demo-yt";
+        useProgressive("hls.js unavailable");
       }
 
       if ("IntersectionObserver" in window) {
-        const io = new IntersectionObserver(
-          (ents) => {
-            if (ents.some((e) => e.isIntersecting)) {
-              attachProgressive();
+        var io = new IntersectionObserver(
+          function (ents) {
+            if (ents.some(function (e) { return e.isIntersecting; })) {
+              attachOnSite();
               io.disconnect();
             }
           },
@@ -103,7 +160,7 @@
         );
         io.observe(v);
       } else {
-        attachProgressive();
+        attachOnSite();
       }
     </script>
   </body>
