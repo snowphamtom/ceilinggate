@@ -15,7 +15,7 @@ type Props = {
 export function SortingMachineStages({ activePipe, hasDecision }: Props) {
   return (
     <section className="sm-pipeline sm-glass" aria-label="Check pipeline">
-      <p className="sm-section-label">Pipeline · gather to result</p>
+      <p className="sm-section-label">3 · How a check runs</p>
       <div className="sm-pipe-track">
         {PIPE_STAGES.map((s, i) => {
           const lit = i === activePipe || hasDecision;
@@ -43,8 +43,7 @@ export function SortingMachineStages({ activePipe, hasDecision }: Props) {
         })}
       </div>
       <p className="sm-law">
-        <span className="sm-law-chip">Gather → Sort</span> ·{" "}
-        <span className="sm-law-chip">C ≤ S</span> per receipt line → GRANT / REFUSE
+        Gather evidence → compare each line (claimed ≤ receipt) → GRANT or REFUSE
       </p>
     </section>
   );

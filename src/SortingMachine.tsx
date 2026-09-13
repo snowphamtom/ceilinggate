@@ -230,7 +230,7 @@ export default function SortingMachine() {
       <header className="sm-hero sm-enter sm-enter-1">
         <div className="sm-hero-rail" aria-hidden />
         <div className="sm-hero-top">
-          <p className="sm-eyebrow">Claim Check · forensic evidence desk</p>
+          <p className="sm-eyebrow">Claim Check · claim vs receipt</p>
           <div className="sm-hero-meta">
             <LiveForUptime />
             <span className="sm-live-pill" title="Live">
@@ -240,12 +240,11 @@ export default function SortingMachine() {
           </div>
         </div>
         <h1>Claim Check</h1>
-        <p className="sm-desk-kicker">Claim vs receipt · line ledger</p>
+        <p className="sm-desk-kicker">Compare the claim to the receipt — line by line</p>
         <p className="sm-lede">
-          Sort each money claim against its receipt. Claimed ≤ On receipt →{" "}
-          <strong>GRANT</strong>. Over by dollars → <strong>REFUSE</strong>.{" "}
-          <span className="sm-law-chip">C ≤ S</span> ·{" "}
-          <span className="sm-law-chip">S_H</span>
+          Claimed amount at or under the receipt → <strong>GRANT</strong>. Over by
+          dollars → <strong>REFUSE</strong>. Rule:{" "}
+          <span className="sm-law-chip">C ≤ S</span>
         </p>
         <SponsorChips
           lit={{
@@ -294,7 +293,7 @@ export default function SortingMachine() {
       </div>
 
       <footer className="sm-foot">
-        <span>C ≤ S · Claim Check · residual honesty desk</span>
+        <span>C ≤ S · Claim Check · claim vs receipt</span>
         <a
           href="https://github.com/snowphamtom/ceilinggate"
           target="_blank"

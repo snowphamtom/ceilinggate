@@ -8,8 +8,8 @@ export function KlausOrganizer({ lane }: Props) {
   return (
     <section className="sm-panel sm-klaus-lean sm-glass" aria-label="Klaus strip">
       <div className="sm-panel-head">
-        <h2>Klaus</h2>
-        <span className="sm-chip">Organizer</span>
+        <h2>Klaus organizer</h2>
+        <span className="sm-chip">Live holds</span>
       </div>
       <div className="sm-klaus-counts">
         <div>

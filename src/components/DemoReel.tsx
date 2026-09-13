@@ -9,7 +9,7 @@ export function DemoReel() {
   return (
     <section className="sm-panel sm-demo-reel sm-glass" aria-label="Demo">
       <div className="sm-panel-head">
-        <h2>Demo</h2>
+        <h2>Watch the demo</h2>
         <span className="sm-chip">YouTube</span>
       </div>
       <div className="sm-demo-frame">
@@ -31,7 +31,7 @@ export function DemoReel() {
           Download MP4
         </a>
         <span>·</span>
-        <a href="/watch.html">Watch (HLS)</a>
+        <a href="/watch.html">On-site player</a>
       </p>
     </section>
   );

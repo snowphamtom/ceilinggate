@@ -2903,3 +2903,224 @@ body {
     flex-wrap: wrap;
   }
 }
+
+
+/* =====================================================================
+   Y0 MASTERPIECE DENSIFY — 1280×800 first paint
+   KEEP cinematic glow/stamp theater. Pack GRANT+S_H+Check ID+caliper
+   into scrollY0. Ledger / pipeline / DemoReel stay below.
+   ===================================================================== */
+.sm-shell.sm-masterpiece {
+  padding: 0.85rem 1.1rem 3.5rem;
+  max-width: 1180px;
+}
+.sm-shell.sm-masterpiece .sm-hero {
+  margin-bottom: 0.55rem;
+  padding: 0.7rem 1rem 0.65rem;
+  border-radius: 14px;
+}
+.sm-shell.sm-masterpiece .sm-hero h1 {
+  margin: 0.1rem 0 0.05rem;
+  font-size: clamp(1.55rem, 3.2vw, 2.15rem);
+  line-height: 1;
+  filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.35));
+}
+.sm-shell.sm-masterpiece .sm-eyebrow {
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+}
+.sm-shell.sm-masterpiece .sm-desk-kicker {
+  font-size: 0.92rem;
+  margin: 0.05rem 0 0.15rem;
+}
+.sm-shell.sm-masterpiece .sm-lede {
+  font-size: 0.82rem;
+  line-height: 1.35;
+  margin: 0.15rem 0 0;
+  max-width: 52rem;
+}
+.sm-shell.sm-masterpiece .sm-hero-meta {
+  gap: 0.3rem 0.4rem;
+}
+.sm-shell.sm-masterpiece .sm-uptime,
+.sm-shell.sm-masterpiece .sm-live-pill {
+  font-size: 0.64rem;
+  padding: 0.16rem 0.42rem;
+}
+.sm-shell.sm-masterpiece .sm-sponsor-kicker {
+  display: none;
+}
+.sm-shell.sm-masterpiece .sm-sponsors {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0.3rem;
+  margin-top: 0.4rem;
+  overflow-x: auto;
+}
+.sm-shell.sm-masterpiece .sm-sponsors li {
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 0.28rem 0.45rem;
+  border-radius: 8px;
+}
+.sm-shell.sm-masterpiece .sm-sponsors strong {
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+}
+.sm-shell.sm-masterpiece .sm-sponsors span {
+  display: block;
+  font-size: 0.62rem;
+  line-height: 1.25;
+  opacity: 0.85;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Proof fold — tight cinematic plate */
+.sm-shell.sm-masterpiece .sm-proof-fold {
+  margin: 0 0 0.55rem;
+}
+.sm-shell.sm-masterpiece .sm-proof-fold .sm-claim {
+  padding: 0.7rem 0.9rem 0.75rem;
+  border-radius: 14px;
+}
+.sm-shell.sm-masterpiece .sm-proof-fold .sm-panel-head {
+  margin-bottom: 0.2rem;
+}
+.sm-shell.sm-masterpiece .sm-proof-fold .sm-panel-head h2 {
+  font-size: clamp(1rem, 1.8vw, 1.2rem);
+}
+.sm-shell.sm-masterpiece .sm-proof-fold .sm-section-label {
+  font-size: 0.58rem;
+}
+.sm-shell.sm-masterpiece .sm-proof-fold .sm-subj {
+  margin: 0.1rem 0;
+  font-size: 0.78rem;
+}
+.sm-shell.sm-masterpiece .sm-proof-fold .sm-rival-hint {
+  margin: 0.08rem 0 0.2rem;
+  font-size: 0.68rem;
+}
+.sm-shell.sm-masterpiece .sm-proof-fold .sm-demo-path {
+  margin: 0 0 0.35rem;
+  font-size: 0.78rem;
+  line-height: 1.3;
+}
+.sm-shell.sm-masterpiece .sm-proof-fold .sm-demo-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-bottom: 0.35rem;
+}
+.sm-shell.sm-masterpiece .sm-proof-fold .sm-btn {
+  min-height: 2.55rem;
+  padding: 0.45rem 0.85rem;
+  font-size: 0.74rem;
+  border-radius: 9px;
+}
+
+/* Stamp theater densify — KEEP glow */
+.sm-shell.sm-masterpiece .sm-proof-theater {
+  margin: 0.35rem 0 0.35rem;
+  padding: 0.65rem 0.8rem 0.55rem;
+  border-radius: 12px;
+}
+.sm-shell.sm-masterpiece .sm-verdict-stamp {
+  min-height: 2.55rem;
+  padding: 0.28rem 0.85rem;
+  font-size: clamp(1.55rem, 3.2vw, 2.05rem);
+  letter-spacing: 0.08em;
+}
+.sm-shell.sm-masterpiece .sm-seal {
+  margin: 0.25rem 0 0.2rem;
+  font-size: 0.78rem;
+  padding: 0.2rem 0.45rem;
+}
+.sm-shell.sm-masterpiece .sm-proof-readable {
+  margin: 0.2rem 0 0.35rem;
+  padding: 0.45rem 0.65rem;
+  border-radius: 10px;
+  gap: 0.15rem 0.65rem;
+}
+.sm-shell.sm-masterpiece .sm-proof-readable .sm-proof-kicker {
+  font-size: 0.56rem;
+}
+.sm-shell.sm-masterpiece .sm-proof-id {
+  font-size: clamp(0.92rem, 1.8vw, 1.1rem);
+}
+.sm-shell.sm-masterpiece .sm-proof-meta {
+  font-size: 0.62rem;
+}
+.sm-shell.sm-masterpiece .sm-caliper-jewel {
+  margin: 0.2rem 0 0.25rem;
+  padding: 0.45rem 0.6rem;
+  border-radius: 10px;
+}
+.sm-shell.sm-masterpiece .sm-caliper-head {
+  margin-bottom: 0.25rem;
+  font-size: 0.6rem;
+}
+.sm-shell.sm-masterpiece .sm-caliper li {
+  margin-bottom: 0.22rem;
+  font-size: 0.66rem;
+  gap: 0.35rem;
+}
+.sm-shell.sm-masterpiece .sm-caliper-track {
+  height: 0.5rem;
+}
+
+/* Defer heavy chrome past Y0 critical quartet */
+.sm-shell.sm-masterpiece .sm-proof-fold .sm-oneline,
+.sm-shell.sm-masterpiece .sm-proof-fold .sm-mask,
+.sm-shell.sm-masterpiece .sm-proof-fold .sm-verdict > ul,
+.sm-shell.sm-masterpiece .sm-proof-fold .sm-verdict > p:not(.sm-seal):not(.sm-oneline):not(.sm-mask) {
+  /* keep in DOM; tighten */
+  margin-top: 0.25rem;
+  font-size: 0.78rem;
+}
+.sm-shell.sm-masterpiece .sm-proof-fold .sm-oneline {
+  margin: 0.25rem 0 0.15rem;
+  padding: 0.4rem 0.55rem;
+  font-size: 0.78rem;
+}
+.sm-shell.sm-masterpiece .sm-proof-fold .sm-ledger-wrap {
+  margin-top: 0.45rem;
+  padding: 0.55rem 0.65rem 0.6rem;
+}
+.sm-shell.sm-masterpiece .sm-pipeline {
+  margin-bottom: 0.55rem;
+  padding: 0.45rem 0.55rem !important;
+}
+.sm-shell.sm-masterpiece .sm-pipe-stage {
+  padding: 0.3rem 0.2rem !important;
+}
+.sm-shell.sm-masterpiece .sm-law {
+  margin: 0.2rem 0 0;
+  font-size: 0.68rem;
+}
+
+/* Hard fold: at short viewports, hide ledger/oneline/mask until scroll —
+   stamp + seal + Check ID + caliper remain */
+@media (max-height: 860px) and (min-width: 900px) {
+  /* Extra pack on short desktops — content stays in DOM for scroll */
+  .sm-shell.sm-masterpiece .sm-proof-fold .sm-demo-path { font-size: 0.72rem; }
+  .sm-shell.sm-masterpiece .sm-proof-fold .sm-rival-hint { display: none; }
+  .sm-shell.sm-masterpiece .sm-sponsors span { display: none; }
+  .sm-shell.sm-masterpiece .sm-hero { margin-bottom: 0.4rem; padding: 0.55rem 0.85rem 0.5rem; }
+  .sm-shell.sm-masterpiece .sm-desk-kicker { display: none; }
+  .sm-shell.sm-masterpiece .sm-hero-rail { opacity: 0.7; }
+  .sm-shell.sm-masterpiece .sm-atm-glow-c { opacity: 0.35; }
+}
+
+/* Bigger hit targets without blowing Y0 */
+.sm-shell.sm-masterpiece .sm-btn.grant,
+.sm-shell.sm-masterpiece .sm-btn.refuse,
+.sm-shell.sm-masterpiece .sm-btn.breath {
+  min-width: 8.5rem;
+}
+.sm-shell.sm-masterpiece .sm-cell {
+  min-height: 2.2rem;
+  font-size: 0.9rem;
+  padding: 0.35rem 0.45rem;
+}

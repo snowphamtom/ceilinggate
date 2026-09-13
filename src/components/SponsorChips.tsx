@@ -12,15 +12,15 @@ export function SponsorChips({ lit = {} }: { lit?: Lit }) {
       <ul className="sm-sponsors" aria-label="Sponsors on the live path">
         <li className={lit.firecrawl ? "is-lit" : undefined} data-lit={lit.firecrawl ? "1" : "0"}>
           <strong>Firecrawl</strong>
-          <span>Scrape public receipt URL → On receipt (S)</span>
+          <span>Reads the public receipt page</span>
         </li>
         <li className={lit.agentmail ? "is-lit" : undefined} data-lit={lit.agentmail ? "1" : "0"}>
           <strong>AgentMail</strong>
-          <span>Claim arrives in inbox → webhook</span>
+          <span>Inbox for emailed claims</span>
         </li>
         <li className={lit.openai ? "is-lit" : undefined} data-lit={lit.openai ? "1" : "0"}>
           <strong>OpenAI</strong>
-          <span>Summary line after the numbers (does not decide)</span>
+          <span>Writes a summary — does not decide</span>
         </li>
       </ul>
     </div>

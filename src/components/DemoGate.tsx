@@ -103,8 +103,8 @@ export function DemoGate({
       <div className="sm-panel-edge" aria-hidden />
       <div className="sm-panel-head">
         <div>
-          <p className="sm-section-label">Evidence · verdict theater</p>
-          <h2>Claim Check</h2>
+          <p className="sm-section-label">1 · Claim → check → verdict</p>
+          <h2>Try a check</h2>
         </div>
         <span className={"sm-chip " + (ok ? "grant" : "refuse")}>
           {ok ? "GRANT" : "REFUSE"}
@@ -112,32 +112,33 @@ export function DemoGate({
       </div>
       <p className="sm-subj">{subject}</p>
       <p className="sm-rival-hint">
-        Line ledger · Claimed (C) · On receipt (S) · Status · S_H
+        Each line: claimed amount vs what is on the receipt
       </p>
       <p className="sm-demo-path">
-        Try a <strong>REFUSE</strong> example (amount over receipt), then a{" "}
-        <strong>GRANT</strong> example (under or equal). A short summary follows
-        the numbers.
+        Press <strong>Show REFUSE</strong> (over the receipt), then{" "}
+        <strong>Show GRANT</strong> (at or under). The stamp, seal, Check ID, and
+        bars update live.
       </p>
-      <div className="sm-demo-row">
+      <div className="sm-demo-row" role="group" aria-label="Demo controls">
         {onOneBreath ? (
           <button
             type="button"
             className="sm-btn breath"
             onClick={onOneBreath}
             disabled={breathBusy}
+            title="Run REFUSE then GRANT in one breath"
           >
-            {breathBusy ? "Running…" : "Show REFUSE then GRANT"}
+            {breathBusy ? "Running…" : "Play both"}
           </button>
         ) : null}
         <button type="button" className="sm-btn refuse" onClick={onDemoRefuse}>
-          Demo REFUSE
+          1 · Show REFUSE
         </button>
         <button type="button" className="sm-btn grant" onClick={onDemoGrant}>
-          Demo GRANT
+          2 · Show GRANT
         </button>
         <button type="button" className="sm-btn ghost" onClick={onResort}>
-          Re-sort C ≤ S
+          Re-check lines
         </button>
       </div>
 
@@ -146,7 +147,7 @@ export function DemoGate({
           <div>
             <strong>Waiting for a result</strong>
             <p className="sm-await-hint">
-              Press Demo REFUSE or Demo GRANT to run the check
+              Press Show REFUSE or Show GRANT to run the check
             </p>
           </div>
         </div>
@@ -225,23 +226,24 @@ export function DemoGate({
             <p>Every line passes C ≤ S.</p>
           )}
           <p className="sm-mask">
-            mask {decision.mask}
             {decision.failedIndices.length
-              ? ` · fail [${decision.failedIndices.join(",")}]`
-              : " · all lines OK"}
+              ? `Over on line${decision.failedIndices.length > 1 ? "s" : ""} ${decision.failedIndices
+                  .map((i) => i + 1)
+                  .join(", ")}`
+              : "All lines clear"}
           </p>
         </div>
       )}
 
       <div className="sm-ledger-wrap">
-      <p className="sm-section-label sm-ledger-label">Line ledger · claim vs receipt</p>
+      <p className="sm-section-label sm-ledger-label">2 · Edit the line amounts</p>
       <table className="sm-ledger" aria-label="Line ledger">
         <thead>
           <tr>
             <th>LINE</th>
-            <th>CLAIMED (C)</th>
-            <th>ON RECEIPT (S)</th>
-            <th>Δ</th>
+            <th>CLAIMED</th>
+            <th>ON RECEIPT</th>
+            <th>DIFF</th>
             <th>STATUS</th>
           </tr>
         </thead>
