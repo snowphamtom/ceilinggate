@@ -1,7 +1,7 @@
-# Lesson card — 750cc6d
+# Lesson card — 836f213
 
 1. What changed
-ui: LENS win-polish densify optic (KEEP-safe)
+ui: fold punch — Demo REFUSE/GRANT + ledger stamp above fold; video/Klaus below
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
