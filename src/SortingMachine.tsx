@@ -20,6 +20,7 @@ import { DemoReel } from "./components/DemoReel";
 import { LiveFeeds } from "./components/LiveFeeds";
 import { SortingMachineStages } from "./components/SortingMachine";
 import { CascadeLane } from "./components/CascadeLane";
+import { useLastResidual } from "./lib/gr21Live";
 import "./sorting-machine.css";
 
 const LINE_NAMES = (demo.lineItems as string[]) ?? [
@@ -70,6 +71,7 @@ const hasConvex = Boolean(import.meta.env.VITE_CONVEX_URL);
 
 export default function SortingMachine() {
   const { lane, tick, loading } = useOrganizerLane();
+  const { live: lastResidual } = useLastResidual();
   const liveRows = useQuery(
     api.claims.listDecisions,
     hasConvex ? { limit: 8 } : "skip",
@@ -250,6 +252,7 @@ export default function SortingMachine() {
           onSourceEdit={onSourceEdit}
           fails={fails}
           showAwait={decision == null}
+          liveResidual={lastResidual}
         />
 
         <CascadeLane />
@@ -296,7 +299,7 @@ export default function SortingMachine() {
 
       <footer className="sm-foot">
         <span>GATHER→SORT · CASCADE · NIX/DRIFT · Klaus feed · C≤S</span>
-        <span>Evidence: fleet-gerbil-682 · Site: quirky-rhinoceros-204</span>
+        <span>Evidence: fleet-gerbil-682 gr21:getLastResidual · Site: quirky</span>
         <a
           href="https://github.com/snowphamtom/ceilinggate"
           target="_blank"

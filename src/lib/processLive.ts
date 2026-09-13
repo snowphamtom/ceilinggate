@@ -17,6 +17,10 @@ export type LiveProcess = {
   pendingHoldIds: string[];
   lastSyncedAt: number;
   stampLabel: string | null;
+  /** GR-21 Magpie residual (fleet-gerbil getLive) */
+  residualCommitment?: string | null;
+  historicAnchor?: string | null;
+  residualVariance?: number | null;
   detail: Record<string, unknown> | null;
 };
 
@@ -59,14 +63,16 @@ export function formatSyncedAgo(ts: number | null | undefined, now: number): str
 export function formatCt(ts: number | null | undefined): string {
   if (!ts) return "—";
   try {
-    return new Intl.DateTimeFormat("en-US", {
-      timeZone: "America/Chicago",
-      month: "short",
-      day: "numeric",
-      hour: "numeric",
-      minute: "2-digit",
-      hour12: true,
-    }).format(new Date(ts)) + " CT";
+    return (
+      new Intl.DateTimeFormat("en-US", {
+        timeZone: "America/Chicago",
+        month: "short",
+        day: "numeric",
+        hour: "numeric",
+        minute: "2-digit",
+        hour12: true,
+      }).format(new Date(ts)) + " CT"
+    );
   } catch {
     return new Date(ts).toISOString();
   }

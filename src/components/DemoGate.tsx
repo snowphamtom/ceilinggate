@@ -1,5 +1,6 @@
 import type { GateDecision } from "../lib/residualGates";
 import { residualCommitment } from "../lib/gr21Residual";
+import type { LastResidual } from "../lib/gr21Live";
 
 export type LineRow = { name: string; claimed: number; source: number };
 
@@ -14,6 +15,8 @@ type Props = {
   onSourceEdit: (idx: number, value: string) => void;
   fails: string[];
   showAwait?: boolean;
+  /** Live Evidence gr21:getLastResidual — prefer over local FNV fuel */
+  liveResidual?: LastResidual | null;
 };
 
 function money(n: number) {
@@ -36,13 +39,30 @@ export function DemoGate({
   onSourceEdit,
   fails,
   showAwait = false,
+  liveResidual = null,
 }: Props) {
   const ok = decision.status === "grant" && decision.mask === 0;
-  const rc = residualCommitment(
+  const local = residualCommitment(
     rows.map((r) => r.claimed),
     rows.map((r) => r.source),
     subject || "ceilinggate-gr21",
   );
+  // Align with Evidence getLastResidual (sha256) when live; local FNV = offline fuel only
+  const commitHex =
+    liveResidual?.residualCommitment ?? local.commit;
+  const historicHex =
+    liveResidual?.historicAnchor ?? local.commit;
+  const commitShort = commitHex.slice(0, 12);
+  const historicShort = historicHex.slice(0, 12);
+  const variance = liveResidual?.variance ?? local.variance;
+  const projector =
+    liveResidual != null
+      ? liveResidual.cLeS
+        ? "CLEAR"
+        : "OVER"
+      : local.projector;
+  const liveLabel = liveResidual ? "fleet-gerbil · getLastResidual" : "local fuel";
+
   return (
     <section className="sm-panel sm-claim" aria-label="Live claim lane">
       <div className="sm-panel-head">
@@ -128,15 +148,30 @@ export function DemoGate({
       ) : (
         <div className={"sm-verdict " + (ok ? "grant" : "refuse")}>
           <div className="sm-verdict-stamp">{ok ? "GRANT" : "REFUSE"}</div>
-          <div className="sm-gr21-stamp" title={rc.commit}>
-            <span className="sm-gr21-kicker">Evidence · GR-21 residual commitment</span>
-            <span className={"sm-gr21-proj " + (rc.projector === "CLEAR" ? "clear" : "over")}>
-              C≤S projector {rc.projector}
+          <div
+            className="sm-gr21-stamp"
+            title={`commit=${commitHex}\nhistoric=${historicHex}`}
+            data-testid="gr21-residual-stamp"
+          >
+            <span className="sm-gr21-kicker">
+              Evidence · GR-21 residual · {liveLabel}
             </span>
-            <code className="sm-gr21-hash">{rc.short}</code>
+            <span
+              className={
+                "sm-gr21-proj " + (projector === "CLEAR" ? "clear" : "over")
+              }
+            >
+              C≤S projector {projector}
+            </span>
+            <code className="sm-gr21-hash">{commitShort}</code>
             <span className="sm-gr21-meta">
-              σ² {rc.variance.toExponential(2)}
-              {rc.overLines ? ` · over×${rc.overLines}` : " · residual 0"}
+              residualCommitment {commitShort}… · historicAnchor {historicShort}…
+              {" · "}σ² {variance.toExponential(2)}
+              {local.overLines && !liveResidual
+                ? ` · over×${local.overLines}`
+                : liveResidual?.cLeS
+                  ? " · residual 0"
+                  : ""}
             </span>
           </div>
           {fails.length ? (
@@ -146,7 +181,10 @@ export function DemoGate({
               ))}
             </ul>
           ) : (
-            <p>Every line clears C ≤ S. Mask 0 · residual commitment binds the projector.</p>
+            <p>
+              Every line clears C ≤ S. Mask 0 · residual commitment binds the
+              projector.
+            </p>
           )}
           <p className="sm-mask">
             mask {decision.mask}
@@ -154,7 +192,9 @@ export function DemoGate({
               ? ` · fail [${decision.failedIndices.join(",")}]`
               : " · all clear"}
             {" · commit "}
-            <code>{rc.short}</code>
+            <code>{commitShort}</code>
+            {" · anchor "}
+            <code>{historicShort}</code>
           </p>
         </div>
       )}
