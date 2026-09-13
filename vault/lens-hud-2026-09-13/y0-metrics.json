@@ -1,0 +1,65 @@
+{
+  "stamp": {
+    "top": 271,
+    "bottom": 618,
+    "aboveFold": true,
+    "color": "rgb(232, 230, 248)",
+    "bg": "rgba(0, 0, 0, 0)",
+    "border": "rgba(46, 207, 143, 0.5)"
+  },
+  "seal": {
+    "top": 303,
+    "bottom": 326,
+    "aboveFold": true,
+    "color": "rgb(200, 196, 232)",
+    "bg": "rgba(8, 6, 26, 0.65)",
+    "border": "rgba(77, 232, 255, 0.35)"
+  },
+  "checkId": {
+    "top": 345,
+    "bottom": 415,
+    "aboveFold": true,
+    "color": "rgb(232, 230, 248)",
+    "bg": "rgba(8, 6, 26, 0.8)",
+    "border": "rgba(77, 232, 255, 0.55)"
+  },
+  "caliper": {
+    "top": 419,
+    "bottom": 523,
+    "aboveFold": true,
+    "color": "rgb(232, 230, 248)",
+    "bg": "rgba(8, 6, 26, 0.6)",
+    "border": "rgba(168, 85, 247, 0.4)"
+  },
+  "grantBtn": {
+    "top": 228,
+    "bottom": 266,
+    "aboveFold": true,
+    "color": "rgb(200, 247, 222)",
+    "bg": "rgba(0, 0, 0, 0)",
+    "border": "rgba(46, 207, 143, 0.65)"
+  },
+  "body": {
+    "top": 0,
+    "bottom": 1583,
+    "aboveFold": false,
+    "color": "rgb(232, 230, 248)",
+    "bg": "rgb(8, 6, 26)",
+    "border": "rgb(232, 230, 248)"
+  },
+  "brand": "Claim Check",
+  "disclosures": [
+    "pipeline",
+    "sponsors",
+    "klaus"
+  ],
+  "shellClass": "sm-shell sm-scratch sm-masterpiece sm-hud",
+  "ribbon": true,
+  "liveFor": true,
+  "yt": "https://www.youtube.com/embed/2KsMO90LpdE",
+  "faceBan": {
+    "hasGR21": false,
+    "hasHashPlasma": false,
+    "hasCascadeLane": false
+  }
+}

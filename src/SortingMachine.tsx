@@ -2,7 +2,8 @@
  * Claim Check — claim-vs-receipt face.
  * KEEP: hero + stages + DemoReel + C≤S Demo + Check ID + intake + Klaus.
  * STRIP: Cascade roster, Drive buckets, forge costume.
- * Calm IA: Claim → edit lines → check → verdict. Dropdowns for secondary chrome.
+ * HUD IA: Claim → edit lines → check → verdict. Dropdowns for secondary chrome.
+ * Visual: violet-navy void + cyan/magenta glow (FUI refs).
  */
 import { useCallback, useEffect, useMemo, useState } from "react";
 import demo from "./data/demo.json";
@@ -218,7 +219,7 @@ export default function SortingMachine() {
 
   return (
     <div
-      className="sm-shell sm-scratch sm-masterpiece sm-calm"
+      className="sm-shell sm-scratch sm-masterpiece sm-hud"
       data-testid="ceilinggate-sorting-machine"
     >
       <div className="sm-atmosphere" aria-hidden>
@@ -226,8 +227,54 @@ export default function SortingMachine() {
         <div className="sm-atm-grid" />
         <div className="sm-atm-glow sm-atm-glow-a" />
         <div className="sm-atm-glow sm-atm-glow-b" />
+        <div className="sm-atm-glow sm-atm-glow-c" />
       </div>
       <header className="sm-hero sm-enter sm-enter-1">
+        <div className="sm-hud-ribbon" aria-hidden>
+          <svg viewBox="0 0 1200 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="hudRibbon" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#ff4fd8" stopOpacity="0" />
+                <stop offset="18%" stopColor="#ff4fd8" stopOpacity="0.55" />
+                <stop offset="48%" stopColor="#c4a0ff" stopOpacity="0.9" />
+                <stop offset="72%" stopColor="#4de8ff" stopOpacity="0.7" />
+                <stop offset="100%" stopColor="#4de8ff" stopOpacity="0" />
+              </linearGradient>
+              <filter id="hudBloom" x="-20%" y="-80%" width="140%" height="260%">
+                <feGaussianBlur stdDeviation="3.5" result="b" />
+                <feMerge>
+                  <feMergeNode in="b" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+            </defs>
+            <path
+              d="M0 48 C 140 18, 220 62, 360 40 S 560 12, 700 38 S 920 68, 1080 28 S 1160 20, 1200 34"
+              fill="none"
+              stroke="url(#hudRibbon)"
+              strokeWidth="3.2"
+              filter="url(#hudBloom)"
+            />
+            <path
+              d="M0 54 C 160 28, 240 70, 380 48 S 580 20, 720 46 S 940 74, 1100 36 S 1165 26, 1200 40"
+              fill="none"
+              stroke="#4de8ff"
+              strokeOpacity="0.28"
+              strokeWidth="1.2"
+            />
+            <g fill="#f0ecff" opacity="0.75">
+              <circle cx="180" cy="36" r="1.4" />
+              <circle cx="310" cy="44" r="1.1" />
+              <circle cx="470" cy="28" r="1.5" />
+              <circle cx="640" cy="42" r="1.2" />
+              <circle cx="820" cy="52" r="1.3" />
+              <circle cx="980" cy="30" r="1.1" />
+              <circle cx="250" cy="58" r="0.9" fill="#ff4fd8" />
+              <circle cx="560" cy="58" r="0.9" fill="#4de8ff" />
+              <circle cx="890" cy="22" r="0.9" fill="#ff4fd8" />
+            </g>
+          </svg>
+        </div>
         <div className="sm-hero-rail" aria-hidden />
         <div className="sm-hero-top">
           <p className="sm-eyebrow">Claim Check · claim vs receipt</p>
