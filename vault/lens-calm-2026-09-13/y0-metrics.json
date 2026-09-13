@@ -1,0 +1,56 @@
+{
+  "stamp": {
+    "top": 274,
+    "bottom": 336,
+    "aboveFold": true,
+    "color": "rgb(214, 239, 228)",
+    "bg": "rgba(0, 0, 0, 0)",
+    "border": "rgba(127, 175, 160, 0.55)"
+  },
+  "seal": {
+    "top": 303,
+    "bottom": 326,
+    "aboveFold": true,
+    "color": "rgb(197, 208, 198)",
+    "bg": "rgba(18, 22, 20, 0.55)",
+    "border": "rgba(150, 160, 148, 0.22)"
+  },
+  "checkId": {
+    "top": 345,
+    "bottom": 415,
+    "aboveFold": true,
+    "color": "rgb(243, 239, 230)",
+    "bg": "rgba(18, 22, 20, 0.75)",
+    "border": "rgba(95, 143, 120, 0.4)"
+  },
+  "caliper": {
+    "top": 419,
+    "bottom": 523,
+    "aboveFold": true,
+    "color": "rgb(243, 239, 230)",
+    "bg": "rgba(18, 22, 20, 0.55)",
+    "border": "rgba(150, 160, 148, 0.24)"
+  },
+  "grantBtn": {
+    "top": 228,
+    "bottom": 266,
+    "aboveFold": true,
+    "color": "rgb(200, 228, 214)",
+    "bg": "rgba(0, 0, 0, 0)",
+    "border": "rgba(95, 143, 120, 0.55)"
+  },
+  "body": {
+    "top": 0,
+    "bottom": 1583,
+    "aboveFold": false,
+    "color": "rgb(243, 239, 230)",
+    "bg": "rgb(18, 22, 20)",
+    "border": "rgb(243, 239, 230)"
+  },
+  "disclosures": [
+    "pipeline",
+    "sponsors",
+    "klaus"
+  ],
+  "brand": "Claim Check"
+}

@@ -103,7 +103,7 @@ export function DemoGate({
       <div className="sm-panel-edge" aria-hidden />
       <div className="sm-panel-head">
         <div>
-          <p className="sm-section-label">1 · Claim → check → verdict</p>
+          <p className="sm-section-label">Claim → edit → check → verdict</p>
           <h2>Try a check</h2>
         </div>
         <span className={"sm-chip " + (ok ? "grant" : "refuse")}>
@@ -236,7 +236,7 @@ export function DemoGate({
       )}
 
       <div className="sm-ledger-wrap">
-      <p className="sm-section-label sm-ledger-label">2 · Edit the line amounts</p>
+      <p className="sm-section-label sm-ledger-label">Edit the line amounts</p>
       <table className="sm-ledger" aria-label="Line ledger">
         <thead>
           <tr>

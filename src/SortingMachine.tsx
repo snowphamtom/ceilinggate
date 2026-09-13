@@ -2,6 +2,7 @@
  * Claim Check — claim-vs-receipt face.
  * KEEP: hero + stages + DemoReel + C≤S Demo + Check ID + intake + Klaus.
  * STRIP: Cascade roster, Drive buckets, forge costume.
+ * Calm IA: Claim → edit lines → check → verdict. Dropdowns for secondary chrome.
  */
 import { useCallback, useEffect, useMemo, useState } from "react";
 import demo from "./data/demo.json";
@@ -13,6 +14,7 @@ import { DemoReel } from "./components/DemoReel";
 import { LiveFeeds } from "./components/LiveFeeds";
 import { SponsorChips } from "./components/SponsorChips";
 import { SortingMachineStages } from "./components/SortingMachine";
+import { CalmDisclosure } from "./components/CalmDisclosure";
 import { useLastResidual } from "./lib/gr21Live";
 import "./sorting-machine.css";
 
@@ -157,7 +159,6 @@ export default function SortingMachine() {
 
   const demoGrant = useCallback(() => {
     runSort(rowsFromFixture(GRANT_FIXTURE), GRANT_FIXTURE.email.subject);
-    // Demo fixture S numbers = receipt scrape stand-in; oneLine after numbers
     setPathLit((p) => ({ ...p, firecrawl: true, openai: true }));
   }, [runSort]);
 
@@ -217,7 +218,7 @@ export default function SortingMachine() {
 
   return (
     <div
-      className="sm-shell sm-scratch sm-masterpiece"
+      className="sm-shell sm-scratch sm-masterpiece sm-calm"
       data-testid="ceilinggate-sorting-machine"
     >
       <div className="sm-atmosphere" aria-hidden>
@@ -225,7 +226,6 @@ export default function SortingMachine() {
         <div className="sm-atm-grid" />
         <div className="sm-atm-glow sm-atm-glow-a" />
         <div className="sm-atm-glow sm-atm-glow-b" />
-        <div className="sm-atm-glow sm-atm-glow-c" />
       </div>
       <header className="sm-hero sm-enter sm-enter-1">
         <div className="sm-hero-rail" aria-hidden />
@@ -246,13 +246,12 @@ export default function SortingMachine() {
           dollars → <strong>REFUSE</strong>. Rule:{" "}
           <span className="sm-law-chip">C ≤ S</span>
         </p>
-        <SponsorChips
-          lit={{
-            firecrawl: pathLit.firecrawl,
-            agentmail: agentmailLit,
-            openai: pathLit.openai && decision != null,
-          }}
-        />
+        <ol className="sm-path" aria-label="One clear path">
+          <li><span>1</span> Claim</li>
+          <li><span>2</span> Edit lines</li>
+          <li><span>3</span> Check</li>
+          <li><span>4</span> Verdict</li>
+        </ol>
       </header>
 
       {/* Y0 proof: GRANT + S_H + check id + caliper before pipeline */}
@@ -277,18 +276,44 @@ export default function SortingMachine() {
         />
       </div>
 
-      <div className="sm-enter sm-enter-3">
-        <SortingMachineStages
-          activePipe={activePipe}
-          hasDecision={decision != null}
-        />
+      <div className="sm-secondary sm-enter sm-enter-3">
+        <CalmDisclosure
+          id="pipeline"
+          title="How a check runs"
+          summary="Gather → triage → evidence → sort → result"
+        >
+          <SortingMachineStages
+            activePipe={activePipe}
+            hasDecision={decision != null}
+          />
+        </CalmDisclosure>
+
+        <CalmDisclosure
+          id="sponsors"
+          title="Sponsors on the live path"
+          summary="Firecrawl · AgentMail · OpenAI"
+        >
+          <SponsorChips
+            lit={{
+              firecrawl: pathLit.firecrawl,
+              agentmail: agentmailLit,
+              openai: pathLit.openai && decision != null,
+            }}
+          />
+        </CalmDisclosure>
       </div>
 
       <div className="sm-below-fold sm-grid sm-grid-lean sm-enter sm-enter-4">
         <DemoReel />
         <div className="sm-side">
           <LiveFeeds />
-          <KlausOrganizer lane={lane} />
+          <CalmDisclosure
+            id="klaus"
+            title="Klaus organizer"
+            summary="Live holds & folder counts"
+          >
+            <KlausOrganizer lane={lane} />
+          </CalmDisclosure>
         </div>
       </div>
 
