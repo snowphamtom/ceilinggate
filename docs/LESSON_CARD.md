@@ -1,7 +1,7 @@
-# Lesson card — 836f213
+# Lesson card — ca9e46a
 
 1. What changed
-ui: fold punch — Demo REFUSE/GRANT + ledger stamp above fold; video/Klaus below
+docs+site: full compliance sweep — ceilinggate-1 paths, REFUSE→GRANT judge pack, drop stale 20260905 poster
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
