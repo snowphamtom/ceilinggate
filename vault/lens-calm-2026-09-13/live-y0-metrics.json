@@ -1,0 +1,40 @@
+{
+  "brand": "Claim Check",
+  "stamp": {
+    "top": 274,
+    "bottom": 336,
+    "aboveFold": true
+  },
+  "seal": {
+    "top": 303,
+    "bottom": 326,
+    "aboveFold": true
+  },
+  "checkId": {
+    "top": 345,
+    "bottom": 415,
+    "aboveFold": true
+  },
+  "caliper": {
+    "top": 419,
+    "bottom": 523,
+    "aboveFold": true
+  },
+  "disclosures": [
+    {
+      "id": "pipeline",
+      "open": false
+    },
+    {
+      "id": "sponsors",
+      "open": false
+    },
+    {
+      "id": "klaus",
+      "open": false
+    }
+  ],
+  "cascade": false,
+  "shell": "sm-shell sm-scratch sm-masterpiece sm-calm",
+  "liveFor": "Live for6d 03h 16m 14s"
+}
