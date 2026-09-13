@@ -1,7 +1,7 @@
-# Lesson card — ae45a05
+# Lesson card — f16d7b8
 
 1. What changed
-ui: GR-21 residual commitment on Evidence/Verdict stamps
+ui: stamp GRANT/REFUSE with fleet-gerbil getLastResidual
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
