@@ -72,6 +72,13 @@ http.route({
   }),
 });
 
+function contentTypeFor(path: string, stored: string) {
+  if (path.endsWith(".m3u8")) return "application/vnd.apple.mpegurl";
+  if (path.endsWith(".m4s")) return "video/iso.segment";
+  if (path.endsWith(".mp4")) return "video/mp4";
+  return stored || "application/octet-stream";
+}
+
 async function serveAsset(ctx: any, path: string) {
   let asset = await ctx.runQuery(api.site.getAsset, { path });
   if (!asset && !path.includes(".")) {
@@ -88,10 +95,12 @@ async function serveAsset(ctx: any, path: string) {
   return new Response(body, {
     status: 200,
     headers: {
-      "content-type": asset.contentType,
+      "content-type": contentTypeFor(path, asset.contentType),
       "cache-control": path.startsWith("/assets/")
         ? "public, max-age=31536000, immutable"
-        : "public, max-age=60",
+        : path.startsWith("/hls/")
+          ? "public, max-age=300"
+          : "public, max-age=60",
     },
   });
 }
@@ -100,6 +109,21 @@ http.route({
   path: "/",
   method: "GET",
   handler: httpAction(async (ctx) => serveAsset(ctx, "/index.html")),
+});
+
+http.route({
+  path: "/watch.html",
+  method: "GET",
+  handler: httpAction(async (ctx) => serveAsset(ctx, "/watch.html")),
+});
+
+http.route({
+  pathPrefix: "/hls/",
+  method: "GET",
+  handler: httpAction(async (ctx, req) => {
+    const path = new URL(req.url).pathname;
+    return serveAsset(ctx, path);
+  }),
 });
 
 http.route({
