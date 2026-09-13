@@ -1,7 +1,7 @@
-# Lesson card — 125b027
+# Lesson card — de4ebdf
 
 1. What changed
-ui: Live-for uptime + receipt/ledger desk chrome on Claim Check
+ui: cinematic masterpiece overhaul of Claim Check face
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
