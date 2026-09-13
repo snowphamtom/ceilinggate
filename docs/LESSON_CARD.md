@@ -1,7 +1,7 @@
-# Lesson card — 11f2ebb
+# Lesson card — 18db7c8
 
 1. What changed
-ui: PERFECT+STRIP root — money sorter only
+ui: densify lean KEEP face from LENS strip-deltas rev b
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
