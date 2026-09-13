@@ -1,7 +1,7 @@
-# Lesson card — 655aa0f
+# Lesson card — 7c6994c
 
 1. What changed
-ui: WIN POLISH A–C — 10s hero, REFUSE→GRANT path, sponsor receipts
+docs: WIN POLISH D — hackathon.md Observatorium + lean KEEP + O-ID + REFUSE→GRANT judge path
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
