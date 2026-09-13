@@ -1,7 +1,7 @@
-# Lesson card — 3ea9a5b
+# Lesson card — 7309311
 
 1. What changed
-ui: SHOW OFF 10/10 — residual caliper + stamp slam/hash reveal, one-breath REFUSE→GRANT, sponsor trinity lights, hero aha
+fix: site upload — critical assets first, skip fragile HLS rungs so meta flips
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
