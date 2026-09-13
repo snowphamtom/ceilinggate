@@ -1,7 +1,7 @@
-# Lesson card — ffe602d
+# Lesson card — 0f7653d
 
 1. What changed
-ui: hard Y0 — proof (GRANT+S_H+GR-21 hash+caliper) before pipeline; densify first-breath
+feat: Observatorium additive schema — grokLedger extras, imperatorLearnings+by_confidence, vaultAccessLog
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
