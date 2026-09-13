@@ -1,7 +1,7 @@
-# Lesson card — f16d7b8
+# Lesson card — ecd5dc6
 
 1. What changed
-ui: stamp GRANT/REFUSE with fleet-gerbil getLastResidual
+docs: judge hackathon.md — ceilinggate-1 + SM/GR-21 + YT O-id
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
