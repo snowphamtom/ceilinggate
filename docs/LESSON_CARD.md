@@ -1,7 +1,7 @@
-# Lesson card — ecd5dc6
+# Lesson card — b0a1ab8
 
 1. What changed
-docs: judge hackathon.md — ceilinggate-1 + SM/GR-21 + YT O-id
+fix: prefer-live YT 2KsMO90LpdE + allgas-demo-yt on watch/hls
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
