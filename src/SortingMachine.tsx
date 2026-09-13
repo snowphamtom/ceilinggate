@@ -16,6 +16,7 @@ import {
 } from "./lib/evidenceLive";
 import { KlausOrganizer } from "./components/KlausOrganizer";
 import { DemoGate, type LineRow } from "./components/DemoGate";
+import { DemoReel } from "./components/DemoReel";
 import { LiveFeeds } from "./components/LiveFeeds";
 import { SortingMachineStages } from "./components/SortingMachine";
 import { CascadeLane } from "./components/CascadeLane";
@@ -87,7 +88,6 @@ export default function SortingMachine() {
   const [runCount, setRunCount] = useState(0);
 
   useEffect(() => {
-    // first paint: real GRANT ledger (never empty costume)
     const boot = rowsFromFixture(GRANT_FIXTURE);
     setRows(boot);
     setSubject(GRANT_FIXTURE.email.subject);
@@ -96,7 +96,6 @@ export default function SortingMachine() {
     setRunCount(1);
   }, []);
 
-  // Continuous GATHER→SORT: advance pipe + alternate live sorts
   useEffect(() => {
     let tick = 0;
     const id = window.setInterval(() => {
@@ -226,6 +225,8 @@ export default function SortingMachine() {
         </p>
       </header>
 
+      <DemoReel />
+
       <SortingMachineStages
         activePipe={activePipe}
         hasDecision={decision != null}
@@ -303,6 +304,7 @@ export default function SortingMachine() {
         >
           Repo
         </a>
+        <a href="/watch.html">Demo video</a>
       </footer>
     </div>
   );
