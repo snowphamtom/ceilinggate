@@ -1,7 +1,7 @@
-# Lesson card — 7309311
+# Lesson card — f8bc4d1
 
 1. What changed
-fix: site upload — critical assets first, skip fragile HLS rungs so meta flips
+fix: true HLS ladder on allgas-demo-hls + fresh GRANT poster
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
