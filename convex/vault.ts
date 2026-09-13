@@ -9,12 +9,21 @@ import type { Id } from "./_generated/dataModel";
  * confirms GitHub Actions secret *names* exist.
  */
 
+const ledgerStatus = v.optional(
+  v.union(v.literal("ok"), v.literal("denied"), v.literal("escalated")),
+);
+
 export const insertLedger = internalMutation({
   args: {
     legion: v.string(),
     province: v.string(),
     action: v.string(),
     timestamp: v.number(),
+    actor: v.optional(v.string()),
+    payload: v.optional(v.any()),
+    status: ledgerStatus,
+    ip: v.optional(v.string()),
+    latency_ms: v.optional(v.number()),
   },
   handler: async (ctx, args): Promise<Id<"grokLedger">> => {
     return await ctx.db.insert("grokLedger", {
@@ -22,17 +31,26 @@ export const insertLedger = internalMutation({
       province: args.province,
       action: args.action,
       timestamp: args.timestamp,
+      actor: args.actor,
+      payload: args.payload,
+      status: args.status,
+      ip: args.ip,
+      latency_ms: args.latency_ms,
     });
   },
 });
 
-/** Public alias for manual ledger inserts if needed */
 export const insertLedgerPublic = mutation({
   args: {
     legion: v.string(),
     province: v.string(),
     action: v.string(),
     timestamp: v.number(),
+    actor: v.optional(v.string()),
+    payload: v.optional(v.any()),
+    status: ledgerStatus,
+    ip: v.optional(v.string()),
+    latency_ms: v.optional(v.number()),
   },
   handler: async (ctx, args): Promise<Id<"grokLedger">> => {
     return await ctx.db.insert("grokLedger", {
@@ -40,6 +58,11 @@ export const insertLedgerPublic = mutation({
       province: args.province,
       action: args.action,
       timestamp: args.timestamp,
+      actor: args.actor,
+      payload: args.payload,
+      status: args.status,
+      ip: args.ip,
+      latency_ms: args.latency_ms,
     });
   },
 });
@@ -50,6 +73,11 @@ export const insertLearning = mutation({
     crawl: v.string(),
     grokMoves: v.string(),
     nextEdict: v.string(),
+    source: v.optional(v.id("grokLedger")),
+    pattern: v.optional(v.string()),
+    edict: v.optional(v.string()),
+    confidence: v.optional(v.number()),
+    executed: v.optional(v.boolean()),
   },
   handler: async (ctx, args): Promise<Id<"imperatorLearnings">> => {
     return await ctx.db.insert("imperatorLearnings", {
@@ -57,6 +85,11 @@ export const insertLearning = mutation({
       crawl: args.crawl,
       grokMoves: args.grokMoves,
       nextEdict: args.nextEdict,
+      source: args.source,
+      pattern: args.pattern,
+      edict: args.edict,
+      confidence: args.confidence,
+      executed: args.executed,
     });
   },
 });
@@ -67,6 +100,11 @@ export const insertLearningInternal = internalMutation({
     crawl: v.string(),
     grokMoves: v.string(),
     nextEdict: v.string(),
+    source: v.optional(v.id("grokLedger")),
+    pattern: v.optional(v.string()),
+    edict: v.optional(v.string()),
+    confidence: v.optional(v.number()),
+    executed: v.optional(v.boolean()),
   },
   handler: async (ctx, args): Promise<Id<"imperatorLearnings">> => {
     return await ctx.db.insert("imperatorLearnings", {
@@ -74,6 +112,30 @@ export const insertLearningInternal = internalMutation({
       crawl: args.crawl,
       grokMoves: args.grokMoves,
       nextEdict: args.nextEdict,
+      source: args.source,
+      pattern: args.pattern,
+      edict: args.edict,
+      confidence: args.confidence,
+      executed: args.executed,
+    });
+  },
+});
+
+export const insertVaultAccess = internalMutation({
+  args: {
+    accessedAt: v.number(),
+    repo: v.string(),
+    path: v.string(),
+    sha: v.optional(v.string()),
+    deployedTo: v.optional(v.string()),
+  },
+  handler: async (ctx, args): Promise<Id<"vaultAccessLog">> => {
+    return await ctx.db.insert("vaultAccessLog", {
+      accessedAt: args.accessedAt,
+      repo: args.repo,
+      path: args.path,
+      sha: args.sha,
+      deployedTo: args.deployedTo,
     });
   },
 });
@@ -83,6 +145,17 @@ export const latestLedger = query({
   handler: async (ctx) => {
     return await ctx.db
       .query("grokLedger")
+      .withIndex("by_timestamp")
+      .order("desc")
+      .first();
+  },
+});
+
+export const latestLearning = query({
+  args: {},
+  handler: async (ctx) => {
+    return await ctx.db
+      .query("imperatorLearnings")
       .withIndex("by_timestamp")
       .order("desc")
       .first();
@@ -102,17 +175,21 @@ export const tributeAfterCrawl = action({
   handler: async (ctx): Promise<{
     ledgerId: Id<"grokLedger">;
     learningId: Id<"imperatorLearnings">;
+    accessId: Id<"vaultAccessLog">;
     timestamp: number;
     crawlBase: string;
     crawlAt: number;
     results: CrawlRow[];
     learned: string[];
   }> => {
+    const t0 = Date.now();
     const crawl = (await ctx.runAction(
       api.firewallCrawl.run,
       {},
     )) as CrawlResult;
     const timestamp = Date.now();
+    const latency_ms = timestamp - t0;
+    const failCount = crawl.results.filter((r) => !r.ok).length;
     const actionText =
       "fixed/verified 404 via Observatorium; Gate 200";
     const ledgerId: Id<"grokLedger"> = await ctx.runMutation(
@@ -122,6 +199,15 @@ export const tributeAfterCrawl = action({
         province: "quirky",
         action: actionText,
         timestamp,
+        actor: "vault.tributeAfterCrawl",
+        payload: {
+          base: crawl.base,
+          at: crawl.at,
+          failCount,
+          routes: crawl.results.map((r) => r.route),
+        },
+        status: failCount > 0 ? "escalated" : "ok",
+        latency_ms,
       },
     );
 
@@ -135,15 +221,31 @@ export const tributeAfterCrawl = action({
         timestamp,
         crawl: crawlSummary,
         grokMoves:
-          "SAFE Y371: schema grokLedger+imperatorLearnings; vault.tributeAfterCrawl; keep firewallCrawl engine; TWO-HOST intact; no Imperium Live GET /",
+          "SAFE Y371: additive schema grokLedger+imperatorLearnings+vaultAccessLog; vault.tributeAfterCrawl; keep firewallCrawl engine; TWO-HOST intact",
         nextEdict:
           "Keep crawling *.convex.site only; never rewrite VITE_CONVEX_URL to .site; optional /llms.txt 404 stays known",
+        source: ledgerId,
+        pattern: "firewall-crawl-tribute",
+        edict: "EDICTUM SECUNDUS Observatorium",
+        confidence: failCount > 0 ? 0.55 : 0.92,
+        executed: true,
+      },
+    );
+
+    const accessId: Id<"vaultAccessLog"> = await ctx.runMutation(
+      internal.vault.insertVaultAccess,
+      {
+        accessedAt: timestamp,
+        repo: "snowphamtom/ceilinggate",
+        path: "convex/vault.ts#tributeAfterCrawl",
+        deployedTo: crawl.base,
       },
     );
 
     return {
       ledgerId,
       learningId,
+      accessId,
       timestamp,
       crawlBase: crawl.base,
       crawlAt: crawl.at,
@@ -153,10 +255,6 @@ export const tributeAfterCrawl = action({
   },
 });
 
-/**
- * Optional: if GH_PAT_MAGPIE is set on the deployment, list Actions secret
- * *names* only (GitHub API never returns secret values). Never echo PAT.
- */
 export const confirmGhVaultNames = action({
   args: {},
   handler: async (): Promise<{
