@@ -3,7 +3,7 @@
  * KEEP: hero + stages + DemoReel + C≤S Demo + Check ID + intake + Klaus.
  * STRIP: Cascade roster, Drive buckets, forge costume.
  */
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import demo from "./data/demo.json";
 import { gateB, type GateDecision } from "./lib/residualGates";
 import { useOrganizerLane } from "./lib/evidenceLive";
@@ -57,6 +57,55 @@ function plainFails(rows: LineRow[], d: GateDecision): string[] {
     return `${cap(r.name)} is ${money(r.claimed - r.source)} over the receipt (${money(r.claimed)} claimed vs ${money(r.source)} on receipt).`;
   });
 }
+
+/**
+ * LIVE_SINCE — public go-live of this Claim Check face (quirky).
+ * Anchored to git 9b8e37c @ 2026-09-07 19:41:37 UTC — first continuous Sorting Machine
+ * ship on this product face; f87e38c @ 19:49 UTC completed SPA scratch.
+ * Not scaffold 2026-09-05. ISO documented here for the Live-for ticker.
+ */
+const LIVE_SINCE_ISO = "2026-09-07T19:41:37.000Z";
+const LIVE_SINCE_MS = Date.parse(LIVE_SINCE_ISO);
+
+function formatLiveFor(ms: number): string {
+  if (!Number.isFinite(ms) || ms < 0) ms = 0;
+  const totalSec = Math.floor(ms / 1000);
+  const s = totalSec % 60;
+  const totalMin = Math.floor(totalSec / 60);
+  const m = totalMin % 60;
+  const totalHr = Math.floor(totalMin / 60);
+  const h = totalHr % 24;
+  const d = Math.floor(totalHr / 24);
+  const pad = (n: number) => String(n).padStart(2, "0");
+  return `${d}d ${pad(h)}h ${pad(m)}m ${pad(s)}s`;
+}
+
+/** Ticking uptime from LIVE_SINCE — plain professional Live for Dd Hh Mm Ss. */
+function LiveForUptime() {
+  const [now, setNow] = useState(() => Date.now());
+  useEffect(() => {
+    const id = window.setInterval(() => setNow(Date.now()), 1000);
+    return () => window.clearInterval(id);
+  }, []);
+  const label = useMemo(
+    () => formatLiveFor(now - LIVE_SINCE_MS),
+    [now],
+  );
+  return (
+    <span
+      className="sm-uptime"
+      title={`Live since ${LIVE_SINCE_ISO} (git 9b8e37c)`}
+      data-testid="live-for-uptime"
+      aria-live="off"
+    >
+      <span className="sm-uptime-label">Live for</span>{" "}
+      <time className="sm-uptime-digits" dateTime={LIVE_SINCE_ISO}>
+        {label}
+      </time>
+    </span>
+  );
+}
+
 
 export default function SortingMachine() {
   const { lane } = useOrganizerLane();
@@ -169,13 +218,17 @@ export default function SortingMachine() {
     <div className="sm-shell sm-scratch sm-lean" data-testid="ceilinggate-sorting-machine">
       <header className="sm-hero">
         <div className="sm-hero-top">
-          <p className="sm-eyebrow">Claim Check</p>
-          <span className="sm-live-pill" title="Live">
-            <span className="sm-pulse-dot" data-pulse={pulse % 2} />
-            LIVE · C ≤ S
-          </span>
+          <p className="sm-eyebrow">Claim Check · evidence desk</p>
+          <div className="sm-hero-meta">
+            <LiveForUptime />
+            <span className="sm-live-pill" title="Live">
+              <span className="sm-pulse-dot" data-pulse={pulse % 2} />
+              LIVE · C ≤ S
+            </span>
+          </div>
         </div>
         <h1>Claim Check</h1>
+        <p className="sm-desk-kicker">Claim vs receipt · line ledger</p>
         <p className="sm-lede">
           Sort each money claim against its receipt. Claimed ≤ On receipt →{" "}
           <strong>GRANT</strong>. Over by dollars → <strong>REFUSE</strong>.{" "}
@@ -227,7 +280,7 @@ export default function SortingMachine() {
       </div>
 
       <footer className="sm-foot">
-        <span>C ≤ S · Claim Check</span>
+        <span>C ≤ S · Claim Check · residual honesty desk</span>
         <a
           href="https://github.com/snowphamtom/ceilinggate"
           target="_blank"

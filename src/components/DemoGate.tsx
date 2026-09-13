@@ -101,14 +101,17 @@ export function DemoGate({
   return (
     <section className="sm-panel sm-claim" aria-label="Live claim lane">
       <div className="sm-panel-head">
-        <h2>Claim Check</h2>
+        <div>
+          <p className="sm-section-label">Evidence · verdict</p>
+          <h2>Claim Check</h2>
+        </div>
         <span className={"sm-chip " + (ok ? "grant" : "refuse")}>
           {ok ? "GRANT" : "REFUSE"}
         </span>
       </div>
       <p className="sm-subj">{subject}</p>
       <p className="sm-rival-hint">
-        Line · Claimed (C) · On receipt (S) · Status · S_H
+        Line ledger · Claimed (C) · On receipt (S) · Status · S_H
       </p>
       <p className="sm-demo-path">
         Try a <strong>REFUSE</strong> example (amount over receipt), then a{" "}
@@ -225,6 +228,7 @@ export function DemoGate({
         </div>
       )}
 
+      <p className="sm-section-label sm-ledger-label">Line ledger · claim vs receipt</p>
       <table className="sm-ledger" aria-label="Line ledger">
         <thead>
           <tr>

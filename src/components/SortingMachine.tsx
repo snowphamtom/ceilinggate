@@ -14,7 +14,8 @@ type Props = {
 /** Pipeline stages: gather through result. */
 export function SortingMachineStages({ activePipe, hasDecision }: Props) {
   return (
-    <section className="sm-pipeline" aria-label="Pipeline stages">
+    <section className="sm-pipeline" aria-label="Check pipeline">
+      <p className="sm-section-label">Pipeline · gather to result</p>
       <div className="sm-pipe-track">
         {PIPE_STAGES.map((s, i) => {
           const lit = i === activePipe || hasDecision;
