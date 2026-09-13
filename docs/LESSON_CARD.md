@@ -1,7 +1,7 @@
-# Lesson card — 4521bdb
+# Lesson card — b98c4bc
 
 1. What changed
-Ship demo reel on live site so judges see the video without Clerk/YouTube.
+Demo reel styles — video plate on live site.
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
