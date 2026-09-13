@@ -177,6 +177,20 @@ http.route({
   handler: httpAction(async (ctx) => serveAsset(ctx, "/watch.html")),
 });
 
+/** I changed http.ts because /judge.html failed in firewall crawl (asset present, route missing). */
+http.route({
+  path: "/judge.html",
+  method: "GET",
+  handler: httpAction(async (ctx) => serveAsset(ctx, "/judge.html")),
+});
+
+/** I changed http.ts because /watch failed in firewall crawl (no bare alias). */
+http.route({
+  path: "/watch",
+  method: "GET",
+  handler: httpAction(async (ctx) => serveAsset(ctx, "/watch.html")),
+});
+
 http.route({
   path: "/hls/master.m3u8",
   method: "GET",
