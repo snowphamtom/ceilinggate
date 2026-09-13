@@ -1,7 +1,7 @@
-# Lesson card — de4ebdf
+# Lesson card — d1d68a7
 
 1. What changed
-ui: cinematic masterpiece overhaul of Claim Check face
+ui: Y0 densify + clearer Claim Check CTAs (masterpiece kept)
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
