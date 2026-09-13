@@ -1,7 +1,7 @@
-# Lesson card — 500d694
+# Lesson card — 082ac4d
 
 1. What changed
-feat: additive Observatorium schema — grokLedger optional fields, imperatorLearnings by_confidence, vaultAccessLog
+ui: professional copy pass — consistent Claimed/Receipt/GRANT/REFUSE/C ≤ S
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
