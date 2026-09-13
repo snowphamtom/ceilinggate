@@ -10,6 +10,9 @@ import { AgentMail } from "@agentmail/convex";
 import FirecrawlClient from "@firecrawl/firecrawl-convex";
 import { gateB } from "./lib/gates";
 import {
+  RECEIPT_EXTRACT_PROMPT,
+  RECEIPT_EXTRACT_SCHEMA,
+  interiorFromExtract,
   parseClaimed,
   parseInteriorFromMarkdown,
   parseSourceUrls,
@@ -75,12 +78,25 @@ export const scrapeAndGate = internalAction({
   handler: async (ctx, args) => {
     try {
       try {
-        const doc = await firecrawl.scrape(ctx, args.url, { formats: ["markdown"] });
+        const doc = await firecrawl.scrape(ctx, args.url, {
+          formats: ["markdown", "json"],
+          jsonOptions: {
+            schema: RECEIPT_EXTRACT_SCHEMA,
+            prompt: RECEIPT_EXTRACT_PROMPT,
+            checkPromptInjection: true,
+          },
+        } as Record<string, unknown>);
         const md =
           (doc as { markdown?: string }).markdown ??
           (doc as { content?: string }).content ??
           JSON.stringify(doc).slice(0, 4000);
-        const interior = parseInteriorFromMarkdown(md);
+        const extracted =
+          (doc as { json?: unknown }).json ??
+          (doc as { extract?: unknown }).extract;
+        const fromJson = interiorFromExtract(extracted);
+        const interior = fromJson.length
+          ? fromJson
+          : parseInteriorFromMarkdown(md);
         await ctx.runMutation(internal.pipeline.gateWithInterior, {
           claimId: args.claimId,
           interior,
