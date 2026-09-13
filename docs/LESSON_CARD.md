@@ -1,7 +1,7 @@
-# Lesson card — 49ad8e4
+# Lesson card — 0f42b33
 
 1. What changed
-Optimize demo player: no eager bytes, 60s first, in-view attach.
+ABR demo player: HLS master when present, hls.js, progressive fallback.
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
