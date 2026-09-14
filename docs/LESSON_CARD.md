@@ -1,7 +1,7 @@
-# Lesson card — 3e7df66
+# Lesson card — 4837846
 
 1. What changed
-feat: Claim Check soft-bridge footer — Vault $499 + T&E $1k PDP beside Shop
+feat: static-alt proxy — prefer GitHub Pages SPA when Convex site storage blocked
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
