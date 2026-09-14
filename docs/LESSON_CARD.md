@@ -1,7 +1,7 @@
-# Lesson card — bb81d1f
+# Lesson card — 2784e33
 
 1. What changed
-Canonical vibeapps listing → claim-check (retire ceilinggate-1).
+fix: Claim Check face strip — yt7 chip, health/card rename, lean /watch copy
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
