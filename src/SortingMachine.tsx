@@ -336,6 +336,37 @@ export default function SortingMachine() {
         </CalmDisclosure>
 
         <CalmDisclosure
+          id="c-le-s"
+          title="What C ≤ S means"
+          summary="Claim ≤ support · Two-Gate · GRANT or REFUSE"
+        >
+          <div className="sm-c-le-s" data-testid="c-le-s-body">
+            <p>
+              <strong>C ≤ S</strong> means the <strong>claim</strong> must not
+              exceed the <strong>support</strong> (the receipt).
+            </p>
+            <ul>
+              <li>
+                <strong>Gate 1 — Claim:</strong> Is every claimed dollar at or
+                under what the receipt shows?
+              </li>
+              <li>
+                <strong>Gate 2 — Receipt:</strong> Is there a clear support line
+                for each claim line?
+              </li>
+            </ul>
+            <p>
+              Both clear → <strong>GRANT</strong> (seal + Check ID). Any line
+              over → <strong>REFUSE</strong> (shows how much over).
+            </p>
+            <p className="sm-muted">
+              Residual honesty desk idea from Monsters Ink / MAGPIE: only grant
+              what the evidence can carry — no stretch.
+            </p>
+          </div>
+        </CalmDisclosure>
+
+        <CalmDisclosure
           id="sponsors"
           title="Sponsors on the live path"
           summary="Firecrawl · AgentMail · OpenAI"
