@@ -1,7 +1,7 @@
-# Lesson card — 5f2b700
+# Lesson card — fdd6491
 
 1. What changed
-watch.html densify-v2 stamp + Pages back link
+watch: densify-v3 stamp — poster-only YT, zero iframe
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
