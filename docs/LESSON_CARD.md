@@ -1,7 +1,7 @@
-# Lesson card — 9ac2eb6
+# Lesson card — fa171fa
 
 1. What changed
-wire: Claim Check HUD prefer-live → allgas-demo-yt2 HLS+MP4
+face: prefer-live HLS yt2 primary; demote Tip Jar YT
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
