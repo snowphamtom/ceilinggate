@@ -1,7 +1,7 @@
-# Lesson card — d5877d2
+# Lesson card — 850f27e
 
 1. What changed
-docs: PRIMARY live URL → GitHub Pages; mark quirky.convex.site DEAD
+All Gas: point public face URLs at Pages; scrub fixture .site receipts.
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
