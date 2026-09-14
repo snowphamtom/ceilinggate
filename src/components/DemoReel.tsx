@@ -9,11 +9,11 @@ import {
 import "./DemoReel.css";
 
 /** Public YT O-ID — */
-const YT_ID = "Jh-txwsIxuk";
+const YT_ID = "hDnY3_iszX4";
 const YT_URL = `https://www.youtube.com/watch?v=${YT_ID}`;
 /**
  * LIVE: prefer-live same-origin /hls yt7 (primary).
- * Public YT secondary: Jh-txwsIxuk.
+ * Public YT secondary: hDnY3_iszX4.
  */
 export function DemoReel() {
   const shellRef = useRef<HTMLElement | null>(null);
@@ -113,7 +113,7 @@ export function DemoReel() {
           target="_blank"
           rel="noreferrer"
           className="sm-demo-yt-secondary"
-          title="Public YT Jh-txwsIxuk — matching HUD is the player above"
+          title="Public YT hDnY3_iszX4 — matching HUD is the player above"
         >
           YouTube · on-request
         </a>

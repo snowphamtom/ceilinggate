@@ -9,7 +9,7 @@
 |---|---|---|
 | Live app PRIMARY | https://snowphamtom.github.io/ceilinggate/ | 200 · full Sorting Machine · soft-bridge · API=.cloud |
 | `.convex.site` | DEAD | Convex free-plan HTTP 500 — do not list |
-| Demo video page | https://snowphamtom.github.io/ceilinggate/watch.html | prefer-live `/hls` · Public YT `Jh-txwsIxuk` |
+| Demo video page | https://snowphamtom.github.io/ceilinggate/watch.html | prefer-live `/hls` · Public YT `hDnY3_iszX4` |
 | Judge card mirror | `.site` DEAD — use Pages + vibeapps listing | |
 | Playlist | https://snowphamtom.github.io/ceilinggate/hls/master.m3u8 | 200 · true HLS → allgas-demo-hls |
 | Health | `.site` DEAD | use Pages PRIMARY |
@@ -17,7 +17,7 @@
 | CI | https://github.com/snowphamtom/ceilinggate/actions/workflows/convex-deploy.yml | convex-deploy |
 | Demo release (prefer-live / progressive) | https://github.com/snowphamtom/ceilinggate/releases/tag/allgas-demo-yt | 174s silent YT cut |
 | HLS ladder (on-site ABR) | https://github.com/snowphamtom/ceilinggate/releases/tag/allgas-demo-hls | v0/v1/v2 · not in Convex static |
-| YouTube Public (secondary) | https://www.youtube.com/watch?v=Jh-txwsIxuk | Tip Jar `2KsMO90LpdE` retired |
+| YouTube Public (secondary) | https://www.youtube.com/watch?v=hDnY3_iszX4 | Tip Jar `2KsMO90LpdE` retired |
 | Progressive mp4 | https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-yt/CeilingGate-Forge-gates-clip-YT.mp4 | 200 |
 | Listing (canonical) | https://vibeapps.dev/s/claim-check | HOLD FILE · UPDATE only |
 | Inbox | ceilinggate-claims@agentmail.to | |
@@ -30,7 +30,7 @@ Observatorium: [docs/OBSERVATORIUM.md](./docs/OBSERVATORIUM.md)
 ## Video lanes
 
 - **prefer-live (DemoReel / `/watch.html` primary):** same-origin `/hls/master.m3u8` yt7 + progressive `/hls` MP4.
-- **YouTube (secondary):** Public `Jh-txwsIxuk` (Tip Jar `2KsMO90LpdE` retired). Poster: `/hls/poster-grant.png`.
+- **YouTube (secondary):** Public `hDnY3_iszX4` (Tip Jar `2KsMO90LpdE` retired). Poster: `/hls/poster-grant.png`.
 
 ## Sponsor use (not costume)
 

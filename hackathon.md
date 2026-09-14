@@ -17,7 +17,7 @@ Live root is **Claim Check** (GATHER → SORT claim-vs-receipt), not a chat prod
 | Health | `.cloud` ok when plan allows; `.site` DEAD |
 | Repo | https://github.com/snowphamtom/ceilinggate |
 | CI (green deploy) | https://github.com/snowphamtom/ceilinggate/actions/workflows/convex-deploy.yml |
-| Demo prefer-live | https://snowphamtom.github.io/ceilinggate/watch.html · Public YT `Jh-txwsIxuk` |
+| Demo prefer-live | https://snowphamtom.github.io/ceilinggate/watch.html · Public YT `hDnY3_iszX4` |
 | Demo prefer-live (GH file) | https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-yt/CeilingGate-Forge-gates-clip-YT.mp4 |
 | Claims inbox | ceilinggate-claims@agentmail.to |
 
@@ -80,8 +80,8 @@ Inner crawl: `npx convex run firewallCrawl:run '{}'`. Outer: `node scripts/firew
 
 ## Lean judge face (KEEP)
 
-Root SPA is the money sorter only: hero + 5-stage GATHER→BUCKET · prefer-live `/hls` yt7 · Public YT `Jh-txwsIxuk` · Demo REFUSE then GRANT · Check ID stamp · lean AgentMail · sponsor chips (Firecrawl / AgentMail / OpenAI). Cascade roster and Drive buckets are stripped from root.
+Root SPA is the money sorter only: hero + 5-stage GATHER→BUCKET · prefer-live `/hls` yt7 · Public YT `hDnY3_iszX4` · Demo REFUSE then GRANT · Check ID stamp · lean AgentMail · sponsor chips (Firecrawl / AgentMail / OpenAI). Cascade roster and Drive buckets are stripped from root.
 
 ## Eligibility snapshot
 
-New app after 25 Aug 2026. Convex backend. Public GitHub. Live GitHub Pages PRIMARY (`.site` DEAD). Video under 3 minutes (prefer-live `/hls` yt7 + Public YT `Jh-txwsIxuk`). Luma / Vibe listing `claim-check`. Social tags sent.
+New app after 25 Aug 2026. Convex backend. Public GitHub. Live GitHub Pages PRIMARY (`.site` DEAD). Video under 3 minutes (prefer-live `/hls` yt7 + Public YT `hDnY3_iszX4`). Luma / Vibe listing `claim-check`. Social tags sent.

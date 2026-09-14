@@ -20,7 +20,7 @@ Demo / video (prefer-live on-site HLS yt7):
 https://snowphamtom.github.io/ceilinggate/watch.html
 
 YouTube Public (secondary — Tip Jar 2KsMO90LpdE retired):
-https://www.youtube.com/watch?v=Jh-txwsIxuk
+https://www.youtube.com/watch?v=hDnY3_iszX4
 
 Progressive mp4 (same cut):
 https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-yt/CeilingGate-Forge-gates-clip-YT.mp4

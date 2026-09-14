@@ -1,6 +1,6 @@
 # Claim Check — YouTube swap package
 
-**Public YT O-ID:** `Jh-txwsIxuk` — Tip Jar `2KsMO90LpdE` retired. Prefer-live primary remains same-origin `/hls` yt7.
+**Public YT O-ID:** `hDnY3_iszX4` — Tip Jar `2KsMO90LpdE` retired. Prefer-live primary remains same-origin `/hls` yt7.
 
 ## File to upload
 - **Local draft (exact path):** `/workspace/ceilinggate-demo/out/claimcheck-recut/CeilingGate-ClaimCheck-HUD-draft.mp4`
@@ -27,9 +27,9 @@ Stack: Convex · Firecrawl · AgentMail · OpenAI
 - **Tags:** Claim Check, CeilingGate, Convex, Firecrawl, AgentMail, GRANT, REFUSE, residual gates, hackathon, All Gas
 
 ## After upload
-1. Public ID live: `Jh-txwsIxuk`.
+1. Public ID live: `hDnY3_iszX4`.
 2. DemoReel / watch.html / vibeapps claim-check flipped to Public (Tip Jar retired).
-3. LIVE: site prefer-live primary = same-origin `/hls` yt7; Public YT secondary `Jh-txwsIxuk`.
+3. LIVE: site prefer-live primary = same-origin `/hls` yt7; Public YT secondary `hDnY3_iszX4`.
 
 ## yt7 note
-LIVE: Claim Check HUD yt7 on same-origin `/hls`. Public YT `Jh-txwsIxuk`. Tip Jar `2KsMO90LpdE` retired.
+LIVE: Claim Check HUD yt7 on same-origin `/hls`. Public YT `hDnY3_iszX4`. Tip Jar `2KsMO90LpdE` retired.

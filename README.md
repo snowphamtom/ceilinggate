@@ -14,12 +14,12 @@ Not a chat app. Not a developer SDK. Not the AgentMail sample inbox assistant.
 | Health | https://snowphamtom.github.io/ceilinggate/health |
 | Build log | [hackathon.md](./hackathon.md) |
 | CI | [convex-deploy](https://github.com/snowphamtom/ceilinggate/actions/workflows/convex-deploy.yml) |
-| Demo files | [Public YT](https://www.youtube.com/watch?v=Jh-txwsIxuk) · [allgas-demo-yt](https://github.com/snowphamtom/ceilinggate/releases/tag/allgas-demo-yt) · [HLS ladder](https://github.com/snowphamtom/ceilinggate/releases/tag/allgas-demo-hls) |
+| Demo files | [Public YT](https://www.youtube.com/watch?v=hDnY3_iszX4) · [allgas-demo-yt](https://github.com/snowphamtom/ceilinggate/releases/tag/allgas-demo-yt) · [HLS ladder](https://github.com/snowphamtom/ceilinggate/releases/tag/allgas-demo-hls) |
 | Listing | https://vibeapps.dev/s/claim-check |
 | Inbox | ceilinggate-claims@agentmail.to |
 | Share | https://x.com/magpie_inventor/status/2096419465973944560 |
 
-Open the live app. Click **1 · Demo REFUSE**, then **2 · Demo GRANT**. Proof is above the fold. No login. Video: prefer-live same-origin `/hls` yt7 on `/watch.html` + DemoReel; Public YT secondary `Jh-txwsIxuk` (Tip Jar `2KsMO90LpdE` retired).
+Open the live app. Click **1 · Demo REFUSE**, then **2 · Demo GRANT**. Proof is above the fold. No login. Video: prefer-live same-origin `/hls` yt7 on `/watch.html` + DemoReel; Public YT secondary `hDnY3_iszX4` (Tip Jar `2KsMO90LpdE` retired).
 
 ## What each sponsor does
 
@@ -30,7 +30,7 @@ Open the live app. Click **1 · Demo REFUSE**, then **2 · Demo GRANT**. Proof i
 
 ## 2026-09-13
 
-CI deploy is green. Prefer-live primary is same-origin `/hls` yt7; Public YT secondary `Jh-txwsIxuk` (Tip Jar `2KsMO90LpdE` retired). Product rule unchanged: claimed ≤ receipt, or REFUSE names the dollar overage.
+CI deploy is green. Prefer-live primary is same-origin `/hls` yt7; Public YT secondary `hDnY3_iszX4` (Tip Jar `2KsMO90LpdE` retired). Product rule unchanged: claimed ≤ receipt, or REFUSE names the dollar overage.
 
 ## Two hosts
 

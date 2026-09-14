@@ -46,12 +46,12 @@ video{width:100%;height:100%}
 <div class="frame"><video controls playsinline src="/hls/CeilingGate-ClaimCheck-HUD.mp4"></video></div>
 <ul>
 <li><a href="/">Live app</a></li>
-<li><a href="/watch.html">Demo player</a> · <a href="https://www.youtube.com/watch?v=Jh-txwsIxuk">YT Jh-txwsIxuk</a></li>
+<li><a href="/watch.html">Demo player</a> · <a href="https://www.youtube.com/watch?v=hDnY3_iszX4">YT hDnY3_iszX4</a></li>
 <li><a href="/hls/master.m3u8">HLS playlist</a></li>
 <li><a href="https://github.com/snowphamtom/ceilinggate">Repo</a></li>
 <li>Inbox: ceilinggate-claims@agentmail.to</li>
 </ul>
-<p class="tag">1 · Demo REFUSE then 2 · Demo GRANT (above the fold). Firecrawl scrapes. OpenAI one-line after numbers — does not decide. Prefer-live /hls yt7 · Public YT Jh-txwsIxuk.</p>
+<p class="tag">1 · Demo REFUSE then 2 · Demo GRANT (above the fold). Firecrawl scrapes. OpenAI one-line after numbers — does not decide. Prefer-live /hls yt7 · Public YT hDnY3_iszX4.</p>
 </main>
 </body>
 </html>`;
