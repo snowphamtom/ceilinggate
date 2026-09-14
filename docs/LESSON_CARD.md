@@ -1,7 +1,7 @@
-# Lesson card — 188f415
+# Lesson card — 54084bf
 
 1. What changed
-feat: lean Claim Check face — plain PASS/FAIL seal, drop σ²/S_H jargon, judge REFUSE→GRANT
+feat: lean Claim Check — semantic verdict attrs, Demo both, Organizer label, meta description
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
