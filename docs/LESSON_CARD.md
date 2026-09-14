@@ -1,7 +1,7 @@
-# Lesson card — dfa9623
+# Lesson card — af48343
 
 1. What changed
-All Gas densify: collapse watch.html YT until request; HLS stays primary.
+watch: collapse YouTube until request — no empty black card
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
