@@ -2,8 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta http-equiv="Cache-Control" content="no-cache" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Claim Check · Demo video</title>
+    <!-- densify-v2: YT details + mount-on-open -->
     <style>
       html, body { margin: 0; background: #08061a; color: #f0ecff; font-family: system-ui, sans-serif; }
       main { max-width: 880px; margin: 24px auto; padding: 0 16px; }
@@ -32,6 +34,17 @@
       details.sec > summary::-webkit-details-marker { display: none; }
       details.sec > summary::before { content: "▸ "; color: #8b87a8; }
       details.sec[open] > summary::before { content: "▾ "; }
+      a.yt-poster {
+        display: inline-flex; flex-direction: column; gap: 0.45rem; margin-top: 0.5rem;
+        max-width: 420px; text-decoration: none; color: #c8c4e8;
+      }
+      a.yt-poster img {
+        width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover;
+        border-radius: 8px; border: 1px solid rgba(168, 85, 247, 0.4);
+        background: #100a24;
+      }
+      a.yt-poster span { font-size: 0.85rem; color: #4de8ff; }
+      details.sec:not([open]) > *:not(summary) { display: none !important; }
     </style>
   </head>
   <body>
@@ -54,16 +67,17 @@
       </div>
       <p class="chip" id="prog-lab" style="margin-top:0.65rem">attaching…</p>
       <p style="margin-top:0.85rem">
-        <a href="/">Back to app</a>
+        <a id="back-app" href="./">Back to app</a>
         · <a href="hls/master.m3u8" id="hls-link">HLS master</a>
         · <a id="prog-link" href="hls/master.m3u8">HLS master</a>
-        · <a class="secondary" href="https://www.youtube.com/watch?v=Jh-txwsIxuk" title="Public YT O-ID Jh-txwsIxuk">YouTube · on-request</a>
       </p>
 
       <details class="sec" id="yt-details">
         <summary>YouTube · on-request · <code>Jh-txwsIxuk</code></summary>
-        <p class="chip" style="margin:0.35rem 0 0.6rem">Loads only after you open this. Prefer-live HLS stays primary above.</p>
-        <div id="yt-mount" style="max-width:420px"></div>
+        <a class="yt-poster" id="yt-poster" href="https://www.youtube.com/watch?v=Jh-txwsIxuk" target="_blank" rel="noreferrer">
+          <img id="yt-thumb" src="hls/poster-grant.png" alt="Claim Check on YouTube" width="420" height="236" loading="lazy" />
+          <span>Open on YouTube · Jh-txwsIxuk</span>
+        </a>
       </details>
     </main>
     <script>
@@ -71,6 +85,8 @@
       const YT_ID = "Jh-txwsIxuk";
       var BASE = new URL(".", location.href).pathname; // /ceilinggate/ or /
       if (!BASE.endsWith("/")) BASE += "/";
+      var backApp = document.getElementById("back-app");
+      if (backApp) backApp.setAttribute("href", BASE);
       const PROG = BASE + "hls/master.m3u8";
       const MASTER = BASE + "hls/master.m3u8";
       var posterEl = document.getElementById("poster");
@@ -80,27 +96,12 @@
       var progLink = document.getElementById("prog-link");
       if (progLink) progLink.setAttribute("href", PROG);
       /* LIVE: same-origin yt7 */
-      var ytDetails = document.getElementById("yt-details");
-      var ytMount = document.getElementById("yt-mount");
-      function armYt() {
-        if (!ytMount || ytMount.querySelector("iframe")) return;
-        var wrap = document.createElement("div");
-        wrap.className = "frame";
-        wrap.style.marginTop = "0.5rem";
-        var iframe = document.createElement("iframe");
-        iframe.id = "yt";
-        iframe.title = "Claim Check Public";
-        iframe.src = "https://www.youtube.com/embed/" + YT_ID + "?rel=0";
-        iframe.setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share");
-        iframe.setAttribute("referrerpolicy", "strict-origin-when-cross-origin");
-        iframe.allowFullscreen = true;
-        wrap.appendChild(iframe);
-        ytMount.appendChild(wrap);
-      }
-      if (ytDetails) {
-        ytDetails.addEventListener("toggle", function () {
-          if (ytDetails.open) armYt();
-        });
+      var ytThumb = document.getElementById("yt-thumb");
+      if (ytThumb) {
+        ytThumb.src = BASE + "hls/poster-grant.png";
+        ytThumb.onerror = function () {
+          ytThumb.src = "https://i.ytimg.com/vi/" + YT_ID + "/hqdefault.jpg";
+        };
       }
       const HLS_JS = "https://cdn.jsdelivr.net/npm/hls.js@1.5.20/dist/hls.min.js";
       const v = document.getElementById("reel");
