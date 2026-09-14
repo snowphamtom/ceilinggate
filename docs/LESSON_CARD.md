@@ -1,7 +1,7 @@
-# Lesson card — b6c0691
+# Lesson card — dfa9623
 
 1. What changed
-scrub ARR false-positive from Klaus snapshot dest label
+All Gas densify: collapse watch.html YT until request; HLS stays primary.
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
