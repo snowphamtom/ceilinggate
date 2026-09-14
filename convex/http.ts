@@ -10,7 +10,7 @@ const agentmail = new AgentMail(components.agentmail, {
 
 const http = httpRouter();
 
-/** Same-origin relative ABR ladder (yt3 audio). Never point browsers at GH releases. */
+/** Same-origin relative ABR ladder (yt7). Never point browsers at GH releases. */
 const HLS_MASTER_FALLBACK = `#EXTM3U
 #EXT-X-VERSION:6
 #EXT-X-INDEPENDENT-SEGMENTS
@@ -27,7 +27,7 @@ const CARD_HTML = `<!doctype html>
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>CeilingGate · All Gas card</title>
+<title>Claim Check · All Gas card</title>
 <style>
 body{margin:0;background:#070b14;color:#e8eefc;font-family:system-ui,sans-serif}
 main{max-width:40rem;margin:1.5rem auto;padding:0 1rem}
@@ -41,7 +41,7 @@ video{width:100%;height:100%}
 </head>
 <body>
 <main>
-<h1>CeilingGate</h1>
+<h1>Claim Check</h1>
 <p class="tag">Sorting Machine · email a receipt → C ≤ S → GRANT/REFUSE. Listing: vibeapps.dev/s/claim-check</p>
 <div class="frame"><video controls playsinline src="/hls/CeilingGate-ClaimCheck-HUD.mp4"></video></div>
 <ul>
@@ -68,7 +68,7 @@ http.route({
   path: "/health",
   method: "GET",
   handler: httpAction(async () =>
-    new Response(JSON.stringify({ ok: true, app: "CeilingGate" }), {
+    new Response(JSON.stringify({ ok: true, app: "Claim Check" }), {
       status: 200,
       headers: { "content-type": "application/json" },
     }),

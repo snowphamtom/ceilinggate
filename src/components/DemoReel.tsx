@@ -9,12 +9,12 @@ import {
 } from "../lib/attachAbr";
 import "./DemoReel.css";
 
-/** Public YT O-ID — Tip Jar 2KsMO90LpdE retired. */
+/** Public YT O-ID — */
 const YT_ID = "Jh-txwsIxuk";
 const YT_URL = `https://www.youtube.com/watch?v=${YT_ID}`;
 /**
  * LIVE: prefer-live same-origin /hls yt7 (primary).
- * Public YT secondary: Jh-txwsIxuk (Tip Jar 2KsMO90LpdE retired).
+ * Public YT secondary: Jh-txwsIxuk.
  */
 export function DemoReel() {
   const shellRef = useRef<HTMLElement | null>(null);

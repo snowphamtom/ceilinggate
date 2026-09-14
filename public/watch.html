@@ -32,10 +32,10 @@
       <h1>Claim Check Demo</h1>
       <div class="meta">
         <span class="chip" id="lab">HLS · Claim Check HUD</span>
-        <span class="chip">yt3 · 1280×800 · audio</span>
+        <span class="chip">yt7 · 1280×800</span>
         <span class="chip">prefer-live</span>
       </div>
-      <p>Primary: Claim Check HUD via same-origin HLS yt7 (progressive MP4 fallback). Public YouTube secondary — Tip Jar retired.</p>
+      <p>Primary: Claim Check HUD via same-origin HLS (progressive MP4 fallback). YouTube secondary.</p>
       <div class="frame" id="hls-frame">
         <video
           id="reel"
@@ -54,8 +54,8 @@
       </p>
 
       <section class="sec">
-        <h2>YouTube (Public — secondary)</h2>
-        <p>Public O-ID <code>Jh-txwsIxuk</code>. Tip Jar <code>2KsMO90LpdE</code> retired. Prefer-live primary remains same-origin <code>/hls/</code> yt7.</p>
+        <h2>YouTube (secondary)</h2>
+        <p>Public O-ID <code>Jh-txwsIxuk</code>. Prefer-live primary is same-origin <code>/hls/</code>.</p>
         <div class="frame" id="yt-frame" style="max-width:420px; margin-top:0.5rem">
           <iframe
             id="yt"
@@ -70,11 +70,11 @@
       </section>
     </main>
     <script>
-      /* Public YT Jh-txwsIxuk — Tip Jar 2KsMO90LpdE retired; primary stays /hls/master.m3u8 */
+      /* Public YT Jh-txwsIxuk; primary stays /hls/master.m3u8 */
       const YT_ID = "Jh-txwsIxuk";
       const PROG = "/hls/CeilingGate-ClaimCheck-HUD.mp4";
       const MASTER = "/hls/master.m3u8";
-      /* LIVE: same-origin yt3 audio pack */
+      /* LIVE: same-origin yt7 */
       const HLS_JS = "https://cdn.jsdelivr.net/npm/hls.js@1.5.20/dist/hls.min.js";
       const v = document.getElementById("reel");
       const lab = document.getElementById("prog-lab");
