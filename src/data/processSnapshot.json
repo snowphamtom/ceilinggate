@@ -57,7 +57,7 @@
     "status": "PARTIAL",
     "when": "2026-09-07T14:01:27 CT",
     "plates07": { "moved": 13, "dest": "07_CORPUS_AND_CERTIFICATES", "fail": 0 },
-    "archival08": { "moved": 43, "dest": "08_ARCHIVE_CARRIERS", "fail": 0, "breakdown": { "named": 3, "img": 22, "uuid": 17, "misc": 1 } },
+    "archival08": { "moved": 43, "dest": "08_ARCHIVE_HOLD", "fail": 0, "breakdown": { "named": 3, "img": 22, "uuid": 17, "misc": 1 } },
     "totalMoves": 56,
     "totalFail": 0,
     "pendingGates": ["H-IO-GATE", "H-SWEEP-DUP"],
