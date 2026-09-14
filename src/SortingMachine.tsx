@@ -174,6 +174,7 @@ export default function SortingMachine() {
     setPathLit((p) => ({ ...p, firecrawl: true }));
     runSort(rowsFromFixture(REFUSE_FIXTURE), REFUSE_FIXTURE.email.subject);
     setPathLit((p) => ({ ...p, firecrawl: true, openai: true }));
+    /* settle: controls→ID→bars→stamp (CSS sm-settle stages); then flip GRANT */
     window.setTimeout(() => {
       runSort(rowsFromFixture(GRANT_FIXTURE), GRANT_FIXTURE.email.subject);
       setPathLit((p) => ({ ...p, firecrawl: true, openai: true }));
@@ -293,12 +294,10 @@ export default function SortingMachine() {
           dollars → <strong>REFUSE</strong>. Rule:{" "}
           <span className="sm-law-chip">C ≤ S</span>
         </p>
-        <ol className="sm-path" aria-label="One clear path">
-          <li><span>1</span> Claim</li>
-          <li><span>2</span> Edit lines</li>
-          <li><span>3</span> Check</li>
-          <li><span>4</span> Verdict</li>
-        </ol>
+        <div className="sm-hero-tele" aria-label="Live check metadata">
+          <span className="sm-meta-chip">claim → edit → check → verdict</span>
+          <span className="sm-meta-chip sm-meta-chip-dim">C ≤ S live</span>
+        </div>
       </header>
 
       {/* Y0 proof: GRANT/REFUSE + Check ID + caliper before pipeline */}
@@ -387,7 +386,7 @@ export default function SortingMachine() {
           <CalmDisclosure
             id="klaus"
             title="Organizer"
-            summary="Holds and folder counts"
+            summary="Holds · folders"
           >
             <KlausOrganizer lane={lane} />
           </CalmDisclosure>

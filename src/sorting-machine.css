@@ -3947,3 +3947,185 @@ body {
   .sm-shell.sm-masterpiece.sm-hud .sm-stamp-glow { animation: none !important; opacity: 0.1 !important; }
   .sm-hud-ribbon { opacity: 0.55; }
 }
+
+/* === LENS densify leap 2026-09-14 (1–5) — densify-only, Y0 holds === */
+
+/* 1 · PASS ribbon brighter secondary; stamp stays dominant; echo chip muted */
+.sm-seal.sm-seal-ribbon {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 0.35rem 0 0.55rem;
+  padding: 0.28rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  border: 1px solid rgba(77, 232, 255, 0.45);
+  background: linear-gradient(
+    90deg,
+    rgba(77, 232, 255, 0.16),
+    rgba(168, 85, 247, 0.12)
+  );
+  color: #c8f7ff;
+  box-shadow: 0 0 18px rgba(77, 232, 255, 0.18);
+}
+.sm-verdict.refuse .sm-seal.sm-seal-ribbon {
+  border-color: rgba(255, 120, 120, 0.45);
+  background: linear-gradient(
+    90deg,
+    rgba(255, 90, 90, 0.14),
+    rgba(255, 160, 80, 0.1)
+  );
+  color: #ffd0d0;
+  box-shadow: 0 0 14px rgba(255, 90, 90, 0.14);
+}
+.sm-chip.sm-chip-echo {
+  opacity: 0.42;
+  transform: scale(0.92);
+  filter: saturate(0.7);
+}
+
+/* 2 · Caliper endpoint mirrors + cyan rail-cap */
+.sm-caliper-leap .sm-caliper-track {
+  position: relative;
+  overflow: visible;
+  margin-bottom: 0.85rem;
+}
+.sm-caliper-leap .sm-caliper-end {
+  position: absolute;
+  top: -1.05rem;
+  transform: translateX(-50%);
+  font-size: 0.62rem;
+  font-variant-numeric: tabular-nums;
+  color: #9aa8c2;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.sm-caliper-leap .sm-caliper-end.c-end {
+  color: #7ee0ff;
+}
+.sm-caliper-leap .sm-caliper-end.s-end {
+  color: #b8b0d8;
+}
+.sm-caliper-leap .sm-caliper-cap {
+  position: absolute;
+  top: -1px;
+  bottom: -1px;
+  width: 2px;
+  transform: translateX(-50%);
+  background: linear-gradient(180deg, #4de8ff, rgba(77, 232, 255, 0.15));
+  box-shadow: 0 0 8px rgba(77, 232, 255, 0.55);
+  border-radius: 1px;
+  pointer-events: none;
+  opacity: 0.85;
+}
+.sm-caliper-leap li.is-clear .sm-caliper-cap {
+  animation: smCyanCap 0.55s ease-out 1;
+}
+@keyframes smCyanCap {
+  from { opacity: 0; box-shadow: 0 0 0 rgba(77, 232, 255, 0); }
+  40% { opacity: 1; box-shadow: 0 0 12px rgba(77, 232, 255, 0.7); }
+  to { opacity: 0.85; box-shadow: 0 0 8px rgba(77, 232, 255, 0.55); }
+}
+
+/* 3 · Telemetry rail (replaces helper + step chips) */
+.sm-telemetry {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.55rem;
+  margin: 0.35rem 0 0.65rem;
+  padding: 0.35rem 0.55rem;
+  border-radius: 8px;
+  border: 1px solid rgba(168, 85, 247, 0.28);
+  background: rgba(12, 10, 28, 0.55);
+  font-size: 0.72rem;
+  color: #b8b0d8;
+}
+.sm-tele-step {
+  font-weight: 600;
+  color: #e8eefc;
+  letter-spacing: 0.03em;
+}
+.sm-tele-sep {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(77, 232, 255, 0.55);
+}
+.sm-tele-hint {
+  color: #8b87a8;
+}
+.sm-hero-tele {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 0.45rem;
+}
+.sm-meta-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  align-items: center;
+}
+.sm-meta-chip {
+  display: inline-block;
+  padding: 0.12rem 0.45rem;
+  border-radius: 999px;
+  border: 1px solid rgba(168, 85, 247, 0.35);
+  background: #100a24;
+  color: #c8c4e8;
+  font-size: 0.68rem;
+  letter-spacing: 0.02em;
+}
+.sm-meta-chip-dim {
+  opacity: 0.7;
+  border-color: rgba(120, 120, 160, 0.35);
+}
+
+/* 4 · One-shot settle: controls → ID → bars → stamp (no loop) */
+.sm-verdict.sm-settle .sm-demo-row,
+.sm-claim .sm-demo-row {
+  animation: none;
+}
+.sm-verdict.sm-settle .sm-proof-stamp {
+  animation: smSettleId 0.45s ease-out 1 both;
+}
+.sm-verdict.sm-settle .sm-caliper {
+  animation: smSettleBars 0.5s ease-out 0.12s 1 both;
+}
+.sm-verdict.sm-settle .sm-verdict-stamp {
+  animation: smSettleStamp 0.55s cubic-bezier(0.2, 0.9, 0.2, 1) 0.22s 1 both;
+}
+.sm-verdict.sm-settle .sm-seal-ribbon {
+  animation: smSettleSeal 0.4s ease-out 0.28s 1 both;
+}
+@keyframes smSettleId {
+  from { opacity: 0.35; transform: translateY(4px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes smSettleBars {
+  from { opacity: 0.25; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes smSettleStamp {
+  from { opacity: 0.2; transform: scale(0.92); filter: blur(1px); }
+  to { opacity: 1; transform: scale(1); filter: none; }
+}
+@keyframes smSettleSeal {
+  from { opacity: 0; transform: translateY(3px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* 5 · Compact secondary video / panel meta */
+.sm-demo-yt-secondary {
+  color: #8b87a8 !important;
+  font-size: 0.85em;
+}
+.sm-demo-reel .sm-panel-head {
+  align-items: center;
+}
+.sm-secondary .sm-disclosure summary,
+.sm-side .sm-disclosure summary {
+  font-size: 0.88rem;
+}

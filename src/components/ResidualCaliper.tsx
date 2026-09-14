@@ -5,14 +5,18 @@ type Props = {
   failedIndices: number[];
 };
 
-/** Claimed vs On receipt bar chart. */
+/** Claimed vs On receipt bar chart with endpoint mirrors. */
 export function ResidualCaliper({ rows, failedIndices }: Props) {
   const max = Math.max(
     1,
     ...rows.flatMap((r) => [r.claimed, r.source]),
   );
   return (
-    <div className="sm-caliper sm-caliper-jewel" data-testid="residual-caliper" aria-label="Claimed vs On receipt">
+    <div
+      className="sm-caliper sm-caliper-jewel sm-caliper-leap"
+      data-testid="residual-caliper"
+      aria-label="Claimed vs On receipt"
+    >
       <div className="sm-caliper-head">
         <span>Claimed vs On receipt</span>
         <span className="sm-caliper-legend">
@@ -35,6 +39,23 @@ export function ResidualCaliper({ rows, failedIndices }: Props) {
                   style={{ left: `${sPct}%` }}
                   title="On receipt amount"
                 />
+                <span
+                  className="sm-caliper-cap"
+                  style={{ left: `${Math.max(cPct, sPct)}%` }}
+                  aria-hidden
+                />
+                <span
+                  className="sm-caliper-end s-end"
+                  style={{ left: `${sPct}%` }}
+                >
+                  ${r.source.toFixed(0)}
+                </span>
+                <span
+                  className="sm-caliper-end c-end"
+                  style={{ left: `${cPct}%` }}
+                >
+                  ${r.claimed.toFixed(0)}
+                </span>
               </div>
               <span className={"sm-caliper-delta " + (fail ? "over" : "clear")}>
                 {fail ? `+$${(r.claimed - r.source).toFixed(0)}` : "C≤S"}

@@ -104,19 +104,21 @@ export function DemoGate({
           <p className="sm-section-label">Claim → edit → check → verdict</p>
           <h2>Try a check</h2>
         </div>
-        <span className={"sm-chip " + (ok ? "grant" : "refuse")}>
+        <span
+          className={"sm-chip sm-chip-echo " + (ok ? "grant" : "refuse")}
+          aria-hidden
+        >
           {ok ? "GRANT" : "REFUSE"}
         </span>
       </div>
       <p className="sm-subj">{subject}</p>
-      <p className="sm-rival-hint">
-        Each line: claimed amount vs what is on the receipt
-      </p>
-      <p className="sm-demo-path">
-        Press <strong>Show REFUSE</strong> (over), then{" "}
-        <strong>Show GRANT</strong> (at or under). Stamp, Check ID, and bars
-        update live.
-      </p>
+      <div className="sm-telemetry" data-testid="demo-telemetry" aria-label="Check path">
+        <span className="sm-tele-step">1 REFUSE</span>
+        <span className="sm-tele-sep" aria-hidden />
+        <span className="sm-tele-step">2 GRANT</span>
+        <span className="sm-tele-sep" aria-hidden />
+        <span className="sm-tele-hint">claimed vs receipt · line by line</span>
+      </div>
       <div className="sm-demo-row" role="group" aria-label="Demo controls">
         {onOneBreath ? (
           <button
@@ -152,7 +154,7 @@ export function DemoGate({
       ) : (
         <div
           key={slamKey}
-          className={"sm-verdict sm-slam sm-first-breath sm-proof-theater " + (ok ? "grant" : "refuse")}
+          className={"sm-verdict sm-slam sm-first-breath sm-proof-theater sm-settle " + (ok ? "grant" : "refuse")}
           data-testid="verdict-slam"
         >
           <div className="sm-stamp-stage" aria-hidden>
@@ -168,7 +170,7 @@ export function DemoGate({
           >
             {ok ? "GRANT" : "REFUSE"}
           </div>
-          <p className="sm-seal" data-testid="hybrid-seal">
+          <p className="sm-seal sm-seal-ribbon" data-testid="hybrid-seal">
             {ok ? (
               <>
                 <strong>PASS</strong> · claim ≤ receipt on every line

@@ -79,7 +79,10 @@ export function DemoReel() {
     >
       <div className="sm-panel-head">
         <h2>Watch the demo</h2>
-        <span className="sm-chip">{label}</span>
+        <div className="sm-meta-chips">
+          <span className="sm-meta-chip">prefer-live</span>
+          <span className="sm-chip">{label}</span>
+        </div>
       </div>
       <div className="sm-demo-frame">
         <video
@@ -117,7 +120,7 @@ export function DemoReel() {
           className="sm-demo-yt-secondary"
           title="Public YT Jh-txwsIxuk — matching HUD is the player above"
         >
-          YouTube (Public)
+          YouTube · on-request
         </a>
       </p>
     </section>
