@@ -1,7 +1,7 @@
-# Lesson card — f307426
+# Lesson card — d5877d2
 
 1. What changed
-fix: point te-grant/te-refuse receipt URLs at GH Pages while quirky.site is down
+docs: PRIMARY live URL → GitHub Pages; mark quirky.convex.site DEAD
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
