@@ -43,7 +43,7 @@ video{width:100%;height:100%}
 <main>
 <h1>CeilingGate</h1>
 <p class="tag">Sorting Machine · email a receipt → C ≤ S → GRANT/REFUSE. Listing: vibeapps.dev/s/ceilinggate-1</p>
-<div class="frame"><video controls playsinline src="/demo/claimcheck-hud.mp4"></video></div>
+<div class="frame"><video controls playsinline src="/hls/CeilingGate-ClaimCheck-HUD.mp4"></video></div>
 <ul>
 <li><a href="/">Live app</a></li>
 <li><a href="/watch.html">Demo player</a> · <a href="https://www.youtube.com/watch?v=2KsMO90LpdE">YT 2KsMO90LpdE</a></li>
@@ -151,6 +151,18 @@ async function serveAsset(ctx: any, path: string) {
     return new Response("Not found", {
       status: 404,
       headers: { "cache-control": "no-store" },
+    });
+  }
+  // httpAction memory cap is 64MB — never arrayBuffer large binaries (71MB MP4 OOMs).
+  // Redirect to Convex storage URL; <video> follows 302 and storage supports Range.
+  if (path.endsWith(".mp4")) {
+    return new Response(null, {
+      status: 302,
+      headers: {
+        Location: asset.url,
+        "cache-control": "public, max-age=60",
+        "access-control-allow-origin": "*",
+      },
     });
   }
   const res = await fetch(asset.url);
