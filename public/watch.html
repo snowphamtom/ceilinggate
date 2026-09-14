@@ -32,24 +32,24 @@
       <h1>Claim Check Demo</h1>
       <div class="meta">
         <span class="chip" id="lab">HLS · Claim Check HUD</span>
-        <span class="chip">yt2 · 1280×800</span>
+        <span class="chip">yt3 · 1280×800 · audio</span>
         <span class="chip">prefer-live</span>
       </div>
-      <p>Primary: matching Claim Check HUD via HLS (progressive MP4 fallback). Tip Jar YouTube held — not the face.</p>
+      <p>Primary: Claim Check HUD audio masterpiece via HLS (progressive MP4 fallback). Tip Jar YouTube held — not the face.</p>
       <div class="frame" id="hls-frame">
         <video
           id="reel"
           controls
           playsinline
           preload="metadata"
-          poster="/demo/poster-grant.png"
+          poster="https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-yt3/poster-grant.png"
         ></video>
       </div>
       <p class="chip" id="prog-lab" style="margin-top:0.65rem">attaching…</p>
       <p style="margin-top:0.85rem">
         <a href="/">Back to app</a>
-        · <a href="https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-yt2/master.m3u8">HLS master</a>
-        · <a id="prog-link" href="https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-yt2/CeilingGate-ClaimCheck-HUD.mp4">Download MP4</a>
+        · <a href="https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-yt3/master.m3u8">HLS master</a>
+        · <a id="prog-link" href="https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-yt3/CeilingGate-ClaimCheck-HUD.mp4">Download MP4</a>
         · <a class="secondary" href="https://www.youtube.com/watch?v=2KsMO90LpdE" title="HOLD Tip Jar O-ID 2KsMO90LpdE">YouTube (Tip Jar)</a>
       </p>
 
@@ -73,9 +73,9 @@
       /* HOLD YT 2KsMO90LpdE — do not change O-ID until tip */
       const YT_ID = "2KsMO90LpdE";
       const PROG =
-        "https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-yt2/CeilingGate-ClaimCheck-HUD.mp4";
-      const MASTER = "https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-yt2/master.m3u8";
-      /* yt3 prep (flip on tip): allgas-demo-yt3/... */
+        "https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-yt3/CeilingGate-ClaimCheck-HUD.mp4";
+      const MASTER = "https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-yt3/master.m3u8";
+      /* LIVE: allgas-demo-yt3 audio pack */
       const HLS_JS = "https://cdn.jsdelivr.net/npm/hls.js@1.5.20/dist/hls.min.js";
       const v = document.getElementById("reel");
       const lab = document.getElementById("prog-lab");

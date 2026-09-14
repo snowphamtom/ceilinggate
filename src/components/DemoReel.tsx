@@ -1,4 +1,4 @@
-/** Prefer-live Claim Check HUD — HLS/progressive yt2 primary. Tip Jar YT held (secondary). */
+/** Prefer-live Claim Check HUD — HLS/progressive yt3 audio primary. Tip Jar YT held (secondary). */
 import { useCallback, useEffect, useRef, useState } from "react";
 import {
   attachAbr,
@@ -11,12 +11,11 @@ import "./DemoReel.css";
 /** HOLD — Tip Jar O-ID. Do NOT flip until Taylor tips new Public ID. */
 const YT_ID = "2KsMO90LpdE";
 const YT_URL = `https://www.youtube.com/watch?v=${YT_ID}`;
-const POSTER = "/demo/poster-grant.png";
+const POSTER = "https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-yt3/poster-grant.png";
 
 /**
- * LIVE tag: allgas-demo-yt2.
- * yt3 prep (do not flip until REEL audio tip):
- *   releases/download/allgas-demo-yt3/{master.m3u8,CeilingGate-ClaimCheck-HUD.mp4}
+ * LIVE tag: allgas-demo-yt3 (audio masterpiece).
+ * HOLD Tip Jar YT O-ID 2KsMO90LpdE until Taylor tips new Public ID.
  */
 export function DemoReel() {
   const shellRef = useRef<HTMLElement | null>(null);
