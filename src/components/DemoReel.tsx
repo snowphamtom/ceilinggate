@@ -111,7 +111,7 @@ export function DemoReel() {
           HLS
         </a>
         <span>·</span>
-        <a href="/watch.html">On-site player</a>
+        <a href={`${import.meta.env.BASE_URL}watch.html`}>On-site player</a>
         <span>·</span>
         <a
           href={YT_URL}

@@ -43,14 +43,14 @@
           controls
           playsinline
           preload="metadata"
-          poster="/hls/poster-grant.png"
+          poster="hls/poster-grant.png" id="poster"
         ></video>
       </div>
       <p class="chip" id="prog-lab" style="margin-top:0.65rem">attaching…</p>
       <p style="margin-top:0.85rem">
         <a href="/">Back to app</a>
-        · <a href="/hls/master.m3u8">HLS master</a>
-        · <a id="prog-link" href="/hls/CeilingGate-ClaimCheck-HUD.mp4">Download MP4</a>
+        · <a href="hls/master.m3u8" id="hls-link">HLS master</a>
+        · <a id="prog-link" href="hls/CeilingGate-ClaimCheck-HUD.mp4">Download MP4</a>
         · <a class="secondary" href="https://www.youtube.com/watch?v=Jh-txwsIxuk" title="Public YT O-ID Jh-txwsIxuk">YouTube · on-request</a>
       </p>
 
@@ -73,8 +73,16 @@
     <script>
       /* Public YT Jh-txwsIxuk; primary stays /hls/master.m3u8 */
       const YT_ID = "Jh-txwsIxuk";
-      const PROG = "/hls/CeilingGate-ClaimCheck-HUD.mp4";
-      const MASTER = "/hls/master.m3u8";
+      var BASE = new URL(".", location.href).pathname; // /ceilinggate/ or /
+      if (!BASE.endsWith("/")) BASE += "/";
+      const PROG = BASE + "hls/CeilingGate-ClaimCheck-HUD.mp4";
+      const MASTER = BASE + "hls/master.m3u8";
+      var posterEl = document.getElementById("poster");
+      if (posterEl) posterEl.setAttribute("poster", BASE + "hls/poster-grant.png");
+      var hlsLink = document.getElementById("hls-link");
+      if (hlsLink) hlsLink.setAttribute("href", MASTER);
+      var progLink = document.getElementById("prog-link");
+      if (progLink) progLink.setAttribute("href", PROG);
       /* LIVE: same-origin yt7 */
       const HLS_JS = "https://cdn.jsdelivr.net/npm/hls.js@1.5.20/dist/hls.min.js";
       const v = document.getElementById("reel");

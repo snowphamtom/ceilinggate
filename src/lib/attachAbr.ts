@@ -3,10 +3,11 @@
  * Do NOT fetch GitHub releases (no CORS).
  */
 
-export const HLS_MASTER = "/hls/master.m3u8";
-export const RUNG_LOW = "/hls/CeilingGate-ClaimCheck-HUD.mp4";
-export const RUNG_HIGH = "/hls/CeilingGate-ClaimCheck-HUD.mp4";
-export const POSTER = "/hls/poster-grant.png";
+const BASE = import.meta.env.BASE_URL || "/";
+export const HLS_MASTER = `${BASE}hls/master.m3u8`;
+export const RUNG_LOW = `${BASE}hls/CeilingGate-ClaimCheck-HUD.mp4`;
+export const RUNG_HIGH = `${BASE}hls/CeilingGate-ClaimCheck-HUD.mp4`;
+export const POSTER = `${BASE}hls/poster-grant.png`;
 
 const HLS_JS =
   "https://cdn.jsdelivr.net/npm/hls.js@1.5.20/dist/hls.min.js";
