@@ -1,7 +1,7 @@
-# Lesson card — 960c080
+# Lesson card — d1d2e72
 
 1. What changed
-face: wire MASTER to allgas-demo-yt3 audio pack
+fix: same-origin HLS/MP4 for Claim Check demo (CORS)
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
