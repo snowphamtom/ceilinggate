@@ -1,7 +1,7 @@
-# Lesson card — bb35def
+# Lesson card — 003bbe9
 
 1. What changed
-fix: 302 /hls MP4 to storage (httpAction 64MB OOM)
+docs: yt4 audio remaster PASS evidence (LUFS + curl)
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
