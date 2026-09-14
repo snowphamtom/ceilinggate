@@ -1,7 +1,7 @@
-# Lesson card — 4fbb607
+# Lesson card — 3e7df66
 
 1. What changed
-Wire send-free Square shop funnel into Claim Check footer.
+feat: Claim Check soft-bridge footer — Vault $499 + T&E $1k PDP beside Shop
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
