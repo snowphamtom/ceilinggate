@@ -301,7 +301,7 @@ export default function SortingMachine() {
         </ol>
       </header>
 
-      {/* Y0 proof: GRANT + S_H + check id + caliper before pipeline */}
+      {/* Y0 proof: GRANT/REFUSE + Check ID + caliper before pipeline */}
       <div className="sm-proof-fold sm-enter sm-enter-2" data-testid="proof-above-fold">
         <DemoGate
           rows={rows}
@@ -360,8 +360,7 @@ export default function SortingMachine() {
               over → <strong>REFUSE</strong> (shows how much over).
             </p>
             <p className="sm-muted">
-              Residual honesty desk idea from Monsters Ink / MAGPIE: only grant
-              what the evidence can carry — no stretch.
+              Only grant what the receipt can carry — no stretch.
             </p>
           </div>
         </CalmDisclosure>

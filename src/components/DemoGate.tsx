@@ -56,7 +56,6 @@ export function DemoGate({
   const commitHex = liveResidual?.residualCommitment ?? local.commit;
   const historicHex = liveResidual?.historicAnchor ?? local.commit;
   const commitShort = commitHex.slice(0, 12);
-  const variance = liveResidual?.variance ?? local.variance;
   const projector =
     liveResidual != null
       ? liveResidual.cLeS
@@ -115,9 +114,9 @@ export function DemoGate({
         Each line: claimed amount vs what is on the receipt
       </p>
       <p className="sm-demo-path">
-        Press <strong>Show REFUSE</strong> (over the receipt), then{" "}
-        <strong>Show GRANT</strong> (at or under). The stamp, seal, Check ID, and
-        bars update live.
+        Press <strong>Show REFUSE</strong> (over), then{" "}
+        <strong>Show GRANT</strong> (at or under). Stamp, Check ID, and bars
+        update live.
       </p>
       <div className="sm-demo-row" role="group" aria-label="Demo controls">
         {onOneBreath ? (
@@ -173,11 +172,11 @@ export function DemoGate({
           <p className="sm-seal" data-testid="hybrid-seal">
             {ok ? (
               <>
-                <strong>S_H = 1</strong> · C ≤ S · commit OK
+                <strong>PASS</strong> · claim ≤ receipt on every line
               </>
             ) : (
               <>
-                <strong>S_H = 0</strong> · REFUSE · over amount shown
+                <strong>FAIL</strong> · claim over receipt — amount shown
               </>
             )}
           </p>
@@ -202,8 +201,7 @@ export function DemoGate({
               {idReveal ? commitShort : "············"}
             </code>
             <span className="sm-proof-meta">
-              σ² {variance.toExponential(2)}
-              {projector === "CLEAR" ? " · balanced" : ""}
+              {projector === "CLEAR" ? "All lines clear" : "Over on marked lines"}
               {" · "}
               {liveLabel}
             </span>
