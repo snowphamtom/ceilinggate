@@ -1,0 +1,13 @@
+I=-17.26 LUFS  TP=-1.87 dBTP  LRA=2.90
+{
+  "input_i": "-17.26",
+  "input_tp": "-1.87",
+  "input_lra": "2.90",
+  "input_thresh": "-27.42",
+  "output_i": "-17.56",
+  "output_tp": "-1.99",
+  "output_lra": "2.20",
+  "output_thresh": "-27.67",
+  "normalization_type": "dynamic",
+  "target_offset": "0.56"
+}
