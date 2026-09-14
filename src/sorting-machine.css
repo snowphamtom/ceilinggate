@@ -3144,9 +3144,9 @@ body {
 
 .sm-shell.sm-masterpiece.sm-hud {
   --void: #08061a;
-  --ink: #e8e6f8;
-  --cream: #f0ecff;
-  --muted: #8b87a8;
+  --ink: #f5f2ff;
+  --cream: #fff8ec;
+  --muted: #b4aed0;
   --panel: rgba(16, 10, 36, 0.88);
   --line: rgba(168, 85, 247, 0.38);
   --grant: #2ecf8f;
@@ -3297,14 +3297,14 @@ body {
 .sm-shell.sm-masterpiece.sm-hud .sm-desk-kicker {
   position: relative;
   z-index: 1;
-  color: #b8a8e0;
+  color: #ddd4f5;
   font-size: 0.86rem;
   margin: 0.02rem 0 0.12rem;
 }
 .sm-shell.sm-masterpiece.sm-hud .sm-lede {
   position: relative;
   z-index: 1;
-  color: #9a94b8;
+  color: #c8c2e0;
   font-size: 0.78rem;
   line-height: 1.35;
   margin: 0.1rem 0 0;
@@ -3493,16 +3493,18 @@ body {
   margin: 0 0 0.28rem;
   font-size: 0.74rem;
   line-height: 1.3;
-  color: #9a94b8;
+  color: #c8c2e0;
 }
 .sm-shell.sm-masterpiece.sm-hud .sm-proof-fold .sm-demo-row {
   gap: 0.3rem;
   margin-bottom: 0.28rem;
 }
 .sm-shell.sm-masterpiece.sm-hud .sm-proof-fold .sm-btn {
-  min-height: 2.4rem;
-  padding: 0.4rem 0.75rem;
-  font-size: 0.72rem;
+  min-height: 2.55rem;
+  padding: 0.45rem 0.85rem;
+  font-size: 0.78rem;
+  font-weight: 650;
+  letter-spacing: 0.02em;
 }
 
 /* Stamp theater — jewel HUD with bloom */

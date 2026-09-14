@@ -5,75 +5,81 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Claim Check · Demo video</title>
     <style>
-      html, body { margin: 0; background: #070b14; color: #e8eefc; font-family: system-ui, sans-serif; }
+      html, body { margin: 0; background: #08061a; color: #f0ecff; font-family: system-ui, sans-serif; }
       main { max-width: 880px; margin: 24px auto; padding: 0 16px; }
       h1 { font-size: 1.15rem; font-weight: 600; letter-spacing: 0.02em; }
-      p, .chip { color: #9aa8c2; font-size: 0.92rem; }
+      p, .chip { color: #b8b0d8; font-size: 0.92rem; }
       .frame {
         position: relative; aspect-ratio: 16 / 9; background: #000;
-        border-radius: 8px; overflow: hidden; border: 1px solid #1a2438;
-        box-shadow: 0 0 0 1px #0c1220 inset;
+        border-radius: 8px; overflow: hidden; border: 1px solid rgba(168, 85, 247, 0.4);
+        box-shadow: 0 0 0 1px #0c0818 inset, 0 0 24px rgba(168, 85, 247, 0.12);
       }
       .frame iframe, .frame video { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; background: #000; }
       .frame video { object-fit: contain; }
-      a { color: #8ec5ff; }
+      a { color: #4de8ff; }
+      a.secondary { color: #8b87a8; font-size: 0.85rem; }
       .meta { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; align-items: baseline; margin: 0.75rem 0 1rem; }
       .chip {
         display: inline-block; padding: 0.15rem 0.55rem; border-radius: 999px;
-        border: 1px solid #243044; background: #0c1220; color: #b8c6de; font-size: 0.78rem;
+        border: 1px solid rgba(168, 85, 247, 0.4); background: #100a24; color: #c8c4e8; font-size: 0.78rem;
       }
-      .sec { margin-top: 1.75rem; padding-top: 1rem; border-top: 1px solid #1a2438; }
-      .sec h2 { font-size: 0.95rem; font-weight: 600; margin: 0 0 0.5rem; }
+      .sec { margin-top: 1.75rem; padding-top: 1rem; border-top: 1px solid rgba(168, 85, 247, 0.28); }
+      .sec h2 { font-size: 0.95rem; font-weight: 600; margin: 0 0 0.5rem; color: #c8c4e8; }
     </style>
   </head>
   <body>
     <main>
       <h1>Claim Check Demo</h1>
       <div class="meta">
-        <span class="chip" id="lab">YouTube</span>
-        <span class="chip">174s · silent</span>
-        <span class="chip">Demo file</span>
+        <span class="chip" id="lab">HLS · Claim Check HUD</span>
+        <span class="chip">yt2 · 1280×800</span>
+        <span class="chip">prefer-live</span>
       </div>
-      <p>Prefer-live YouTube embed. On-site player uses HLS (~5 Mbps) with progressive MP4 fallback.</p>
-      <div class="frame" id="yt-frame">
-        <iframe
-          id="yt"
-          src="https://www.youtube.com/embed/2KsMO90LpdE?rel=0"
-          title="Claim Check demo"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          referrerpolicy="strict-origin-when-cross-origin"
-          allowfullscreen
-        ></iframe>
+      <p>Primary: matching Claim Check HUD via HLS (progressive MP4 fallback). Tip Jar YouTube held — not the face.</p>
+      <div class="frame" id="hls-frame">
+        <video
+          id="reel"
+          controls
+          playsinline
+          preload="metadata"
+          poster="/demo/poster-grant.png"
+        ></video>
       </div>
+      <p class="chip" id="prog-lab" style="margin-top:0.65rem">attaching…</p>
       <p style="margin-top:0.85rem">
         <a href="/">Back to app</a>
-        · <a href="https://www.youtube.com/watch?v=2KsMO90LpdE">YouTube</a>
         · <a href="https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-yt2/master.m3u8">HLS master</a>
         · <a id="prog-link" href="https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-yt2/CeilingGate-ClaimCheck-HUD.mp4">Download MP4</a>
+        · <a class="secondary" href="https://www.youtube.com/watch?v=2KsMO90LpdE" title="HOLD Tip Jar O-ID 2KsMO90LpdE">YouTube (Tip Jar)</a>
       </p>
 
       <section class="sec">
-        <h2>On-site Player</h2>
-        <p class="chip" id="prog-lab">idle</p>
-        <div class="frame" style="margin-top:0.5rem">
-          <video
-            id="reel"
-            controls
-            playsinline
-            preload="none"
-            poster="/demo/poster-grant.png"
-          ></video>
+        <h2>YouTube (Tip Jar — secondary)</h2>
+        <p>Held O-ID <code>2KsMO90LpdE</code>. Flip only after Taylor uploads matching HUD + tips new Public ID.</p>
+        <div class="frame" id="yt-frame" style="max-width:420px; margin-top:0.5rem">
+          <iframe
+            id="yt"
+            src="https://www.youtube.com/embed/2KsMO90LpdE?rel=0"
+            title="Tip Jar (held)"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
         </div>
       </section>
     </main>
     <script>
+      /* HOLD YT 2KsMO90LpdE — do not change O-ID until tip */
       const YT_ID = "2KsMO90LpdE";
       const PROG =
         "https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-yt2/CeilingGate-ClaimCheck-HUD.mp4";
       const MASTER = "https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-yt2/master.m3u8";
+      /* yt3 prep (flip on tip): allgas-demo-yt3/... */
       const HLS_JS = "https://cdn.jsdelivr.net/npm/hls.js@1.5.20/dist/hls.min.js";
       const v = document.getElementById("reel");
       const lab = document.getElementById("prog-lab");
+      const headLab = document.getElementById("lab");
 
       function isTrueHls(t) {
         if (!t || !t.includes("#EXTM3U")) return false;
@@ -102,6 +108,7 @@
       function useProgressive(why) {
         v.src = PROG;
         lab.textContent = "Progressive MP4" + (why ? " · " + why : "");
+        if (headLab) headLab.textContent = "Progressive · Claim Check HUD";
       }
 
       async function attachOnSite() {
@@ -120,6 +127,7 @@
         if (v.canPlayType("application/vnd.apple.mpegurl")) {
           v.src = MASTER;
           lab.textContent = "HLS native";
+          if (headLab) headLab.textContent = "HLS native · Claim Check HUD";
           return;
         }
         try {
@@ -138,30 +146,19 @@
               lab.textContent = lv
                 ? "HLS · " + (lv.height || "?") + "p"
                 : "HLS";
+              if (headLab) headLab.textContent = lab.textContent + " · Claim Check HUD";
             };
             hls.on(window.Hls.Events.LEVEL_SWITCHED, tag);
             hls.on(window.Hls.Events.MANIFEST_PARSED, tag);
             lab.textContent = "HLS";
+            if (headLab) headLab.textContent = "HLS · Claim Check HUD";
             return;
           }
         } catch (e) {}
         useProgressive("hls.js unavailable");
       }
 
-      if ("IntersectionObserver" in window) {
-        var io = new IntersectionObserver(
-          function (ents) {
-            if (ents.some(function (e) { return e.isIntersecting; })) {
-              attachOnSite();
-              io.disconnect();
-            }
-          },
-          { threshold: 0.15 },
-        );
-        io.observe(v);
-      } else {
-        attachOnSite();
-      }
+      attachOnSite();
     </script>
   </body>
 </html>

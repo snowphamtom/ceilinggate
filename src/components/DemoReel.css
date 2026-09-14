@@ -55,3 +55,19 @@
   color: #9be7c0;
   border-color: rgba(31, 157, 99, 0.55);
 }
+
+.sm-demo-yt-secondary {
+  color: #8b87a8 !important;
+  opacity: 0.85;
+  font-size: 0.68rem;
+}
+.sm-demo-yt-secondary:hover { color: #b8b0d8 !important; opacity: 1; }
+.sm-shell.sm-hud .sm-demo-play {
+  border-color: rgba(77, 232, 255, 0.55);
+  background: rgba(8, 6, 26, 0.88);
+  color: #f0ecff;
+  box-shadow: 0 0 18px rgba(77, 232, 255, 0.22);
+}
+.sm-shell.sm-hud .sm-demo-play:hover {
+  background: rgba(77, 232, 255, 0.18);
+}
