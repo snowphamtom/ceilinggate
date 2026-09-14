@@ -50,7 +50,7 @@ Rule: numbers first, language second. Leftover on one line cannot cover a hole o
 
 | Piece | Work on the live path |
 |---|---|
-| **Convex** | Claims, scrapes, gate decisions, Claim Check board on `*.convex.site`. Evidence backend stamps residual Check ID via the live residual query. GitHub Actions deploys with `npx convex deploy`. |
+| **Convex** | Claims, scrapes, gate decisions on `*.convex.cloud`. PRIMARY face is GitHub Pages (`.convex.site` DEAD — accepted rule risk). Evidence backend stamps residual Check ID via the live residual query. GitHub Actions deploys with `npx convex deploy`. |
 | **Firecrawl** | Scrapes the public receipt URL into a line ledger. No URL, no live judgment. |
 | **AgentMail** | Inbox `ceilinggate-claims@agentmail.to` plus webhook into Convex. |
 | **OpenAI** | `oneLine` after the numbers — one sentence only. Does **not** pick GRANT or REFUSE. |
@@ -61,7 +61,7 @@ The sample is a chat thread about mail. Claim Check is a forensic **receipt-line
 
 ## Stack
 
-- Vite + React + TypeScript — Claim Check SPA root on Convex static hosting
+- Vite + React + TypeScript — Claim Check SPA PRIMARY on GitHub Pages (`VITE_CONVEX_URL` → `*.convex.cloud`; `.site` DEAD)
 - Convex schema, queries, mutations, actions, HTTP routes (+ Evidence fleet-gerbil residual anchors)
 - Firecrawl Convex component (`pipeline.scrapeAndGate`)
 - AgentMail component + `/agentmail/webhook`
@@ -72,7 +72,7 @@ The sample is a chat thread about mail. Claim Check is a forensic **receipt-line
 
 ## Observatorium (two-host law)
 
-Static fortress + HTTP = `*.convex.site`. Convex client API = `*.convex.cloud`.
+Two-host law: client API = `*.convex.cloud`. Static face PRIMARY = GitHub Pages. `*.convex.site` DEAD (free-plan HTTP 500) — accepted rule risk until plan lifts.
 
 **Never** point `VITE_CONVEX_URL` at `.site` — the SPA client dies. PRIMARY public face: `https://snowphamtom.github.io/ceilinggate/`. `.convex.site` DEAD until plan lifts.
 
@@ -80,8 +80,11 @@ Inner crawl: `npx convex run firewallCrawl:run '{}'`. Outer: `node scripts/firew
 
 ## Lean judge face (KEEP)
 
-Root SPA is the money sorter only: hero + 5-stage GATHER→BUCKET · prefer-live `/hls` yt7 · Public YT `hDnY3_iszX4` · Demo REFUSE then GRANT · Check ID stamp · lean AgentMail · sponsor chips (Firecrawl / AgentMail / OpenAI). Cascade roster and Drive buckets are stripped from root.
+Root SPA is the money sorter only: hero + 5-stage GATHER→BUCKET · prefer-live `/hls` yt7 · Public YT `hDnY3_iszX4` · Demo REFUSE then GRANT · Check ID stamp · lean AgentMail intake. Cascade/Drive/Sponsors stripped from root.
 
 ## Eligibility snapshot
 
 New app after 25 Aug 2026. Convex backend. Public GitHub. Live GitHub Pages PRIMARY (`.site` DEAD). Video under 3 minutes (prefer-live `/hls` yt7 + Public YT `hDnY3_iszX4`). Luma / Vibe listing `claim-check`. Social tags sent.
+
+## Senate lock 2026-09-14 12:37 CT
+PRIMARY face = GitHub Pages. `.convex.site` DEAD — **accepted rule risk** (no Pro). Judges: use Pages URL on vibeapps listing.
