@@ -1,7 +1,7 @@
-# Lesson card — 2f1d2a8
+# Lesson card — bb81d1f
 
 1. What changed
-feat: flip Public YT to Jh-txwsIxuk (Claim Check LIVE)
+Canonical vibeapps listing → claim-check (retire ceilinggate-1).
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
