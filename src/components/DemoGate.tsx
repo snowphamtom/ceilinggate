@@ -54,7 +54,6 @@ export function DemoGate({
     subject || "ceilinggate-gr21",
   );
   const commitHex = liveResidual?.residualCommitment ?? local.commit;
-  const historicHex = liveResidual?.historicAnchor ?? local.commit;
   const commitShort = commitHex.slice(0, 12);
   const projector =
     liveResidual != null
@@ -185,8 +184,8 @@ export function DemoGate({
               "sm-proof-stamp sm-proof-readable" +
               (idReveal ? " is-revealed el-reveal" : " is-sealed")
             }
-            data-element={idReveal ? "REVEAL" : "SEALED"}
-            title={`commit=${commitHex}\nhistoric=${historicHex}`}
+            data-id-state={idReveal ? "open" : "sealed"}
+            title={idReveal ? `Check ID ${commitShort}` : "Check ID sealed until reveal"}
             data-testid="proof-residual-stamp"
           >
             <span className="sm-proof-kicker">Check ID</span>
