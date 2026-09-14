@@ -1,7 +1,7 @@
-# Lesson card — fdd6491
+# Lesson card — 4e4cfb1
 
 1. What changed
-watch: densify-v3 stamp — poster-only YT, zero iframe
+Flip remaining docs Public YT O-ID to hDnY3_iszX4.
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
