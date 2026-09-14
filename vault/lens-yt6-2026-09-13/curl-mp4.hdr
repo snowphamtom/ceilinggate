@@ -1,0 +1,14 @@
+HTTP/2 302 
+date: Mon, 14 Sep 2026 01:55:16 GMT
+content-length: 0
+location: https://quirky-rhinoceros-204.convex.cloud/api/storage/c69f41b3-179f-4681-96b7-9995f27da3c2
+access-control-allow-origin: *
+cache-control: public, max-age=14400
+convex-usher: usher
+via: 1.1 Caddy
+expires: Mon, 14 Sep 2026 05:55:16 GMT
+cf-cache-status: EXPIRED
+server: cloudflare
+cf-ray: a3abc4bcfb559c3a-IAD
+alt-svc: h3=":443"; ma=86400
+
