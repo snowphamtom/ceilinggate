@@ -1,7 +1,7 @@
-# Lesson card — 4837846
+# Lesson card — f307426
 
 1. What changed
-feat: static-alt proxy — prefer GitHub Pages SPA when Convex site storage blocked
+fix: point te-grant/te-refuse receipt URLs at GH Pages while quirky.site is down
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
