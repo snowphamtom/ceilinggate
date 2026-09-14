@@ -1,7 +1,7 @@
-# Lesson card — dec0f87
+# Lesson card — 81475d1
 
 1. What changed
-strip Sponsors + square.site from Claim Check Pages face
+All Gas: scrub fixture square.site; stub Sponsors; rename archive dest label.
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
