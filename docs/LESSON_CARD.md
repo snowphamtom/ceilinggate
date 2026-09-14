@@ -1,7 +1,7 @@
-# Lesson card — c6d3931
+# Lesson card — 4fbb607
 
 1. What changed
-feat: LENS densify leap 1–5 — PASS ribbon, caliper endpoints, telemetry rail, settle, on-request YT
+Wire send-free Square shop funnel into Claim Check footer.
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
