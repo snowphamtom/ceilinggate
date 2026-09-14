@@ -13,7 +13,6 @@ import { KlausOrganizer } from "./components/KlausOrganizer";
 import { DemoGate, type LineRow } from "./components/DemoGate";
 import { DemoReel } from "./components/DemoReel";
 import { LiveFeeds } from "./components/LiveFeeds";
-import { SponsorChips } from "./components/SponsorChips";
 import { SortingMachineStages } from "./components/SortingMachine";
 import { CalmDisclosure } from "./components/CalmDisclosure";
 import { useLastResidual } from "./lib/gr21Live";
@@ -122,11 +121,6 @@ export default function SortingMachine() {
   const [activePipe, setActivePipe] = useState(0);
   const [pulse, setPulse] = useState(0);
   const [subject, setSubject] = useState(GRANT_FIXTURE.email.subject);
-  const [pathLit, setPathLit] = useState({
-    firecrawl: false,
-    agentmail: false,
-    openai: false,
-  });
   const [breathBusy, setBreathBusy] = useState(false);
 
   useEffect(() => {
@@ -160,25 +154,20 @@ export default function SortingMachine() {
 
   const demoGrant = useCallback(() => {
     runSort(rowsFromFixture(GRANT_FIXTURE), GRANT_FIXTURE.email.subject);
-    setPathLit((p) => ({ ...p, firecrawl: true, openai: true }));
   }, [runSort]);
 
   const demoRefuse = useCallback(() => {
     runSort(rowsFromFixture(REFUSE_FIXTURE), REFUSE_FIXTURE.email.subject);
-    setPathLit((p) => ({ ...p, firecrawl: true, openai: true }));
   }, [runSort]);
 
   const oneBreath = useCallback(() => {
     if (breathBusy) return;
     setBreathBusy(true);
-    setPathLit((p) => ({ ...p, firecrawl: true }));
     runSort(rowsFromFixture(REFUSE_FIXTURE), REFUSE_FIXTURE.email.subject);
-    setPathLit((p) => ({ ...p, firecrawl: true, openai: true }));
     /* settle: controls→ID→bars→stamp (CSS sm-settle stages); then flip GRANT */
     window.setTimeout(() => {
       runSort(rowsFromFixture(GRANT_FIXTURE), GRANT_FIXTURE.email.subject);
-      setPathLit((p) => ({ ...p, firecrawl: true, openai: true }));
-      setBreathBusy(false);
+        setBreathBusy(false);
     }, 1400);
   }, [breathBusy, runSort]);
 
@@ -212,11 +201,6 @@ export default function SortingMachine() {
 
   const d = decision ?? decisionFromRows(rows);
   const fails = plainFails(rows, d);
-  const agentmailLit =
-    pathLit.agentmail ||
-    Boolean(lastResidual) ||
-    (lane.vince?.pending?.length ?? 0) > 0 ||
-    (lane.cole?.proposeRows ?? 0) > 0;
 
   return (
     <div
@@ -364,19 +348,6 @@ export default function SortingMachine() {
           </div>
         </CalmDisclosure>
 
-        <CalmDisclosure
-          id="sponsors"
-          title="Sponsors on the live path"
-          summary="Firecrawl · AgentMail · OpenAI"
-        >
-          <SponsorChips
-            lit={{
-              firecrawl: pathLit.firecrawl,
-              agentmail: agentmailLit,
-              openai: pathLit.openai && decision != null,
-            }}
-          />
-        </CalmDisclosure>
       </div>
 
       <div className="sm-below-fold sm-grid sm-grid-lean sm-enter sm-enter-4">
