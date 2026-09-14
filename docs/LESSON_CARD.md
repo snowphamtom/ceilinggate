@@ -1,7 +1,7 @@
-# Lesson card — 6753a47
+# Lesson card — dec0f87
 
 1. What changed
-All Gas: HLS-only prefer-live — drop 69MB mp4 fallback and Download link.
+strip Sponsors + square.site from Claim Check Pages face
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
