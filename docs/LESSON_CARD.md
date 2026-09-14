@@ -1,7 +1,7 @@
-# Lesson card — 8b91ddb
+# Lesson card — 4b7b16a
 
 1. What changed
-fix: yt6 walkthrough-intro custom bed (no VO)
+fix: yt7 slower walkthrough bed with quiet echo
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
