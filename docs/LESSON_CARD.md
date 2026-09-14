@@ -1,7 +1,7 @@
-# Lesson card — 1c3dfad
+# Lesson card — 8b91ddb
 
 1. What changed
-fix: yt5 demo audio — no VO, pleasant bed only
+fix: yt6 walkthrough-intro custom bed (no VO)
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
