@@ -14,11 +14,11 @@ https://quirky-rhinoceros-204.convex.site/
 Repo:
 https://github.com/snowphamtom/ceilinggate
 
-Demo / video (prefer-live — letter **O** not zero):
-https://www.youtube.com/watch?v=2KsMO90LpdE
-
-On-site player:
+Demo / video (prefer-live on-site HLS yt7):
 https://quirky-rhinoceros-204.convex.site/watch.html
+
+YouTube Public (secondary — Tip Jar 2KsMO90LpdE retired):
+https://www.youtube.com/watch?v=Jh-txwsIxuk
 
 Progressive mp4 (same cut):
 https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-yt/CeilingGate-Forge-gates-clip-YT.mp4

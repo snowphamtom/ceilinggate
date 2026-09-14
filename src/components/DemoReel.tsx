@@ -1,4 +1,4 @@
-/** Prefer-live Claim Check HUD — HLS/progressive yt3 audio primary. Tip Jar YT held (secondary). */
+/** Prefer-live Claim Check HUD — same-origin /hls yt7 primary. Public YT secondary. */
 import { useCallback, useEffect, useRef, useState } from "react";
 import {
   attachAbr,
@@ -9,12 +9,12 @@ import {
 } from "../lib/attachAbr";
 import "./DemoReel.css";
 
-/** HOLD — Tip Jar O-ID. Do NOT flip until Taylor tips new Public ID. */
-const YT_ID = "2KsMO90LpdE";
+/** Public YT O-ID — Tip Jar 2KsMO90LpdE retired. */
+const YT_ID = "Jh-txwsIxuk";
 const YT_URL = `https://www.youtube.com/watch?v=${YT_ID}`;
 /**
- * LIVE tag: allgas-demo-yt3 (audio masterpiece).
- * HOLD Tip Jar YT O-ID 2KsMO90LpdE until Taylor tips new Public ID.
+ * LIVE: prefer-live same-origin /hls yt7 (primary).
+ * Public YT secondary: Jh-txwsIxuk (Tip Jar 2KsMO90LpdE retired).
  */
 export function DemoReel() {
   const shellRef = useRef<HTMLElement | null>(null);
@@ -115,9 +115,9 @@ export function DemoReel() {
           target="_blank"
           rel="noreferrer"
           className="sm-demo-yt-secondary"
-          title="Tip Jar hold — matching HUD is the player above"
+          title="Public YT Jh-txwsIxuk — matching HUD is the player above"
         >
-          YouTube (Tip Jar)
+          YouTube (Public)
         </a>
       </p>
     </section>

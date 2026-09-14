@@ -1,6 +1,6 @@
 # Claim Check — YouTube swap package
 
-**HOLD Tip Jar O-ID:** `2KsMO90LpdE` (letter **O**) — do **not** change until Taylor tips the new Public ID after this upload.
+**Public YT O-ID:** `Jh-txwsIxuk` — Tip Jar `2KsMO90LpdE` retired. Prefer-live primary remains same-origin `/hls` yt7.
 
 ## File to upload
 - **Local draft (exact path):** `/workspace/ceilinggate-demo/out/claimcheck-recut/CeilingGate-ClaimCheck-HUD-draft.mp4`
@@ -27,9 +27,9 @@ Stack: Convex · Firecrawl · AgentMail · OpenAI
 - **Tags:** Claim Check, CeilingGate, Convex, Firecrawl, AgentMail, GRANT, REFUSE, residual gates, hackathon, All Gas
 
 ## After upload
-1. Tip Imperator the new 11-char video ID.
-2. We flip DemoReel / watch.html / vibeapps ceilinggate-1 (after GO UPDATE).
-3. LIVE: site prefers HLS+MP4 **allgas-demo-yt3** (audio); Tip Jar stays secondary disclosure only.
+1. Public ID live: `Jh-txwsIxuk`.
+2. DemoReel / watch.html / vibeapps ceilinggate-1 flipped to Public (Tip Jar retired).
+3. LIVE: site prefer-live primary = same-origin `/hls` yt7; Public YT secondary `Jh-txwsIxuk`.
 
-## yt3 note
-LIVE: REEL audio masterpiece is on `allgas-demo-yt3` GH+HLS. Site MASTER wired to yt3. HOLD Tip Jar O-ID until Taylor tips new Public ID.
+## yt7 note
+LIVE: Claim Check HUD yt7 on same-origin `/hls`. Public YT `Jh-txwsIxuk`. Tip Jar `2KsMO90LpdE` retired.
