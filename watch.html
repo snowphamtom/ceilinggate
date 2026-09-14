@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Cache-Control" content="no-cache" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Claim Check · Demo video</title>
+    <!-- densify-v3 poster-only YT 2026-09-14 -->
+    <!-- densify-v2: YT details + mount-on-open -->
+    <style>
+      html, body { margin: 0; background: #08061a; color: #f0ecff; font-family: system-ui, sans-serif; }
+      main { max-width: 880px; margin: 24px auto; padding: 0 16px; }
+      h1 { font-size: 1.15rem; font-weight: 600; letter-spacing: 0.02em; }
+      p, .chip { color: #b8b0d8; font-size: 0.92rem; }
+      .frame {
+        position: relative; aspect-ratio: 16 / 9; background: #000;
+        border-radius: 8px; overflow: hidden; border: 1px solid rgba(168, 85, 247, 0.4);
+        box-shadow: 0 0 0 1px #0c0818 inset, 0 0 24px rgba(168, 85, 247, 0.12);
+      }
+      .frame iframe, .frame video { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; background: #000; }
+      .frame video { object-fit: contain; }
+      a { color: #4de8ff; }
+      a.secondary { color: #8b87a8; font-size: 0.85rem; }
+      .meta { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; align-items: baseline; margin: 0.75rem 0 1rem; }
+      .chip {
+        display: inline-block; padding: 0.15rem 0.55rem; border-radius: 999px;
+        border: 1px solid rgba(168, 85, 247, 0.4); background: #100a24; color: #c8c4e8; font-size: 0.78rem;
+      }
+      .sec { margin-top: 1.75rem; padding-top: 1rem; border-top: 1px solid rgba(168, 85, 247, 0.28); }
+      .sec h2 { font-size: 0.95rem; font-weight: 600; margin: 0 0 0.5rem; color: #c8c4e8; }
+      details.sec > summary {
+        cursor: pointer; font-size: 0.95rem; font-weight: 600; color: #c8c4e8;
+        list-style: none; margin: 0 0 0.5rem;
+      }
+      details.sec > summary::-webkit-details-marker { display: none; }
+      details.sec > summary::before { content: "▸ "; color: #8b87a8; }
+      details.sec[open] > summary::before { content: "▾ "; }
+      a.yt-poster {
+        display: inline-flex; flex-direction: column; gap: 0.45rem; margin-top: 0.5rem;
+        max-width: 420px; text-decoration: none; color: #c8c4e8;
+      }
+      a.yt-poster img {
+        width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover;
+        border-radius: 8px; border: 1px solid rgba(168, 85, 247, 0.4);
+        background: #100a24;
+      }
+      a.yt-poster span { font-size: 0.85rem; color: #4de8ff; }
+      details.sec:not([open]) > *:not(summary) { display: none !important; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Claim Check Demo</h1>
+      <div class="meta">
+        <span class="chip" id="lab">HLS · Claim Check HUD</span>
+        <span class="chip">yt7 · 1280×800</span>
+        <span class="chip">prefer-live</span>
+      </div>
+      <p>Primary: Claim Check HUD via same-origin HLS. YouTube stays collapsed until requested.</p>
+      <div class="frame" id="hls-frame">
+        <video
+          id="reel"
+          controls
+          playsinline
+          preload="metadata"
+          poster="hls/poster-grant.png" id="poster"
+        ></video>
+      </div>
+      <p class="chip" id="prog-lab" style="margin-top:0.65rem">attaching…</p>
+      <p style="margin-top:0.85rem">
+        <a id="back-app" href="./">Back to app</a>
+        · <a href="hls/master.m3u8" id="hls-link">HLS master</a>
+        · <a id="prog-link" href="hls/master.m3u8">HLS master</a>
+      </p>
+
+      <details class="sec" id="yt-details">
+        <summary>YouTube · on-request · <code>hDnY3_iszX4</code></summary>
+        <a class="yt-poster" id="yt-poster" href="https://www.youtube.com/watch?v=hDnY3_iszX4" target="_blank" rel="noreferrer">
+          <img id="yt-thumb" src="hls/poster-grant.png" alt="Claim Check on YouTube" width="420" height="236" loading="lazy" />
+          <span>Open on YouTube · hDnY3_iszX4</span>
+        </a>
+      </details>
+    </main>
+    <script>
+      /* Public YT hDnY3_iszX4; primary stays /hls/master.m3u8 */
+      const YT_ID = "hDnY3_iszX4";
+      var BASE = new URL(".", location.href).pathname; // /ceilinggate/ or /
+      if (!BASE.endsWith("/")) BASE += "/";
+      var backApp = document.getElementById("back-app");
+      if (backApp) backApp.setAttribute("href", BASE);
+      const PROG = BASE + "hls/master.m3u8";
+      const MASTER = BASE + "hls/master.m3u8";
+      var posterEl = document.getElementById("poster");
+      if (posterEl) posterEl.setAttribute("poster", BASE + "hls/poster-grant.png");
+      var hlsLink = document.getElementById("hls-link");
+      if (hlsLink) hlsLink.setAttribute("href", MASTER);
+      var progLink = document.getElementById("prog-link");
+      if (progLink) progLink.setAttribute("href", PROG);
+      /* LIVE: same-origin yt7 */
+      var ytThumb = document.getElementById("yt-thumb");
+      if (ytThumb) {
+        ytThumb.src = BASE + "hls/poster-grant.png";
+        ytThumb.onerror = function () {
+          ytThumb.src = "https://i.ytimg.com/vi/" + YT_ID + "/hqdefault.jpg";
+        };
+      }
+      const HLS_JS = "https://cdn.jsdelivr.net/npm/hls.js@1.5.20/dist/hls.min.js";
+      const v = document.getElementById("reel");
+      const lab = document.getElementById("prog-lab");
+      const headLab = document.getElementById("lab");
+
+      function isTrueHls(t) {
+        if (!t || !t.includes("#EXTM3U")) return false;
+        if (t.includes("github.com/")) return false;
+        if (t.includes(".mp4") && !t.includes("prog.m3u8") && !t.includes("stream.m3u8")) return false;
+        return (
+          t.includes("stream.m3u8") ||
+          t.includes("prog.m3u8") ||
+          t.includes(".m4s") ||
+          /\.ts(\?|$)/.test(t) ||
+          (t.includes("#EXT-X-STREAM-INF") && !t.includes(".mp4"))
+        );
+      }
+
+      function loadHlsJs() {
+        if (window.Hls) return Promise.resolve();
+        return new Promise(function (resolve, reject) {
+          var s = document.createElement("script");
+          s.src = HLS_JS;
+          s.async = true;
+          s.onload = function () { resolve(); };
+          s.onerror = function () { reject(new Error("hls.js")); };
+          document.head.appendChild(s);
+        });
+      }
+
+      function useProgressive(why) {
+        v.src = PROG;
+        lab.textContent = "Progressive MP4" + (why ? " · " + why : "");
+        if (headLab) headLab.textContent = "Progressive · Claim Check HUD";
+      }
+
+      async function attachOnSite() {
+        var text = "";
+        try {
+          var r = await fetch(MASTER, { cache: "no-store" });
+          text = r.ok ? await r.text() : "";
+        } catch (e) {
+          useProgressive("master fetch fail");
+          return;
+        }
+        if (!isTrueHls(text)) {
+          useProgressive("no segment ladder");
+          return;
+        }
+        if (v.canPlayType("application/vnd.apple.mpegurl")) {
+          v.src = MASTER;
+          lab.textContent = "HLS native";
+          if (headLab) headLab.textContent = "HLS native · Claim Check HUD";
+          return;
+        }
+        try {
+          await loadHlsJs();
+          if (window.Hls && window.Hls.isSupported()) {
+            var hls = new window.Hls({
+              capLevelToPlayerSize: true,
+              startLevel: -1,
+              maxBufferLength: 12,
+              maxMaxBufferLength: 24,
+            });
+            hls.loadSource(MASTER);
+            hls.attachMedia(v);
+            var tag = function () {
+              var lv = hls.levels[hls.currentLevel];
+              lab.textContent = lv
+                ? "HLS · " + (lv.height || "?") + "p"
+                : "HLS";
+              if (headLab) headLab.textContent = lab.textContent + " · Claim Check HUD";
+            };
+            hls.on(window.Hls.Events.LEVEL_SWITCHED, tag);
+            hls.on(window.Hls.Events.MANIFEST_PARSED, tag);
+            lab.textContent = "HLS";
+            if (headLab) headLab.textContent = "HLS · Claim Check HUD";
+            return;
+          }
+        } catch (e) {}
+        useProgressive("hls.js unavailable");
+      }
+
+      attachOnSite();
+    </script>
+  </body>
+</html>

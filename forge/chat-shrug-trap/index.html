@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chat Shrug Trap — LIVE</title>
+  <style>
+    :root { color-scheme: dark; font-family: system-ui, sans-serif; }
+    body { margin: 0; background: #0b1220; color: #e8eef7; padding: 1.25rem; max-width: 40rem; }
+    h1 { font-size: 1.35rem; margin: 0 0 0.35rem; }
+    .lede { color: #a8bdd8; font-size: 0.92rem; margin: 0 0 1rem; }
+    label { display: block; margin: 0.55rem 0; font-size: 0.85rem; color: #a8bdd8; }
+    input { display: block; width: 100%; box-sizing: border-box; margin-top: 0.25rem;
+      padding: 0.55rem 0.65rem; border-radius: 8px; border: 1px solid #2a3a55;
+      background: #121a2b; color: #e8eef7; font: inherit; }
+    .row { display:flex; flex-wrap:wrap; gap:0.5rem; margin-top:0.75rem; }
+    button { padding: 0.55rem 0.9rem; border-radius: 8px; border: 1px solid #2a6df4;
+      background: #1a3a7a; color: #fff; font-weight: 600; cursor: pointer; }
+    button.ghost { background: transparent; border-color: #94a3b8; }
+    .card { margin-top: 1rem; padding: 1rem; border-radius: 10px; border: 1px solid #2a3a55; }
+    .card.grant { border-color: #1f9d63; background: rgba(31,157,99,0.12); }
+    .card.refuse { border-color: #d64545; background: rgba(214,69,69,0.12); }
+    table { width:100%; border-collapse: collapse; margin-top:0.75rem; font-size:0.88rem; }
+    th, td { text-align:left; padding:0.35rem 0.4rem; border-bottom:1px solid #2a3a55; font-family: ui-monospace, monospace; }
+    tr.fail td { color:#fca5a5; }
+    .foil { margin-top:0.75rem; padding:0.65rem 0.75rem; border-radius:8px; border:1px solid #d64545;
+      background:rgba(214,69,69,0.12); font-size:0.9rem; }
+    pre { white-space:pre-wrap; font-size:0.78rem; color:#a8bdd8; margin-top:0.75rem; }
+    a { color: #9ec5ff; }
+  </style>
+</head>
+<body>
+  <h1>Chat shrug trap</h1>
+  <p class="lede">Better than parent / Block / GIW: totals can look fine while one line is OVER. ResidualGates REFUSEs componentwise — copy the refuse receipt. Starts empty.</p>
+  <label>Claimed<input id="claimed" value="" placeholder="90, 60, 20, 10" /></label>
+  <label>On-receipt<input id="interior" value="" placeholder="100, 50, 25, 10" /></label>
+  <div class="row">
+    <button type="button" class="ghost" id="loadTrap">Load shrug trap</button>
+    <button type="button" class="ghost" id="reset">Reset</button>
+    <button type="button" id="run">Run gate</button>
+  </div>
+  <div id="out"></div>
+  <p><a href="/">← CeilingGate board</a></p>
+  <script>
+    function parseList(s) {
+      return s.split(/[\s,]+/).map(x => x.trim()).filter(Boolean).map(Number).filter(n => Number.isFinite(n));
+    }
+    function sum(xs) { return xs.reduce((a,b) => a+b, 0); }
+    function enclosed(interior, claimed) {
+      if (interior.length !== claimed.length) return false;
+      for (let i = 0; i < interior.length; i++) if (!(claimed[i] <= interior[i])) return false;
+      return true;
+    }
+    function breaches(interior, claimed, idx) {
+      if (!interior.length || !claimed.length) return [];
+      const rest = breaches(interior.slice(1), claimed.slice(1), idx + 1);
+      return interior[0] < claimed[0] ? [idx, ...rest] : rest;
+    }
+    function maskOf(failed) { return failed.reduce((a,i) => a | (1 << i), 0); }
+    function gateB(interior, claimed) {
+      if (enclosed(interior, claimed)) return { status: "grant", mask: 0, failed: [] };
+      const failed = breaches(interior, claimed, 0);
+      const m = maskOf(failed);
+      return { status: "refuse", mask: m === 0 ? 1 : m, failed };
+    }
+    function receipt(interior, claimed, d) {
+      const lines = [];
+      lines.push(`STATUS ${d.status.toUpperCase()} · mask ${d.mask}`);
+      const shrug = d.status === "refuse" && interior.length === claimed.length && sum(claimed) <= sum(interior);
+      lines.push(`SUM claimed ${sum(claimed)} · SUM on-receipt ${sum(interior)}` + (shrug ? " · chat would shrug (totals OK)" : ""));
+      const n = Math.max(interior.length, claimed.length);
+      for (let i = 0; i < n; i++) {
+        const c = claimed[i], inn = interior[i];
+        if (!Number.isFinite(c) || !Number.isFinite(inn)) {
+          lines.push(`LINE ${i} · CLAIMED ${c ?? "—"} · ON RECEIPT ${inn ?? "—"} · STATUS SHAPE`);
+          continue;
+        }
+        const residual = c - inn;
+        lines.push(`LINE ${i} · CLAIMED ${c} · ON RECEIPT ${inn} · residual ${residual}${c > inn ? " > 0 → OVER" : " ≤ 0 → CLEAR"}`);
+      }
+      lines.push(d.status === "refuse"
+        ? "ADMIT only if claimed ≤ on-receipt on every line — surplus on one line cannot cover a deficit on another."
+        : "ADMIT: every line claimed ≤ on-receipt (componentwise).");
+      return lines.join("\n");
+    }
+    const claimedEl = document.getElementById("claimed");
+    const interiorEl = document.getElementById("interior");
+    const out = document.getElementById("out");
+    document.getElementById("loadTrap").onclick = () => {
+      claimedEl.value = "90, 60, 20, 10";
+      interiorEl.value = "100, 50, 25, 10";
+      document.getElementById("run").click();
+    };
+    document.getElementById("reset").onclick = () => {
+      claimedEl.value = "";
+      interiorEl.value = "";
+      out.innerHTML = "";
+    };
+    document.getElementById("run").onclick = () => {
+      const claimed = parseList(claimedEl.value);
+      const interior = parseList(interiorEl.value);
+      const d = gateB(interior, claimed);
+      const shrug = d.status === "refuse" && interior.length === claimed.length && sum(claimed) <= sum(interior);
+      const n = Math.max(claimed.length, interior.length);
+      let rows = "";
+      for (let i = 0; i < n; i++) {
+        const c = claimed[i] ?? 0, inn = interior[i] ?? 0;
+        const over = Number.isFinite(claimed[i]) && Number.isFinite(interior[i]) && claimed[i] > interior[i];
+        rows += `<tr class="${over ? "fail" : ""}"><td>${i}</td><td>${c}</td><td>${inn}</td><td>${over ? "OVER" : "CLEAR"}</td></tr>`;
+      }
+      const text = receipt(interior, claimed, d);
+      out.innerHTML = `<div class="card ${d.status}"><strong>${d.status.toUpperCase()}</strong>
+        <div>mask ${d.mask}${d.mask === 0 ? " · GRANT ⇔ mask==0" : " · failed [" + d.failed.join(",") + "]"}
+        · SUM claimed ${sum(claimed)} · SUM on-receipt ${sum(interior)}</div>
+        ${shrug ? `<div class="foil">Chat would shrug: totals OK (${sum(claimed)} ≤ ${sum(interior)}). Gate: <strong>REFUSE</strong>.</div>` : ""}
+        <table><thead><tr><th>LINE</th><th>CLAIMED</th><th>ON RECEIPT</th><th>STATUS</th></tr></thead><tbody>${rows}</tbody></table>
+        <div class="row"><button type="button" class="ghost" id="copy">Copy refuse receipt</button></div>
+        <pre id="receipt">${text.replace(/</g,"&lt;")}</pre></div>`;
+      document.getElementById("copy").onclick = () => navigator.clipboard?.writeText(text);
+    };
+  </script>
+</body>
+</html>
