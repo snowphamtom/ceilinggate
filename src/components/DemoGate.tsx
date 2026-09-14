@@ -125,9 +125,9 @@ export function DemoGate({
             className="sm-btn breath"
             onClick={onOneBreath}
             disabled={breathBusy}
-            title="Run REFUSE then GRANT in one breath"
+            title="Run REFUSE then GRANT once"
           >
-            {breathBusy ? "Running…" : "Play both"}
+            {breathBusy ? "Running…" : "Demo both"}
           </button>
         ) : null}
         <button type="button" className="sm-btn refuse" onClick={onDemoRefuse}>
@@ -146,7 +146,7 @@ export function DemoGate({
           <div>
             <strong>Waiting for a result</strong>
             <p className="sm-await-hint">
-              Press Show REFUSE or Show GRANT to run the check
+              Start with Show REFUSE, then Show GRANT
             </p>
           </div>
         </div>
@@ -165,7 +165,7 @@ export function DemoGate({
               "sm-verdict-stamp sm-stamp-slam" +
               (ok ? " el-ice el-lightning" : " el-fire")
             }
-            data-element={ok ? "ICE+LIGHTNING" : "FIRE"}
+            data-verdict={ok ? "grant" : "refuse"}
           >
             {ok ? "GRANT" : "REFUSE"}
           </div>

@@ -386,8 +386,8 @@ export default function SortingMachine() {
           <LiveFeeds />
           <CalmDisclosure
             id="klaus"
-            title="Klaus organizer"
-            summary="Live holds & folder counts"
+            title="Organizer"
+            summary="Holds and folder counts"
           >
             <KlausOrganizer lane={lane} />
           </CalmDisclosure>
