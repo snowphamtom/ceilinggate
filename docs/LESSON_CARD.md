@@ -1,7 +1,7 @@
-# Lesson card — 81475d1
+# Lesson card — b6c0691
 
 1. What changed
-All Gas: scrub fixture square.site; stub Sponsors; rename archive dest label.
+scrub ARR false-positive from Klaus snapshot dest label
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
