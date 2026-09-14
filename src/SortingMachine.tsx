@@ -409,6 +409,13 @@ export default function SortingMachine() {
         >
           Listing
         </a>
+        <a
+          href="https://monsters-ink-107139.square.site/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Shop
+        </a>
       </footer>
     </div>
   );
