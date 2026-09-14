@@ -1,0 +1,2 @@
+BEFORE: program -19.2 LUFS / TP -3.7 | VO AndrewMultilingual metallic | bed stem dead (-72 dB)
+AFTER:  program -16.0 LUFS / TP -9.3 | VO BrianNeural -15% | bed -32.7 unducked sidechain-ducked | SHA df19e58af50eb94819b9648b228b13aa830079c1e5d3c906606a915f8fefb6cb
