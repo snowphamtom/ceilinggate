@@ -1,7 +1,7 @@
-# Lesson card — 4b7b16a
+# Lesson card — 2f1d2a8
 
 1. What changed
-fix: yt7 slower walkthrough bed with quiet echo
+feat: flip Public YT to Jh-txwsIxuk (Claim Check LIVE)
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
