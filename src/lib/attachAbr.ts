@@ -1,13 +1,12 @@
 /** Adaptive bitrate attach for the judge demo.
- * Segment HLS (/hls/master → prog.m3u8 / stream.m3u8 · .ts/.m4s) when present.
- * Fake masters that only list release .mp4 rungs stay progressive (not hls.js).
+ * Same-origin HLS (/hls/master → relative v*_prog.m3u8 · .ts) with progressive /hls MP4 fallback.
+ * Do NOT fetch GitHub releases (no CORS).
  */
 
-export const HLS_MASTER = "https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-yt3/master.m3u8";
-export const RUNG_LOW =
-  "https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-yt3/CeilingGate-ClaimCheck-HUD.mp4";
-export const RUNG_HIGH =
-  "https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-yt3/CeilingGate-ClaimCheck-HUD.mp4";
+export const HLS_MASTER = "/hls/master.m3u8";
+export const RUNG_LOW = "/hls/CeilingGate-ClaimCheck-HUD.mp4";
+export const RUNG_HIGH = "/hls/CeilingGate-ClaimCheck-HUD.mp4";
+export const POSTER = "/hls/poster-grant.png";
 
 const HLS_JS =
   "https://cdn.jsdelivr.net/npm/hls.js@1.5.20/dist/hls.min.js";
@@ -21,14 +20,14 @@ function net(): Net {
 
 export function pickProgressive(): { url: string; label: string } {
   const n = net();
-  if (n.saveData) return { url: RUNG_LOW, label: "save-data \u00b7 60s" };
+  if (n.saveData) return { url: RUNG_LOW, label: "save-data · progressive" };
   if (typeof n.downlink === "number" && n.downlink > 0 && n.downlink < 0.25) {
-    return { url: RUNG_LOW, label: `low \u00b7 ${n.downlink}Mb/s` };
+    return { url: RUNG_LOW, label: `low · ${n.downlink}Mb/s` };
   }
   if (n.effectiveType === "slow-2g" || n.effectiveType === "2g") {
     return { url: RUNG_LOW, label: n.effectiveType };
   }
-  return { url: RUNG_HIGH, label: n.downlink ? `high \u00b7 ${n.downlink}Mb/s` : "high" };
+  return { url: RUNG_HIGH, label: n.downlink ? `high · ${n.downlink}Mb/s` : "high" };
 }
 
 async function masterKind(): Promise<"segments" | "mp4-rungs" | "none"> {
@@ -37,6 +36,8 @@ async function masterKind(): Promise<"segments" | "mp4-rungs" | "none"> {
     if (!r.ok) return "none";
     const t = await r.text();
     if (!t.includes("#EXTM3U")) return "none";
+    // Reject absolute GitHub masters — CORS breaks hls.js fetch.
+    if (t.includes("github.com/")) return "none";
     if (
       t.includes("stream.m3u8") ||
       t.includes("prog.m3u8") ||
@@ -90,7 +91,7 @@ export async function attachAbr(
 
   if (kind === "segments" && nativeHls) {
     el.src = HLS_MASTER;
-    onLabel?.("HLS native \u00b7 ABR");
+    onLabel?.("HLS native · ABR");
     return {
       mode: "hls",
       label: "HLS native",
@@ -118,7 +119,7 @@ export async function attachAbr(
           const lv = hls.levels[hls.currentLevel];
           onLabel?.(
             lv
-              ? `HLS ABR \u00b7 ${lv.height ?? "?"}p \u00b7 ${Math.round((lv.bitrate ?? 0) / 1000)}kb/s`
+              ? `HLS ABR · ${lv.height ?? "?"}p · ${Math.round((lv.bitrate ?? 0) / 1000)}kb/s`
               : "HLS ABR",
           );
         };
@@ -134,7 +135,7 @@ export async function attachAbr(
 
   const pick = pickProgressive();
   el.src = pick.url;
-  onLabel?.(pick.label + (kind === "mp4-rungs" ? " \u00b7 master rungs" : " \u00b7 progressive"));
+  onLabel?.(pick.label + (kind === "mp4-rungs" ? " · master rungs" : " · progressive"));
   return {
     mode: "progressive",
     label: pick.label,

@@ -10,20 +10,16 @@ const agentmail = new AgentMail(components.agentmail, {
 
 const http = httpRouter();
 
-const RELEASE =
-  "https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-yt";
-const HLS_REL =
-  "https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-hls";
-/** True ABR ladder (YT cut) hosted on GH release — not Convex static. */
+/** Same-origin relative ABR ladder (yt3 audio). Never point browsers at GH releases. */
 const HLS_MASTER_FALLBACK = `#EXTM3U
 #EXT-X-VERSION:6
 #EXT-X-INDEPENDENT-SEGMENTS
-#EXT-X-STREAM-INF:BANDWIDTH=5117736,AVERAGE-BANDWIDTH=4615845,RESOLUTION=1280x800,FRAME-RATE=30,CODECS="avc1.640020"
-${HLS_REL}/v0_prog.m3u8
-#EXT-X-STREAM-INF:BANDWIDTH=2770368,AVERAGE-BANDWIDTH=2564916,RESOLUTION=1152x720,FRAME-RATE=30,CODECS="avc1.64001f"
-${HLS_REL}/v1_prog.m3u8
-#EXT-X-STREAM-INF:BANDWIDTH=1002040,AVERAGE-BANDWIDTH=590492,RESOLUTION=768x480,FRAME-RATE=30,CODECS="avc1.64001f"
-${HLS_REL}/v2_prog.m3u8
+#EXT-X-STREAM-INF:BANDWIDTH=5248960,AVERAGE-BANDWIDTH=4674136,RESOLUTION=1280x800,FRAME-RATE=30,CODECS="avc1.640020,mp4a.40.2"
+v0_prog.m3u8
+#EXT-X-STREAM-INF:BANDWIDTH=2982432,AVERAGE-BANDWIDTH=2653566,RESOLUTION=1152x720,FRAME-RATE=30,CODECS="avc1.64001f,mp4a.40.2"
+v1_prog.m3u8
+#EXT-X-STREAM-INF:BANDWIDTH=1532952,AVERAGE-BANDWIDTH=1337029,RESOLUTION=768x480,FRAME-RATE=30,CODECS="avc1.64001f,mp4a.40.2"
+v2_prog.m3u8
 `;
 
 const CARD_HTML = `<!doctype html>
@@ -47,7 +43,7 @@ video{width:100%;height:100%}
 <main>
 <h1>CeilingGate</h1>
 <p class="tag">Sorting Machine · email a receipt → C ≤ S → GRANT/REFUSE. Listing: vibeapps.dev/s/ceilinggate-1</p>
-<div class="frame"><video controls playsinline src="${RELEASE}/CeilingGate-Forge-gates-clip-YT.mp4"></video></div>
+<div class="frame"><video controls playsinline src="/demo/claimcheck-hud.mp4"></video></div>
 <ul>
 <li><a href="/">Live app</a></li>
 <li><a href="/watch.html">Demo player</a> · <a href="https://www.youtube.com/watch?v=2KsMO90LpdE">YT 2KsMO90LpdE</a></li>
@@ -159,17 +155,18 @@ async function serveAsset(ctx: any, path: string) {
   }
   const res = await fetch(asset.url);
   const body = await res.arrayBuffer();
-  return new Response(body, {
-    status: 200,
-    headers: {
-      "content-type": contentTypeFor(path, asset.contentType),
-      "cache-control": path.startsWith("/assets/")
-        ? "public, max-age=31536000, immutable"
-        : path.startsWith("/hls/")
-          ? "public, max-age=300"
-          : "public, max-age=60",
-    },
-  });
+  const headers: Record<string, string> = {
+    "content-type": contentTypeFor(path, asset.contentType),
+    "cache-control": path.startsWith("/assets/")
+      ? "public, max-age=31536000, immutable"
+      : path.startsWith("/hls/")
+        ? "public, max-age=300"
+        : "public, max-age=60",
+  };
+  if (path.startsWith("/hls/") || path.startsWith("/demo/")) {
+    headers["access-control-allow-origin"] = "*";
+  }
+  return new Response(body, { status: 200, headers });
 }
 
 http.route({
@@ -219,6 +216,7 @@ http.route({
       if (
         highEnough &&
         text.includes("#EXTM3U") &&
+        !text.includes("github.com/") &&
         (text.includes("stream.m3u8") ||
           text.includes("prog.m3u8") ||
           (text.includes("#EXT-X-STREAM-INF") && !text.includes(".mp4")))

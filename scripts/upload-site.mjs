@@ -131,7 +131,7 @@ async function main() {
       p === "/index.html" ? 0 :
       p.startsWith("/assets/") && p.endsWith(".js") ? 1 :
       p.startsWith("/assets/") && p.endsWith(".css") ? 2 :
-      p.startsWith("/hls/") ? 9 : 5;
+      p.startsWith("/hls/") || p.startsWith("/demo/") ? 9 : 5;
     return rank(a.path) - rank(b.path);
   });
   let finalPub = null;

@@ -2,8 +2,8 @@
 #EXT-X-VERSION:6
 #EXT-X-INDEPENDENT-SEGMENTS
 #EXT-X-STREAM-INF:BANDWIDTH=5248960,AVERAGE-BANDWIDTH=4674136,RESOLUTION=1280x800,FRAME-RATE=30,CODECS="avc1.640020,mp4a.40.2"
-https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-yt3/v0_prog.m3u8
+v0_prog.m3u8
 #EXT-X-STREAM-INF:BANDWIDTH=2982432,AVERAGE-BANDWIDTH=2653566,RESOLUTION=1152x720,FRAME-RATE=30,CODECS="avc1.64001f,mp4a.40.2"
-https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-yt3/v1_prog.m3u8
+v1_prog.m3u8
 #EXT-X-STREAM-INF:BANDWIDTH=1532952,AVERAGE-BANDWIDTH=1337029,RESOLUTION=768x480,FRAME-RATE=30,CODECS="avc1.64001f,mp4a.40.2"
-https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-yt3/v2_prog.m3u8
+v2_prog.m3u8

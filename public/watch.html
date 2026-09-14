@@ -42,14 +42,14 @@
           controls
           playsinline
           preload="metadata"
-          poster="https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-yt3/poster-grant.png"
+          poster="/hls/poster-grant.png"
         ></video>
       </div>
       <p class="chip" id="prog-lab" style="margin-top:0.65rem">attaching…</p>
       <p style="margin-top:0.85rem">
         <a href="/">Back to app</a>
-        · <a href="https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-yt3/master.m3u8">HLS master</a>
-        · <a id="prog-link" href="https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-yt3/CeilingGate-ClaimCheck-HUD.mp4">Download MP4</a>
+        · <a href="/hls/master.m3u8">HLS master</a>
+        · <a id="prog-link" href="/hls/CeilingGate-ClaimCheck-HUD.mp4">Download MP4</a>
         · <a class="secondary" href="https://www.youtube.com/watch?v=2KsMO90LpdE" title="HOLD Tip Jar O-ID 2KsMO90LpdE">YouTube (Tip Jar)</a>
       </p>
 
@@ -72,10 +72,9 @@
     <script>
       /* HOLD YT 2KsMO90LpdE — do not change O-ID until tip */
       const YT_ID = "2KsMO90LpdE";
-      const PROG =
-        "https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-yt3/CeilingGate-ClaimCheck-HUD.mp4";
-      const MASTER = "https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-yt3/master.m3u8";
-      /* LIVE: allgas-demo-yt3 audio pack */
+      const PROG = "/hls/CeilingGate-ClaimCheck-HUD.mp4";
+      const MASTER = "/hls/master.m3u8";
+      /* LIVE: same-origin yt3 audio pack */
       const HLS_JS = "https://cdn.jsdelivr.net/npm/hls.js@1.5.20/dist/hls.min.js";
       const v = document.getElementById("reel");
       const lab = document.getElementById("prog-lab");
@@ -83,6 +82,7 @@
 
       function isTrueHls(t) {
         if (!t || !t.includes("#EXTM3U")) return false;
+        if (t.includes("github.com/")) return false;
         if (t.includes(".mp4") && !t.includes("prog.m3u8") && !t.includes("stream.m3u8")) return false;
         return (
           t.includes("stream.m3u8") ||

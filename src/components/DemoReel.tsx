@@ -5,14 +5,13 @@ import {
   type AbrHandle,
   RUNG_HIGH,
   HLS_MASTER,
+  POSTER,
 } from "../lib/attachAbr";
 import "./DemoReel.css";
 
 /** HOLD — Tip Jar O-ID. Do NOT flip until Taylor tips new Public ID. */
 const YT_ID = "2KsMO90LpdE";
 const YT_URL = `https://www.youtube.com/watch?v=${YT_ID}`;
-const POSTER = "https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-yt3/poster-grant.png";
-
 /**
  * LIVE tag: allgas-demo-yt3 (audio masterpiece).
  * HOLD Tip Jar YT O-ID 2KsMO90LpdE until Taylor tips new Public ID.
