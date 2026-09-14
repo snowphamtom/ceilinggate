@@ -1,7 +1,7 @@
-# Lesson card — 850f27e
+# Lesson card — b388ad2
 
 1. What changed
-All Gas: point public face URLs at Pages; scrub fixture .site receipts.
+All Gas: BASE_URL-aware HLS paths so prefer-live works on GH Pages.
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
