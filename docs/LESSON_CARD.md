@@ -1,7 +1,7 @@
-# Lesson card — 2784e33
+# Lesson card — 188f415
 
 1. What changed
-fix: Claim Check face strip — yt7 chip, health/card rename, lean /watch copy
+feat: lean Claim Check face — plain PASS/FAIL seal, drop σ²/S_H jargon, judge REFUSE→GRANT
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
