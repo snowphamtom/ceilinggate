@@ -1,7 +1,7 @@
-# Lesson card — b388ad2
+# Lesson card — dfd3ff8
 
 1. What changed
-All Gas: BASE_URL-aware HLS paths so prefer-live works on GH Pages.
+strip Square Shop/Vault/T&E footer CTAs from Claim Check face
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
