@@ -24,7 +24,7 @@
       "email": {
         "subject": "Expense claim \u2014 under receipt totals",
         "from": "claims@monstersink.example",
-        "body": "CLAIMED: 98, 49, 25, 9\nLINE_ITEMS: fuel, lodging, meals, misc\nPUBLIC_SOURCE: https://monsters-ink-107139.square.site",
+        "body": "CLAIMED: 98, 49, 25, 9\nLINE_ITEMS: fuel, lodging, meals, misc\nPUBLIC_SOURCE: https://example.com/receipt-source",
         "receiptUrl": "https://snowphamtom.github.io/ceilinggate/receipts/fuel-grant.html"
       },
       "claimed": [
@@ -61,7 +61,7 @@
       "email": {
         "subject": "Expense claim \u2014 over on lodging & misc",
         "from": "claims@monstersink.example",
-        "body": "CLAIMED: 98, 51, 25, 11\nPUBLIC_SOURCE: https://monsters-ink-107139.square.site",
+        "body": "CLAIMED: 98, 51, 25, 11\nPUBLIC_SOURCE: https://example.com/receipt-source",
         "receiptUrl": "https://snowphamtom.github.io/ceilinggate/receipts/fuel-refuse.html"
       },
       "claimed": [
@@ -3568,7 +3568,7 @@
     }
   ],
   "seedUrls": [
-    "https://monsters-ink-107139.square.site",
+    "https://example.com/receipt-source",
     "https://www.diu.mil/work-with-us/open-solicitations",
     "https://patentcenter.uspto.gov/",
     "https://www.nist.gov/cyberframework",
