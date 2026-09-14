@@ -1,7 +1,7 @@
-# Lesson card — d1d2e72
+# Lesson card — b67a10d
 
 1. What changed
-fix: same-origin HLS/MP4 for Claim Check demo (CORS)
+docs+face: MAGPIE submit vault + plain C≤S Two-Gate disclosure
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
