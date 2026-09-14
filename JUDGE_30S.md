@@ -1,16 +1,13 @@
-# 30-second judge path
+# Claim Check — 30 seconds
 
-Live: https://quirky-rhinoceros-204.convex.site/
-Video: https://quirky-rhinoceros-204.convex.site/watch.html (prefer-live `/hls` yt7 · Public YT `Jh-txwsIxuk`)
+PRIMARY live: https://snowphamtom.github.io/ceilinggate/
+API (two-host): https://quirky-rhinoceros-204.convex.cloud
+`.convex.site`: DEAD (Convex free-plan HTTP 500) — do not use until plan lifts.
+Video: https://snowphamtom.github.io/ceilinggate/watch.html (prefer-live `/hls` · Public YT `Jh-txwsIxuk`)
 
-**CeilingGate** — continuous Sorting Machine. Email a receipt → GRANT or REFUSE.
-
-1. Open the live app — proof is above the fold (Demo REFUSE/GRANT + ledger).
-2. Click **1 · Demo REFUSE** — overages named in dollars · Check ID stamp · OpenAI one-line.
-3. Click **2 · Demo GRANT** — every line C ≤ S · residual CLEAR.
-4. Optional: `/watch.html` — prefer-live same-origin HLS yt7 (Public YT secondary).
+## Path
+1. Open the PRIMARY live app — proof is above the fold (Demo REFUSE/GRANT + ledger).
+2. Tap **1 · Show REFUSE** — a line over the receipt, in plain English.
+3. Tap **2 · Show GRANT** — every line at or under the receipt.
+4. Optional: `/watch.html` — prefer-live HLS (Public YT secondary · on-request).
 5. Optional live path: email claim + public receipt URL to `ceilinggate-claims@agentmail.to`. Firecrawl scrapes; OpenAI writes one sentence after the numbers (does not decide).
-
-Sponsor chips on the hero: Firecrawl scrape · AgentMail inbox · OpenAI one-line.
-
-No login. No keys. Listing: https://vibeapps.dev/s/claim-check · Repo: https://github.com/snowphamtom/ceilinggate

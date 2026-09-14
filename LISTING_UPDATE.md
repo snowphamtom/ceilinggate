@@ -1,3 +1,5 @@
+PRIMARY live (GitHub Pages). `.convex.site` DEAD until Convex plan lifts.
+
 # VibeApps listing — paste / UPDATE only (HOLD FILE)
 
 Canonical card: https://vibeapps.dev/s/claim-check  
@@ -9,13 +11,13 @@ Tagline:
 CeilingGate — continuous Sorting Machine for money claims. GATHER → SORT (C ≤ S) → GRANT/REFUSE.
 
 Live:
-https://quirky-rhinoceros-204.convex.site/
+https://snowphamtom.github.io/ceilinggate/
 
 Repo:
 https://github.com/snowphamtom/ceilinggate
 
 Demo / video (prefer-live on-site HLS yt7):
-https://quirky-rhinoceros-204.convex.site/watch.html
+https://snowphamtom.github.io/ceilinggate/watch.html
 
 YouTube Public (secondary — Tip Jar 2KsMO90LpdE retired):
 https://www.youtube.com/watch?v=Jh-txwsIxuk

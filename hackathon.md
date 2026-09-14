@@ -11,11 +11,13 @@ Live root is **Claim Check** (GATHER → SORT claim-vs-receipt), not a chat prod
 | | |
 |---|---|
 | **Listing (canonical)** | https://vibeapps.dev/s/claim-check |
-| Live app (Claim Check root) | https://quirky-rhinoceros-204.convex.site/ |
-| Health | https://quirky-rhinoceros-204.convex.site/health |
+| Live app PRIMARY (Claim Check) | https://snowphamtom.github.io/ceilinggate/ |
+| API (two-host `.cloud`) | https://quirky-rhinoceros-204.convex.cloud |
+| `.convex.site` | DEAD — free-plan HTTP 500; do not use |
+| Health | `.cloud` ok when plan allows; `.site` DEAD |
 | Repo | https://github.com/snowphamtom/ceilinggate |
 | CI (green deploy) | https://github.com/snowphamtom/ceilinggate/actions/workflows/convex-deploy.yml |
-| Demo prefer-live (on-site HLS yt7) | https://quirky-rhinoceros-204.convex.site/watch.html · Public YT `Jh-txwsIxuk` (Tip Jar `2KsMO90LpdE` retired) |
+| Demo prefer-live | https://snowphamtom.github.io/ceilinggate/watch.html · Public YT `Jh-txwsIxuk` |
 | Demo prefer-live (GH file) | https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-yt/CeilingGate-Forge-gates-clip-YT.mp4 |
 | Claims inbox | ceilinggate-claims@agentmail.to |
 
@@ -72,7 +74,7 @@ The sample is a chat thread about mail. Claim Check is a forensic **receipt-line
 
 Static fortress + HTTP = `*.convex.site`. Convex client API = `*.convex.cloud`.
 
-**Never** point `VITE_CONVEX_URL` at `.site` — the SPA client dies. Crawl / public site URL stays `https://quirky-rhinoceros-204.convex.site`.
+**Never** point `VITE_CONVEX_URL` at `.site` — the SPA client dies. PRIMARY public face: `https://snowphamtom.github.io/ceilinggate/`. `.convex.site` DEAD until plan lifts.
 
 Inner crawl: `npx convex run firewallCrawl:run '{}'`. Outer: `node scripts/firewall-crawl.mjs`. Doc: `docs/OBSERVATORIUM.md`.
 
@@ -82,4 +84,4 @@ Root SPA is the money sorter only: hero + 5-stage GATHER→BUCKET · prefer-live
 
 ## Eligibility snapshot
 
-New app after 25 Aug 2026. Convex backend. Public GitHub. Live `convex.site`. Video under 3 minutes (prefer-live `/hls` yt7 + Public YT `Jh-txwsIxuk`). Luma / Vibe listing `claim-check`. Social tags sent.
+New app after 25 Aug 2026. Convex backend. Public GitHub. Live GitHub Pages PRIMARY (`.site` DEAD). Video under 3 minutes (prefer-live `/hls` yt7 + Public YT `Jh-txwsIxuk`). Luma / Vibe listing `claim-check`. Social tags sent.

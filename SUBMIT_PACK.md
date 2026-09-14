@@ -7,11 +7,12 @@
 
 | Field | URL | Meter |
 |---|---|---|
-| Live app | https://quirky-rhinoceros-204.convex.site/ | 200 · lean Sorting Machine · proof above fold |
-| Demo video page | https://quirky-rhinoceros-204.convex.site/watch.html | 200 · prefer-live `/hls` yt7 · Public YT `Jh-txwsIxuk` |
-| Judge card mirror | https://quirky-rhinoceros-204.convex.site/card.html | 200 |
+| Live app PRIMARY | https://snowphamtom.github.io/ceilinggate/ | 200 · full Sorting Machine · soft-bridge · API=.cloud |
+| `.convex.site` | DEAD | Convex free-plan HTTP 500 — do not list |
+| Demo video page | https://snowphamtom.github.io/ceilinggate/watch.html | prefer-live `/hls` · Public YT `Jh-txwsIxuk` |
+| Judge card mirror | `.site` DEAD — use Pages + vibeapps listing | |
 | Playlist | https://quirky-rhinoceros-204.convex.site/hls/master.m3u8 | 200 · true HLS → allgas-demo-hls |
-| Health | https://quirky-rhinoceros-204.convex.site/health | `{"ok":true,"app":"CeilingGate"}` |
+| Health | `.site` DEAD | use Pages PRIMARY |
 | Repository | https://github.com/snowphamtom/ceilinggate | public |
 | CI | https://github.com/snowphamtom/ceilinggate/actions/workflows/convex-deploy.yml | convex-deploy |
 | Demo release (prefer-live / progressive) | https://github.com/snowphamtom/ceilinggate/releases/tag/allgas-demo-yt | 174s silent YT cut |

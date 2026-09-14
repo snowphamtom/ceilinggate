@@ -42,7 +42,7 @@ video{width:100%;height:100%}
 <body>
 <main>
 <h1>Claim Check</h1>
-<p class="tag">Sorting Machine · email a receipt → C ≤ S → GRANT/REFUSE. Listing: vibeapps.dev/s/claim-check</p>
+<p class="tag">PRIMARY: https://snowphamtom.github.io/ceilinggate/ · API=.cloud · .site DEAD. Listing: vibeapps.dev/s/claim-check</p>
 <div class="frame"><video controls playsinline src="/hls/CeilingGate-ClaimCheck-HUD.mp4"></video></div>
 <ul>
 <li><a href="/">Live app</a></li>

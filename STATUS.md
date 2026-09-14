@@ -2,7 +2,9 @@
 
 ## Live
 
-- App: https://quirky-rhinoceros-204.convex.site/
+- App PRIMARY: https://snowphamtom.github.io/ceilinggate/
+- API: https://quirky-rhinoceros-204.convex.cloud
+- `.convex.site`: DEAD (free-plan HTTP 500)
 - Health: `{"ok":true,"app":"CeilingGate"}`
 - Repo: https://github.com/snowphamtom/ceilinggate
 - CI: green (`convex-deploy` runs 35, 37, 38)
