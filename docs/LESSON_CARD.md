@@ -1,7 +1,7 @@
-# Lesson card — b67a10d
+# Lesson card — bb35def
 
 1. What changed
-docs+face: MAGPIE submit vault + plain C≤S Two-Gate disclosure
+fix: 302 /hls MP4 to storage (httpAction 64MB OOM)
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
