@@ -1,7 +1,7 @@
-# Lesson card — 4e4cfb1
+# Lesson card — 19813c6
 
 1. What changed
-Flip remaining docs Public YT O-ID to hDnY3_iszX4.
+docs: keep hackathon.md honest — Pages PRIMARY, .site DEAD
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
