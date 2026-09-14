@@ -1,7 +1,7 @@
-# Lesson card — 003bbe9
+# Lesson card — 1c3dfad
 
 1. What changed
-docs: yt4 audio remaster PASS evidence (LUFS + curl)
+fix: yt5 demo audio — no VO, pleasant bed only
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
