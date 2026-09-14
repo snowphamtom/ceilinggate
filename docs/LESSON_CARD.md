@@ -1,7 +1,7 @@
-# Lesson card — 9b5d23b
+# Lesson card — c6d3931
 
 1. What changed
-fix: drop unused historicHex after plain Check ID tooltip
+feat: LENS densify leap 1–5 — PASS ribbon, caliper endpoints, telemetry rail, settle, on-request YT
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
