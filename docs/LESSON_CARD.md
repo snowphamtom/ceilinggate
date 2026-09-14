@@ -1,7 +1,7 @@
-# Lesson card — dfd3ff8
+# Lesson card — 6753a47
 
 1. What changed
-strip Square Shop/Vault/T&E footer CTAs from Claim Check face
+All Gas: HLS-only prefer-live — drop 69MB mp4 fallback and Download link.
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
