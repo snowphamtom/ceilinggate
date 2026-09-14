@@ -142,12 +142,67 @@ function contentTypeFor(path: string, stored: string) {
   return stored || "application/octet-stream";
 }
 
+/** Static alt while Convex site storage is plan-blocked (no site:publish). */
+const STATIC_ALT = "https://snowphamtom.github.io/ceilinggate";
+
+function prefersStaticAlt(path: string): boolean {
+  return (
+    path === "/index.html" ||
+    path.startsWith("/assets/") ||
+    path === "/watch.html" ||
+    path === "/judge.html" ||
+    path === "/manifest.webmanifest" ||
+    path === "/favicon.svg" ||
+    path === "/icons.svg" ||
+    path === "/sw.js" ||
+    path.startsWith("/pwa/") ||
+    path.startsWith("/receipts/") ||
+    path.startsWith("/fixtures/") ||
+    path.startsWith("/forge/")
+  );
+}
+
+async function serveStaticAlt(path: string): Promise<Response | null> {
+  try {
+    const url = `${STATIC_ALT}${path.startsWith("/") ? path : `/${path}`}`;
+    const res = await fetch(url, { redirect: "follow" });
+    if (!res.ok) return null;
+    if (path.endsWith(".mp4")) {
+      return new Response(null, {
+        status: 302,
+        headers: {
+          Location: url,
+          "cache-control": "public, max-age=60",
+          "access-control-allow-origin": "*",
+        },
+      });
+    }
+    const body = await res.arrayBuffer();
+    const headers: Record<string, string> = {
+      "content-type": contentTypeFor(path, res.headers.get("content-type") || undefined),
+      "cache-control": path.startsWith("/assets/")
+        ? "public, max-age=31536000, immutable"
+        : "public, max-age=60",
+      "x-ceilinggate-static-alt": "1",
+    };
+    return new Response(body, { status: 200, headers });
+  } catch {
+    return null;
+  }
+}
+
 async function serveAsset(ctx: any, path: string) {
+  if (prefersStaticAlt(path)) {
+    const alt = await serveStaticAlt(path);
+    if (alt) return alt;
+  }
   let asset = await ctx.runQuery(api.site.getAsset, { path });
   if (!asset && !path.includes(".")) {
     asset = await ctx.runQuery(api.site.getAsset, { path: "/index.html" });
   }
   if (!asset?.url) {
+    const alt = await serveStaticAlt(path === "/" ? "/index.html" : path);
+    if (alt) return alt;
     return new Response("Not found", {
       status: 404,
       headers: { "cache-control": "no-store" },
