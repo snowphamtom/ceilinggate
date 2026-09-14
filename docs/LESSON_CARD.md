@@ -1,7 +1,7 @@
-# Lesson card — fa171fa
+# Lesson card — 960c080
 
 1. What changed
-face: prefer-live HLS yt2 primary; demote Tip Jar YT
+face: wire MASTER to allgas-demo-yt3 audio pack
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
