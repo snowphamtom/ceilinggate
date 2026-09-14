@@ -1,7 +1,7 @@
-# Lesson card — af48343
+# Lesson card — 5f2b700
 
 1. What changed
-watch: collapse YouTube until request — no empty black card
+watch.html densify-v2 stamp + Pages back link
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
