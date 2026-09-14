@@ -3,7 +3,6 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import {
   attachAbr,
   type AbrHandle,
-  RUNG_HIGH,
   HLS_MASTER,
   POSTER,
 } from "../lib/attachAbr";
@@ -103,10 +102,6 @@ export function DemoReel() {
         ) : null}
       </div>
       <p className="sm-demo-links">
-        <a href={RUNG_HIGH} target="_blank" rel="noreferrer">
-          Download MP4
-        </a>
-        <span>·</span>
         <a href={HLS_MASTER} target="_blank" rel="noreferrer">
           HLS
         </a>

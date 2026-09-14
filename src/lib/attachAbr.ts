@@ -5,8 +5,9 @@
 
 const BASE = import.meta.env.BASE_URL || "/";
 export const HLS_MASTER = `${BASE}hls/master.m3u8`;
-export const RUNG_LOW = `${BASE}hls/CeilingGate-ClaimCheck-HUD.mp4`;
-export const RUNG_HIGH = `${BASE}hls/CeilingGate-ClaimCheck-HUD.mp4`;
+/** Progressive fallback disabled on Pages (no 69MB asset) — reuse poster as inert stub; HLS is primary. */
+export const RUNG_LOW = `${BASE}hls/poster-grant.png`;
+export const RUNG_HIGH = `${BASE}hls/poster-grant.png`;
 export const POSTER = `${BASE}hls/poster-grant.png`;
 
 const HLS_JS =
