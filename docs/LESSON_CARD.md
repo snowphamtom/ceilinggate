@@ -1,7 +1,7 @@
-# Lesson card — 54084bf
+# Lesson card — 9b5d23b
 
 1. What changed
-feat: lean Claim Check — semantic verdict attrs, Demo both, Organizer label, meta description
+fix: drop unused historicHex after plain Check ID tooltip
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
