@@ -1,6 +1,6 @@
 # VibeApps listing — paste / UPDATE only (HOLD FILE)
 
-Canonical card: https://vibeapps.dev/s/ceilinggate-1  
+Canonical card: https://vibeapps.dev/s/claim-check  
 (Do **not** FILE a duplicate. Legacy `/s/ceilinggate` is WATCH only.)
 
 Title: CeilingGate

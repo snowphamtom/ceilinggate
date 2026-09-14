@@ -3,7 +3,7 @@
 Taylor: work together so the CeilingGate / All Gas submission keeps evolving and improving creatively.
 
 ## Charter
-- One live listing: https://vibeapps.dev/s/ceilinggate — UPDATE only, never duplicate FILE.
+- One live listing: https://vibeapps.dev/s/claim-check — UPDATE only, never duplicate FILE.
 - Every change must be **better than parent** on its narrow job + **fully interactive** (no costumes).
 - Teach/learn via MANAGER (HARMONY_TEACH_LEARN.md). Silent to Taylor.
 - Fences: OFF PHONE · Luma cash only $10k/$5k/$1.5k · Square freeze · no sockpuppets · no fake $.

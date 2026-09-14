@@ -18,7 +18,7 @@
 | HLS ladder (on-site ABR) | https://github.com/snowphamtom/ceilinggate/releases/tag/allgas-demo-hls | v0/v1/v2 · not in Convex static |
 | YouTube Public (secondary) | https://www.youtube.com/watch?v=Jh-txwsIxuk | Tip Jar `2KsMO90LpdE` retired |
 | Progressive mp4 | https://github.com/snowphamtom/ceilinggate/releases/download/allgas-demo-yt/CeilingGate-Forge-gates-clip-YT.mp4 | 200 |
-| Listing (canonical) | https://vibeapps.dev/s/ceilinggate-1 | HOLD FILE · UPDATE only |
+| Listing (canonical) | https://vibeapps.dev/s/claim-check | HOLD FILE · UPDATE only |
 | Inbox | ceilinggate-claims@agentmail.to | |
 
 30-second path: [JUDGE_30S.md](./JUDGE_30S.md)  

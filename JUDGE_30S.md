@@ -13,4 +13,4 @@ Video: https://quirky-rhinoceros-204.convex.site/watch.html (prefer-live `/hls` 
 
 Sponsor chips on the hero: Firecrawl scrape · AgentMail inbox · OpenAI one-line.
 
-No login. No keys. Listing: https://vibeapps.dev/s/ceilinggate-1 · Repo: https://github.com/snowphamtom/ceilinggate
+No login. No keys. Listing: https://vibeapps.dev/s/claim-check · Repo: https://github.com/snowphamtom/ceilinggate

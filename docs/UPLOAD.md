@@ -20,7 +20,7 @@ Claimed ≤ on receipt → GRANT. Over → REFUSE. Rule: C ≤ S.
 
 Live app: https://quirky-rhinoceros-204.convex.site/
 Watch (HLS): https://quirky-rhinoceros-204.convex.site/watch.html
-Listing: https://vibeapps.dev/s/ceilinggate-1
+Listing: https://vibeapps.dev/s/claim-check
 
 Stack: Convex · Firecrawl · AgentMail · OpenAI
 ```
@@ -28,7 +28,7 @@ Stack: Convex · Firecrawl · AgentMail · OpenAI
 
 ## After upload
 1. Public ID live: `Jh-txwsIxuk`.
-2. DemoReel / watch.html / vibeapps ceilinggate-1 flipped to Public (Tip Jar retired).
+2. DemoReel / watch.html / vibeapps claim-check flipped to Public (Tip Jar retired).
 3. LIVE: site prefer-live primary = same-origin `/hls` yt7; Public YT secondary `Jh-txwsIxuk`.
 
 ## yt7 note

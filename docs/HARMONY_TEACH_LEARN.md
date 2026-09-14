@@ -14,7 +14,7 @@ Taylor: everyone teach and learn in harmony.
 ## Current shared lessons (MANAGER board)
 - Tip Jar/Line Delta must start empty; Demo buttons ≠ win-proof; edit-input→Run is the PASS bar.
 - Gates demo for vibeapps must be **<180s** continuous click→result.
-- Official All Gas submit = vibeapps card (https://vibeapps.dev/s/ceilinggate). Wayne mail ≠ filing.
+- Official All Gas submit = vibeapps card (https://vibeapps.dev/s/claim-check). Wayne mail ≠ filing.
 - No duplicate vibeapps FILE — UPDATE listing only.
 - GROK ADMIN under fences — see STANDING_ACCESS.md.
 

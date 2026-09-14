@@ -10,7 +10,7 @@ Live root is **Claim Check** (GATHER → SORT claim-vs-receipt), not a chat prod
 
 | | |
 |---|---|
-| **Listing (canonical)** | https://vibeapps.dev/s/ceilinggate-1 |
+| **Listing (canonical)** | https://vibeapps.dev/s/claim-check |
 | Live app (Claim Check root) | https://quirky-rhinoceros-204.convex.site/ |
 | Health | https://quirky-rhinoceros-204.convex.site/health |
 | Repo | https://github.com/snowphamtom/ceilinggate |
@@ -20,7 +20,7 @@ Live root is **Claim Check** (GATHER → SORT claim-vs-receipt), not a chat prod
 | Claims inbox | ceilinggate-claims@agentmail.to |
 
 Started 2026-09-05. Submitter: Taylor Heller. Deadline: 2026-09-22 12:00 PM PT.  
-**HOLD FILE** on the vibeapps card — UPDATE listing only (`ceilinggate-1`, not legacy `/s/ceilinggate`).
+**HOLD FILE** on the vibeapps card — UPDATE listing only (`claim-check`, not legacy `ceilinggate-1`).
 
 ## How to judge it (no login, no keys)
 
@@ -82,4 +82,4 @@ Root SPA is the money sorter only: hero + 5-stage GATHER→BUCKET · prefer-live
 
 ## Eligibility snapshot
 
-New app after 25 Aug 2026. Convex backend. Public GitHub. Live `convex.site`. Video under 3 minutes (prefer-live `/hls` yt7 + Public YT `Jh-txwsIxuk`). Luma / Vibe listing `ceilinggate-1`. Social tags sent.
+New app after 25 Aug 2026. Convex backend. Public GitHub. Live `convex.site`. Video under 3 minutes (prefer-live `/hls` yt7 + Public YT `Jh-txwsIxuk`). Luma / Vibe listing `claim-check`. Social tags sent.

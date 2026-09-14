@@ -9,7 +9,7 @@ Plain-English fuel for **Claim Check** judges. Source docs parked here; the live
 | **Claim Check (quirky)** | https://quirky-rhinoceros-204.convex.site/ |
 | Watch / demo | https://quirky-rhinoceros-204.convex.site/watch.html |
 | Repo | https://github.com/snowphamtom/ceilinggate |
-| Listing | https://vibeapps.dev/s/ceilinggate-1 |
+| Listing | https://vibeapps.dev/s/claim-check |
 
 ## What **C ≤ S** means (judge one-liner)
 

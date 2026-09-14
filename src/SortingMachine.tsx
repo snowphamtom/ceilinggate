@@ -405,7 +405,7 @@ export default function SortingMachine() {
           Repo
         </a>
         <a
-          href="https://vibeapps.dev/s/ceilinggate-1"
+          href="https://vibeapps.dev/s/claim-check"
           target="_blank"
           rel="noreferrer"
         >

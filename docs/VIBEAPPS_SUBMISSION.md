@@ -1,12 +1,12 @@
 # CeilingGate — Vibe Apps UPDATE pack (DELTA)
 
-**Listing:** https://vibeapps.dev/s/ceilinggate-1 · **HOLD FILE — UPDATE only**  
+**Listing:** https://vibeapps.dev/s/claim-check · **HOLD FILE — UPDATE only**  
 **prefer-live:** silent YouTube + allgas-demo-yt GH (Taylor VO quality hold aborted NEW upload).  
 **SHOW3:** on GH — not primary prefer.
 
 
 ## WIN FOCUS (HOLD FILE)
-- Card: https://vibeapps.dev/s/ceilinggate-1
+- Card: https://vibeapps.dev/s/claim-check
 - Working app URL: https://quirky-rhinoceros-204.convex.site/
 - Setup prompt: Open the live SPA (no login). Reset so gates start empty. Tip 50 → Run → REFUSE (plain-English overages). Tip 5 → Run → GRANT. Optional: email claim + public receipt URL to ceilinggate-claims@agentmail.to.
 

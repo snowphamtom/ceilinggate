@@ -15,7 +15,7 @@ Not a chat app. Not a developer SDK. Not the AgentMail sample inbox assistant.
 | Build log | [hackathon.md](./hackathon.md) |
 | CI | [convex-deploy](https://github.com/snowphamtom/ceilinggate/actions/workflows/convex-deploy.yml) |
 | Demo files | [Public YT](https://www.youtube.com/watch?v=Jh-txwsIxuk) · [allgas-demo-yt](https://github.com/snowphamtom/ceilinggate/releases/tag/allgas-demo-yt) · [HLS ladder](https://github.com/snowphamtom/ceilinggate/releases/tag/allgas-demo-hls) |
-| Listing | https://vibeapps.dev/s/ceilinggate-1 |
+| Listing | https://vibeapps.dev/s/claim-check |
 | Inbox | ceilinggate-claims@agentmail.to |
 | Share | https://x.com/magpie_inventor/status/2096419465973944560 |
 
