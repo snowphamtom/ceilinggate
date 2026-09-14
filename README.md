@@ -8,10 +8,10 @@ Not a chat app. Not a developer SDK. Not the AgentMail sample inbox assistant.
 
 | | |
 |---|---|
-| Live | https://quirky-rhinoceros-204.convex.site/ |
-| Demo video | https://quirky-rhinoceros-204.convex.site/watch.html |
-| Playlist | https://quirky-rhinoceros-204.convex.site/hls/master.m3u8 |
-| Health | https://quirky-rhinoceros-204.convex.site/health |
+| Live | https://snowphamtom.github.io/ceilinggate/ |
+| Demo video | https://snowphamtom.github.io/ceilinggate/watch.html |
+| Playlist | https://snowphamtom.github.io/ceilinggate/hls/master.m3u8 |
+| Health | https://snowphamtom.github.io/ceilinggate/health |
 | Build log | [hackathon.md](./hackathon.md) |
 | CI | [convex-deploy](https://github.com/snowphamtom/ceilinggate/actions/workflows/convex-deploy.yml) |
 | Demo files | [Public YT](https://www.youtube.com/watch?v=Jh-txwsIxuk) · [allgas-demo-yt](https://github.com/snowphamtom/ceilinggate/releases/tag/allgas-demo-yt) · [HLS ladder](https://github.com/snowphamtom/ceilinggate/releases/tag/allgas-demo-hls) |
@@ -34,7 +34,7 @@ CI deploy is green. Prefer-live primary is same-origin `/hls` yt7; Public YT sec
 
 ## Two hosts
 
-Static fortress (browser, crawls, `/health`, `/watch.html`): `https://quirky-rhinoceros-204.convex.site`  
+Static fortress (browser, crawls, `/health`, `/watch.html`): `https://snowphamtom.github.io/ceilinggate`  
 Convex client API (`VITE_CONVEX_URL`): `https://quirky-rhinoceros-204.convex.cloud`  
 Evidence: `https://fleet-gerbil-682.convex.cloud`
 

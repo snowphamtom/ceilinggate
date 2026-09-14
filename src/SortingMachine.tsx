@@ -62,7 +62,7 @@ function plainFails(rows: LineRow[], d: GateDecision): string[] {
 }
 
 /**
- * LIVE_SINCE — public go-live of this Claim Check face (quirky).
+ * LIVE_SINCE — public go-live of this Claim Check face (Pages).
  * Anchored to git 9b8e37c @ 2026-09-07 19:41:37 UTC — first continuous Sorting Machine
  * ship on this product face; f87e38c @ 19:49 UTC completed SPA scratch.
  * Not scaffold 2026-09-05. ISO documented here for the Live-for ticker.

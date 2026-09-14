@@ -11,7 +11,7 @@
 | `.convex.site` | DEAD | Convex free-plan HTTP 500 — do not list |
 | Demo video page | https://snowphamtom.github.io/ceilinggate/watch.html | prefer-live `/hls` · Public YT `Jh-txwsIxuk` |
 | Judge card mirror | `.site` DEAD — use Pages + vibeapps listing | |
-| Playlist | https://quirky-rhinoceros-204.convex.site/hls/master.m3u8 | 200 · true HLS → allgas-demo-hls |
+| Playlist | https://snowphamtom.github.io/ceilinggate/hls/master.m3u8 | 200 · true HLS → allgas-demo-hls |
 | Health | `.site` DEAD | use Pages PRIMARY |
 | Repository | https://github.com/snowphamtom/ceilinggate | public |
 | CI | https://github.com/snowphamtom/ceilinggate/actions/workflows/convex-deploy.yml | convex-deploy |
