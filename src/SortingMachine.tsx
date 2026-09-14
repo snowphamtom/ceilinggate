@@ -409,27 +409,6 @@ export default function SortingMachine() {
         >
           Listing
         </a>
-        <a
-          href="https://monsters-ink-107139.square.site/"
-          target="_blank"
-          rel="noreferrer"
-        >
-          Shop
-        </a>
-        <a
-          href="https://monsters-ink-107139.square.site/product/taylor-heller-vault-suite/ZQEYDDVJQCEZ5VUXXFTCSZ4B"
-          target="_blank"
-          rel="noreferrer"
-        >
-          Vault $499
-        </a>
-        <a
-          href="https://monsters-ink-107139.square.site/product/t-e-residual-honesty-brief-pdf-1-1-/GRQ576XXBR5K6ISNWQMMDMCT"
-          target="_blank"
-          rel="noreferrer"
-        >
-          T&amp;E $1k
-        </a>
       </footer>
     </div>
   );
