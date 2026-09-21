@@ -1,7 +1,7 @@
-# Lesson card — 19813c6
+# Lesson card — 03ec185
 
 1. What changed
-docs: keep hackathon.md honest — Pages PRIMARY, .site DEAD
+All Gas harden: C≤S hero vs cousins; GRANT→REFUSE demo; ledger always
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
