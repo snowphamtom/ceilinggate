@@ -113,11 +113,11 @@ export function DemoGate({
       </div>
       <p className="sm-subj">{subject}</p>
       <div className="sm-telemetry" data-testid="demo-telemetry" aria-label="Check path">
-        <span className="sm-tele-step">1 REFUSE</span>
+        <span className="sm-tele-step">1 GRANT</span>
         <span className="sm-tele-sep" aria-hidden />
-        <span className="sm-tele-step">2 GRANT</span>
+        <span className="sm-tele-step">2 REFUSE</span>
         <span className="sm-tele-sep" aria-hidden />
-        <span className="sm-tele-hint">claimed vs receipt · line by line</span>
+        <span className="sm-tele-hint">LINE · CLAIMED · ON RECEIPT · STATUS</span>
       </div>
       <div className="sm-demo-row" role="group" aria-label="Demo controls">
         {onOneBreath ? (
@@ -126,16 +126,16 @@ export function DemoGate({
             className="sm-btn breath"
             onClick={onOneBreath}
             disabled={breathBusy}
-            title="Run REFUSE then GRANT once"
+            title="Run GRANT then REFUSE once (CG-TE lodging/misc $1 over)"
           >
             {breathBusy ? "Running…" : "Demo both"}
           </button>
         ) : null}
-        <button type="button" className="sm-btn refuse" onClick={onDemoRefuse}>
-          1 · Show REFUSE
-        </button>
         <button type="button" className="sm-btn grant" onClick={onDemoGrant}>
-          2 · Show GRANT
+          1 · Show GRANT
+        </button>
+        <button type="button" className="sm-btn refuse" onClick={onDemoRefuse}>
+          2 · Show REFUSE
         </button>
         <button type="button" className="sm-btn ghost" onClick={onResort}>
           Re-check lines
@@ -147,7 +147,7 @@ export function DemoGate({
           <div>
             <strong>Waiting for a result</strong>
             <p className="sm-await-hint">
-              Start with Show REFUSE, then Show GRANT
+              Start with Show GRANT, then Show REFUSE ($1 over lodging/misc)
             </p>
           </div>
         </div>
@@ -235,7 +235,7 @@ export function DemoGate({
       )}
 
       <div className="sm-ledger-wrap">
-      <p className="sm-section-label sm-ledger-label">Edit the line amounts</p>
+      <p className="sm-section-label sm-ledger-label">LINE · CLAIMED · ON RECEIPT · STATUS (always on GRANT and REFUSE)</p>
       <table className="sm-ledger" aria-label="Line ledger">
         <thead>
           <tr>

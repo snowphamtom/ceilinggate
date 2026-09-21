@@ -163,11 +163,11 @@ export default function SortingMachine() {
   const oneBreath = useCallback(() => {
     if (breathBusy) return;
     setBreathBusy(true);
-    runSort(rowsFromFixture(REFUSE_FIXTURE), REFUSE_FIXTURE.email.subject);
-    /* settle: controls→ID→bars→stamp (CSS sm-settle stages); then flip GRANT */
+    runSort(rowsFromFixture(GRANT_FIXTURE), GRANT_FIXTURE.email.subject);
+    /* settle: GRANT first, then REFUSE with $1 over lodging/misc (CG-TE) */
     window.setTimeout(() => {
-      runSort(rowsFromFixture(GRANT_FIXTURE), GRANT_FIXTURE.email.subject);
-        setBreathBusy(false);
+      runSort(rowsFromFixture(REFUSE_FIXTURE), REFUSE_FIXTURE.email.subject);
+      setBreathBusy(false);
     }, 1400);
   }, [breathBusy, runSort]);
 
@@ -272,15 +272,19 @@ export default function SortingMachine() {
           </div>
         </div>
         <h1>Claim Check</h1>
-        <p className="sm-desk-kicker">Compare the claim to the receipt — line by line</p>
+        <p className="sm-desk-kicker">
+          ResidualGates · claimed ≤ scraped receipt · line by line — not a chat yes/no
+        </p>
         <p className="sm-lede">
-          Claimed amount at or under the receipt → <strong>GRANT</strong>. Over by
-          dollars → <strong>REFUSE</strong>. Rule:{" "}
+          Each line: claimed vs on-receipt. At or under → <strong>GRANT</strong>. Over
+          by dollars → <strong>REFUSE</strong>. Rule:{" "}
           <span className="sm-law-chip">C ≤ S</span>
+          {" "}· expense residual board (not recall watch, not subscription cancel, not
+          terms recovery, not insurance appeals).
         </p>
         <div className="sm-hero-tele" aria-label="Live check metadata">
-          <span className="sm-meta-chip">claim → edit → check → verdict</span>
-          <span className="sm-meta-chip sm-meta-chip-dim">C ≤ S live</span>
+          <span className="sm-meta-chip">LINE · CLAIMED · ON RECEIPT · STATUS</span>
+          <span className="sm-meta-chip sm-meta-chip-dim">C ≤ S · no chat panel</span>
         </div>
       </header>
 

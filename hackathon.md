@@ -27,12 +27,12 @@ Started 2026-09-05. Submitter: Taylor Heller. Deadline: 2026-09-22 12:00 PM PT.
 ## How to judge it (no login, no keys)
 
 1. Open the live app — root is **Claim Check**.
-2. Click **1 · Demo REFUSE**, then **2 · Demo GRANT**. Read the Check ID stamp + OpenAI one-line each time.
+2. Click **1 · Demo GRANT**, then **2 · Demo REFUSE** (CG-TE lodging/misc $1 over). Read the Check ID stamp + LINE/CLAIMED/ON RECEIPT/STATUS table + OpenAI one-line each time.
 3. Read the ledger: **LINE · CLAIMED (C) · ON RECEIPT (S) · STATUS** → GRANT/REFUSE stamp.
 4. Check Evidence/Verdict **residual Check ID** (C≤S projector · short id · σ²) on the stamp.
 5. Optional live path: email a claim plus a public receipt URL to the inbox. The board updates after Firecrawl reads the page.
 
-Sponsor chips on the hero name real work: Firecrawl scrape · AgentMail inbox · OpenAI one-line (does not decide).
+Hero stays ResidualGates / C≤S — never an inbox yes/no chat. OpenAI one-line does not decide.
 
 Judges do not need API keys, a Convex dashboard, or an account.
 
@@ -40,11 +40,14 @@ Judges do not need API keys, a Convex dashboard, or an account.
 
 | Us | Not us |
 |---|---|
-| Every **receipt line** gated **C ≤ S** → GRANT/REFUSE | Whole-page promise / chat shrug |
-| Continuous gather → sort Claim Check root | Organize-in-place costume board |
-| Residual Check ID on Evidence/Verdict stamps | Block / vibes10 style page gaps without line residuals |
+| Every **receipt line** gated **C ≤ S** → GRANT/REFUSE + LINE/CLAIMED/ON RECEIPT/STATUS | Whole-page promise / chat shrug |
+| ResidualGates expense board | **RecallReady** (forward receipt → product recall watch) |
+| Claimed ≤ scraped receipt residual | **Exorcist** (forward receipts → cancel forgotten subs) |
+| Expense C≤S table | **Owed** (terms/recovery chase, not line residual) |
+| **Claim Check** + C≤S table (keep name) | **ClaimHero** (insurance denial appeals — name collision only) |
+| Continuous gather → sort Claim Check root | Organize-in-place costume / inbox yes-no chat |
 
-Rule: numbers first, language second. Leftover on one line cannot cover a hole on another.
+Rule: numbers first, language second. Leftover on one line cannot cover a hole on another. No freeform chat panel.
 
 ## What each sponsor does
 
