@@ -4,6 +4,17 @@ Email a money claim with a public receipt. CeilingGate checks each line against 
 
 Not a chat app. Not a developer SDK. Not the AgentMail sample inbox assistant.
 
+## Current Status (2026-11-08) — Residual-Honest
+
+| Surface | Measured Status |
+|---------|-----------------|
+| Live app | https://snowphamtom.github.io/ceilinggate/ |
+| Product rule | Claimed ≤ receipt → GRANT; else REFUSE names the dollar overage |
+| CI deploy | Green on master push (Convex) |
+| Demo path | Prefer-live same-origin `/hls` + Public YT secondary |
+| Two-host rule | Static fortress on GitHub Pages; Convex API on `.convex.cloud` (never point VITE_CONVEX_URL at `.site`) |
+| Contest / listing | Materials present; no new submission claimed in this pass |
+
 ## Judges — start here
 
 | | |
@@ -19,7 +30,7 @@ Not a chat app. Not a developer SDK. Not the AgentMail sample inbox assistant.
 | Inbox | ceilinggate-claims@agentmail.to |
 | Share | https://x.com/magpie_inventor/status/2096419465973944560 |
 
-Open the live app. Click **1 · Demo REFUSE**, then **2 · Demo GRANT**. Proof is above the fold. No login. Video: prefer-live same-origin `/hls` yt7 on `/watch.html` + DemoReel; Public YT secondary `hDnY3_iszX4` (Tip Jar `2KsMO90LpdE` retired).
+Open the live app. Click **1 · Demo REFUSE**, then **2 · Demo GRANT**. Proof is above the fold. No login.
 
 ## What each sponsor does
 
@@ -27,10 +38,6 @@ Open the live app. Click **1 · Demo REFUSE**, then **2 · Demo GRANT**. Proof i
 - **Firecrawl** — scrapes the public receipt. No URL, no live judgment.
 - **AgentMail** — claim ingress at `ceilinggate-claims@agentmail.to`.
 - **OpenAI** — one sentence after the numbers. It does not pick GRANT or REFUSE.
-
-## 2026-09-13
-
-CI deploy is green. Prefer-live primary is same-origin `/hls` yt7; Public YT secondary `hDnY3_iszX4` (Tip Jar `2KsMO90LpdE` retired). Product rule unchanged: claimed ≤ receipt, or REFUSE names the dollar overage.
 
 ## Two hosts
 
