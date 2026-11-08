@@ -1,7 +1,7 @@
-# Lesson card — 03ec185
+# Lesson card — 2455be0
 
 1. What changed
-All Gas harden: C≤S hero vs cousins; GRANT→REFUSE demo; ledger always
+Residual-honest status polish (2026-11-08): measured readiness table
 
 2. Where a human taps it
 https://quirky-rhinoceros-204.convex.site/
